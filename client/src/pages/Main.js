@@ -2,10 +2,11 @@ import React from 'react';
 import axios from 'axios';
 
 export default function Main(props) {
+
   return (
     <>
       <img src="./coloredpencils.jpg" alt="learning image" />
-      <div className="container has-text-centered">
+      <div className="container has-text-centered mt-3" >
         <p>
           Learning Link connects parents to skilled teachers and tutors to fill
           their child's educational needs. Search among our teachers and tutors

@@ -13,6 +13,7 @@ export default function Nav() {
       <div id="navbarBasicExample" className="navbar-end">
         <div className="navbar-end">
           <div className="buttons">
+            <p>Already have an account?</p>
             <a className="button is-light">Log in</a>
           </div>
         </div>

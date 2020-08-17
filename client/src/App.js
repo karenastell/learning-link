@@ -19,6 +19,7 @@ export default function App() {
     <>
     <Nav />
     <Main />
+    <Footer />
     </>
   )
 }
