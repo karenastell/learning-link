@@ -58,12 +58,12 @@
 // };
 
 import React from 'react'
-import ProfileForm from './components/ProfileForm'
+import TutorProfileForm from './components/TutorProfileForm'
 
 export default function App() {
   return (
     <div>
-      <ProfileForm/>
+      <TutorProfileForm/>
     </div>
   )
 }
