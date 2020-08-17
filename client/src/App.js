@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
 import { Route, Switch, BrowserRouter as Router, Redirect } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./AuthContext";
+
 import Main from "./pages/Main";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 
 
@@ -13,7 +16,10 @@ import Main from "./pages/Main";
 
 export default function App() {
   return (
-    <h2>hello</h2>
+    <>
+    <Nav />
+    <Main />
+    </>
   )
 }
 
