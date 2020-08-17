@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../AuthContext";
+import { AuthContext } from "../../AuthContext";
 import Axios from "axios";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import "../App.css";
