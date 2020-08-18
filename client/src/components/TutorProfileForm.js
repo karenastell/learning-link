@@ -1,108 +1,18 @@
 import React from 'react';
+import Address from './Address';
+import Subjects from './Subjects';
+import Grades from './Grades';
+import UserInfo from './UserInfo';
+import Intro from './Intro';
+import Delivery from './Delivery';
+import Button from './Button';
 
 export default function ProfileForm() {
   return (
     <div className='container mt-5 mb-5'>
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'>Your Information</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <p className='control is-expanded has-icons-left'>
-              <input
-                className='input'
-                id='first-name'
-                type='text'
-                placeholder='First Name'
-              />
-              <span className='icon is-small is-left'>
-                <i className='fas fa-user'></i>
-              </span>
-            </p>
-          </div>
-          <div className='field'>
-            <p className='control is-expanded has-icons-left'>
-              <input
-                className='input'
-                id='last-name'
-                type='text'
-                placeholder='Last Name'
-              />
-              <span className='icon is-small is-left'>
-                <i className='fas fa-user'></i>
-              </span>
-            </p>
-          </div>
+      <UserInfo />
 
-          <div className='field'>
-            <p className='control is-expanded has-icons-left has-icons-right'>
-              <input
-                className='input'
-                id='email'
-                type='email'
-                placeholder='Email'
-              />
-              <span className='icon is-small is-left'>
-                <i className='fas fa-envelope'></i>
-              </span>
-              <span className='icon is-small is-right'></span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'>Password</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <p className='control is-expanded'>
-              <input
-                className='input'
-                id='password'
-                type='password'
-                placeholder='Password'
-              />
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'>Confirm Password</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <p className='control is-expanded'>
-              <input
-                className='input'
-                id='password'
-                type='password'
-                placeholder='Password'
-              />
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'>Introduction</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
-              <textarea
-                className='textarea'
-                id='about'
-                placeholder='A breif introduction to share with potential students. Include specific areas of study'
-              ></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Intro />
 
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
@@ -131,9 +41,13 @@ export default function ProfileForm() {
         </div>
       </div>
 
+      <Grades />
+
+      <Subjects />
+
       <div className='field is-horizontal'>
-        <div className='field-label'>
-          <label className='label'>Grade Levels</label>
+        <div className='field-label is-normal'>
+          <label className='label'>Availability</label>
         </div>
         <div className='field-body'>
           <div className='field is-narrow'>
@@ -141,29 +55,65 @@ export default function ProfileForm() {
               <label className='checkbox mr-5'>
                 <input
                   className='mr-2'
-                  id='elementary'
+                  id='sunday'
                   type='checkbox'
                   name='member'
                 />
-                Elementary School (K-4)
+                Sunday
               </label>
               <label className='checkbox mr-5'>
                 <input
                   className='mr-2'
-                  id='middle'
+                  id='monday'
                   type='checkbox'
                   name='member'
                 />
-                Middle School (5-8)
+                Monday
               </label>
               <label className='checkbox mr-5'>
                 <input
                   className='mr-2'
-                  id='high'
+                  id='tuesday'
                   type='checkbox'
                   name='member'
                 />
-                High School (9-12)
+                Tuesday
+              </label>
+              <label className='checkbox mr-5'>
+                <input
+                  className='mr-2'
+                  id='wednesday'
+                  type='checkbox'
+                  name='member'
+                />
+                Wednesday
+              </label>
+              <label className='checkbox mr-5'>
+                <input
+                  className='mr-2'
+                  id='thursday'
+                  type='checkbox'
+                  name='member'
+                />
+                Thursday
+              </label>
+              <label className='checkbox mr-5'>
+                <input
+                  className='mr-2'
+                  id='friday'
+                  type='checkbox'
+                  name='member'
+                />
+                Friday
+              </label>
+              <label className='checkbox mr-5'>
+                <input
+                  className='mr-2'
+                  id='saturday'
+                  type='checkbox'
+                  name='member'
+                />
+                Saturday
               </label>
             </div>
           </div>
@@ -171,533 +121,47 @@ export default function ProfileForm() {
       </div>
 
       <div className='field is-horizontal'>
-        <div className='field-label'>
-          <label className='label'>Subjects</label>
-        </div>
-        <div className='field-body'>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th>Elementary School Subjects</th>
-                <th>Middle School Subjects</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='el-lang-arts'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Language Arts
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='md-lang-arts'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Language Arts
-                  </label>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='el-math'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Math
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='md-basic-math'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Basic Math
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='el-science'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Science
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='md-prealgebra'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Pre-Algebra
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='el-ss'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Social Studies
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='md-science'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Science
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='md-ss'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Social Studies
-                  </label>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className='field is-horizontal'>
-        <div className='field-label'>
+        <div className='field-label is-normal'>
           <label className='label'></label>
         </div>
         <div className='field-body'>
-          <div className='field'>
-            <table className='table'>
-              <thead>
-                <tr>
-                  <th>High School Subjects</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-english'
-                        type='checkbox'
-                        name='member'
-                      />
-                      English
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-bio'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Biology
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-government'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Government
-                    </label>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-algebra'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Algebra
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-physics'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Physics
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-precalc'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Business
-                    </label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-geometry'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Geometry
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-chem'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Chemistry
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-history'
-                        type='checkbox'
-                        name='member'
-                      />
-                      US History
-                    </label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-trig'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Trigonometry
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-physical'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Physical Science
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-geography'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Geography
-                    </label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-stats'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Statistics
-                    </label>
-                  </td>
-
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-spanish'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Spanish
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-psych'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Psychology
-                    </label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-precalc'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Pre-Calculus
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-french'
-                        type='checkbox'
-                        name='member'
-                      />
-                      French
-                    </label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-calc'
-                        type='checkbox'
-                        name='member'
-                      />
-                      Calculus
-                    </label>
-                  </td>
-                  <td>
-                    <label className='checkbox mr-5'>
-                      <input
-                        className='mr-2'
-                        id='hs-german'
-                        type='checkbox'
-                        name='member'
-                      />
-                      German
-                    </label>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className='field is-narrow'>
+            <div className='control'>
+              <label className='checkbox mr-5'>
+                <input
+                  className='mr-2'
+                  id='morning'
+                  type='checkbox'
+                  name='member'
+                />
+                Morning (7:00am - 12:00pm)
+              </label>
+              <label className='checkbox mr-5'>
+                <input
+                  className='mr-2'
+                  id='afternoon'
+                  type='checkbox'
+                  name='member'
+                />
+                Afternoon (12:00pm - 5:00pm)
+              </label>
+              <label className='checkbox mr-5'>
+                <input
+                  className='mr-2'
+                  id='evening'
+                  type='checkbox'
+                  name='member'
+                />
+                Evening (5:00pm - 10:00pm)
+              </label>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className='field is-horizontal'>
-        <div className='field-label'>
-          <label className='label'>Availability</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <table className='table'>
-              <tr>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='sunday'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Sunday
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='monday'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Monday
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='tuesday'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Tuesday
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='wednesday'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Wednesday
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='thursday'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Thursday
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='friday'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Friday
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='saturday'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Saturday
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='morning'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Morning (7:00am - 12:00pm)
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='afternoon'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Afternoon (12:00pm - 5:00pm)
-                  </label>
-                </td>
-                <td>
-                  <label className='checkbox mr-5'>
-                    <input
-                      className='mr-2'
-                      id='evening'
-                      type='checkbox'
-                      name='member'
-                    />
-                    Evening (5:00pm - 10:00pm)
-                  </label>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
+      <Delivery />
 
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'>Delivery</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <label className='checkbox mr-5'>
-              <input
-                className='mr-2'
-                id='elementary'
-                type='checkbox'
-                name='member'
-              />
-              In Person
-            </label>
-            <label className='checkbox mr-5'>
-              <input
-                className='mr-2'
-                id='elementary'
-                type='checkbox'
-                name='member'
-              />
-              Remote
-            </label>
-          </div>
-        </div>
-      </div>
+      <Address />
 
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
@@ -712,16 +176,7 @@ export default function ProfileForm() {
         </div>
       </div>
 
-      <div className='field is-horizontal'>
-        <div className='field-label'></div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
-              <button className='button is-primary'>Submit</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Button />
     </div>
   );
 }
