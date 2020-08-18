@@ -18,7 +18,7 @@ export default function Main(props) {
         </p>
 
         <div class="container my-5 has-text-centered">
-          <h3 className="mb-3">Sign up to get started!</h3>
+          <h3 className="mb-3 title is-4">Sign up to get started!</h3>
           <button className="button is-primary mx-2">Sign up as a teacher/tutor</button>
           <button className="button is-primary mx-2">Sign up as a parent</button>
         </div>
