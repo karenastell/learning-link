@@ -4,7 +4,7 @@ export default function Grades() {
     return (
         <div className='field is-horizontal'>
         <div className='field-label'>
-          <label className='label'>Grade Levels</label>
+          <label className='label'>Grade</label>
         </div>
         <div className='field-body'>
           <div className='field is-narrow'>

@@ -4,17 +4,14 @@ import Address from './Address';
 import Intro from './Intro';
 import Subjects from './Subjects';
 import Button from './Button';
+import Delivery from './Delivery';
 
 export default function StudentProfileForm() {
   return (
-    <div className='container'>
-      <h1>Student Form</h1>
+    <div className='container mt-5 mb-5'>
+      <h1 className='title'>Student Form</h1>
       <UserInfo />
       <Intro />
-
-      <Subjects />
-
-      <Address />
 
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
@@ -43,6 +40,8 @@ export default function StudentProfileForm() {
           </div>
         </div>
       </div>
+
+      <Address />
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
           <label className='label'>Special Education Services</label>
@@ -70,33 +69,8 @@ export default function StudentProfileForm() {
           </div>
         </div>
       </div>
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'>School Information</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <p className='control is-expanded'>
-              <input
-                className='input'
-                id='grade'
-                type='text'
-                placeholder='Grade'
-              />
-            </p>
-          </div>
-          <div className='field'>
-            <p className='control is-expanded'>
-              <input
-                className='input'
-                id='school'
-                type='text'
-                placeholder='School'
-              />
-            </p>
-          </div>
-        </div>
-      </div>
+      <Subjects />
+      <Delivery />
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
           <label className='label'>

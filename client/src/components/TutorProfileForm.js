@@ -10,6 +10,7 @@ import Button from './Button';
 export default function ProfileForm() {
   return (
     <div className='container mt-5 mb-5'>
+       <h1 className='title'>Tutor Form</h1>
       <UserInfo />
 
       <Intro />
@@ -40,8 +41,6 @@ export default function ProfileForm() {
           </div>
         </div>
       </div>
-
-      <Grades />
 
       <Subjects />
 
