@@ -1,6 +1,6 @@
 import React from 'react'
 import "../App.css";
-import SignupForm from "../../components/SignupForm";
+import SignupForm from "../../components/origcomponents/SignupForm";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
