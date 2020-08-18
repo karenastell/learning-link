@@ -1,10 +1,28 @@
-// import React, { useContext } from "react";
-// import { Route, Switch, BrowserRouter as Router, Redirect } from "react-router-dom";
-// import { AuthProvider, AuthContext } from "./AuthContext";
+import React, { useContext } from "react";
+import { Route, Switch, BrowserRouter as Router, Redirect } from "react-router-dom";
+import { AuthProvider, AuthContext } from "./AuthContext";
+
+import Main from "./pages/Main";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+
+
+
 // import Home from "./pages/Home";
 // import Signup from "./pages/Signup";
 // import Login from "./pages/Login";
 // import Members from "./pages/Members";
+
+
+export default function App() {
+  return (
+    <>
+    <Nav />
+    <Main />
+    <Footer />
+    </>
+  )
+}
 
 // // Even though this is the App.js file, in the end we are not exactly exporting
 // // the App component.  We actually set up the app component to implement our react
@@ -55,7 +73,7 @@
 //       <App />
 //     </AuthProvider>
 //   );
-// };
+
 
 import React from 'react'
 import StudentProfileForm from './components/StudentProfileForm'
@@ -69,3 +87,4 @@ export default function App() {
     </div>
   )
 }
+
