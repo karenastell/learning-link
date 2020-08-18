@@ -7,7 +7,7 @@ import Intro from './Intro';
 import Delivery from './Delivery';
 import Button from './Button';
 
-export default function ProfileForm() {
+export default function ProfileForm(props) {
   return (
     <div className='container mt-5 mb-5'>
        <h1 className='title'>Tutor Form</h1>

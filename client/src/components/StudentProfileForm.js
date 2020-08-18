@@ -6,7 +6,7 @@ import Subjects from './Subjects';
 import Button from './Button';
 import Delivery from './Delivery';
 
-export default function StudentProfileForm() {
+export default function StudentProfileForm(props) {
   return (
     <div className='container mt-5 mb-5'>
       <h1 className='title'>Student Form</h1>
