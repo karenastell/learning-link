@@ -73,4 +73,18 @@ export default function App() {
 //       <App />
 //     </AuthProvider>
 //   );
-// };
+
+
+import React from 'react'
+import StudentProfileForm from './components/StudentProfileForm'
+import TutorProfileForm from './components/TutorProfileForm'
+
+export default function App() {
+  return (
+    <div>
+      <TutorProfileForm/>
+      <StudentProfileForm/>
+    </div>
+  )
+}
+
