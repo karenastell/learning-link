@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from '../components/Button';
+import LoginButton from '../components/LoginButton';
 
 export default function Nav() {
   const [modal, setModal] = useState('modal');
@@ -24,16 +24,7 @@ export default function Nav() {
         <div className="navbar-brand">
           <h1 className="title title-margin label-text">Learning Link</h1>
         </div>
-        <div id="navbarBasicExample" className="navbar-end">
-          <div className="navbar-end">
-            <div className="buttons">
-              <p>Already have an account?</p>
-              <a className="button is-light ml-2" onClick={handleModalDisplay}>
-                Log in
-              </a>
-            </div>
-          </div>
-        </div>
+    <LoginButton handleModalDisplay={handleModalDisplay} />
       </nav>
 
       {/* modal for the login */}
@@ -41,7 +32,7 @@ export default function Nav() {
         <div className="modal-background"></div>
         <div className="modal-card">
           <header className="modal-card-head">
-            <p className="modal-card-title">Login</p>
+            <p className="modal-card-title">Login to Learning Link</p>
             <button
               className="delete"
               aria-label="close"
