@@ -25,7 +25,7 @@ export default function ProfileForm(props) {
               <textarea
                 className='textarea'
                 id='credientials'
-                placeholder='Credientials'
+                placeholder='Degree(s)'
               ></textarea>
             </div>
           </div>
