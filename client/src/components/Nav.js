@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LoginButton from '../components/LoginButton';
+import LogoutButton from '../components/LogoutButton';
 
 export default function Nav() {
   const [modal, setModal] = useState('modal');
@@ -24,7 +25,9 @@ export default function Nav() {
         <div className="navbar-brand">
           <h1 className="title title-margin label-text">Learning Link</h1>
         </div>
-    <LoginButton handleModalDisplay={handleModalDisplay} />
+        {/* Once authentication is working, conditionally render either login or logout */}
+        <LoginButton handleModalDisplay={handleModalDisplay} />
+        {/* <LogoutButton /> */}
       </nav>
 
       {/* modal for the login */}
@@ -76,8 +79,8 @@ export default function Nav() {
                 </div>
               </div>
             </div>
-            <div className='control has-text-centered'>
-              <button className='button is-primary is-fullwidth'>Submit</button>
+            <div className="control has-text-centered">
+              <button className="button is-primary is-fullwidth">Submit</button>
             </div>
           </section>
         </div>
