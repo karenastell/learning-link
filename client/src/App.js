@@ -1,3 +1,4 @@
+
 import React, { useContext } from 'react';
 import {
   Route,
@@ -43,6 +44,7 @@ export default function App() {
     </>
   );
 }
+
 
 // // Even though this is the App.js file, in the end we are not exactly exporting
 // // the App component.  We actually set up the app component to implement our react
@@ -93,3 +95,4 @@ export default function App() {
 //       <App />
 //     </AuthProvider>
 //   );
+

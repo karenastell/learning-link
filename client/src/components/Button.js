@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Button() {
+export default function Button(props) {
     return (
         <div className='field is-horizontal'>
         <div className='field-label'></div>

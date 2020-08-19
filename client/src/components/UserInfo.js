@@ -57,30 +57,38 @@ export default function UserInfo() {
         </div>
         <div className='field-body'>
           <div className='field'>
-            <p className='control is-expanded'>
+            <p className='control is-expanded has-icons-left has-icons-right'>
               <input
                 className='input'
                 id='password'
                 type='password'
                 placeholder='Password'
               />
+               <span className='icon is-small is-left'>
+                <i className='fas fa-lock'></i>
+              </span>
+              <span className='icon is-small is-right'></span>
             </p>
           </div>
         </div>
       </div>
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
-          <label className='label'>Confirm Password</label>
+          <label className='label'>Password</label>
         </div>
         <div className='field-body'>
           <div className='field'>
-            <p className='control is-expanded'>
+            <p className='control is-expanded has-icons-left has-icons-right'>
               <input
                 className='input'
-                id='password'
+                id='confirm-password'
                 type='password'
-                placeholder='Password'
+                placeholder='Confirm Password'
               />
+               <span className='icon is-small is-left'>
+                <i className='fas fa-lock'></i>
+              </span>
+              <span className='icon is-small is-right'></span>
             </p>
           </div>
         </div>
