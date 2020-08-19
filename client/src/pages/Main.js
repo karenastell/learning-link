@@ -34,7 +34,7 @@ export default function Main(props) {
           </Link>
           <Link to="/signup-student">
             <button className="button is-primary mx-2">
-              Sign up your child
+              Sign up a student
             </button>
           </Link>
         </div>
