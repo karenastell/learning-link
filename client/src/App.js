@@ -1,27 +1,47 @@
-import React, { useContext } from "react";
-import { Route, Switch, BrowserRouter as Router, Redirect } from "react-router-dom";
-import { AuthProvider, AuthContext } from "./AuthContext";
+import React, { useContext } from 'react';
+import {
+  Route,
+  Switch,
+  BrowserRouter as Router,
+  Redirect,
+} from 'react-router-dom';
+import { AuthProvider, AuthContext } from './AuthContext';
 
-import Main from "./pages/Main";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
-
-
+import Main from './pages/Main';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import StudentProfileForm from './components/StudentProfileForm';
+import TutorProfileForm from './components/TutorProfileForm';
+import Search from './pages/Search';
+import MyProfile from './pages/MyProfile';
+import TutorDashboard from './pages/TutorDashboard';
+import StudentDashboard from './pages/StudentDashboard';
+import Messages from './pages/Messages';
 
 // import Home from "./pages/Home";
 // import Signup from "./pages/Signup";
 // import Login from "./pages/Login";
 // import Members from "./pages/Members";
 
-
 export default function App() {
   return (
     <>
-    <Nav />
-    <Main />
-    <Footer />
+      <Nav />
+      <Router>
+        <>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/signup-tutor" component={TutorProfileForm} />
+        <Route exact path="/signup-student" component={StudentProfileForm} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/myprofile" component={MyProfile} />
+        <Route exact path="/student-dashboard" component={StudentDashboard} />
+        <Route exact path="/tutor-dashboard" component={TutorDashboard} />
+        <Route exact path="/messages" component={Messages} />
+        </>
+      </Router>
+      <Footer />
     </>
-  )
+  );
 }
 
 // // Even though this is the App.js file, in the end we are not exactly exporting
@@ -35,11 +55,11 @@ export default function App() {
 //   const { isAuth, setIsAuth } = useContext(AuthContext);
 //   console.log("App auth: ", isAuth);
 
-//   // here we are ceating a private route wrapper to prevent front end routing to 
+//   // here we are ceating a private route wrapper to prevent front end routing to
 //   // restricted pages.  The ({ component: Component, ...rest })  argument that is
-//   // passed to this functional component is essentially the same as just passing 
-//   // props, but using object destucturing.  the ...rest is literally the rest of 
-//   // the props that were not destructured. 
+//   // passed to this functional component is essentially the same as just passing
+//   // props, but using object destucturing.  the ...rest is literally the rest of
+//   // the props that were not destructured.
 //   const PrivateRoute = ({ component: Component, ...rest }) => (
 //     <Route
 //       {...rest}
@@ -73,18 +93,3 @@ export default function App() {
 //       <App />
 //     </AuthProvider>
 //   );
-
-
-import React from 'react'
-import StudentProfileForm from './components/StudentProfileForm'
-import TutorProfileForm from './components/TutorProfileForm'
-
-export default function App() {
-  return (
-    <div>
-      <TutorProfileForm/>
-      <StudentProfileForm/>
-    </div>
-  )
-}
-
