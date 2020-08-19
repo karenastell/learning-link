@@ -11,7 +11,7 @@ export default function SideBarMenu() {
             <Link to='/student-dashboard'>Dashboard</Link>
           </li>
           <li>
-            <Link to='/student-profile'>My Profile</Link>
+            <Link to='/myprofile'>My Profile</Link>
           </li>
           <li>
             <Link to='/search'>Search for a Tutor</Link>
