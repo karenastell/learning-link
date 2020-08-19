@@ -1,11 +1,11 @@
 import React from 'react';
-import Address from './Address';
-import Subjects from './Subjects';
-import Grades from './Grades';
-import UserInfo from './UserInfo';
-import Intro from './Intro';
-import Delivery from './Delivery';
-import Button from './Button';
+import Address from '../components/Address';
+import Subjects from '../components/Subjects';
+import Grades from '../components/Grades';
+import UserInfo from '../components/UserInfo';
+import Intro from '../components/Intro';
+import Delivery from '../components/Delivery';
+import Button from '../components/Button';
 
 export default function ProfileForm(props) {
   return (

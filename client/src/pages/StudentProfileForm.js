@@ -1,10 +1,10 @@
 import React from 'react';
-import UserInfo from './UserInfo';
-import Address from './Address';
-import Intro from './Intro';
-import Subjects from './Subjects';
-import Button from './Button';
-import Delivery from './Delivery';
+import UserInfo from '../components/UserInfo';
+import Address from '../components/Address';
+import Intro from '../components/Intro';
+import Subjects from '../components/Subjects';
+import Button from '../components/Button';
+import Delivery from '../components/Delivery';
 
 export default function StudentProfileForm(props) {
   return (
