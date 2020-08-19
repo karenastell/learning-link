@@ -5,7 +5,8 @@ import { AuthProvider, AuthContext } from "./AuthContext";
 import Main from "./pages/Main";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-
+import StudentProfileForm from './components/StudentProfileForm'
+import TutorProfileForm from './components/TutorProfileForm'
 
 
 // import Home from "./pages/Home";
@@ -73,18 +74,4 @@ export default function App() {
 //       <App />
 //     </AuthProvider>
 //   );
-
-
-import React from 'react'
-import StudentProfileForm from './components/StudentProfileForm'
-import TutorProfileForm from './components/TutorProfileForm'
-
-export default function App() {
-  return (
-    <div>
-      <TutorProfileForm/>
-      <StudentProfileForm/>
-    </div>
-  )
-}
 
