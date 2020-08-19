@@ -6,6 +6,7 @@ export default function ParentView(props){
     return (
         <>
         <SideBarMenu />
+        <h1 className='title'>student dashboard</h1>
         </>
     )
 }

@@ -6,6 +6,7 @@ export default function Messages(props){
     return (
         <>
         <SideBarMenu />
+        <h1 className='title'>messages</h1>
         </>
     )
 }

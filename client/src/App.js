@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react';
 import {
   Route,
@@ -18,6 +17,7 @@ import MyProfile from './pages/MyProfile';
 import TutorDashboard from './pages/TutorDashboard';
 import StudentDashboard from './pages/StudentDashboard';
 import Messages from './pages/Messages';
+import Calendar from './pages/Calendar';
 
 // import Home from "./pages/Home";
 // import Signup from "./pages/Signup";
@@ -30,21 +30,21 @@ export default function App() {
       <Nav />
       <Router>
         <>
-        <Route exact path="/" component={Main} />
-        <Route exact path="/signup-tutor" component={TutorProfileForm} />
-        <Route exact path="/signup-student" component={StudentProfileForm} />
-        <Route exact path="/search" component={Search} />
-        <Route exact path="/myprofile" component={MyProfile} />
-        <Route exact path="/student-dashboard" component={StudentDashboard} />
-        <Route exact path="/tutor-dashboard" component={TutorDashboard} />
-        <Route exact path="/messages" component={Messages} />
+          <Route exact path='/' component={Main} />
+          <Route exact path='/calendar' component={Calendar} />
+          <Route exact path='/signup-tutor' component={TutorProfileForm} />
+          <Route exact path='/signup-student' component={StudentProfileForm} />
+          <Route exact path='/search' component={Search} />
+          <Route exact path='/myprofile' component={MyProfile} />
+          <Route exact path='/student-dashboard' component={StudentDashboard} />
+          <Route exact path='/tutor-dashboard' component={TutorDashboard} />
+          <Route exact path='/messages' component={Messages} />
         </>
       </Router>
       <Footer />
     </>
   );
 }
-
 
 // // Even though this is the App.js file, in the end we are not exactly exporting
 // // the App component.  We actually set up the app component to implement our react
@@ -95,4 +95,3 @@ export default function App() {
 //       <App />
 //     </AuthProvider>
 //   );
-
