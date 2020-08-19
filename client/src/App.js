@@ -28,7 +28,7 @@ export default function App() {
     <>
       <Nav />
       <Router>
-        <div>
+        <>
         <Route exact path="/" component={Main} />
         <Route exact path="/signup-tutor" component={TutorProfileForm} />
         <Route exact path="/signup-student" component={StudentProfileForm} />
@@ -37,7 +37,7 @@ export default function App() {
         <Route exact path="/student-dashboard" component={StudentDashboard} />
         <Route exact path="/tutor-dashboard" component={TutorDashboard} />
         <Route exact path="/messages" component={Messages} />
-        </div>
+        </>
       </Router>
       <Footer />
     </>

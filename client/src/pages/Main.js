@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Main(props) {
@@ -26,15 +27,18 @@ export default function Main(props) {
 
         <div class="container my-5 has-text-centered">
           <h3 className="mb-3 title is-4">Sign up to get started!</h3>
-          <button className="button is-primary mx-2">
-            Sign up as a teacher/tutor
-          </button>
-          <button className="button is-primary mx-2">
-            Sign up as a parent
-          </button>
+          <Link to="/signup-tutor">
+            <button className="button is-primary mx-2">
+              Sign up as a teacher/tutor
+            </button>
+          </Link>
+          <Link to="/signup-student">
+            <button className="button is-primary mx-2">
+              Sign up your child
+            </button>
+          </Link>
         </div>
       </div>
-
     </>
   );
 }
