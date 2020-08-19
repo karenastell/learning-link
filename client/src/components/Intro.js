@@ -12,7 +12,7 @@ export default function Intro() {
               <textarea
                 className='textarea'
                 id='about'
-                placeholder='A breif introduction to share with potential students.'
+                placeholder='A brief introduction to share with potential students.'
               ></textarea>
             </div>
           </div>

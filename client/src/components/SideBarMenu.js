@@ -33,6 +33,7 @@ const menuStyle = {
   width: '10%',
   height: '700px',
   marginLeft: '10px',
+  marginRight: '10px',
   float: 'left',
   borderRight: '1px solid black'
 };

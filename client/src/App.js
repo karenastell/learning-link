@@ -59,14 +59,19 @@
 import React from 'react';
 import StudentProfileForm from './components/StudentProfileForm';
 import TutorProfileForm from './components/TutorProfileForm';
-import SideBarMenu from './components/SideBarMenu'
+import SideBarMenu from './components/SideBarMenu';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Nav from './components/Nav'
 
 export default function App() {
   return (
-    <div>
-      <SideBarMenu/>
-      <TutorProfileForm />
-      <StudentProfileForm />
-    </div>
+    <Router>
+      <div>
+        <Nav/>
+        <SideBarMenu />
+        <TutorProfileForm />
+        <StudentProfileForm />
+      </div>
+    </Router>
   );
 }
