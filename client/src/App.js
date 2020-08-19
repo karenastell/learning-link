@@ -1,10 +1,50 @@
-// import React, { useContext } from "react";
-// import { Route, Switch, BrowserRouter as Router, Redirect } from "react-router-dom";
-// import { AuthProvider, AuthContext } from "./AuthContext";
 
-// import Main from "./pages/Main";
-// import Nav from "./components/Nav";
-// import Footer from "./components/Footer";
+import React, { useContext } from 'react';
+import {
+  Route,
+  Switch,
+  BrowserRouter as Router,
+  Redirect,
+} from 'react-router-dom';
+import { AuthProvider, AuthContext } from './AuthContext';
+
+import Main from './pages/Main';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import StudentProfileForm from './components/StudentProfileForm';
+import TutorProfileForm from './components/TutorProfileForm';
+import Search from './pages/Search';
+import MyProfile from './pages/MyProfile';
+import TutorDashboard from './pages/TutorDashboard';
+import StudentDashboard from './pages/StudentDashboard';
+import Messages from './pages/Messages';
+
+// import Home from "./pages/Home";
+// import Signup from "./pages/Signup";
+// import Login from "./pages/Login";
+// import Members from "./pages/Members";
+
+export default function App() {
+  return (
+    <>
+      <Nav />
+      <Router>
+        <>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/signup-tutor" component={TutorProfileForm} />
+        <Route exact path="/signup-student" component={StudentProfileForm} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/myprofile" component={MyProfile} />
+        <Route exact path="/student-dashboard" component={StudentDashboard} />
+        <Route exact path="/tutor-dashboard" component={TutorDashboard} />
+        <Route exact path="/messages" component={Messages} />
+        </>
+      </Router>
+      <Footer />
+    </>
+  );
+}
+
 
 // // Even though this is the App.js file, in the end we are not exactly exporting
 // // the App component.  We actually set up the app component to implement our react
@@ -56,22 +96,3 @@
 //     </AuthProvider>
 //   );
 
-import React from 'react';
-import StudentProfileForm from './components/StudentProfileForm';
-import TutorProfileForm from './components/TutorProfileForm';
-import SideBarMenu from './components/SideBarMenu';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Nav from './components/Nav'
-
-export default function App() {
-  return (
-    <Router>
-      <div>
-        <Nav/>
-        <SideBarMenu />
-        <TutorProfileForm />
-        <StudentProfileForm />
-      </div>
-    </Router>
-  );
-}
