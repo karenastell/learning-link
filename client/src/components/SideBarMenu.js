@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 export default function SideBarMenu() {
   return (
-    <div style={menuStyle}>
+    <div style={menuStyle} className='column is-one-fifth'>
       <aside className='menu'>
         <p className='menu-label'>Menu</p>
         <ul className='menu-list'>
@@ -30,7 +30,6 @@ export default function SideBarMenu() {
 }
 
 const menuStyle = {
-  width: '10%',
   height: '700px',
   marginLeft: '10px',
   marginRight: '10px',
