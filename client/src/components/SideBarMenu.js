@@ -31,6 +31,7 @@ export default function SideBarMenu() {
 
 const menuStyle = {
   width: '10%',
+  minWidth: "150px",
   height: '700px',
   marginLeft: '10px',
   marginRight: '10px',
