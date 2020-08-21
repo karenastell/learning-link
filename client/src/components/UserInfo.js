@@ -43,7 +43,6 @@ export default function UserInfo(props) {
             <p className='control is-expanded has-icons-left has-icons-right'>
               <input
                 className='input'
-                id='email'
                 type='email'
                 placeholder='Email'
                 name='email'
@@ -66,7 +65,6 @@ export default function UserInfo(props) {
             <p className='control is-expanded has-icons-left has-icons-right'>
               <input
                 className='input'
-                id='password'
                 type='password'
                 placeholder='Password'
                 name='password'

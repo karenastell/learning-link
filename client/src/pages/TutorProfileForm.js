@@ -5,6 +5,7 @@ import UserInfo from '../components/UserInfo';
 import Bio from '../components/Bio';
 import Delivery from '../components/Delivery';
 import Button from '../components/Button';
+import Axios from 'axios';
 
 export default function ProfileForm(props) {
   const [tutorFormInfo, setTutorFormInfo] = useState({});
@@ -15,8 +16,6 @@ export default function ProfileForm(props) {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    console.log(value, name);
-    // use brackets to signify the name in the state
     setTutorFormInfo({
       ...tutorFormInfo,
       [name]: value,
@@ -35,6 +34,29 @@ export default function ProfileForm(props) {
       ...days,
       event.target.value
     ])
+  }
+
+  const onButtonSubmit = (event) => {
+    // for now, we'll put event.preventDefault(), but eventually we will redirect the user
+    event.preventDefault();
+    Axios.post('/api/auth/signup-tutor', {
+      firstName: tutorFormInfo.firstName,
+      lastName: tutorFormInfo.lastName,
+      email: tutorFormInfo.email,
+      password: tutorFormInfo.password,
+      bio: tutorFormInfo.bio,
+      degree: tutorFormInfo.degree,
+      experience: tutorFormInfo.experience,
+      delivery_method: tutorFormInfo.delivery_method,
+      city: tutorFormInfo.city,
+      state: tutorFormInfo.state,
+      // these last 2 are arrays
+      subjects: subjects,
+      days: days,
+    }).then((response) => {
+      console.log(response);
+      // then redirect
+    })
   }
 
   return (
@@ -183,7 +205,7 @@ export default function ProfileForm(props) {
         </div>
       </div>
 
-      <Button />
+      <Button onButtonSubmit={onButtonSubmit} />
     </div>
   );
 }
