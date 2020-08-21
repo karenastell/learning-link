@@ -8,6 +8,7 @@ import Delivery from '../components/Delivery';
 
 export default function StudentProfileForm(props) {
   const [studentFormInfo, setStudentFormInfo] = useState({});
+  const [subjects, setSubjects] = useState([]);
 
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
@@ -16,6 +17,10 @@ export default function StudentProfileForm(props) {
     console.log(value, name);
     // use brackets to signify the name in the state
     setStudentFormInfo({ ...studentFormInfo, [name]: value });
+  };
+
+  const handleCheckboxes = (event) => {
+    setSubjects([...subjects, event.target.value]);
   };
 
   return (
@@ -88,9 +93,7 @@ export default function StudentProfileForm(props) {
           </div>
         </div>
       </div>
-      <Subjects 
-      // handleInputChange={handleInputChange}
-       />
+      <Subjects handleCheckboxes={handleCheckboxes} />
       <Delivery handleInputChange={handleInputChange} />
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
