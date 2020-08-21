@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Bio() {
+export default function Bio(props) {
     return (
         <div className='field is-horizontal'>
         <div className='field-label is-normal'>
@@ -13,6 +13,8 @@ export default function Bio() {
                 className='textarea'
                 id='about'
                 placeholder='A brief introduction to share with potential students.'
+                name='bio'
+                onChange={props.handleInputChange}
               ></textarea>
             </div>
           </div>

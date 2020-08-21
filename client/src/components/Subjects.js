@@ -24,7 +24,7 @@ export default function Subjects() {
                       className='mr-2'
                       id='el-lang-arts'
                       type='checkbox'
-                      name='member'
+                      name='subject'
                     />
                     Language Arts
                   </label>
@@ -35,7 +35,7 @@ export default function Subjects() {
                       className='mr-2'
                       id='md-lang-arts'
                       type='checkbox'
-                      name='member'
+                      name='subject'
                     />
                     Language Arts
                   </label>
@@ -49,7 +49,7 @@ export default function Subjects() {
                       className='mr-2'
                       id='el-math'
                       type='checkbox'
-                      name='member'
+                      name='subject'
                     />
                     Math
                   </label>
@@ -60,7 +60,7 @@ export default function Subjects() {
                       className='mr-2'
                       id='md-basic-math'
                       type='checkbox'
-                      name='member'
+                      name='subject'
                     />
                     Basic Math
                   </label>
@@ -73,7 +73,7 @@ export default function Subjects() {
                       className='mr-2'
                       id='el-science'
                       type='checkbox'
-                      name='member'
+                      name='subject'
                     />
                     Science
                   </label>
@@ -84,7 +84,7 @@ export default function Subjects() {
                       className='mr-2'
                       id='md-prealgebra'
                       type='checkbox'
-                      name='member'
+                      name='subject'
                     />
                     Pre-Algebra
                   </label>
@@ -97,7 +97,7 @@ export default function Subjects() {
                       className='mr-2'
                       id='el-ss'
                       type='checkbox'
-                      name='member'
+                      name='subject'
                     />
                     Social Studies
                   </label>
@@ -108,7 +108,7 @@ export default function Subjects() {
                       className='mr-2'
                       id='md-science'
                       type='checkbox'
-                      name='member'
+                      name='subject'
                     />
                     Science
                   </label>
@@ -122,7 +122,7 @@ export default function Subjects() {
                       className='mr-2'
                       id='md-ss'
                       type='checkbox'
-                      name='member'
+                      name='subject'
                     />
                     Social Studies
                   </label>
@@ -153,7 +153,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-english'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       English
                     </label>
@@ -164,7 +164,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-bio'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Biology
                     </label>
@@ -175,7 +175,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-government'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Government
                     </label>
@@ -189,7 +189,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-algebra'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Algebra
                     </label>
@@ -200,7 +200,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-physics'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Physics
                     </label>
@@ -211,7 +211,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-precalc'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Business
                     </label>
@@ -224,7 +224,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-geometry'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Geometry
                     </label>
@@ -235,7 +235,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-chem'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Chemistry
                     </label>
@@ -246,7 +246,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-history'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       US History
                     </label>
@@ -259,7 +259,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-trig'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Trigonometry
                     </label>
@@ -270,7 +270,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-physical'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Physical Science
                     </label>
@@ -281,7 +281,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-geography'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Geography
                     </label>
@@ -294,7 +294,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-stats'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Statistics
                     </label>
@@ -306,7 +306,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-spanish'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Spanish
                     </label>
@@ -317,7 +317,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-psych'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Psychology
                     </label>
@@ -330,7 +330,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-precalc'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Pre-Calculus
                     </label>
@@ -341,7 +341,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-french'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       French
                     </label>
@@ -354,7 +354,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-calc'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       Calculus
                     </label>
@@ -365,7 +365,7 @@ export default function Subjects() {
                         className='mr-2'
                         id='hs-german'
                         type='checkbox'
-                        name='member'
+                        name='subject'
                       />
                       German
                     </label>
