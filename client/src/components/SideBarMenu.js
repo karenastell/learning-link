@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default function SideBarMenu() {
   return (
@@ -23,16 +23,17 @@ export default function SideBarMenu() {
             <Link to='/calendar'>Calendar</Link>
           </li>
         </ul>
-       
       </aside>
     </div>
   );
 }
 
 const menuStyle = {
+  width: '10%',
+  minWidth: '150px',
   height: '700px',
   marginLeft: '10px',
   marginRight: '10px',
   float: 'left',
-  borderRight: '1px solid black'
+  borderRight: '1px solid black',
 };
