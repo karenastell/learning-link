@@ -7,7 +7,7 @@ export default function Button(props) {
         <div className='field-body'>
           <div className='field'>
             <div className='control'>
-              <button className='button is-primary'>Submit</button>
+              <button className='button is-primary' onClick={props.onButtonSubmit}>Submit</button>
             </div>
           </div>
         </div>
