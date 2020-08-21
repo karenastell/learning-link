@@ -26,6 +26,9 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    isTeacher: {
+      type: DataTypes.BOOLEAN,
+    },
   });
 
   User.associate = (models) => {
