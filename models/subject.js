@@ -7,7 +7,7 @@ module.exports = (sequelize, Datatypes) => {
   });
 
   Subject.associate = (models) => {
-    Subject.belongsTo(models.UserProfile, {
+    Subject.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
       },
