@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Subjects() {
+export default function Subjects(props) {
   return (
     <>
       <div className='field is-horizontal'>
@@ -22,9 +22,10 @@ export default function Subjects() {
                   <label className='checkbox mr-5'>
                     <input
                       className='mr-2'
-                      id='el-lang-arts'
+                      value='el-lang-arts'
                       type='checkbox'
                       name='subject'
+                      onChange={props.handleCheckboxes}
                     />
                     Language Arts
                   </label>
@@ -33,9 +34,10 @@ export default function Subjects() {
                   <label className='checkbox mr-5'>
                     <input
                       className='mr-2'
-                      id='md-lang-arts'
+                      value='md-lang-arts'
                       type='checkbox'
                       name='subject'
+                      onChange={props.handleCheckboxes}
                     />
                     Language Arts
                   </label>
@@ -47,9 +49,10 @@ export default function Subjects() {
                   <label className='checkbox mr-5'>
                     <input
                       className='mr-2'
-                      id='el-math'
+                      value='el-math'
                       type='checkbox'
                       name='subject'
+                      onChange={props.handleCheckboxes}
                     />
                     Math
                   </label>
@@ -58,9 +61,10 @@ export default function Subjects() {
                   <label className='checkbox mr-5'>
                     <input
                       className='mr-2'
-                      id='md-basic-math'
+                      value='md-basic-math'
                       type='checkbox'
                       name='subject'
+                      onChange={props.handleCheckboxes}
                     />
                     Basic Math
                   </label>
@@ -71,9 +75,10 @@ export default function Subjects() {
                   <label className='checkbox mr-5'>
                     <input
                       className='mr-2'
-                      id='el-science'
+                      value='el-science'
                       type='checkbox'
                       name='subject'
+                      onChange={props.handleCheckboxes}
                     />
                     Science
                   </label>
@@ -82,9 +87,10 @@ export default function Subjects() {
                   <label className='checkbox mr-5'>
                     <input
                       className='mr-2'
-                      id='md-prealgebra'
+                      value='md-prealgebra'
                       type='checkbox'
                       name='subject'
+                      onChange={props.handleCheckboxes}
                     />
                     Pre-Algebra
                   </label>
@@ -95,9 +101,10 @@ export default function Subjects() {
                   <label className='checkbox mr-5'>
                     <input
                       className='mr-2'
-                      id='el-ss'
+                      value='el-ss'
                       type='checkbox'
                       name='subject'
+                      onChange={props.handleCheckboxes}
                     />
                     Social Studies
                   </label>
@@ -106,9 +113,10 @@ export default function Subjects() {
                   <label className='checkbox mr-5'>
                     <input
                       className='mr-2'
-                      id='md-science'
+                      value='md-science'
                       type='checkbox'
                       name='subject'
+                      onChange={props.handleCheckboxes}
                     />
                     Science
                   </label>
@@ -120,9 +128,10 @@ export default function Subjects() {
                   <label className='checkbox mr-5'>
                     <input
                       className='mr-2'
-                      id='md-ss'
+                      value='md-ss'
                       type='checkbox'
                       name='subject'
+                      onChange={props.handleCheckboxes}
                     />
                     Social Studies
                   </label>
@@ -141,7 +150,9 @@ export default function Subjects() {
             <table className='table'>
               <thead>
                 <tr>
-                  <th>High School Subjects</th>
+                  <th>High School Subjects
+                    onChange={props.handleCheckboxes}
+                  </th>
                 </tr>
               </thead>
 
@@ -151,9 +162,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-english'
+                        value='hs-english'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       English
                     </label>
@@ -162,9 +174,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-bio'
+                        value='hs-bio'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Biology
                     </label>
@@ -173,9 +186,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-government'
+                        value='hs-government'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Government
                     </label>
@@ -187,9 +201,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-algebra'
+                        value='hs-algebra'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Algebra
                     </label>
@@ -198,9 +213,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-physics'
+                        value='hs-physics'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Physics
                     </label>
@@ -209,9 +225,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-precalc'
+                        value='hs-precalc'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Business
                     </label>
@@ -222,9 +239,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-geometry'
+                        value='hs-geometry'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Geometry
                     </label>
@@ -233,9 +251,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-chem'
+                        value='hs-chem'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Chemistry
                     </label>
@@ -244,9 +263,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-history'
+                        value='hs-history'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       US History
                     </label>
@@ -257,9 +277,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-trig'
+                        value='hs-trig'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Trigonometry
                     </label>
@@ -268,9 +289,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-physical'
+                        value='hs-physical'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Physical Science
                     </label>
@@ -279,9 +301,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-geography'
+                        value='hs-geography'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Geography
                     </label>
@@ -292,9 +315,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-stats'
+                        value='hs-stats'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Statistics
                     </label>
@@ -304,9 +328,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-spanish'
+                        value='hs-spanish'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Spanish
                     </label>
@@ -315,9 +340,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-psych'
+                        value='hs-psych'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Psychology
                     </label>
@@ -328,9 +354,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-precalc'
+                        value='hs-precalc'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Pre-Calculus
                     </label>
@@ -339,9 +366,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-french'
+                        value='hs-french'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       French
                     </label>
@@ -352,9 +380,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-calc'
+                        value='hs-calc'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       Calculus
                     </label>
@@ -363,9 +392,10 @@ export default function Subjects() {
                     <label className='checkbox mr-5'>
                       <input
                         className='mr-2'
-                        id='hs-german'
+                        value='hs-german'
                         type='checkbox'
                         name='subject'
+                        onChange={props.handleCheckboxes}
                       />
                       German
                     </label>
