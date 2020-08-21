@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function UserInfo() {
+export default function UserInfo(props) {
   return (
     <>
       <div className='field is-horizontal'>
@@ -15,6 +15,8 @@ export default function UserInfo() {
                 id='first-name'
                 type='text'
                 placeholder='First Name'
+                name='firstName'
+                onChange={props.handleInputChange}
               />
               <span className='icon is-small is-left'>
                 <i className='fas fa-user'></i>
@@ -28,6 +30,8 @@ export default function UserInfo() {
                 id='last-name'
                 type='text'
                 placeholder='Last Name'
+                name='lastName'
+                onChange={props.handleInputChange}
               />
               <span className='icon is-small is-left'>
                 <i className='fas fa-user'></i>
@@ -42,6 +46,8 @@ export default function UserInfo() {
                 id='email'
                 type='email'
                 placeholder='Email'
+                name='email'
+                onChange={props.handleInputChange}
               />
               <span className='icon is-small is-left'>
                 <i className='fas fa-envelope'></i>
@@ -63,6 +69,8 @@ export default function UserInfo() {
                 id='password'
                 type='password'
                 placeholder='Password'
+                name='password'
+                onChange={props.handleInputChange}
               />
                <span className='icon is-small is-left'>
                 <i className='fas fa-lock'></i>

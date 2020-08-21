@@ -1,7 +1,6 @@
 import React from 'react';
 import Address from '../components/Address';
 import Subjects from '../components/Subjects';
-import Grades from '../components/Grades';
 import UserInfo from '../components/UserInfo';
 import Bio from '../components/Bio';
 import Delivery from '../components/Delivery';
