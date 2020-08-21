@@ -17,9 +17,11 @@ module.exports = (sequelize, Datatypes) => {
 
   UserProfile.associate = (models) => {
     //   hasOne or belongsTo?
-    //   UserProfile.hasOne(models.User, {
-
-    //   })
+    UserProfile.hasOne(models.User, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
     UserProfile.hasMany(models.Subject, {
       onDelete: 'cascade',
     });
@@ -32,9 +34,9 @@ module.exports = (sequelize, Datatypes) => {
       onDelete: 'cascade',
     });
 
-    UserProfile.hasMany(models.Message, {
-      onDelete: 'casecade',
-    });
+    // UserProfile.hasMany(models.Message, {
+    //   onDelete: 'casecade',
+    // });
   };
 
   return UserProfile;
