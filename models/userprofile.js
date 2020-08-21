@@ -15,5 +15,29 @@ module.exports = (sequelize, Datatypes) => {
     duration: Datatypes.STRING,
   });
 
+  UserProfile.associate = (models) => {
+    //   hasOne or belongsTo?
+    UserProfile.hasOne(models.User, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    UserProfile.hasMany(models.Subject, {
+      onDelete: 'cascade',
+    });
+
+    UserProfile.hasMany(models.Availability, {
+      onDelete: 'cascade',
+    });
+
+    UserProfile.hasMany(models.Review, {
+      onDelete: 'cascade',
+    });
+
+    // UserProfile.hasMany(models.Message, {
+    //   onDelete: 'casecade',
+    // });
+  };
+
   return UserProfile;
 };
