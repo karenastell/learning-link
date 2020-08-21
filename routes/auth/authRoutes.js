@@ -14,19 +14,82 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 // hashed and stored securely thanks to how we configured our
 // Sequelize User Model. If the user is created successfully, proceed
 //  to log the user in, otherwise send back an error
-router.post('/signup', (req, res) => {
-  db.User.create({
+// /api/auth/signup
+router.post('/signup-tutor', async (req, res) => {
+  // add something to check if their email already exists....
+  let UserId;
+  const dbUser = await db.User.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
+    isTeacher: true,
   })
     .then((dbResponse) => {
-      res.json(dbResponse);
+      console.log(dbResponse.dataValues.id, 'this is the user ID');
+      UserId = dbResponse.dataValues.id;
+      // res.json(dbResponse);
     })
     .catch((err) => {
       res.json(err);
     });
+
+  const dbUserProfile = await db.UserProfile.create({
+    bio: req.body.bio,
+    degree: req.body.degree,
+    experience: req.body.experience,
+    delivery_method: req.body.delivery_method,
+    location: req.body.location,
+    rate: req.body.rate,
+    UserId,
+  });
+  console.log(dbUserProfile);
+
+  const dbSubject = await db.Subject.create({
+    subject: req.body.subject,
+    UserId,
+  });
+
+  const dbAvailability = await db.Availability.create({
+    day: req.body.day,
+    UserId,
+  });
+
+  res.json(dbUserProfile);
+});
+router.post('/signup-student', async (req, res) => {
+  // check for the same email
+  let UserId;
+  const dbUser = await db.User.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+    isTeacher: false,
+  })
+    .then((dbResponse) => {
+      console.log(dbResponse.dataValues.id, 'this is the user ID');
+      UserId = dbResponse.dataValues.id;
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+
+  const dbUserProfile = await db.UserProfile.create({
+    bio: req.body.bio,
+    delivery_method: req.body.delivery_method,
+    location: req.body.location,
+    grade: req.body.grade,
+    school: req.body.school,
+    special_ed: req.body.special_ed,
+    duration: req.body.duration,
+    UserId,
+  });
+  const dbSubject = await db.Subject.create({
+    subject: req.body.subject,
+    UserId,
+  });
+  res.json(dbUserProfile);
 });
 
 // Route for logging user out
