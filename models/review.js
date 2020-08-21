@@ -5,5 +5,13 @@ module.exports = (sequelize, Datatypes) => {
     },
   });
 
+  Review.associate = (models) => {
+    Review.belongsTo(models.UserProfile, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
+
   return Review;
 };

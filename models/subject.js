@@ -6,5 +6,13 @@ module.exports = (sequelize, Datatypes) => {
     },
   });
 
+  Subject.associate = (models) => {
+    Subject.belongsTo(models.UserProfile, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
+
   return Subject;
 };
