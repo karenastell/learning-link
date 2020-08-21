@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Delivery() {
+export default function Delivery(props) {
     return (
         <div className='field is-horizontal'>
         <div className='field-label is-normal'>
@@ -12,8 +12,10 @@ export default function Delivery() {
               <input
                 className='mr-2'
                 id='elementary'
-                type='checkbox'
-                name='member'
+                value='remote'
+                type='radio'
+                name='delivery_method'
+                onChange={props.handleInputChange}
               />
               Remote
             </label>
@@ -21,10 +23,23 @@ export default function Delivery() {
               <input
                 className='mr-2'
                 id='elementary'
-                type='checkbox'
-                name='member'
+                type='radio'
+                value='In Person'
+                name='delivery_method'
+                onChange={props.handleInputChange}
               />
               In Person
+            </label>
+            <label className='checkbox mr-5'>
+              <input
+                className='mr-2'
+                id='elementary'
+                type='radio'
+                value='hybrid'
+                name='delivery_method'
+                onChange={props.handleInputChange}
+              />
+              Hybrid
             </label>
           </div>
         </div>

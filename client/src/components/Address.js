@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Address() {
+export default function Address(props) {
     return (
         <div className='field is-horizontal'>
         <div className='field-label is-normal'>
@@ -14,11 +14,13 @@ export default function Address() {
                 id='city'
                 type='text'
                 placeholder='City'
+                name="city"
+                onChange={props.handleInputChange}
               />
             </p>
           </div>
           <div className="select width-div">
-              <select className="select-state width-div">
+              <select className="select-state width-div" name="state" onChange={props.handleInputChange}>
                 <option value="">Select a State</option>
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>
