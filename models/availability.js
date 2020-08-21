@@ -7,9 +7,9 @@ module.exports = (sequelize, Datatypes) => {
   });
   Availability.associate = (models) => {
     Availability.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
+    //   foreignKey: {
+    //     allowNull: false,
+    //   },
     });
   };
 
