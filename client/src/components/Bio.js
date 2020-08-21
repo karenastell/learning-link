@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function Intro() {
+export default function Bio() {
     return (
         <div className='field is-horizontal'>
         <div className='field-label is-normal'>
-          <label className='label'>Introduction</label>
+          <label className='label'>Bio</label>
         </div>
         <div className='field-body'>
           <div className='field'>

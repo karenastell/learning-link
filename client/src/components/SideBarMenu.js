@@ -1,9 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default function SideBarMenu() {
   return (
-    <div style={menuStyle}>
+    <div style={menuStyle} className='column is-one-fifth'>
       <aside className='menu'>
         <p className='menu-label'>Menu</p>
         <ul className='menu-list'>
@@ -23,7 +23,6 @@ export default function SideBarMenu() {
             <Link to='/calendar'>Calendar</Link>
           </li>
         </ul>
-       
       </aside>
     </div>
   );
@@ -31,10 +30,10 @@ export default function SideBarMenu() {
 
 const menuStyle = {
   width: '10%',
-  minWidth: "150px",
+  minWidth: '150px',
   height: '700px',
   marginLeft: '10px',
   marginRight: '10px',
   float: 'left',
-  borderRight: '1px solid black'
+  borderRight: '1px solid black',
 };

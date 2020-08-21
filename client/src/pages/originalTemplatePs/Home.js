@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../AuthContext";
 import "../App.css";
-import { Container, Row, Button, Col } from "react-bootstrap";
 import Axios from "axios";
 
 function Home(props) {

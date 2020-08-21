@@ -3,17 +3,17 @@ import Address from '../components/Address';
 import Subjects from '../components/Subjects';
 import Grades from '../components/Grades';
 import UserInfo from '../components/UserInfo';
-import Intro from '../components/Intro';
+import Bio from '../components/Bio';
 import Delivery from '../components/Delivery';
 import Button from '../components/Button';
 
 export default function ProfileForm(props) {
   return (
     <div className='container mt-5 mb-5'>
-       <h1 className='title'>Tutor Form</h1>
+      <h1 className='title'>Tutor Form</h1>
       <UserInfo />
 
-      <Intro />
+      <Bio />
 
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
@@ -113,45 +113,6 @@ export default function ProfileForm(props) {
                   name='member'
                 />
                 Saturday
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'></label>
-        </div>
-        <div className='field-body'>
-          <div className='field is-narrow'>
-            <div className='control'>
-              <label className='checkbox mr-5'>
-                <input
-                  className='mr-2'
-                  id='morning'
-                  type='checkbox'
-                  name='member'
-                />
-                Morning (7:00am - 12:00pm)
-              </label>
-              <label className='checkbox mr-5'>
-                <input
-                  className='mr-2'
-                  id='afternoon'
-                  type='checkbox'
-                  name='member'
-                />
-                Afternoon (12:00pm - 5:00pm)
-              </label>
-              <label className='checkbox mr-5'>
-                <input
-                  className='mr-2'
-                  id='evening'
-                  type='checkbox'
-                  name='member'
-                />
-                Evening (5:00pm - 10:00pm)
               </label>
             </div>
           </div>
