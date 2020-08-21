@@ -22,7 +22,6 @@ module.exports = (sequelize, Datatypes) => {
         allowNull: false,
       },
     });
-
   };
 
   return UserProfile;

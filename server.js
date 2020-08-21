@@ -38,7 +38,7 @@ app.get('*', (req, res) => {
 
 // Sync sequelize models then start Express app
 // =============================================
-db.sequelize.sync({ force: true })
+db.sequelize.sync({ force: false })
   .then(() => {
     console.log('\n*************************************');
     console.log(`${process.env.DB_NAME} database connected`);
