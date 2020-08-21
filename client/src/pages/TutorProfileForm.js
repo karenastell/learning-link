@@ -9,6 +9,10 @@ import Button from '../components/Button';
 export default function ProfileForm(props) {
   const [tutorFormInfo, setTutorFormInfo] = useState({});
 
+  const [subjects, setSubjects] = useState([]);
+
+  const [days, setDays] = useState([])
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     console.log(value, name);
@@ -17,6 +21,20 @@ export default function ProfileForm(props) {
       ...tutorFormInfo,
       [name]: value,
     });
+  }
+
+  const handleCheckboxes = (event) => {
+    setSubjects([
+      ...subjects,
+      event.target.value
+    ])
+  }
+
+  const handleDayCheckboxes = (event) => {
+    setDays([
+      ...days,
+      event.target.value
+    ])
   }
 
   return (
@@ -57,7 +75,7 @@ export default function ProfileForm(props) {
         </div>
       </div>
 
-      <Subjects />
+      <Subjects handleCheckboxes={handleCheckboxes} />
 
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
@@ -73,7 +91,7 @@ export default function ProfileForm(props) {
                   value='Sunday'
                   type='checkbox'
                   name='day'
-                  // onChange={handleInputChange}
+                  onChange={handleDayCheckboxes}
                 />
                 Sunday
               </label>
@@ -84,7 +102,7 @@ export default function ProfileForm(props) {
                   value='Monday'
                   type='checkbox'
                   name='day'
-                  // onChange={handleInputChange}
+                  onChange={handleDayCheckboxes}
                 />
                 Monday
               </label>
@@ -95,7 +113,7 @@ export default function ProfileForm(props) {
                   value="Tuesday"
                   type='checkbox'
                   name='day'
-                  // onChange={handleInputChange}
+                  onChange={handleDayCheckboxes}
                 />
                 Tuesday
               </label>
@@ -106,7 +124,7 @@ export default function ProfileForm(props) {
                   value='Wednesday'
                   type='checkbox'
                   name='day'
-                  // onChange={handleInputChange}
+                  onChange={handleDayCheckboxes}
                 />
                 Wednesday
               </label>
@@ -117,7 +135,7 @@ export default function ProfileForm(props) {
                   value='Thursday'
                   type='checkbox'
                   name='day'
-                  // onChange={handleInputChange}
+                  onChange={handleDayCheckboxes}
                 />
                 Thursday
               </label>
@@ -128,7 +146,7 @@ export default function ProfileForm(props) {
                   value='Friday'
                   type='checkbox'
                   name='day'
-                  // onChange={handleInputChange}
+                  onChange={handleDayCheckboxes}
                 />
                 Friday
               </label>
@@ -139,7 +157,7 @@ export default function ProfileForm(props) {
                   value="Saturday"
                   type='checkbox'
                   name='day'
-                  // onChange={handleInputChange}
+                  onChange={handleDayCheckboxes}
                 />
                 Saturday
               </label>
