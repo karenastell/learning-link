@@ -7,9 +7,9 @@ module.exports = (sequelize, Datatypes) => {
 
   Review.associate = (models) => {
     Review.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
+    //   foreignKey: {
+    //     allowNull: false,
+    //   },
     });
   };
 
