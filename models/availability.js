@@ -5,5 +5,13 @@ module.exports = (sequelize, Datatypes) => {
       allowNull: false,
     },
   });
+  Availability.associate = (models) => {
+    Availability.belongsTo(models.UserProfile, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
+
   return Availability;
 };
