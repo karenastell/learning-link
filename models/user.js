@@ -34,7 +34,23 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
       },
     });
+    User.hasMany(models.Subject, {
+      onDelete: 'cascade',
+    });
+
+    User.hasMany(models.Availability, {
+      onDelete: 'cascade',
+    });
+
+    User.hasMany(models.Review, {
+      onDelete: 'cascade',
+    });
+
+    // User.hasMany(models.Message, {
+    //   onDelete: 'casecade',
+    // });
   };
+
   // Creating a custom method for our User model. This will check if an unhashed
   // password entered by the user can be compared to the hashed password stored in our database
   User.prototype.validPassword = function (password) {

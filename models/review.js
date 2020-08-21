@@ -6,7 +6,7 @@ module.exports = (sequelize, Datatypes) => {
   });
 
   Review.associate = (models) => {
-    Review.belongsTo(models.UserProfile, {
+    Review.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
       },
