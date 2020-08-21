@@ -29,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   User.associate = (models) => {
-    User.belongsTo(models.UserProfile, {
+    User.hasOne(models.UserProfile, {
       foreignKey: {
         allowNull: false,
       },

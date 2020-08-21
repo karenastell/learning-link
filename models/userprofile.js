@@ -17,12 +17,11 @@ module.exports = (sequelize, Datatypes) => {
 
   UserProfile.associate = (models) => {
     //   hasOne or belongsTo?
-    UserProfile.hasOne(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
+    UserProfile.belongsTo(models.User, {
+      // foreignKey: {
+      //   allowNull: false,
+      // },
     });
-
   };
 
   return UserProfile;
