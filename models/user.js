@@ -32,6 +32,24 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   User.associate = (models) => {
+    User.belongsToMany(models.User, {
+      through: 'TutorStudent',
+      as: 'Student',
+      foreignkey: 'TutorId',
+      otherKey: 'StudentId',
+    });
+  };
+
+  User.associate = (models) => {
+    User.belongsToMany(models.User, {
+      through: 'TutorStudent',
+      as: 'Tutor',
+      foreignkey: 'StudentId',
+      otherKey: 'TutorId',
+    });
+  };
+
+  User.associate = (models) => {
     User.hasOne(models.UserProfile, {
       foreignKey: {
         allowNull: false,
