@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+// import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu';
 import { AuthContext } from '../AuthContext';
@@ -7,13 +8,18 @@ export default function MyProfile(props){
     // get the userId from context
     const { userId } = useContext(AuthContext);
     // will need some state here to handle the editing capabilities
-console.log(userId)
+
+
+// const { id } = useParams()
+console.log(userId, "this should be the id")
     // will need to get the user's profile data from the database
-    // useEffect(() => {
-    //     Axios.get('/api/my-profile').then((response) => {
-    //         console.log(response);
-    //     });
-    // }, []);
+    useEffect(() => {
+        console.log(userId, 'this is the userId inside the useeffect');
+          Axios.get(`/api/myprofile/${userId}`).then((response) => {
+            console.log(response);
+        });  
+        
+    }, []);
 
     // Will need to have PUT requests to update items if the user makes edits.
     return (

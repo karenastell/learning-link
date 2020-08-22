@@ -6,7 +6,8 @@ const passport = require('../../config/passport');
 // passport.authenticate() is a middle ware provided by passport
 // and is configured
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  console.log(req.user.dataValues);
+  // console.log(req.user.dataValues);
+  console.log('user is logged in');
   res.json(req.user);
 });
 

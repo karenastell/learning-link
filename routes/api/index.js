@@ -6,9 +6,19 @@ router.get('/secrets', isAuthenticated, (req, res) => {
   res.json('Talk is cheap. Show me the code. -Linus Torvalds');
 });
 
-// TODO: we will want to make sure this is authenticated!!!!
-// router.get('/my-profile', (req, res) => {
-//   db.UserProfile.
-// });
+router.get('/myprofile/:id', (req, res) => {
+  console.log(req.params.id, "this is the params");
+  db.User.findOne({
+    where: { id: req.params.id },
+    include: [
+      { model: db.UserProfile },
+      { model: db.Subject },
+      { model: db.Availability },
+    ],
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
 
 module.exports = router;
