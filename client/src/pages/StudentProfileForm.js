@@ -3,8 +3,8 @@ import UserInfo from '../components/UserInfo';
 import Address from '../components/Address';
 import Bio from '../components/Bio';
 import Subjects from '../components/Subjects';
-import Button from '../components/Button';
 import Delivery from '../components/Delivery';
+import Axios from 'axios';
 
 export default function StudentProfileForm(props) {
   const [studentFormInfo, setStudentFormInfo] = useState({});
@@ -21,6 +21,29 @@ export default function StudentProfileForm(props) {
 
   const handleCheckboxes = (event) => {
     setSubjects([...subjects, event.target.value]);
+  };
+
+  console.log(studentFormInfo);
+
+  const onButtonSubmit = (event) => {
+    event.preventDefault();
+    Axios.post('/api/auth/signup-student', {
+      firstName: studentFormInfo.firstName,
+      lastName: studentFormInfo.lastName,
+      email: studentFormInfo.email,
+      password: studentFormInfo.password,
+      bio: studentFormInfo.bio,
+      grade: studentFormInfo.grade,
+      school: studentFormInfo.school,
+      city: studentFormInfo.city,
+      state: studentFormInfo.state,
+      special_ed: studentFormInfo.special_ed,
+      subjects: studentFormInfo.subjects,
+      delivery_method: studentFormInfo.delivery_method,
+      duration: studentFormInfo.duration,
+    }).then((response) => {
+      console.log(response, 'Sign Up Form Has Been Posted');
+    });
   };
 
   return (
@@ -116,7 +139,18 @@ export default function StudentProfileForm(props) {
           </div>
         </div>
       </div>
-      <Button />
+      <div className='field is-horizontal'>
+        <div className='field-label'></div>
+        <div className='field-body'>
+          <div className='field'>
+            <div className='control'>
+              <button className='button is-primary' onClick={onButtonSubmit}>
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

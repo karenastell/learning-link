@@ -4,7 +4,6 @@ import Subjects from '../components/Subjects';
 import UserInfo from '../components/UserInfo';
 import Bio from '../components/Bio';
 import Delivery from '../components/Delivery';
-import Button from '../components/Button';
 import Axios from 'axios';
 
 export default function ProfileForm(props) {
@@ -205,6 +204,7 @@ export default function ProfileForm(props) {
         </div>
       </div>
 
+
       <div className='field is-horizontal'>
         <div className='field-label'></div>
         <div className='field-body'>
@@ -215,6 +215,7 @@ export default function ProfileForm(props) {
           </div>
         </div>
       </div>
+
     </div>
   );
 }
