@@ -12,6 +12,8 @@ export default function Nav() {
   const [credsAreInvalid, setCredsAreInvalid] = useState('');
   const [modal, setModal] = useState('modal');
 
+// TODO: Make a logout function that connects to logout backend
+
   useEffect(() => {
     console.log(userId);
   }, [userId])

@@ -13,6 +13,8 @@ export default function MyProfile(props){
     const [subjectsInfo, setSubjectsInfo] = useState([]);
     const [availabilityInfo, setAvailabilityInfo] = useState([]);
 
+    const isTeacher = userInfo.isTeacher;
+
 // const { id } = useParams()
 console.log(userId, "this should be the id")
     // will need to get the user's profile data from the database
@@ -47,8 +49,28 @@ console.log(userId, "this should be the id")
             <p>Email: {userInfo.email}</p>
             <p>Bio: {userProfileInfo.bio}</p>
             <p>Location: {userProfileInfo.city}, {userProfileInfo.state}</p>
-            <p>Degree: {userProfileInfo.degree}</p>
-            <p>Experience: {userProfileInfo.experience}</p>
+            { isTeacher ? <p>Degree: {userProfileInfo.degree}</p> : null}
+            { isTeacher === false ? <p>Grade: {userProfileInfo.grade}</p> : null}
+            { isTeacher === false ? <p>School: {userProfileInfo.school}</p> : null}
+            { isTeacher ? <p>Experience: {userProfileInfo.experience}</p> : null}
+            <p>Delivery Method: {userProfileInfo.delivery_method}</p>
+            { isTeacher === false ? <p>Special Education: userProfileInfo.special_ed}</p> : null}
+            { userProfileInfo.rate ? <p>Rate: ${userProfileInfo.rate}</p> : null}
+            <div>
+               <dl className="block-list is-small is-outlined is-success is-centered">
+                <h3>Subjects for tutoring:</h3>
+                {subjectsInfo.map(subject => <li key={subject.subject}>{subject.subject}</li>)}
+            </dl> 
+            </div>
+            { isTeacher ? (
+                <div>
+                <dl className="block-list is-small is-outlined is-success is-centered">
+                 <h3>Days Available: </h3>
+                 {availabilityInfo.map(day => <li key={day.day}>{day.day}</li>)}
+             </dl> 
+             </div>
+            ) : null}
+            
         </div>
         </>
     )
