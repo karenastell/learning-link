@@ -35,7 +35,7 @@ export default function ProfileForm(props) {
     ])
   }
 
-  const onButtonSubmit = (event) => {
+  const tutorOnButtonSubmit = (event) => {
     // for now, we'll put event.preventDefault(), but eventually we will redirect the user
     event.preventDefault();
     Axios.post('/api/auth/signup-tutor', {
@@ -54,7 +54,7 @@ export default function ProfileForm(props) {
       days: days,
     }).then((response) => {
       console.log(response);
-      // then redirect
+      // TODO: then redirect
     })
   }
 
@@ -204,6 +204,17 @@ export default function ProfileForm(props) {
         </div>
       </div>
 
+
+      <div className='field is-horizontal'>
+        <div className='field-label'></div>
+        <div className='field-body'>
+          <div className='field'>
+            <div className='control'>
+              <button className='button is-primary' onClick={tutorOnButtonSubmit}>Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
   );
