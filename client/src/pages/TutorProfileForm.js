@@ -4,6 +4,7 @@ import Subjects from '../components/Subjects';
 import UserInfo from '../components/UserInfo';
 import Bio from '../components/Bio';
 import Delivery from '../components/Delivery';
+import Availability from '../components/Availability';
 import Axios from 'axios';
 
 export default function ProfileForm(props) {
