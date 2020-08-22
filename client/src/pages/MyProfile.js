@@ -43,6 +43,11 @@ console.log(userId, "this should be the id")
         <div className='container mt-5 mb-5'>
             {/* Display each field from the database (obv not the password) */}
             {/* have an edit button after each item? or one edit button that allows all items to be editable? */}
+            <p>Name: {userInfo.firstName} {userInfo.lastName}</p>
+            <p>Email: {userInfo.email}</p>
+            <p>Bio: {userProfileInfo.bio}</p>
+            <p>Location: {userProfileInfo.city}, {userProfileInfo.state}</p>
+            <p>Degree: {userProfileInfo.degree}</p>
         </div>
         </>
     )
