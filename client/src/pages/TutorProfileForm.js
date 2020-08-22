@@ -96,7 +96,9 @@ export default function ProfileForm(props) {
         </div>
       </div>
 
-      <Subjects handleCheckboxes={handleCheckboxes} />
+      <Subjects 
+      // handleCheckboxes={handleCheckboxes} 
+      />
 
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
@@ -204,7 +206,6 @@ export default function ProfileForm(props) {
         </div>
       </div>
 
-
       <div className='field is-horizontal'>
         <div className='field-label'></div>
         <div className='field-body'>
@@ -215,7 +216,6 @@ export default function ProfileForm(props) {
           </div>
         </div>
       </div>
-
     </div>
   );
 }

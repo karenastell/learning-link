@@ -95,11 +95,13 @@ router.post('/signup-student', async (req, res) => {
     UserId,
   });
 
-  const dbSubject = await db.Subject.create({
-    subject: req.body.subject,
-    UserId,
-  });
-  res.json(dbUserProfile);
+  // const dbSubject = await db.Subject.create({
+  //   subject: req.body.subject,
+  //   UserId,
+  // });
+
+  console.log(req.body);
+  console.log(req.body.subjects);
 
   await req.body.subjects.forEach((subject) => {
     db.Subject.create({
@@ -107,6 +109,7 @@ router.post('/signup-student', async (req, res) => {
       UserId,
     });
   });
+  res.json(dbUserProfile);
 });
 
 // Route for logging user out
