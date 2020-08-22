@@ -53,9 +53,11 @@ export default function MyProfile(props) {
         <div className="level">
           <div className="level-left"></div>
           <div className="level-right">
-            <a className="level-item" onClick={() => setEditMode('on')}>
-              Edit Profile
-            </a>
+            {editMode === 'off' ? (
+              <a className="level-item" onClick={() => setEditMode('on')}>
+                Edit Profile
+              </a>
+            ) : null}
           </div>
         </div>
         {editMode === 'off' ? (
@@ -67,7 +69,17 @@ export default function MyProfile(props) {
             isTeacher={isTeacher}
           />
         ) : (
-          <EditProfile />
+          <EditProfile
+            userInfo={userInfo}
+            userProfileInfo={userProfileInfo}
+            subjectsInfo={subjectsInfo}
+            availabilityInfo={availabilityInfo}
+            isTeacher={isTeacher}
+            setEditMode={setEditMode}
+            setUserInfo={setUserInfo}
+            setUserProfileInfo={setUserProfileInfo}
+            userId={userId}
+          />
         )}
       </div>
     </>

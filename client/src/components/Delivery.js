@@ -12,10 +12,10 @@ export default function Delivery(props) {
               <input
                 className='mr-2'
                 id='elementary'
-                value='remote'
+                value='Remote'
                 type='radio'
                 name='delivery_method'
-                onChange={props.handleInputChange}
+                onChange={props.handleInputChange || props.handleProfileInfoChange}
               />
               Remote
             </label>
@@ -26,7 +26,7 @@ export default function Delivery(props) {
                 type='radio'
                 value='In Person'
                 name='delivery_method'
-                onChange={props.handleInputChange}
+                onChange={props.handleInputChange || props.handleProfileInfoChange}
               />
               In Person
             </label>
@@ -35,9 +35,9 @@ export default function Delivery(props) {
                 className='mr-2'
                 id='elementary'
                 type='radio'
-                value='hybrid'
+                value='Hybrid'
                 name='delivery_method'
-                onChange={props.handleInputChange}
+                onChange={props.handleInputChange || props.handleProfileInfoChange}
               />
               Hybrid
             </label>
