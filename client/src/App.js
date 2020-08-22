@@ -24,21 +24,46 @@ import Calendar from './pages/Calendar';
 // import Login from "./pages/Login";
 // import Members from "./pages/Members";
 
-export default function App() {
+function App() {
+  const { isAuth, setIsAuth } = useContext(AuthContext);
+  console.log('App auth: ', isAuth);
+
+  // here we are ceating a private route wrapper to prevent front end routing to
+  // restricted pages.  The ({ component: Component, ...rest })  argument that is
+  // passed to this functional component is essentially the same as just passing
+  // props, but using object destucturing.  the ...rest is literally the rest of
+  // the props that were not destructured.
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) =>
+        isAuth ? <Component {...props} /> : <Redirect to="/login" />
+      }
+    />
+  );
+
   return (
     <>
       <Nav />
       <Router>
         <>
-          <Route exact path='/' component={Main} />
-          <Route exact path='/calendar' component={Calendar} />
-          <Route exact path='/signup-tutor' component={TutorProfileForm} />
-          <Route exact path='/signup-student' component={StudentProfileForm} />
-          <Route exact path='/search' component={Search} />
-          <Route exact path='/myprofile' component={MyProfile} />
-          <Route exact path='/student-dashboard' component={StudentDashboard} />
-          <Route exact path='/tutor-dashboard' component={TutorDashboard} />
-          <Route exact path='/messages' component={Messages} />
+          <Route exact path="/" component={Main} />
+          <Route exact path="/signup-tutor" component={TutorProfileForm} />
+          <Route exact path="/signup-student" component={StudentProfileForm} />
+          <PrivateRoute exact path="/calendar" component={Calendar} />
+          <PrivateRoute exact path="/search" component={Search} />
+          <PrivateRoute exact path="/myprofile" component={MyProfile} />
+          <PrivateRoute
+            exact
+            path="/student-dashboard"
+            component={StudentDashboard}
+          />
+          <PrivateRoute
+            exact
+            path="/tutor-dashboard"
+            component={TutorDashboard}
+          />
+          <PrivateRoute exact path="/messages" component={Messages} />
         </>
       </Router>
       <Footer />
@@ -46,9 +71,16 @@ export default function App() {
   );
 }
 
-// // Even though this is the App.js file, in the end we are not exactly exporting
-// // the App component.  We actually set up the app component to implement our react
-// // router, but in the end we export App wrapped in the context provider
+export default () => {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  );
+};
+// Even though this is the App.js file, in the end we are not exactly exporting
+// the App component.  We actually set up the app component to implement our react
+// router, but in the end we export App wrapped in the context provider
 
 // function App() {
 //   // Here we subscribe the authentication context using the useContext hook
@@ -89,9 +121,3 @@ export default function App() {
 
 // // Here we export the final product of our app/context configuration, and
 // // even though it is unnamed here, it will be imported as App in index.js
-// export default () => {
-//   return (
-//     <AuthProvider>
-//       <App />
-//     </AuthProvider>
-//   );

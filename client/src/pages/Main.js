@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { AuthContext } from '../AuthContext';
+import { Redirect } from 'react-router-dom';
+
+import Axios from 'axios';
 
 export default function Main(props) {
+const { isAuth, userId} = useContext(AuthContext);
+
+// ternary: if the user is authenticated, they are redirected to their profile page.
   return (
+    <>
+    { isAuth ? <Redirect to='/myprofile' /> : 
     <>
       <img src="./coloredpencils.jpg" alt="learning image" />
       <div className="container has-text-centered mt-3">
@@ -25,7 +33,7 @@ export default function Main(props) {
           grades. Communicate with your students' parents
         </p>
 
-        <div class="container my-5 has-text-centered">
+        <div className="container my-5 has-text-centered">
           <h3 className="mb-3 title is-4">Sign up to get started!</h3>
           <Link to="/signup-tutor">
             <button className="button is-primary mx-2">
@@ -39,6 +47,8 @@ export default function Main(props) {
           </Link>
         </div>
       </div>
+      </>
+}
     </>
   );
 }

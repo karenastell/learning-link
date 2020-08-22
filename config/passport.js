@@ -23,6 +23,7 @@ passport.use(new LocalStrategy(
         email,
       },
     }).then((dbUser) => {
+      console.log(dbUser.dataValues, "look at me!!!!!!!! a;lsdkjf;aslkdjf;alskdjf;alskjdf;laskjdf;alsjkdf;ljkas")
       // If there's no user with the given email
       if (!dbUser) {
         return done(null, false, {

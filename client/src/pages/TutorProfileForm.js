@@ -11,7 +11,7 @@ export default function ProfileForm(props) {
 
   const [subjects, setSubjects] = useState([]);
 
-  const [days, setDays] = useState([])
+  const [days, setDays] = useState([]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -19,21 +19,15 @@ export default function ProfileForm(props) {
       ...tutorFormInfo,
       [name]: value,
     });
-  }
+  };
 
   const handleCheckboxes = (event) => {
-    setSubjects([
-      ...subjects,
-      event.target.value
-    ])
-  }
+    setSubjects([...subjects, event.target.value]);
+  };
 
   const handleDayCheckboxes = (event) => {
-    setDays([
-      ...days,
-      event.target.value
-    ])
-  }
+    setDays([...days, event.target.value]);
+  };
 
   const tutorOnButtonSubmit = (event) => {
     // for now, we'll put event.preventDefault(), but eventually we will redirect the user
@@ -55,39 +49,39 @@ export default function ProfileForm(props) {
     }).then((response) => {
       console.log(response);
       // TODO: then redirect
-    })
-  }
+    });
+  };
 
   return (
-    <div className='container mt-5 mb-5'>
-      <h1 className='title'>Tutor Form</h1>
+    <div className="container mt-5 mb-5">
+      <h1 className="title">Tutor Form</h1>
       <UserInfo handleInputChange={handleInputChange} />
 
       <Bio handleInputChange={handleInputChange} />
 
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'>Education</label>
+      <div className="field is-horizontal">
+        <div className="field-label is-normal">
+          <label className="label">Education</label>
         </div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
+        <div className="field-body">
+          <div className="field">
+            <div className="control">
               <textarea
-                className='textarea'
-                id='credientials'
-                placeholder='Degree(s)'
+                className="textarea"
+                id="credientials"
+                placeholder="Degree(s)"
                 name="degree"
                 onChange={handleInputChange}
               ></textarea>
             </div>
           </div>
 
-          <div className='field'>
-            <div className='control'>
+          <div className="field">
+            <div className="control">
               <textarea
-                className='textarea'
-                id='experience'
-                placeholder='Experience'
+                className="textarea"
+                id="experience"
+                placeholder="Experience"
                 name="experience"
                 onChange={handleInputChange}
               ></textarea>
@@ -96,90 +90,88 @@ export default function ProfileForm(props) {
         </div>
       </div>
 
-      <Subjects 
-      // handleCheckboxes={handleCheckboxes} 
-      />
+      <Subjects handleCheckboxes={handleCheckboxes} />
 
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'>Availability</label>
+      <div className="field is-horizontal">
+        <div className="field-label is-normal">
+          <label className="label">Availability</label>
         </div>
-        <div className='field-body'>
-          <div className='field is-narrow'>
-            <div className='control'>
-              <label className='checkbox mr-5'>
+        <div className="field-body">
+          <div className="field is-narrow">
+            <div className="control">
+              <label className="checkbox mr-5">
                 <input
-                  className='mr-2'
-                  id='sunday'
-                  value='Sunday'
-                  type='checkbox'
-                  name='day'
+                  className="mr-2"
+                  id="sunday"
+                  value="Sunday"
+                  type="checkbox"
+                  name="day"
                   onChange={handleDayCheckboxes}
                 />
                 Sunday
               </label>
-              <label className='checkbox mr-5'>
+              <label className="checkbox mr-5">
                 <input
-                  className='mr-2'
-                  id='monday'
-                  value='Monday'
-                  type='checkbox'
-                  name='day'
+                  className="mr-2"
+                  id="monday"
+                  value="Monday"
+                  type="checkbox"
+                  name="day"
                   onChange={handleDayCheckboxes}
                 />
                 Monday
               </label>
-              <label className='checkbox mr-5'>
+              <label className="checkbox mr-5">
                 <input
-                  className='mr-2'
-                  id='tuesday'
+                  className="mr-2"
+                  id="tuesday"
                   value="Tuesday"
-                  type='checkbox'
-                  name='day'
+                  type="checkbox"
+                  name="day"
                   onChange={handleDayCheckboxes}
                 />
                 Tuesday
               </label>
-              <label className='checkbox mr-5'>
+              <label className="checkbox mr-5">
                 <input
-                  className='mr-2'
-                  id='wednesday'
-                  value='Wednesday'
-                  type='checkbox'
-                  name='day'
+                  className="mr-2"
+                  id="wednesday"
+                  value="Wednesday"
+                  type="checkbox"
+                  name="day"
                   onChange={handleDayCheckboxes}
                 />
                 Wednesday
               </label>
-              <label className='checkbox mr-5'>
+              <label className="checkbox mr-5">
                 <input
-                  className='mr-2'
-                  id='thursday'
-                  value='Thursday'
-                  type='checkbox'
-                  name='day'
+                  className="mr-2"
+                  id="thursday"
+                  value="Thursday"
+                  type="checkbox"
+                  name="day"
                   onChange={handleDayCheckboxes}
                 />
                 Thursday
               </label>
-              <label className='checkbox mr-5'>
+              <label className="checkbox mr-5">
                 <input
-                  className='mr-2'
-                  id='friday'
-                  value='Friday'
-                  type='checkbox'
-                  name='day'
+                  className="mr-2"
+                  id="friday"
+                  value="Friday"
+                  type="checkbox"
+                  name="day"
                   onChange={handleDayCheckboxes}
                 />
                 Friday
               </label>
-              <label className='checkbox mr-5'>
+              <label className="checkbox mr-5">
                 <input
-                  className='mr-2'
-                  id='saturday'
+                  className="mr-2"
+                  id="saturday"
                   value="Saturday"
-                  type='checkbox'
-                  name='day'
+                  type="checkbox"
+                  name="day"
                   onChange={handleDayCheckboxes}
                 />
                 Saturday
@@ -193,25 +185,36 @@ export default function ProfileForm(props) {
 
       <Address handleInputChange={handleInputChange} />
 
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'>Rate per Hour (optional)</label>
+      <div className="field is-horizontal">
+        <div className="field-label is-normal">
+          <label className="label">Rate per Hour (optional)</label>
         </div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
-              <input type='number' name="rate" className='' placeholder='$' onChange={handleInputChange}></input>
+        <div className="field-body">
+          <div className="field">
+            <div className="control">
+              <input
+                type="number"
+                name="rate"
+                className=""
+                placeholder="$"
+                onChange={handleInputChange}
+              ></input>
             </div>
           </div>
         </div>
       </div>
 
-      <div className='field is-horizontal'>
-        <div className='field-label'></div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
-              <button className='button is-primary' onClick={tutorOnButtonSubmit}>Submit</button>
+      <div className="field is-horizontal">
+        <div className="field-label"></div>
+        <div className="field-body">
+          <div className="field">
+            <div className="control">
+              <button
+                className="button is-primary"
+                onClick={tutorOnButtonSubmit}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>
