@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import LoginButton from '../components/LoginButton';
 import LogoutButton from '../components/LogoutButton';
+import { AuthContext } from '../AuthContext';
+import Axios from 'axios';
 
 export default function Nav() {
+  const {setIsAuth, setUserId, userId} = useContext(AuthContext);
+  const emptyCreds = { emailInput: '', passwordInput: '' };
+  const errorMessage = 'invalid credentials';
+  const [formData, setFormData] = useState(emptyCreds);
+  const [credsAreInvalid, setCredsAreInvalid] = useState('');
   const [modal, setModal] = useState('modal');
 
+  useEffect(() => {
+    console.log(userId);
+  }, [userId])
+  
   // displays the modal when the login button is clicked
   const handleModalDisplay = () => {
     setModal('modal is-active');
@@ -13,6 +24,37 @@ export default function Nav() {
   // closes the modal when the close button is clicked
   const handleModalClose = () => {
     setModal('modal');
+  };
+
+  const handleInputChange = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    const inputCreds = {
+      email: formData.emailInput,
+      password: formData.passwordInput,
+    };
+    login(inputCreds);
+    setFormData(emptyCreds);
+  };
+
+  const login = (loginCreds) => {
+    Axios.post('/api/auth/login', loginCreds)
+      .then((user) => {
+        console.log('login response ', user);
+        console.log(user.data.id, "This should be the id...")
+        setUserId(user.data.id);
+        setIsAuth(true);
+        setModal('modal');
+      })
+      .catch((err) => {
+        setCredsAreInvalid(errorMessage);
+        console.log(err);
+      });
   };
 
   return (
@@ -56,6 +98,8 @@ export default function Nav() {
                       id="email"
                       type="email"
                       placeholder="Email"
+                      name="emailInput"
+                      onChange={handleInputChange}
                     />
                   </p>
                 </div>
@@ -74,13 +118,20 @@ export default function Nav() {
                       id="password"
                       type="password"
                       placeholder="Password"
+                      name="passwordInput"
+                      onChange={handleInputChange}
                     />
                   </p>
                 </div>
               </div>
             </div>
             <div className="control has-text-centered">
-              <button className="button is-primary is-fullwidth">Submit</button>
+              <button
+                className="button is-primary is-fullwidth"
+                onClick={handleFormSubmit}
+              >
+                Submit
+              </button>
             </div>
           </section>
         </div>
