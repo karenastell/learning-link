@@ -5,7 +5,7 @@ import { AuthContext } from '../AuthContext';
 import Axios from 'axios';
 
 export default function Nav() {
-  const {setIsAuth, setUserId, userId} = useContext(AuthContext);
+  const { isAuth, setIsAuth, setUserId, userId} = useContext(AuthContext);
   const emptyCreds = { emailInput: '', passwordInput: '' };
   const errorMessage = 'invalid credentials';
   const [formData, setFormData] = useState(emptyCreds);
@@ -67,9 +67,8 @@ export default function Nav() {
         <div className="navbar-brand">
           <h1 className="title title-margin label-text">Learning Link</h1>
         </div>
-        {/* Once authentication is working, conditionally render either login or logout */}
-        <LoginButton handleModalDisplay={handleModalDisplay} />
-        {/* <LogoutButton /> */}
+        {/* if the user is logged in, the LogoutButton displays, if not, the loginButton */}
+        { isAuth ? <LogoutButton /> : <LoginButton handleModalDisplay={handleModalDisplay} /> }
       </nav>
 
       {/* modal for the login */}

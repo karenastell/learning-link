@@ -48,6 +48,7 @@ console.log(userId, "this should be the id")
             <p>Bio: {userProfileInfo.bio}</p>
             <p>Location: {userProfileInfo.city}, {userProfileInfo.state}</p>
             <p>Degree: {userProfileInfo.degree}</p>
+            <p>Experience: {userProfileInfo.experience}</p>
         </div>
         </>
     )
