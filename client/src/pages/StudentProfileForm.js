@@ -23,6 +23,23 @@ export default function StudentProfileForm(props) {
     setSubjects([...subjects, event.target.value]);
   };
 
+  const postProfileForm = (profile) => {
+    $.ajax({
+      method: 'POST',
+      url: 'api/auth/signup-student',
+      data: profile,
+      processData: false,
+      contentType: false,
+    }).then((response) => {
+      console.log(response, 'Profile has been posted');
+    });
+  };
+
+
+  profileObject = {
+    firstName: 
+  };
+
   return (
     <div className='container mt-5 mb-5'>
       <h1 className='title'>Student Form</h1>
