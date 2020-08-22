@@ -4,6 +4,7 @@ import Subjects from '../components/Subjects';
 import UserInfo from '../components/UserInfo';
 import Bio from '../components/Bio';
 import Delivery from '../components/Delivery';
+import Availability from '../components/Availability';
 import Axios from 'axios';
 
 export default function ProfileForm(props) {
@@ -11,7 +12,7 @@ export default function ProfileForm(props) {
 
   const [subjects, setSubjects] = useState([]);
 
-  const [days, setDays] = useState([])
+  const [days, setDays] = useState([]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -19,21 +20,15 @@ export default function ProfileForm(props) {
       ...tutorFormInfo,
       [name]: value,
     });
-  }
+  };
 
   const handleCheckboxes = (event) => {
-    setSubjects([
-      ...subjects,
-      event.target.value
-    ])
-  }
+    setSubjects([...subjects, event.target.value]);
+  };
 
   const handleDayCheckboxes = (event) => {
-    setDays([
-      ...days,
-      event.target.value
-    ])
-  }
+    setDays([...days, event.target.value]);
+  };
 
   const tutorOnButtonSubmit = (event) => {
     // for now, we'll put event.preventDefault(), but eventually we will redirect the user
@@ -55,8 +50,8 @@ export default function ProfileForm(props) {
     }).then((response) => {
       console.log(response);
       // TODO: then redirect
-    })
-  }
+    });
+  };
 
   return (
     <div className='container mt-5 mb-5'>
@@ -76,7 +71,7 @@ export default function ProfileForm(props) {
                 className='textarea'
                 id='credientials'
                 placeholder='Degree(s)'
-                name="degree"
+                name='degree'
                 onChange={handleInputChange}
               ></textarea>
             </div>
@@ -88,7 +83,7 @@ export default function ProfileForm(props) {
                 className='textarea'
                 id='experience'
                 placeholder='Experience'
-                name="experience"
+                name='experience'
                 onChange={handleInputChange}
               ></textarea>
             </div>
@@ -96,98 +91,9 @@ export default function ProfileForm(props) {
         </div>
       </div>
 
-      <Subjects 
-      // handleCheckboxes={handleCheckboxes} 
-      />
+      <Subjects handleCheckboxes={handleCheckboxes} />
 
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal'>
-          <label className='label'>Availability</label>
-        </div>
-        <div className='field-body'>
-          <div className='field is-narrow'>
-            <div className='control'>
-              <label className='checkbox mr-5'>
-                <input
-                  className='mr-2'
-                  id='sunday'
-                  value='Sunday'
-                  type='checkbox'
-                  name='day'
-                  onChange={handleDayCheckboxes}
-                />
-                Sunday
-              </label>
-              <label className='checkbox mr-5'>
-                <input
-                  className='mr-2'
-                  id='monday'
-                  value='Monday'
-                  type='checkbox'
-                  name='day'
-                  onChange={handleDayCheckboxes}
-                />
-                Monday
-              </label>
-              <label className='checkbox mr-5'>
-                <input
-                  className='mr-2'
-                  id='tuesday'
-                  value="Tuesday"
-                  type='checkbox'
-                  name='day'
-                  onChange={handleDayCheckboxes}
-                />
-                Tuesday
-              </label>
-              <label className='checkbox mr-5'>
-                <input
-                  className='mr-2'
-                  id='wednesday'
-                  value='Wednesday'
-                  type='checkbox'
-                  name='day'
-                  onChange={handleDayCheckboxes}
-                />
-                Wednesday
-              </label>
-              <label className='checkbox mr-5'>
-                <input
-                  className='mr-2'
-                  id='thursday'
-                  value='Thursday'
-                  type='checkbox'
-                  name='day'
-                  onChange={handleDayCheckboxes}
-                />
-                Thursday
-              </label>
-              <label className='checkbox mr-5'>
-                <input
-                  className='mr-2'
-                  id='friday'
-                  value='Friday'
-                  type='checkbox'
-                  name='day'
-                  onChange={handleDayCheckboxes}
-                />
-                Friday
-              </label>
-              <label className='checkbox mr-5'>
-                <input
-                  className='mr-2'
-                  id='saturday'
-                  value="Saturday"
-                  type='checkbox'
-                  name='day'
-                  onChange={handleDayCheckboxes}
-                />
-                Saturday
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Availability handleCheckBoxes={handleCheckboxes} />
 
       <Delivery handleInputChange={handleInputChange} />
 
@@ -200,7 +106,13 @@ export default function ProfileForm(props) {
         <div className='field-body'>
           <div className='field'>
             <div className='control'>
-              <input type='number' name="rate" className='' placeholder='$' onChange={handleInputChange}></input>
+              <input
+                type='number'
+                name='rate'
+                className=''
+                placeholder='$'
+                onChange={handleInputChange}
+              ></input>
             </div>
           </div>
         </div>
@@ -211,7 +123,12 @@ export default function ProfileForm(props) {
         <div className='field-body'>
           <div className='field'>
             <div className='control'>
-              <button className='button is-primary' onClick={tutorOnButtonSubmit}>Submit</button>
+              <button
+                className='button is-primary'
+                onClick={tutorOnButtonSubmit}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>

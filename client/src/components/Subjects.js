@@ -150,9 +150,7 @@ export default function Subjects(props) {
             <table className='table'>
               <thead>
                 <tr>
-                  <th>
-                    High School Subjects onChange={props.handleCheckboxes}
-                  </th>
+                  <th>High School Subjects</th>
                 </tr>
               </thead>
 
