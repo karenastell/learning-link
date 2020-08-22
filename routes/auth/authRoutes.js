@@ -15,9 +15,11 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 // Sequelize User Model. If the user is created successfully, proceed
 //  to log the user in, otherwise send back an error
 // /api/auth/signup
+// handle the tutor signup POST
 router.post('/signup-tutor', async (req, res) => {
-  // add something to check if their email already exists....
+  // TODO: add something to check if their email already exists.... or this may already be done...
   let UserId;
+  // create the User in the User table first
   const dbUser = await db.User.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -27,38 +29,48 @@ router.post('/signup-tutor', async (req, res) => {
   })
     .then((dbResponse) => {
       console.log(dbResponse.dataValues.id, 'this is the user ID');
+      // set the UserId to the id that was assigned by the db
       UserId = dbResponse.dataValues.id;
-      // res.json(dbResponse);
     })
     .catch((err) => {
       res.json(err);
     });
 
+  // after the User is created, then make the UserProfile
   const dbUserProfile = await db.UserProfile.create({
     bio: req.body.bio,
     degree: req.body.degree,
     experience: req.body.experience,
     delivery_method: req.body.delivery_method,
-    location: req.body.location,
+    city: req.body.city,
+    state: req.body.state,
     rate: req.body.rate,
     UserId,
   });
   console.log(dbUserProfile);
 
-  const dbSubject = await db.Subject.create({
-    subject: req.body.subject,
-    UserId,
+  // for each subject in the subjects array, create the row in the table
+  await req.body.subjects.forEach((subject) => {
+    db.Subject.create({
+      subject: subject,
+      UserId,
+    });
   });
 
-  const dbAvailability = await db.Availability.create({
-    day: req.body.day,
-    UserId,
+  // for each day in the days array, create the row in the Availability table
+  await req.body.days.forEach((day) => {
+    db.Availability.create({
+      day: day,
+      UserId,
+    });
   });
 
   res.json(dbUserProfile);
 });
+
+// Handle the student sign up POST
 router.post('/signup-student', async (req, res) => {
-  // check for the same email
+  // TODO: add something to check if their email already exists....let UserId;
   let UserId;
   const dbUser = await db.User.create({
     firstName: req.body.firstName,
@@ -78,7 +90,8 @@ router.post('/signup-student', async (req, res) => {
   const dbUserProfile = await db.UserProfile.create({
     bio: req.body.bio,
     delivery_method: req.body.delivery_method,
-    location: req.body.location,
+    city: req.body.city,
+    state: req.body.state,
     grade: req.body.grade,
     school: req.body.school,
     special_ed: req.body.special_ed,
