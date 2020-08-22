@@ -24,6 +24,7 @@ export default function StudentProfileForm(props) {
   };
 
   console.log(studentFormInfo);
+  console.log(subjects);
 
   const onButtonSubmit = (event) => {
     event.preventDefault();
@@ -38,7 +39,7 @@ export default function StudentProfileForm(props) {
       city: studentFormInfo.city,
       state: studentFormInfo.state,
       special_ed: studentFormInfo.special_ed,
-      subjects: studentFormInfo.subjects,
+      subjects: subjects,
       delivery_method: studentFormInfo.delivery_method,
       duration: studentFormInfo.duration,
     }).then((response) => {

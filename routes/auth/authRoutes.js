@@ -26,17 +26,15 @@ router.post('/signup-tutor', async (req, res) => {
     email: req.body.email,
     password: req.body.password,
     isTeacher: true,
-  })
-    .then((dbResponse) => {
-      console.log(dbResponse.dataValues.id, 'this is the user ID');
-      // set the UserId to the id that was assigned by the db
-      UserId = dbResponse.dataValues.id;
-    })
-    .catch((err) => {
-      res.json(err);
-    });
+  });
+  console.log(dbUser.dataValues.id, 'This should be the id');
 
-  // after the User is created, then make the UserProfile
+  const setUserId = () => {
+    UserId = dbUser.dataValues.id;
+  };
+  await setUserId();
+
+  // // after the User is created, then make the UserProfile
   const dbUserProfile = await db.UserProfile.create({
     bio: req.body.bio,
     degree: req.body.degree,
@@ -78,14 +76,12 @@ router.post('/signup-student', async (req, res) => {
     email: req.body.email,
     password: req.body.password,
     isTeacher: false,
-  })
-    .then((dbResponse) => {
-      console.log(dbResponse.dataValues.id, 'this is the user ID');
-      UserId = dbResponse.dataValues.id;
-    })
-    .catch((err) => {
-      res.json(err);
-    });
+  });
+
+  const setUserId = () => {
+    UserId = dbUser.dataValues.id;
+  };
+  await setUserId();
 
   const dbUserProfile = await db.UserProfile.create({
     bio: req.body.bio,
@@ -99,11 +95,13 @@ router.post('/signup-student', async (req, res) => {
     UserId,
   });
 
-  const dbSubject = await db.Subject.create({
-    subject: req.body.subject,
-    UserId,
-  });
-  res.json(dbUserProfile);
+  // const dbSubject = await db.Subject.create({
+  //   subject: req.body.subject,
+  //   UserId,
+  // });
+
+  console.log(req.body);
+  console.log(req.body.subjects);
 
   await req.body.subjects.forEach((subject) => {
     db.Subject.create({
@@ -111,6 +109,7 @@ router.post('/signup-student', async (req, res) => {
       UserId,
     });
   });
+  res.json(dbUserProfile);
 });
 
 // Route for logging user out
