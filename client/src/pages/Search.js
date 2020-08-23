@@ -19,7 +19,9 @@ export default function Search(props) {
     Friday: false,
     Saturday: false,
   });
+  const [subjectChecked, setSubjectChecked] = useState({
 
+  });
 
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
@@ -33,37 +35,34 @@ export default function Search(props) {
     setSubjects([...subjects, event.target.value]);
   };
 
-  const handleDaysCheckBoxes = (event) => {
-    const { value } = event.target;
-    console.log(value);
-    if (check.[value] === false) {
-        // set the state to true
-        // student is seeking tutoring on that day
-       setCheck({ ...check, [value]: true });
-    if(days.includes(value)){
-        setDays([...days])
-    } else {
-        setDays([...days, value])
-    }
-     
-    } else {
-        // set state to false
-        // student is not seeking tutoring on that day
-     setCheck({ ...check, [value]: false });
-   
+    const handleDaysCheckBoxes = (event) => {
+      const { value } = event.target;
+      console.log(value);
+      if (check.[value] === false) {
+          // set the state to true
+          // student is seeking tutoring on that day
+         setCheck({ ...check, [value]: true });
+      if(days.includes(value)){
+          setDays([...days])
+      } else {
+          setDays([...days, value])
+      }
+
+      } else {
+          // set state to false
+          // student is not seeking tutoring on that day
+       setCheck({ ...check, [value]: false });
+
+      }
+    };
+
+  const handleRemove = (value) => {
+    // if the day is already in the days state array and it is unchecked, take it out of the state
+    if (days.includes(value)) {
+      const newArray = days.filter((day) => day !== value);
+      setDays(newArray);
     }
   };
-
-
-  const handleRemove=(value)=>{
-      // if the day is already in the days state array and it is unchecked, take it out of the state
-      if(days.includes(value)){
-          const newArray = days.filter((day)=>day !==value)
-          setDays(newArray)
-      }
-  }
-  
-
 
   const findATutor = () => {
     console.log(days);
@@ -83,14 +82,14 @@ export default function Search(props) {
       });
     }
     if (days) {
-         if(days.length === 1){
-              searchUrl = `${searchUrl}/days/${days[0]}` 
-           } else {
-                searchUrl = `${searchUrl}/days/`
-                days.forEach((day)=>{
-                searchUrl = `${searchUrl}${day}&`
-                })  
-           }
+      if (days.length === 1) {
+        searchUrl = `${searchUrl}/days/${days[0]}`;
+      } else {
+        searchUrl = `${searchUrl}/days/`;
+        days.forEach((day) => {
+          searchUrl = `${searchUrl}${day}&`;
+        });
+      }
     }
 
     console.log(searchUrl);
@@ -108,7 +107,7 @@ export default function Search(props) {
         <Delivery handleInputChange={handleInputChange} />
         <Address handleInputChange={handleInputChange} />
         <Availability
-        check={check}
+          check={check}
           handleDaysCheckBoxes={handleDaysCheckBoxes}
           handleRemove={handleRemove}
         />
