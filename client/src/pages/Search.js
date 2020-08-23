@@ -20,6 +20,11 @@ export default function Search(props) {
     Saturday: false,
   });
 
+  useEffect(()=>{
+console.log('effect effected');
+// checkIfFalse()
+  },)
+
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
     const { name, value } = event.target;
@@ -34,7 +39,10 @@ export default function Search(props) {
 
   const handleDaysCheckBoxes = (event) => {
     const { value } = event.target;
+    console.log(value);
     if (check.[value] === false) {
+        // set the state to true
+        // student is seeking tutoring on that day
        setCheck({ ...check, [value]: true });
     if(days.includes(value)){
         setDays([...days])
@@ -43,14 +51,23 @@ export default function Search(props) {
     }
      
     } else {
+        // set state to false
+        // student is not seeking tutoring on that day
      setCheck({ ...check, [value]: false });
-    //  setDays(days)
+   
     }
-console.log(days);
-    console.log(check);
-
-
   };
+
+
+  const handleRemove=(value)=>{
+      // if the day is already in the array
+      if(days.includes(value)){
+          const newArray = days.filter((day)=>day !==value)
+          setDays(newArray)
+      }
+  }
+  
+
 
   const findATutor = () => {
     console.log(days);
@@ -96,7 +113,9 @@ console.log(days);
         <Delivery handleInputChange={handleInputChange} />
         <Address handleInputChange={handleInputChange} />
         <Availability
+        check={check}
           handleDaysCheckBoxes={handleDaysCheckBoxes}
+          handleRemove={handleRemove}
         />
         <div className='field is-horizontal'>
           <div className='field-label'></div>

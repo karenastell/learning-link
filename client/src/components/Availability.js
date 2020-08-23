@@ -18,6 +18,7 @@ export default function Availability(props) {
                 name='day'
                 check={props.check}
                 onClick={props.handleDaysCheckBoxes}
+                onChange={()=>props.handleRemove('Sunday')}
               />
               Sunday
             </label>
@@ -29,6 +30,7 @@ export default function Availability(props) {
                 type='checkbox'
                 name='day'
                 onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Monday')}
               />
               Monday
             </label>
@@ -40,6 +42,7 @@ export default function Availability(props) {
                 type='checkbox'
                 name='day'
                 onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Tuesday')}
               />
               Tuesday
             </label>
@@ -51,6 +54,7 @@ export default function Availability(props) {
                 type='checkbox'
                 name='day'
                 onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Wednesday')}
               />
               Wednesday
             </label>
@@ -62,6 +66,7 @@ export default function Availability(props) {
                 type='checkbox'
                 name='day'
                 onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Thursday')}
               />
               Thursday
             </label>
@@ -73,6 +78,7 @@ export default function Availability(props) {
                 type='checkbox'
                 name='day'
                 onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Friday')}
               />
               Friday
             </label>
@@ -84,6 +90,7 @@ export default function Availability(props) {
                 type='checkbox'
                 name='day'
                 onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Saturday')}
               />
               Saturday
             </label>
