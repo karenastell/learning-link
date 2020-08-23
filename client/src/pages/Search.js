@@ -20,10 +20,6 @@ export default function Search(props) {
     Saturday: false,
   });
 
-  useEffect(()=>{
-console.log('effect effected');
-// checkIfFalse()
-  },)
 
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
@@ -60,7 +56,7 @@ console.log('effect effected');
 
 
   const handleRemove=(value)=>{
-      // if the day is already in the array
+      // if the day is already in the days state array and it is unchecked, take it out of the state
       if(days.includes(value)){
           const newArray = days.filter((day)=>day !==value)
           setDays(newArray)
@@ -87,15 +83,14 @@ console.log('effect effected');
       });
     }
     if (days) {
-      searchUrl = `${searchUrl}/days/`;
-      if (days.length > 1) {
-        days.forEach((day) => {
-          searchUrl = `${searchUrl}${day}&`;
-        });
-      } else
-        days.forEach((day) => {
-          searchUrl = `${searchUrl}${day}`;
-        });
+         if(days.length === 1){
+              searchUrl = `${searchUrl}/days/${days[0]}` 
+           } else {
+                searchUrl = `${searchUrl}/days/`
+                days.forEach((day)=>{
+                searchUrl = `${searchUrl}${day}&`
+                })  
+           }
     }
 
     console.log(searchUrl);
