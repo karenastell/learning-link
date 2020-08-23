@@ -7,7 +7,7 @@ router.get('/secrets', isAuthenticated, (req, res) => {
 });
 
 router.get('/myprofile/:id', (req, res) => {
-  console.log(req.params.id, "this is the params");
+  console.log(req.params.id, 'this is the params');
   db.User.findOne({
     where: { id: req.params.id },
     include: [
@@ -20,5 +20,18 @@ router.get('/myprofile/:id', (req, res) => {
     res.json(data);
   });
 });
+
+router.get('/search/day/:day', (req, res) => {
+  console.log(req.params.day);
+  db.Availability.findAll({
+    where: { day: req.params.day },
+    include: [{ model: db.User }],
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
+
+
 
 module.exports = router;

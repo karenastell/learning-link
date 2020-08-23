@@ -29,7 +29,6 @@ export default function Search(props) {
 
   const handleCheckboxes = (event) => {
     const { value } = event.target;
-    console.log(value);
     if (subjects.includes(value)) {
       const newArray = subjects.filter((subject) => subject !== value);
       setSubjects(newArray);
@@ -38,10 +37,9 @@ export default function Search(props) {
     }
   };
 
-  // comment this function out to get Prettier to work
+//   comment this function out to get Prettier to work
     const handleDaysCheckBoxes = (event) => {
       const { value } = event.target;
-      console.log(value);
         if (check.[value] === false) {
             // set the state to true
             // student is seeking tutoring on that day
@@ -68,15 +66,12 @@ export default function Search(props) {
     }
   };
 
-  const findATutor = () => {
-    console.log(days);
-
-    console.log(subjects);
+  const createSearchUrl = () => {
     // create a search URL make the GET request
-    let searchUrl = '';
+    let searchUrl = '/api/search';
     // add the city/state
     if (search.city && search.state) {
-      searchUrl = `city/${search.city}/state/${search.state}`;
+      searchUrl = `${searchUrl}/city/${search.city}/state/${search.state}`;
     }
     // add the delivery method
     if (search.delivery_method) {
@@ -89,21 +84,27 @@ export default function Search(props) {
       });
     }
     // add the availability preference
-    if (days) {
-      if (days.length === 1) {
-        searchUrl = `${searchUrl}/days/${days[0]}`;
-      } else {
-        searchUrl = `${searchUrl}/days/`;
-        days.forEach((day) => {
-          searchUrl = `${searchUrl}${day}&`;
-        });
-      }
+    console.log(days.length);
+    if (days.length === 1) {
+      searchUrl = `${searchUrl}/day/${days[0]}`;
+    } else if (days.length > 1) {
+      searchUrl = `${searchUrl}/day/`;
+      days.forEach((day) => {
+        searchUrl = `${searchUrl}${day}&`;
+      });
     }
 
     console.log(searchUrl);
+    return searchUrl;
   };
 
-  findATutor();
+  console.log(createSearchUrl());
+
+  const findATutor = () => {
+    Axios.get(createSearchUrl()).then((response) => {
+      console.log('!!!!!!!!!!!!!!!!tutor search:', response);
+    });
+  };
 
   return (
     <>
@@ -124,7 +125,9 @@ export default function Search(props) {
           <div className='field-body'>
             <div className='field'>
               <div className='control'>
-                <button className='button is-primary'>Find a Tutor</button>
+                <button onClick={findATutor} className='button is-primary'>
+                  Find a Tutor
+                </button>
               </div>
             </div>
           </div>
