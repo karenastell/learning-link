@@ -32,6 +32,37 @@ router.get('/search/day/:day', (req, res) => {
   });
 });
 
+router.get('/search/city/:city/state/:state', (req, res) => {
+  console.log(req.params.city, req.params.state);
+  db.UserProfile.findAll({
+    where: { city: req.params.city, state: req.params.state },
+    include: [{ model: db.User }],
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
 
+router.get('/search/subject/:subject', (req, res) => {
+  console.log(req.params.subject);
+  db.Subject.findAll({
+    where: { subject: req.params.subject },
+    include: [{ model: db.User }],
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
+
+router.get('/search/delivery_method/:delivery_method', (req, res) => {
+  console.log(req.params.delivery_method);
+  db.UserProfile.findAll({
+    where: { delivery_method: req.params.delivery_method },
+    include: [{ model: db.User }],
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
 
 module.exports = router;

@@ -75,7 +75,7 @@ export default function Search(props) {
     }
     // add the delivery method
     if (search.delivery_method) {
-      searchUrl = `${searchUrl}/delivery/${search.delivery_method}`;
+      searchUrl = `${searchUrl}/delivery_method/${search.delivery_method}`;
     }
     // add the subjects
     if (subjects) {
