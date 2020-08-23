@@ -17,7 +17,7 @@ export default function Availability(props) {
                 type='checkbox'
                 name='day'
                 check={props.check}
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
               />
               Sunday
             </label>
@@ -28,7 +28,7 @@ export default function Availability(props) {
                 value='Monday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
               />
               Monday
             </label>
@@ -39,7 +39,7 @@ export default function Availability(props) {
                 value='Tuesday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
               />
               Tuesday
             </label>
@@ -50,7 +50,7 @@ export default function Availability(props) {
                 value='Wednesday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
               />
               Wednesday
             </label>
@@ -61,7 +61,7 @@ export default function Availability(props) {
                 value='Thursday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
               />
               Thursday
             </label>
@@ -72,7 +72,7 @@ export default function Availability(props) {
                 value='Friday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
               />
               Friday
             </label>
@@ -83,7 +83,7 @@ export default function Availability(props) {
                 value='Saturday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
               />
               Saturday
             </label>

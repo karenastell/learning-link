@@ -10,7 +10,7 @@ export default function Search(props) {
   const [search, setSearch] = useState({});
   const [subjects, setSubjects] = useState([]);
   const [days, setDays] = useState([]);
-  const [Check, setCheck] = useState({
+  const [check, setCheck] = useState({
     Sunday: false,
     Monday: false,
     Tuesday: false,
@@ -23,8 +23,6 @@ export default function Search(props) {
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
     const { name, value } = event.target;
-
-    console.log(value, name);
     // use brackets to signify the name in the state
     setSearch({ ...search, [name]: value });
   };
@@ -34,19 +32,27 @@ export default function Search(props) {
     setSubjects([...subjects, event.target.value]);
   };
 
-  const checkChecked = (event) => {
+  const handleDaysCheckBoxes = (event) => {
     const { value } = event.target;
-    console.log(event.target);
-    console.log(Check);
-    if (Check.[value] === false) {
-      setCheck({ ...Check, [value]: true });
+    if (check.[value] === false) {
+       setCheck({ ...check, [value]: true });
+    if(days.includes(value)){
+        setDays([...days])
     } else {
-      setCheck({ ...Check, [value]: false });
+        setDays([...days, value])
     }
+     
+    } else {
+     setCheck({ ...check, [value]: false });
+    //  setDays(days)
+    }
+console.log(days);
+    console.log(check);
+
+
   };
 
   const findATutor = () => {
-    console.log(search);
     console.log(days);
 
     console.log(subjects);
@@ -90,7 +96,7 @@ export default function Search(props) {
         <Delivery handleInputChange={handleInputChange} />
         <Address handleInputChange={handleInputChange} />
         <Availability
-          checkChecked={checkChecked}
+          handleDaysCheckBoxes={handleDaysCheckBoxes}
         />
         <div className='field is-horizontal'>
           <div className='field-label'></div>
