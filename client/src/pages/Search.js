@@ -19,9 +19,6 @@ export default function Search(props) {
     Friday: false,
     Saturday: false,
   });
-  const [subjectChecked, setSubjectChecked] = useState({
-
-  });
 
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
@@ -31,29 +28,36 @@ export default function Search(props) {
   };
 
   const handleCheckboxes = (event) => {
-    console.log(event);
-    setSubjects([...subjects, event.target.value]);
+    const { value } = event.target;
+    console.log(value);
+    if (subjects.includes(value)) {
+      const newArray = subjects.filter((subject) => subject !== value);
+      setSubjects(newArray);
+    } else {
+      setSubjects([...subjects, value]);
+    }
   };
 
+  // comment this function out to get Prettier to work
     const handleDaysCheckBoxes = (event) => {
       const { value } = event.target;
       console.log(value);
-      if (check.[value] === false) {
-          // set the state to true
-          // student is seeking tutoring on that day
-         setCheck({ ...check, [value]: true });
-      if(days.includes(value)){
-          setDays([...days])
-      } else {
-          setDays([...days, value])
-      }
+        if (check.[value] === false) {
+            // set the state to true
+            // student is seeking tutoring on that day
+           setCheck({ ...check, [value]: true });
+        if(days.includes(value)){
+            setDays([...days])
+        } else {
+            setDays([...days, value])
+        }
 
-      } else {
-          // set state to false
-          // student is not seeking tutoring on that day
-       setCheck({ ...check, [value]: false });
+        } else {
+            // set state to false
+            // student is not seeking tutoring on that day
+         setCheck({ ...check, [value]: false });
 
-      }
+        }
     };
 
   const handleRemove = (value) => {
@@ -68,19 +72,23 @@ export default function Search(props) {
     console.log(days);
 
     console.log(subjects);
-
+    // create a search URL make the GET request
     let searchUrl = '';
+    // add the city/state
     if (search.city && search.state) {
       searchUrl = `city/${search.city}/state/${search.state}`;
     }
+    // add the delivery method
     if (search.delivery_method) {
       searchUrl = `${searchUrl}/delivery/${search.delivery_method}`;
     }
+    // add the subjects
     if (subjects) {
       subjects.forEach((subject) => {
         searchUrl = `${searchUrl}/subject/${subject}`;
       });
     }
+    // add the availability preference
     if (days) {
       if (days.length === 1) {
         searchUrl = `${searchUrl}/days/${days[0]}`;
