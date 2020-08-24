@@ -68,8 +68,6 @@ export default function Search(props) {
 
   const findATutor = () => {
     const responseArray = [];
-    console.log(days.length);
-    console.log(subjects.length);
     if (days.length >= 1) {
       days.forEach((day) => {
         Axios.get(`api/search/day/${day}`).then((response) => {
