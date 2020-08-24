@@ -144,10 +144,17 @@ export default function ProfileDisplay({
               >
                 Save Changes
               </button>
+              <button
+                className="button is-light mx-4"
+                // onClick={handleCancelChanges or redirect}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
       </div>
+      
     </>
   );
 }

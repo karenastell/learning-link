@@ -21,12 +21,12 @@ router.get('/myprofile/:id', (req, res) => {
   });
 });
 
-router.put('/edit-profile/:id', (req, res) => {
-  console.log(req.body);
-  db.User.updateOne()
-}).then((data) => {
-  console.log(data);
-  res.json(data);
-})
+// router.put('/edit-profile/:id', (req, res) => {
+//   console.log(req.body);
+//   db.User.updateOne()
+// }).then((data) => {
+//   console.log(data);
+//   res.json(data);
+// })
 
 module.exports = router;
