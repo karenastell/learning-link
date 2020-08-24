@@ -37,7 +37,7 @@ function App() {
     <Route
       {...rest}
       render={(props) =>
-        isAuth ? <Component {...props} /> : <Redirect to="/login" />
+        isAuth ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );
@@ -52,7 +52,7 @@ function App() {
           <Route exact path="/signup-student" component={StudentProfileForm} />
           <PrivateRoute exact path="/calendar" component={Calendar} />
           <Route exact path="/search" component={Search} />
-          <PrivateRoute exact path="/myprofile" component={MyProfile} />
+          <Route exact path="/myprofile" component={MyProfile} />
           <PrivateRoute
             exact
             path="/student-dashboard"

@@ -16,11 +16,13 @@ export default function Address(props) {
                 placeholder='City'
                 name="city"
                 onChange={props.handleInputChange}
+                value={props.city ? props.city : ''}
               />
             </p>
           </div>
           <div className="select width-div">
-              <select className="select-state width-div" name="state" onChange={props.handleInputChange}>
+              <select className="select-state width-div" name="state" onChange={props.handleInputChange} value={props.state ? props.state : ""}
+              >
                 <option value="">Select a State</option>
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>
