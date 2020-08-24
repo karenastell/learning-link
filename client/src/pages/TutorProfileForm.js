@@ -62,7 +62,7 @@ export default function ProfileForm(props) {
       setTimeout(() => {
        history.push('/');
        setAlert('off') 
-      }, 2000);
+      }, 3000);
       
     });
   };
