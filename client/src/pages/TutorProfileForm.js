@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Address from '../components/Address';
 import Subjects from '../components/Subjects';
 import UserInfo from '../components/UserInfo';
@@ -12,6 +13,8 @@ export default function ProfileForm(props) {
   const [subjects, setSubjects] = useState([]);
 
   const [days, setDays] = useState([]);
+
+  const [alert, setAlert] = useState('off');
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -28,6 +31,8 @@ export default function ProfileForm(props) {
   const handleDayCheckboxes = (event) => {
     setDays([...days, event.target.value]);
   };
+
+  const history = useHistory();
 
   const tutorOnButtonSubmit = (event) => {
     // for now, we'll put event.preventDefault(), but eventually we will redirect the user
@@ -47,14 +52,31 @@ export default function ProfileForm(props) {
       subjects: subjects,
       days: days,
     }).then((response) => {
-      console.log(response);
+      console.log(response.data, "This is the response!");
       // do we need a redirect?
+      setAlert('on');
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+      setTimeout(() => {
+       history.push('/');
+       setAlert('off') 
+      }, 2000);
+      
     });
   };
 
   return (
     <div className="container mt-5 mb-5">
       <h1 className="title">Tutor Form</h1>
+      {alert === 'on' ? (
+                <article class="message is-primary">
+                  <div class="message-body">
+                    You have successfully Signed up!  Redirecting to the homepage.  Please login...
+                  </div>
+                </article>
+              ) : null}
       <UserInfo handleInputChange={handleInputChange} />
 
       <Bio handleInputChange={handleInputChange} />
