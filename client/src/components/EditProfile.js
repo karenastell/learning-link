@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Delivery from './Delivery';
 import Availability from './Availability';
 import Bio from './Bio';
@@ -30,13 +31,19 @@ export default function ProfileDisplay({
     setUserProfileInfo({ ...userProfileInfo, [name]: value });
   };
 
+  const history = useHistory()
+
   const handleSaveChanges = () => {
     Axios.put(`/api/edit-profile/${userId}`, {
       user: userInfo,
       userProfile: userProfileInfo,
     }).then(() => {});
     setEditMode('off');
+    history.push('/updatemessage');
+
   };
+
+
   return (
     <>
       <h1>Edit profile page</h1>

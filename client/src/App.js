@@ -18,6 +18,7 @@ import TutorDashboard from './pages/TutorDashboard';
 import StudentDashboard from './pages/StudentDashboard';
 import Messages from './pages/Messages';
 import Calendar from './pages/Calendar';
+import UpdatedProfileMessage from './pages/UpdatedProfileMessage';
 
 // import Home from "./pages/Home";
 // import Signup from "./pages/Signup";
@@ -64,6 +65,7 @@ function App() {
             component={TutorDashboard}
           />
           <PrivateRoute exact path="/messages" component={Messages} />
+          <PrivateRoute exact path="/updatemessage" component={UpdatedProfileMessage} />
         </>
       </Router>
       <Footer />
