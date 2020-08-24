@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import Availability from '../components/Availability';
 import { AuthContext } from '../AuthContext';
 import Axios from 'axios';
 

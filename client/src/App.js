@@ -53,7 +53,7 @@ function App() {
           <Route exact path="/signup-student" component={StudentProfileForm} />
           <PrivateRoute exact path="/calendar" component={Calendar} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/myprofile" component={MyProfile} />
+          <PrivateRoute exact path="/myprofile" component={MyProfile} />
           <PrivateRoute
             exact
             path="/student-dashboard"
@@ -65,7 +65,7 @@ function App() {
             component={TutorDashboard}
           />
           <PrivateRoute exact path="/messages" component={Messages} />
-          <Route exact path="/updatemessage" component={UpdatedProfileMessage} />
+          <PrivateRoute exact path="/updatemessage" component={UpdatedProfileMessage} />
         </>
       </Router>
       <Footer />
