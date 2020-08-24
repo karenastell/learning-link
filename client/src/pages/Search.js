@@ -19,9 +19,6 @@ export default function Search(props) {
     Friday: false,
     Saturday: false,
   });
-  const [subjectChecked, setSubjectChecked] = useState({
-
-  });
 
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
@@ -31,29 +28,34 @@ export default function Search(props) {
   };
 
   const handleCheckboxes = (event) => {
-    console.log(event);
-    setSubjects([...subjects, event.target.value]);
+    const { value } = event.target;
+    if (subjects.includes(value)) {
+      const newArray = subjects.filter((subject) => subject !== value);
+      setSubjects(newArray);
+    } else {
+      setSubjects([...subjects, value]);
+    }
   };
 
+  //   comment this function out to get Prettier to work
     const handleDaysCheckBoxes = (event) => {
       const { value } = event.target;
-      console.log(value);
-      if (check.[value] === false) {
-          // set the state to true
-          // student is seeking tutoring on that day
-         setCheck({ ...check, [value]: true });
-      if(days.includes(value)){
-          setDays([...days])
-      } else {
-          setDays([...days, value])
-      }
+        if (check.[value] === false) {
+            // set the state to true
+            // student is seeking tutoring on that day
+           setCheck({ ...check, [value]: true });
+        if(days.includes(value)){
+            setDays([...days])
+        } else {
+            setDays([...days, value])
+        }
 
-      } else {
-          // set state to false
-          // student is not seeking tutoring on that day
-       setCheck({ ...check, [value]: false });
+        } else {
+            // set state to false
+            // student is not seeking tutoring on that day
+         setCheck({ ...check, [value]: false });
 
-      }
+        }
     };
 
   const handleRemove = (value) => {
@@ -65,37 +67,47 @@ export default function Search(props) {
   };
 
   const findATutor = () => {
-    console.log(days);
-
-    console.log(subjects);
-
-    let searchUrl = '';
-    if (search.city && search.state) {
-      searchUrl = `city/${search.city}/state/${search.state}`;
-    }
-    if (search.delivery_method) {
-      searchUrl = `${searchUrl}/delivery/${search.delivery_method}`;
-    }
-    if (subjects) {
-      subjects.forEach((subject) => {
-        searchUrl = `${searchUrl}/subject/${subject}`;
+    const responseArray = [];
+    console.log(days.length);
+    console.log(subjects.length);
+    if (days.length >= 1) {
+      days.forEach((day) => {
+        Axios.get(`api/search/day/${day}`).then((response) => {
+          console.log(response);
+          responseArray.push(response.data);
+        });
       });
     }
-    if (days) {
-      if (days.length === 1) {
-        searchUrl = `${searchUrl}/days/${days[0]}`;
-      } else {
-        searchUrl = `${searchUrl}/days/`;
-        days.forEach((day) => {
-          searchUrl = `${searchUrl}${day}&`;
+
+    if (subjects.length >= 1) {
+      subjects.forEach((subject) => {
+        Axios.get(`api/search/subject/${subject}`).then((response) => {
+          console.log(response);
+          responseArray.push(response.data);
         });
-      }
+      });
     }
 
-    console.log(searchUrl);
-  };
+    if (search.delivery_method) {
+      Axios.get(`api/search/delivery_method/${search.delivery_method}`).then(
+        (response) => {
+          console.log(response);
+          responseArray.push(response.data);
+        }
+      );
+    }
 
-  findATutor();
+    if (search.city && search.state) {
+      Axios.get(`api/search/city/${search.city}/state/${search.state}`).then(
+        (response) => {
+          console.log(response);
+          responseArray.push(response.data);
+        }
+      );
+    }
+
+    console.log(responseArray, 'this is the response array');
+  };
 
   return (
     <>
@@ -116,7 +128,9 @@ export default function Search(props) {
           <div className='field-body'>
             <div className='field'>
               <div className='control'>
-                <button className='button is-primary'>Find a Tutor</button>
+                <button onClick={findATutor} className='button is-primary'>
+                  Find a Tutor
+                </button>
               </div>
             </div>
           </div>
