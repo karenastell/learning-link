@@ -16,7 +16,7 @@ export default function Address(props) {
                 placeholder='City'
                 name="city"
                 onChange={props.handleInputChange || props.handleProfileInfoChange}
-                value={props.city ? props.city : ''}
+                value={props.city ? props.city : null}
               />
             </p>
           </div>

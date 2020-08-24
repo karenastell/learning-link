@@ -27,6 +27,11 @@ export default function ProfileDisplay({
             <div className="tile">
               <p>Email: {userInfo.email}</p>
             </div>
+            { isTeacher ? (
+              <div className="tile">
+              <p>Rate: ${userProfileInfo.rate}</p>
+            </div>
+            ) : null}
           </div>
 
           {isTeacher ? (

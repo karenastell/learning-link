@@ -27,12 +27,15 @@ export default function ProfileDisplay({
 
   const handleProfileInfoChange = (event) => {
     const { name, value } = event.target;
-    setUserProfileInfo({...userProfileInfo, [name]: value});
+    setUserProfileInfo({ ...userProfileInfo, [name]: value });
   };
 
   const handleSaveChanges = () => {
-    Axios.put(`/api/edit-profile/${userId}`, {user: userInfo, userProfile: userProfileInfo, subjectsInfo: subjectsInfo, availabilityInfo}).then(() => {});
-    setEditMode('off')
+    Axios.put(`/api/edit-profile/${userId}`, {
+      user: userInfo,
+      userProfile: userProfileInfo,
+    }).then(() => {});
+    setEditMode('off');
   };
   return (
     <>
@@ -93,52 +96,110 @@ export default function ProfileDisplay({
           </div>
         </div>
       </div>
-      <Bio bio={userProfileInfo.bio} handleProfileInfoChange={handleProfileInfoChange} />
-      <Address city={userProfileInfo.city} state={userProfileInfo.state} handleProfileInfoChange={handleProfileInfoChange} />
+      <Bio
+        bio={userProfileInfo.bio}
+        handleProfileInfoChange={handleProfileInfoChange}
+      />
+      <Address
+        city={userProfileInfo.city}
+        state={userProfileInfo.state}
+        handleProfileInfoChange={handleProfileInfoChange}
+      />
       {isTeacher ? (
+        <>
+          <div className="field is-horizontal">
+            <div className="field-label is-normal">
+              <label className="label">Education</label>
+            </div>
+            <div className="field-body">
+              <div className="field">
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    id="credientials"
+                    placeholder="Degree(s)"
+                    name="degree"
+                    value={userProfileInfo.degree}
+                    onChange={handleProfileInfoChange}
+                  ></textarea>
+                </div>
+              </div>
+              <div className="field">
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    id="experience"
+                    placeholder="Experience"
+                    name="experience"
+                    value={userProfileInfo.experience}
+                    onChange={handleProfileInfoChange}
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="field is-horizontal">
+            <div className="field-label is-normal">
+              <label className="label">Rate per Hour (optional)</label>
+            </div>
+            <div className="field-body">
+              <div className="field">
+                <div className="control">
+                  <input
+                    type="number"
+                    name="rate"
+                    className=""
+                    placeholder="$"
+                    onChange={handleProfileInfoChange}
+                    value={userProfileInfo.rate}
+                  ></input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
         <div className="field is-horizontal">
           <div className="field-label is-normal">
-            <label className="label">Education</label>
+            <label className="label">School Information</label>
           </div>
           <div className="field-body">
             <div className="field">
-              <div className="control">
-                <textarea
-                  className="textarea"
-                  id="credientials"
-                  placeholder="Degree(s)"
-                  name="degree"
-                  value={userProfileInfo.degree}
-                    onChange={handleProfileInfoChange}
-                ></textarea>
-              </div>
+              <p className="control is-expanded">
+                <input
+                  onChange={handleProfileInfoChange}
+                  className="input"
+                  id="grade"
+                  type="text"
+                  placeholder="Grade"
+                  name="grade"
+                  value={userProfileInfo.grade}
+                />
+              </p>
             </div>
-
             <div className="field">
-              <div className="control">
-                <textarea
-                  className="textarea"
-                  id="experience"
-                  placeholder="Experience"
-                  name="experience"
-                  value={userProfileInfo.experience}
-                    onChange={handleProfileInfoChange}
-                ></textarea>
-              </div>
+              <p className="control is-expanded">
+                <input
+                  onChange={handleProfileInfoChange}
+                  className="input"
+                  id="school"
+                  type="text"
+                  placeholder="School"
+                  name="school"
+                  value={userProfileInfo.school}
+                />
+              </p>
             </div>
           </div>
         </div>
-      ) : null}
-      <Delivery handleProfileInfoChange={handleProfileInfoChange}/>
+      )}
+      <Delivery handleProfileInfoChange={handleProfileInfoChange} />
       <div className="field is-horizontal">
         <div className="field-label"></div>
         <div className="field-body">
           <div className="field">
             <div className="control">
-              <button
-                className="button is-primary"
-                onClick={handleSaveChanges}
-              >
+              <button className="button is-primary" onClick={handleSaveChanges}>
                 Save Changes
               </button>
               <button
@@ -151,7 +212,6 @@ export default function ProfileDisplay({
           </div>
         </div>
       </div>
-      
     </>
   );
 }
