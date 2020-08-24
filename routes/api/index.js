@@ -65,18 +65,21 @@ router.put('/edit-profile/:id', async (req, res) => {
     { where: { id: req.params.id } }
   );
 
-  await db.UserProfile.update({
-    bio: req.body.userProfile.bio,
-    degree: req.body.userProfile.degree,
-    experience: req.body.userProfile.experience,
-    delivery_method: req.body.userProfile.delivery_method,
-    city: req.body.userProfile.city,
-    state: req.body.userProfile.state,
-    grade: req.body.userProfile.grade,
-    school: req.body.userProfile.school,
-    duration: req.body.userProfile.duration,
-    rate: req.body.userProfile.rate,
-  }, { where: { UserId: req.params.id } });
+  await db.UserProfile.update(
+    {
+      bio: req.body.userProfile.bio,
+      degree: req.body.userProfile.degree,
+      experience: req.body.userProfile.experience,
+      delivery_method: req.body.userProfile.delivery_method,
+      city: req.body.userProfile.city,
+      state: req.body.userProfile.state,
+      grade: req.body.userProfile.grade,
+      school: req.body.userProfile.school,
+      duration: req.body.userProfile.duration,
+      rate: req.body.userProfile.rate,
+    },
+    { where: { UserId: req.params.id } }
+  );
   res.json(req.body);
 });
 

@@ -106,39 +106,93 @@ export default function ProfileDisplay({
         handleProfileInfoChange={handleProfileInfoChange}
       />
       {isTeacher ? (
+        <>
+          <div className="field is-horizontal">
+            <div className="field-label is-normal">
+              <label className="label">Education</label>
+            </div>
+            <div className="field-body">
+              <div className="field">
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    id="credientials"
+                    placeholder="Degree(s)"
+                    name="degree"
+                    value={userProfileInfo.degree}
+                    onChange={handleProfileInfoChange}
+                  ></textarea>
+                </div>
+              </div>
+              <div className="field">
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    id="experience"
+                    placeholder="Experience"
+                    name="experience"
+                    value={userProfileInfo.experience}
+                    onChange={handleProfileInfoChange}
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="field is-horizontal">
+            <div className="field-label is-normal">
+              <label className="label">Rate per Hour (optional)</label>
+            </div>
+            <div className="field-body">
+              <div className="field">
+                <div className="control">
+                  <input
+                    type="number"
+                    name="rate"
+                    className=""
+                    placeholder="$"
+                    onChange={handleProfileInfoChange}
+                    value={userProfileInfo.rate}
+                  ></input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
         <div className="field is-horizontal">
           <div className="field-label is-normal">
-            <label className="label">Education</label>
+            <label className="label">School Information</label>
           </div>
           <div className="field-body">
             <div className="field">
-              <div className="control">
-                <textarea
-                  className="textarea"
-                  id="credientials"
-                  placeholder="Degree(s)"
-                  name="degree"
-                  value={userProfileInfo.degree}
+              <p className="control is-expanded">
+                <input
                   onChange={handleProfileInfoChange}
-                ></textarea>
-              </div>
+                  className="input"
+                  id="grade"
+                  type="text"
+                  placeholder="Grade"
+                  name="grade"
+                  value={userProfileInfo.grade}
+                />
+              </p>
             </div>
-
             <div className="field">
-              <div className="control">
-                <textarea
-                  className="textarea"
-                  id="experience"
-                  placeholder="Experience"
-                  name="experience"
-                  value={userProfileInfo.experience}
+              <p className="control is-expanded">
+                <input
                   onChange={handleProfileInfoChange}
-                ></textarea>
-              </div>
+                  className="input"
+                  id="school"
+                  type="text"
+                  placeholder="School"
+                  name="school"
+                  value={userProfileInfo.school}
+                />
+              </p>
             </div>
           </div>
         </div>
-      ) : null}
+      )}
       <Delivery handleProfileInfoChange={handleProfileInfoChange} />
       <div className="field is-horizontal">
         <div className="field-label"></div>
