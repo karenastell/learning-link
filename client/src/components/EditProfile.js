@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import Subjects from './Subjects';
 import Delivery from './Delivery';
 import Availability from './Availability';
 import Bio from './Bio';
@@ -32,7 +31,7 @@ export default function ProfileDisplay({
   };
 
   const handleSaveChanges = () => {
-    Axios.put(`/api/edit-profile/${userId}`, {user: userInfo, userProfile: userProfileInfo}).then(() => {});
+    Axios.put(`/api/edit-profile/${userId}`, {user: userInfo, userProfile: userProfileInfo, subjectsInfo: subjectsInfo, availabilityInfo}).then(() => {});
     setEditMode('off')
   };
   return (
@@ -95,7 +94,7 @@ export default function ProfileDisplay({
         </div>
       </div>
       <Bio bio={userProfileInfo.bio} handleProfileInfoChange={handleProfileInfoChange} />
-      <Address city={userProfileInfo.city} state={userProfileInfo.state} />
+      <Address city={userProfileInfo.city} state={userProfileInfo.state} handleProfileInfoChange={handleProfileInfoChange} />
       {isTeacher ? (
         <div className="field is-horizontal">
           <div className="field-label is-normal">
@@ -131,8 +130,6 @@ export default function ProfileDisplay({
         </div>
       ) : null}
       <Delivery handleProfileInfoChange={handleProfileInfoChange}/>
-      {isTeacher ? <Availability /> : null}
-      <Subjects />
       <div className="field is-horizontal">
         <div className="field-label"></div>
         <div className="field-body">
@@ -140,13 +137,13 @@ export default function ProfileDisplay({
             <div className="control">
               <button
                 className="button is-primary"
-                // onClick={handleSaveChanges}
+                onClick={handleSaveChanges}
               >
                 Save Changes
               </button>
               <button
                 className="button is-light mx-4"
-                // onClick={handleCancelChanges or redirect}
+                onClick={() => setEditMode('off')}
               >
                 Cancel
               </button>
