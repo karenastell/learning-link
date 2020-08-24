@@ -14,7 +14,8 @@ export default function Bio(props) {
                 id='about'
                 placeholder='A brief introduction to share with potential students.'
                 name='bio'
-                onChange={props.handleInputChange}
+                onChange={props.handleInputChange || props.handleProfileInfoChange}
+                value={props.bio ? props.bio : null}
               ></textarea>
             </div>
           </div>

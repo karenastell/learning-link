@@ -1,16 +1,15 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 
 export default function LogoutButton() {
-    return (
-        <div id="navbarBasicExample" className="navbar-end">
-        <div className="navbar-end">
-          <div className="buttons">
-            <a className="button is-light ml-2">
-              Logout
-            </a>
-          </div>
+  const { logout } = useContext(AuthContext);
+  return (
+    <div id="navbarBasicExample" className="navbar-end">
+      <div className="navbar-end">
+        <div className="buttons">
+          <a className="button is-light ml-2" onClick={logout} >Logout</a>
         </div>
       </div>
-    )
+    </div>
+  );
 }
