@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
 export default function ProfileDisplay({
@@ -8,10 +8,10 @@ export default function ProfileDisplay({
   availabilityInfo,
   isTeacher,
   setEditAvailabilityMode,
-  setEditSubjectsMode
+  setEditSubjectsMode,
+  getUserInfo
 }) {
-  // we can have a put in here? Or up in the Myprofile page?
-
+  
 
 
   return (

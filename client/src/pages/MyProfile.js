@@ -26,16 +26,46 @@ export default function MyProfile(props) {
   const isTeacher = userInfo.isTeacher;
 
   // TODO: GET rid of this once you have this page styled and set this page back to a private route!
-  console.log(userId, 'this should be the id');
+//   console.log(userId, 'this should be the id');
   // will need to get the user's profile data from the database
   useEffect(() => {
-    console.log(userId, 'this is the userId inside the useeffect');
-    getUserInfo();
+    if (userId) {
+        Axios.get(`/api/myprofile/${userId}`).then((response) => {
+          console.log(response);
+          const data = response.data;
+          setUserInfo({
+            ...userInfo,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            isTeacher: data.isTeacher,
+          });
+          setUserProfileInfo(data.UserProfile);
+          setSubjectsInfo(data.Subjects);
+          setAvailabilityInfo(data.Availabilities);
+        });
+      }
   }, []);
 
+//   This useE
   useEffect(() => {
-    getUserInfo();
-  }, [editMode, editAvailabilityMode, editSubjectsMode]);
+    if (userId) {
+        Axios.get(`/api/myprofile/${userId}`).then((response) => {
+          console.log(response);
+          const data = response.data;
+          setUserInfo({
+            ...userInfo,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            isTeacher: data.isTeacher,
+          });
+          setUserProfileInfo(data.UserProfile);
+          setSubjectsInfo(data.Subjects);
+          setAvailabilityInfo(data.Availabilities);
+        });
+      }
+  }, [editMode]);
 
   const getUserInfo = () => {
     if (userId) {
@@ -87,9 +117,9 @@ export default function MyProfile(props) {
             userId={userId}
           />
         ) : editAvailabilityMode === 'on' ? (
-          <EditAvailability setEditAvailabilityMode={setEditAvailabilityMode} />
+          <EditAvailability setEditAvailabilityMode={setEditAvailabilityMode} isTeacher={isTeacher} />
         ) : editSubjectsMode === 'on' ? (
-          <EditSubjects setEditSubjectsMode={setEditSubjectsMode} />
+          <EditSubjects setEditSubjectsMode={setEditSubjectsMode} isTeacher={isTeacher} />
         ) : (
           <ProfileDisplay
             userInfo={userInfo}
@@ -99,6 +129,7 @@ export default function MyProfile(props) {
             isTeacher={isTeacher}
             setEditAvailabilityMode={setEditAvailabilityMode}
             setEditSubjectsMode={setEditSubjectsMode}
+            getUserInfo={getUserInfo}
           />
         )}
       </div>
