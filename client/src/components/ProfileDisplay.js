@@ -53,7 +53,6 @@ export default function ProfileDisplay({
               </p>
             </div>
           ) : null}
-          {userProfileInfo.rate ? <p>Rate: ${userProfileInfo.rate}</p> : null}
         </div>
         <div className="tile is-parent">
           <div className="tile is-vertical box">
