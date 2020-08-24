@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Subjects from '../components/Subjects';
 import { AuthContext } from '../AuthContext';
@@ -14,6 +14,13 @@ export default function EditSubjects({ setEditSubjectsMode, isTeacher }) {
   const handleCheckboxes = (event) => {
     setSubjects([...subjects, event.target.value]);
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
 
   const history = useHistory();
 
