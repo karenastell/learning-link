@@ -18,7 +18,7 @@ export default function Availability(props) {
                 name='day'
                 check={props.check}
                 onClick={props.handleDaysCheckBoxes}
-                onChange={()=>props.handleRemove('Sunday')}
+                onChange={()=>props.handleRemove('Sunday') || null}
               />
               Sunday
             </label>

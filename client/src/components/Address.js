@@ -15,13 +15,13 @@ export default function Address(props) {
                 type='text'
                 placeholder='City'
                 name="city"
-                onChange={props.handleInputChange}
+                onChange={props.handleInputChange || props.handleProfileInfoChange}
                 value={props.city ? props.city : ''}
               />
             </p>
           </div>
           <div className="select width-div">
-              <select className="select-state width-div" name="state" onChange={props.handleInputChange} value={props.state ? props.state : ""}
+              <select className="select-state width-div" name="state" onChange={props.handleInputChange || props.handleProfileInfoChange} value={props.state ? props.state : ""}
               >
                 <option value="">Select a State</option>
                 <option value="Alabama">Alabama</option>
