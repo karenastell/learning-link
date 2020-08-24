@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 export default function ProfileDisplay({
@@ -7,8 +7,11 @@ export default function ProfileDisplay({
   subjectsInfo,
   availabilityInfo,
   isTeacher,
+  setEditAvailabilityMode,
+  setEditSubjectsMode
 }) {
   // we can have a put in here? Or up in the Myprofile page?
+
 
 
   return (
@@ -34,6 +37,7 @@ export default function ProfileDisplay({
                   <li key={day.day}>{day.day}</li>
                 ))}
               </dl>
+              <a className="is-pulled-right" onClick={() => setEditAvailabilityMode('on')}>Edit Availability</a>
             </div>
           ) : null}
           {isTeacher === false ? (
@@ -84,6 +88,7 @@ export default function ProfileDisplay({
                 <li key={subject.subject}>{subject.subject}</li>
               ))}
             </dl>
+            <a className="is-pulled-right" onClick={() => setEditSubjectsMode('on')}>Edit Subjects</a>
           </div>
         </div>
       </div>
