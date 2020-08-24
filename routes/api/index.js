@@ -23,7 +23,7 @@ router.get('/myprofile/:id', (req, res) => {
 
 router.put('/edit-profile/subjects/:id', async (req, res) => {
   // delete existing subjects, then post the new ones
-  console.log(req.body)
+  console.log(req.body);
   await db.Subject.destroy({
     where: { UserId: req.params.id },
   });
@@ -33,6 +33,7 @@ router.put('/edit-profile/subjects/:id', async (req, res) => {
       UserId: req.params.id,
     });
   });
+  res.json(req.body);
 });
 
 router.put('/edit-profile/availability/:id', async (req, res) => {
@@ -48,29 +49,35 @@ router.put('/edit-profile/availability/:id', async (req, res) => {
       UserId: req.params.id,
     });
   });
-
+  res.json(req.body);
 });
 
 router.put('/edit-profile/:id', async (req, res) => {
   console.log(req.body);
 
-  // first we need to delete existing subjects and days(delete)
-  // if the role is teacher, delete the availabilities, then create the new ones
-  if (req.body.user.isTeacher === true) {
-    console.log(req.body.availabilityInfo, 'there is availability info');
-    // await db.Availability.destroy({
-    //   where: { UserId: req.params.id },
-    // });
-  } else {
-    console.log('no availability info');
-  }
-
   // Then we can update the user (PUT)
-  // db.User.updateOne()
+  await db.User.update(
+    {
+      firstName: req.body.user.firstName,
+      lastName: req.body.user.lastName,
+      email: req.body.user.email,
+    },
+    { where: { id: req.params.id } }
+  );
+
+  await db.UserProfile.update({
+    bio: req.body.userProfile.bio,
+    degree: req.body.userProfile.degree,
+    experience: req.body.userProfile.experience,
+    delivery_method: req.body.userProfile.delivery_method,
+    city: req.body.userProfile.city,
+    state: req.body.userProfile.state,
+    grade: req.body.userProfile.grade,
+    school: req.body.userProfile.school,
+    duration: req.body.userProfile.duration,
+    rate: req.body.userProfile.rate,
+  }, { where: { UserId: req.params.id } });
+  res.json(req.body);
 });
-// .then((data) => {
-//   // console.log(data);
-//   // res.json(data);
-// })
 
 module.exports = router;

@@ -27,12 +27,15 @@ export default function ProfileDisplay({
 
   const handleProfileInfoChange = (event) => {
     const { name, value } = event.target;
-    setUserProfileInfo({...userProfileInfo, [name]: value});
+    setUserProfileInfo({ ...userProfileInfo, [name]: value });
   };
 
   const handleSaveChanges = () => {
-    Axios.put(`/api/edit-profile/${userId}`, {user: userInfo, userProfile: userProfileInfo, subjectsInfo: subjectsInfo, availabilityInfo}).then(() => {});
-    setEditMode('off')
+    Axios.put(`/api/edit-profile/${userId}`, {
+      user: userInfo,
+      userProfile: userProfileInfo,
+    }).then(() => {});
+    setEditMode('off');
   };
   return (
     <>
@@ -93,8 +96,15 @@ export default function ProfileDisplay({
           </div>
         </div>
       </div>
-      <Bio bio={userProfileInfo.bio} handleProfileInfoChange={handleProfileInfoChange} />
-      <Address city={userProfileInfo.city} state={userProfileInfo.state} handleProfileInfoChange={handleProfileInfoChange} />
+      <Bio
+        bio={userProfileInfo.bio}
+        handleProfileInfoChange={handleProfileInfoChange}
+      />
+      <Address
+        city={userProfileInfo.city}
+        state={userProfileInfo.state}
+        handleProfileInfoChange={handleProfileInfoChange}
+      />
       {isTeacher ? (
         <div className="field is-horizontal">
           <div className="field-label is-normal">
@@ -109,7 +119,7 @@ export default function ProfileDisplay({
                   placeholder="Degree(s)"
                   name="degree"
                   value={userProfileInfo.degree}
-                    onChange={handleProfileInfoChange}
+                  onChange={handleProfileInfoChange}
                 ></textarea>
               </div>
             </div>
@@ -122,23 +132,20 @@ export default function ProfileDisplay({
                   placeholder="Experience"
                   name="experience"
                   value={userProfileInfo.experience}
-                    onChange={handleProfileInfoChange}
+                  onChange={handleProfileInfoChange}
                 ></textarea>
               </div>
             </div>
           </div>
         </div>
       ) : null}
-      <Delivery handleProfileInfoChange={handleProfileInfoChange}/>
+      <Delivery handleProfileInfoChange={handleProfileInfoChange} />
       <div className="field is-horizontal">
         <div className="field-label"></div>
         <div className="field-body">
           <div className="field">
             <div className="control">
-              <button
-                className="button is-primary"
-                onClick={handleSaveChanges}
-              >
+              <button className="button is-primary" onClick={handleSaveChanges}>
                 Save Changes
               </button>
               <button
@@ -151,7 +158,6 @@ export default function ProfileDisplay({
           </div>
         </div>
       </div>
-      
     </>
   );
 }
