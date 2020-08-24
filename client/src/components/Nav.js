@@ -44,7 +44,7 @@ export default function Nav() {
       password: formData.passwordInput,
     };
     login(inputCreds);
-    setFormData(emptyCreds);
+    
   };
 
   const login = (loginCreds) => {
@@ -55,7 +55,8 @@ export default function Nav() {
         setUserId(user.data.id);
         setIsAuth(true);
         setModal('modal');
-        setAlert('off')
+        setAlert('off');
+        setFormData(emptyCreds);
       })
       .catch((err) => {
         setCredsAreInvalid(errorMessage);
@@ -113,6 +114,7 @@ export default function Nav() {
                       placeholder="Email"
                       name="emailInput"
                       onChange={handleInputChange}
+                      value={formData.emailInput}
                     />
                   </p>
                 </div>
@@ -133,6 +135,7 @@ export default function Nav() {
                       placeholder="Password"
                       name="passwordInput"
                       onChange={handleInputChange}
+                      value={formData.passwordInput}
                     />
                   </p>
                 </div>
