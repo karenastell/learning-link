@@ -37,7 +37,7 @@ export default function Search(props) {
     }
   };
 
-//   comment this function out to get Prettier to work
+  //   comment this function out to get Prettier to work
     const handleDaysCheckBoxes = (event) => {
       const { value } = event.target;
         if (check.[value] === false) {
@@ -66,44 +66,47 @@ export default function Search(props) {
     }
   };
 
-  const createSearchUrl = () => {
-    // create a search URL make the GET request
-    let searchUrl = '/api/search';
-    // add the city/state
-    if (search.city && search.state) {
-      searchUrl = `${searchUrl}/city/${search.city}/state/${search.state}`;
-    }
-    // add the delivery method
-    if (search.delivery_method) {
-      searchUrl = `${searchUrl}/delivery_method/${search.delivery_method}`;
-    }
-    // add the subjects
-    if (subjects) {
-      subjects.forEach((subject) => {
-        searchUrl = `${searchUrl}/subject/${subject}`;
-      });
-    }
-    // add the availability preference
-    console.log(days.length);
-    if (days.length === 1) {
-      searchUrl = `${searchUrl}/day/${days[0]}`;
-    } else if (days.length > 1) {
-      searchUrl = `${searchUrl}/day/`;
-      days.forEach((day) => {
-        searchUrl = `${searchUrl}${day}&`;
-      });
-    }
-
-    console.log(searchUrl);
-    return searchUrl;
-  };
-
-  console.log(createSearchUrl());
-
   const findATutor = () => {
-    Axios.get(createSearchUrl()).then((response) => {
-      console.log('!!!!!!!!!!!!!!!!tutor search:', response);
-    });
+    const responseArray = [];
+    console.log(days.length);
+    console.log(subjects.length);
+    if (days.length >= 1) {
+      days.forEach((day) => {
+        Axios.get(`api/search/day/${day}`).then((response) => {
+          console.log(response);
+          responseArray.push(response.data);
+        });
+      });
+    }
+
+    if (subjects.length >= 1) {
+      subjects.forEach((subject) => {
+        Axios.get(`api/search/subject/${subject}`).then((response) => {
+          console.log(response);
+          responseArray.push(response.data);
+        });
+      });
+    }
+
+    if (search.delivery_method) {
+      Axios.get(`api/search/delivery_method/${search.delivery_method}`).then(
+        (response) => {
+          console.log(response);
+          responseArray.push(response.data);
+        }
+      );
+    }
+
+    if (search.city && search.state) {
+      Axios.get(`api/search/city/${search.city}/state/${search.state}`).then(
+        (response) => {
+          console.log(response);
+          responseArray.push(response.data);
+        }
+      );
+    }
+
+    console.log(responseArray, 'this is the response array');
   };
 
   return (

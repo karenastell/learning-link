@@ -22,6 +22,7 @@ router.get('/myprofile/:id', (req, res) => {
 });
 
 router.get('/search/day/:day', (req, res) => {
+  console.log(req.params);
   console.log(req.params.day);
   db.Availability.findAll({
     where: { day: req.params.day },
