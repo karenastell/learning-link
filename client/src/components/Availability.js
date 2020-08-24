@@ -17,7 +17,8 @@ export default function Availability(props) {
                 type='checkbox'
                 name='day'
                 check={props.check}
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
+                onChange={()=>props.handleRemove('Sunday')}
               />
               Sunday
             </label>
@@ -28,7 +29,8 @@ export default function Availability(props) {
                 value='Monday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Monday')}
               />
               Monday
             </label>
@@ -39,7 +41,8 @@ export default function Availability(props) {
                 value='Tuesday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Tuesday')}
               />
               Tuesday
             </label>
@@ -50,7 +53,8 @@ export default function Availability(props) {
                 value='Wednesday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Wednesday')}
               />
               Wednesday
             </label>
@@ -61,7 +65,8 @@ export default function Availability(props) {
                 value='Thursday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Thursday')}
               />
               Thursday
             </label>
@@ -72,7 +77,8 @@ export default function Availability(props) {
                 value='Friday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Friday')}
               />
               Friday
             </label>
@@ -83,7 +89,8 @@ export default function Availability(props) {
                 value='Saturday'
                 type='checkbox'
                 name='day'
-                onClick={props.checkChecked}
+                onClick={props.handleDaysCheckBoxes}
+                 onChange={()=>props.handleRemove('Saturday')}
               />
               Saturday
             </label>
