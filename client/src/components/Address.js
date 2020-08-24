@@ -21,7 +21,7 @@ export default function Address(props) {
             </p>
           </div>
           <div className="select width-div">
-              <select className="select-state width-div" name="state" onChange={props.handleInputChange || props.handleProfileInfoChange} value={props.state ? props.state : ""}
+              <select className="select-state width-div" name="state" onChange={props.handleInputChange || props.handleProfileInfoChange} value={props.state ? props.state : null}
               >
                 <option value="">Select a State</option>
                 <option value="Alabama">Alabama</option>
