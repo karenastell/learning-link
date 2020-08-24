@@ -47,8 +47,8 @@ export default function EditSubjects({ setEditSubjectsMode, isTeacher }) {
           <div className="field">
             <div className="control">
               {alert === 'on' ? (
-                <article class="message is-danger">
-                  <div class="message-body">
+                <article className="message is-danger">
+                  <div className="message-body">
                     You must select at least one subject!
                   </div>
                 </article>

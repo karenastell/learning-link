@@ -7,10 +7,13 @@ import Axios from 'axios';
 export default function Nav() {
   const { isAuth, setIsAuth, setUserId, userId} = useContext(AuthContext);
   const emptyCreds = { emailInput: '', passwordInput: '' };
-  const errorMessage = 'invalid credentials';
+  const errorMessage = 'Incorrect email or password';
   const [formData, setFormData] = useState(emptyCreds);
   const [credsAreInvalid, setCredsAreInvalid] = useState('');
   const [modal, setModal] = useState('modal');
+
+  const [alert, setAlert] = useState('off');
+
 
 // TODO: Make a logout function that connects to logout backend
 
@@ -52,9 +55,11 @@ export default function Nav() {
         setUserId(user.data.id);
         setIsAuth(true);
         setModal('modal');
+        setAlert('off')
       })
       .catch((err) => {
         setCredsAreInvalid(errorMessage);
+        setAlert('on')
         console.log(err);
       });
   };
@@ -87,6 +92,13 @@ export default function Nav() {
           </header>
           {/* email input */}
           <section className="modal-card-body">
+          {alert === 'on' ? (
+                <article className="message is-danger">
+                  <div className="message-body">
+                    {errorMessage}
+                  </div>
+                </article>
+              ) : null}
             <div className="field is-horizontal">
               <div className="field-label is-normal">
                 <label className="label">Email</label>
