@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import UserInfo from '../components/UserInfo';
 import Address from '../components/Address';
 import Bio from '../components/Bio';
@@ -9,6 +10,8 @@ import Axios from 'axios';
 export default function StudentProfileForm(props) {
   const [studentFormInfo, setStudentFormInfo] = useState({});
   const [subjects, setSubjects] = useState([]);
+
+  const [alert, setAlert] = useState('off');
 
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
@@ -25,6 +28,8 @@ export default function StudentProfileForm(props) {
 
   console.log(studentFormInfo);
   console.log(subjects);
+
+  const history = useHistory();
 
   const onButtonSubmit = (event) => {
     event.preventDefault();
@@ -44,12 +49,29 @@ export default function StudentProfileForm(props) {
       duration: studentFormInfo.duration,
     }).then((response) => {
       console.log(response, 'Sign Up Form Has Been Posted');
+      setAlert('on');
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+      setTimeout(() => {
+       history.push('/');
+       setAlert('off') 
+      }, 3000);
+      
     });
   };
 
   return (
     <div className='container mt-5 mb-5'>
       <h1 className='title'>Student Form</h1>
+      {alert === 'on' ? (
+                <article class="message is-primary">
+                  <div class="message-body">
+                    You have successfully Signed up!  Redirecting to the homepage.  Please login...
+                  </div>
+                </article>
+              ) : null}
       <UserInfo handleInputChange={handleInputChange} />
       <Bio handleInputChange={handleInputChange} />
 

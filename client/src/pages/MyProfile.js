@@ -98,7 +98,7 @@ export default function MyProfile(props) {
           <div className="level-left"></div>
           <div className="level-right">
             {editMode === 'off' ? (
-              <a className="level-item" onClick={() => setEditMode('on')}>
+              <a className="level-item button is-outlined is-pulled-right is-info" onClick={() => setEditMode('on')}>
                 Edit Profile
               </a>
             ) : null}

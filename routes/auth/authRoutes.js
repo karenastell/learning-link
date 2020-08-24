@@ -64,7 +64,7 @@ router.post('/signup-tutor', async (req, res) => {
     });
   });
 
-  res.json(dbUserProfile);
+  res.json(dbUser);
 });
 
 // Handle the student sign up POST
@@ -110,7 +110,7 @@ router.post('/signup-student', async (req, res) => {
       UserId,
     });
   });
-  res.json(dbUserProfile);
+  res.json(dbUser);
 });
 
 // Route for logging user out

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import Axios from 'axios';
@@ -16,6 +16,13 @@ export default function EditAvailability({
   const handleDaysCheckBoxes = (event) => {
     setDays([...days, event.target.value]);
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
 
   const history = useHistory();
 
