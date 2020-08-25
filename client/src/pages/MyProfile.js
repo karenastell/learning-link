@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 // import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu';
+import Nav from '../components/Nav';
 import ProfileDisplay from '../components/ProfileDisplay';
 import EditProfile from '../components/EditProfile';
 import EditAvailability from '../components/EditAvailability';
@@ -89,6 +90,7 @@ export default function MyProfile(props) {
   // Will need to have PUT requests to update items if the user makes edits.
   return (
     <>
+    <Nav />
       <SideBarMenu />
       <h1 className="title">
         {userInfo.firstName} {userInfo.lastName}'s profile

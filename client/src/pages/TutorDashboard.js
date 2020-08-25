@@ -1,11 +1,12 @@
 import React from 'react';
+import Nav from '../components/Nav';
 import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu';
 
 export default function TutorDashboard(props) {
   return (
     <>
-      
+      <Nav />
         <div className='columns'>
           <SideBarMenu />
           <div className='container'>

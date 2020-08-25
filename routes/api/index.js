@@ -65,6 +65,7 @@ router.get('/search/delivery_method/:delivery_method', (req, res) => {
     res.json(data);
   });
 });
+
 router.put('/edit-profile/subjects/:id', async (req, res) => {
   // delete existing subjects, then post the new ones
   console.log(req.body);
@@ -106,7 +107,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } }
+    { where: { id: req.params.id } },
   );
 
   await db.UserProfile.update(
@@ -122,7 +123,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } }
+    { where: { UserId: req.params.id } },
   );
   res.json(req.body);
 });

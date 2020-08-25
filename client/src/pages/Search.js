@@ -5,6 +5,8 @@ import Delivery from '../components/Delivery';
 import Address from '../components/Address';
 import Availability from '../components/Availability';
 import Subjects from '../components/Subjects';
+import Nav from '../components/Nav';
+
 
 export default function Search(props) {
   const [search, setSearch] = useState({});
@@ -111,6 +113,7 @@ export default function Search(props) {
 
   return (
     <>
+    <Nav />
       <SideBarMenu />
       <div className='container'>
         <h1 className='title has-text-centered'>Search For a Tutor</h1>
