@@ -24,7 +24,7 @@ export default function EditAvailability({
     });
   }, []);
 
-  // const history = useHistory();
+  const history = useHistory();
 
   const handleSaveChanges = () => {
     // First make sure they checked at least one day...

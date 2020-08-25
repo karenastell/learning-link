@@ -22,7 +22,7 @@ export default function EditSubjects({ setEditSubjectsMode, isTeacher }) {
     });
   }, []);
 
-  // const history = useHistory();
+  const history = useHistory();
 
   const handleSaveChanges = () => {
     // Make sure they have at least one subject checked...

@@ -45,7 +45,7 @@ export default function ProfileForm(props) {
     setDays([...days, event.target.value]);
   };
 
-  // const history = useHistory();
+  const history = useHistory();
 
   const tutorOnButtonSubmit = (event) => {
     event.preventDefault();

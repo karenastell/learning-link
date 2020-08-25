@@ -38,7 +38,7 @@ export default function StudentProfileForm(props) {
   };
 
 
-  // const history = useHistory();
+  const history = useHistory();
 
   const onButtonSubmit = (event) => {
     event.preventDefault();
