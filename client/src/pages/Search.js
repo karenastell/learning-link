@@ -7,6 +7,7 @@ import Availability from '../components/Availability';
 import Subjects from '../components/Subjects';
 import Nav from '../components/Nav';
 
+import TutorSearchResult from '../components/TutorSearchResult';
 
 export default function Search(props) {
   const [search, setSearch] = useState({});
@@ -21,6 +22,10 @@ export default function Search(props) {
     Friday: false,
     Saturday: false,
   });
+  const [results, setResults] = useState([]);
+
+  let responseArray = [];
+  let responseData;
 
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
@@ -40,25 +45,25 @@ export default function Search(props) {
   };
 
   //   comment this function out to get Prettier to work
-    const handleDaysCheckBoxes = (event) => {
-      const { value } = event.target;
-        if (check.[value] === false) {
-            // set the state to true
-            // student is seeking tutoring on that day
-           setCheck({ ...check, [value]: true });
-        if(days.includes(value)){
-            setDays([...days])
-        } else {
-            setDays([...days, value])
-        }
+  const handleDaysCheckBoxes = (event) => {
+    const { value } = event.target;
+      if (check.[value] === false) {
+          // set the state to true
+          // student is seeking tutoring on that day
+         setCheck({ ...check, [value]: true });
+      if(days.includes(value)){
+          setDays([...days])
+      } else {
+          setDays([...days, value])
+      }
 
-        } else {
-            // set state to false
-            // student is not seeking tutoring on that day
-         setCheck({ ...check, [value]: false });
+      } else {
+          // set state to false
+          // student is not seeking tutoring on that day
+       setCheck({ ...check, [value]: false });
 
-        }
-    };
+      }
+  };
 
   const handleRemove = (value) => {
     // if the day is already in the days state array and it is unchecked, take it out of the state
@@ -69,14 +74,17 @@ export default function Search(props) {
   };
 
   const findATutor = () => {
-    const responseArray = [];
-    console.log(days.length);
-    console.log(subjects.length);
     if (days.length >= 1) {
       days.forEach((day) => {
         Axios.get(`api/search/day/${day}`).then((response) => {
-          console.log(response);
-          responseArray.push(response.data);
+          console.log('day: ', response);
+          response.data.forEach((item) => {
+            responseData = {
+              id: item.id,
+              day: item.day,
+            };
+            responseArray.push(responseData);
+          });
         });
       });
     }
@@ -84,17 +92,31 @@ export default function Search(props) {
     if (subjects.length >= 1) {
       subjects.forEach((subject) => {
         Axios.get(`api/search/subject/${subject}`).then((response) => {
-          console.log(response);
-          responseArray.push(response.data);
+          console.log('subject: ', response);
+          response.data.forEach((item) => {
+            responseData = {
+              subject: item.subject,
+              id: item.id,
+            };
+            responseArray.push(responseData);
+          });
         });
       });
     }
 
+
+
     if (search.delivery_method) {
       Axios.get(`api/search/delivery_method/${search.delivery_method}`).then(
         (response) => {
-          console.log(response);
-          responseArray.push(response.data);
+          console.log('delivery: ', response);
+          response.data.forEach((item) => {
+            responseData = {
+              id: item.id,
+              delivery: item.delivery_method,
+            };
+            responseArray.push(responseData)
+          });
         }
       );
     }
@@ -102,14 +124,40 @@ export default function Search(props) {
     if (search.city && search.state) {
       Axios.get(`api/search/city/${search.city}/state/${search.state}`).then(
         (response) => {
-          console.log(response);
-          responseArray.push(response.data);
+          console.log('city/state: ', response);
+          response.data.forEach((item)=>{
+                responseData = {
+              id: item.id,
+              city: item.city,
+              state: item.state
+          }
+          responseArray.push(responseData);
+          })
+        
         }
       );
     }
 
-    console.log(responseArray, 'this is the response array');
+    setResults([...results, responseArray]);
   };
+
+
+  console.log(results, 'results');
+
+  
+
+  results.forEach((result) => {
+    console.log(result.id);
+  });
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -138,6 +186,13 @@ export default function Search(props) {
             </div>
           </div>
         </div>
+        <TutorSearchResult />
+        {subjects.map((subject) => (
+          <p>{subject}</p>
+        ))}
+        {results.map((tutor) => (
+          <p>{tutor.id}</p>
+        ))}
       </div>
     </>
   );
