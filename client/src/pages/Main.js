@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import Nav from '../components/Nav';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import { Redirect } from 'react-router-dom';
@@ -13,6 +14,7 @@ const { isAuth, userId} = useContext(AuthContext);
     <>
     { isAuth ? <Redirect to='/myprofile' /> : 
     <>
+    <Nav />
       <img src="./coloredpencils.jpg" alt="learning image" />
       <div className="container has-text-centered mt-3">
         <p>

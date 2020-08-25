@@ -46,9 +46,10 @@ function App() {
 
   return (
     <>
-      <Nav />
+      
       <Router>
         <>
+        {/* <Nav /> */}
           <Route exact path="/" component={Main} />
           <Route exact path="/signup-tutor" component={TutorProfileForm} />
           <Route exact path="/signup-student" component={StudentProfileForm} />

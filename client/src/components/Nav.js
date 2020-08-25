@@ -60,6 +60,7 @@ export default function Nav() {
         console.log(err);
       });
   };
+  console.log(window.location.pathname)
 
   return (
     <>
@@ -72,7 +73,7 @@ export default function Nav() {
           <h1 className="title title-margin label-text">Learning Link</h1>
         </div>
         {/* if the user is logged in, the LogoutButton displays, if not, the loginButton */}
-        { isAuth ? <LogoutButton /> : window.location.pathname === '/' ? <LoginButton handleModalDisplay={handleModalDisplay} /> : null}
+        { isAuth ? <LogoutButton /> : <LoginButton handleModalDisplay={handleModalDisplay} /> }
       </nav>
 
       {/* modal for the login */}
