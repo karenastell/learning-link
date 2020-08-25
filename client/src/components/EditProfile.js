@@ -29,7 +29,7 @@ export default function ProfileDisplay({
     setUserProfileInfo({ ...userProfileInfo, [name]: value });
   };
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleSaveChanges = () => {
     if (isTeacher) {

@@ -80,6 +80,8 @@ export default function Search(props) {
             responseData = {
               id: item.id,
               day: item.day,
+              firstName: item.firstName,
+              lastName: item.lastName
             };
             responseArray.push(responseData);
           });
