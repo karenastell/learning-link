@@ -154,8 +154,11 @@ export default function Search(props) {
   return (
     <>
     <Nav />
-      <SideBarMenu />
-      <div className='container'>
+    <div className="columns">
+      <div className="column is-narrow">
+      <SideBarMenu />        
+      </div>
+      <div className='container column'>
         <h1 className='title has-text-centered'>Search For a Tutor</h1>
         <h3 className='subtitle is-4 mt-5'>Choose Your Search Criteria:</h3>
         <Subjects handleCheckboxes={handleCheckboxes} />
@@ -186,6 +189,8 @@ export default function Search(props) {
           <p>{tutor.id}</p>
         ))}
       </div>
+    </div>
+      
     </>
   );
 }

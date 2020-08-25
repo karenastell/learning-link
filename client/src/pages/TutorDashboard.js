@@ -7,18 +7,20 @@ export default function TutorDashboard(props) {
   return (
     <>
       <Nav />
-        <div className='columns'>
+      <div className="columns">
+        <div className="column is-narrow">
           <SideBarMenu />
-          <div className='container'>
-          <div className='column is-four-fifths'>
-            <h1 className='title'>Tutor Dashboard</h1>
+        </div>
+        <div className="container column">
+          <div className="column is-four-fifths">
+            <h1 className="title">Tutor Dashboard</h1>
             <div style={dashboard}>
-              <label className='checkbox mr-5'>
+              <label className="checkbox mr-5">
                 <input
-                  className='mr-2'
-                  id='new-students'
-                  type='checkbox'
-                  name='newStudents'
+                  className="mr-2"
+                  id="new-students"
+                  type="checkbox"
+                  name="newStudents"
                 />
                 Taking On New Students
               </label>

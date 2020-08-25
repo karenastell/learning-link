@@ -26,46 +26,45 @@ export default function MyProfile(props) {
 
   const isTeacher = userInfo.isTeacher;
 
-  // TODO: GET rid of this once you have this page styled and set this page back to a private route!
-//   console.log(userId, 'this should be the id');
+  //   console.log(userId, 'this should be the id');
   // will need to get the user's profile data from the database
   useEffect(() => {
     if (userId) {
-        Axios.get(`/api/myprofile/${userId}`).then((response) => {
-          console.log(response);
-          const data = response.data;
-          setUserInfo({
-            ...userInfo,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            isTeacher: data.isTeacher,
-          });
-          setUserProfileInfo(data.UserProfile);
-          setSubjectsInfo(data.Subjects);
-          setAvailabilityInfo(data.Availabilities);
+      Axios.get(`/api/myprofile/${userId}`).then((response) => {
+        console.log(response);
+        const data = response.data;
+        setUserInfo({
+          ...userInfo,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          isTeacher: data.isTeacher,
         });
-      }
+        setUserProfileInfo(data.UserProfile);
+        setSubjectsInfo(data.Subjects);
+        setAvailabilityInfo(data.Availabilities);
+      });
+    }
   }, []);
 
-//   This useEffect isn't being triggered... take it out? or fiddle with it??
+  //   This useEffect isn't being triggered... take it out? or fiddle with it??
   useEffect(() => {
     if (userId) {
-        Axios.get(`/api/myprofile/${userId}`).then((response) => {
-          console.log(response);
-          const data = response.data;
-          setUserInfo({
-            ...userInfo,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            isTeacher: data.isTeacher,
-          });
-          setUserProfileInfo(data.UserProfile);
-          setSubjectsInfo(data.Subjects);
-          setAvailabilityInfo(data.Availabilities);
+      Axios.get(`/api/myprofile/${userId}`).then((response) => {
+        console.log(response);
+        const data = response.data;
+        setUserInfo({
+          ...userInfo,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          isTeacher: data.isTeacher,
         });
-      }
+        setUserProfileInfo(data.UserProfile);
+        setSubjectsInfo(data.Subjects);
+        setAvailabilityInfo(data.Availabilities);
+      });
+    }
   }, [editMode]);
 
   const getUserInfo = () => {
@@ -87,53 +86,69 @@ export default function MyProfile(props) {
     }
   };
 
-  // Will need to have PUT requests to update items if the user makes edits.
   return (
     <>
-    <Nav />
-      <SideBarMenu />
-      <h1 className="title">
-        {userInfo.firstName} {userInfo.lastName}'s profile
-      </h1>
-      <div className="container">
-        <div className="level">
-          <div className="level-left"></div>
-          <div className="level-right">
-            {editMode === 'off' ? (
-              <a className="level-item button is-outlined is-pulled-right is-info" onClick={() => setEditMode('on')}>
-                Edit Profile
-              </a>
-            ) : null}
-          </div>
+      <Nav />
+      <div className="columns">
+        <div className="column is-narrow">
+          <SideBarMenu />
         </div>
-        {editMode === 'on' ? (
-          <EditProfile
-            userInfo={userInfo}
-            userProfileInfo={userProfileInfo}
-            subjectsInfo={subjectsInfo}
-            availabilityInfo={availabilityInfo}
-            isTeacher={isTeacher}
-            setEditMode={setEditMode}
-            setUserInfo={setUserInfo}
-            setUserProfileInfo={setUserProfileInfo}
-            userId={userId}
-          />
-        ) : editAvailabilityMode === 'on' ? (
-          <EditAvailability setEditAvailabilityMode={setEditAvailabilityMode} isTeacher={isTeacher} />
-        ) : editSubjectsMode === 'on' ? (
-          <EditSubjects setEditSubjectsMode={setEditSubjectsMode} isTeacher={isTeacher} />
-        ) : (
-          <ProfileDisplay
-            userInfo={userInfo}
-            userProfileInfo={userProfileInfo}
-            subjectsInfo={subjectsInfo}
-            availabilityInfo={availabilityInfo}
-            isTeacher={isTeacher}
-            setEditAvailabilityMode={setEditAvailabilityMode}
-            setEditSubjectsMode={setEditSubjectsMode}
-            getUserInfo={getUserInfo}
-          />
-        )}
+        <div className="column">
+          <h1 className="title">
+          {userInfo.firstName} {userInfo.lastName}'s profile
+        </h1>
+        <div className="container">
+          <div className="level">
+            <div className="level-left"></div>
+            <div className="level-right">
+              {editMode === 'off' ? (
+                <a
+                  className="level-item button is-outlined is-pulled-right is-info"
+                  onClick={() => setEditMode('on')}
+                >
+                  Edit Profile
+                </a>
+              ) : null}
+            </div>
+          </div>
+          {editMode === 'on' ? (
+            <EditProfile
+              userInfo={userInfo}
+              userProfileInfo={userProfileInfo}
+              subjectsInfo={subjectsInfo}
+              availabilityInfo={availabilityInfo}
+              isTeacher={isTeacher}
+              setEditMode={setEditMode}
+              setUserInfo={setUserInfo}
+              setUserProfileInfo={setUserProfileInfo}
+              userId={userId}
+            />
+          ) : editAvailabilityMode === 'on' ? (
+            <EditAvailability
+              setEditAvailabilityMode={setEditAvailabilityMode}
+              isTeacher={isTeacher}
+            />
+          ) : editSubjectsMode === 'on' ? (
+            <EditSubjects
+              setEditSubjectsMode={setEditSubjectsMode}
+              isTeacher={isTeacher}
+            />
+          ) : (
+            <ProfileDisplay
+              userInfo={userInfo}
+              userProfileInfo={userProfileInfo}
+              subjectsInfo={subjectsInfo}
+              availabilityInfo={availabilityInfo}
+              isTeacher={isTeacher}
+              setEditAvailabilityMode={setEditAvailabilityMode}
+              setEditSubjectsMode={setEditSubjectsMode}
+              getUserInfo={getUserInfo}
+            />
+          )}
+        </div>
+        </div>
+
+        
       </div>
     </>
   );
