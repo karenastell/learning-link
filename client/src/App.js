@@ -19,6 +19,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import Messages from './pages/Messages';
 import Calendar from './pages/Calendar';
 
+
 // import Home from "./pages/Home";
 // import Signup from "./pages/Signup";
 // import Login from "./pages/Login";
@@ -37,7 +38,7 @@ function App() {
     <Route
       {...rest}
       render={(props) =>
-        isAuth ? <Component {...props} /> : <Redirect to="/" />
+        isAuth ? <Component {...props} /> : <Redirect to='/' />
       }
     />
   );
@@ -47,23 +48,23 @@ function App() {
       <Nav />
       <Router>
         <>
-          <Route exact path="/" component={Main} />
-          <Route exact path="/signup-tutor" component={TutorProfileForm} />
-          <Route exact path="/signup-student" component={StudentProfileForm} />
-          <PrivateRoute exact path="/calendar" component={Calendar} />
-          <Route exact path="/search" component={Search} />
-          <Route exact path="/myprofile" component={MyProfile} />
+          <Route exact path='/' component={Main} />
+          <Route exact path='/signup-tutor' component={TutorProfileForm} />
+          <Route exact path='/signup-student' component={StudentProfileForm} />
+          <PrivateRoute exact path='/calendar' component={Calendar} />
+          <Route exact path='/search' component={Search} />
+          <Route exact path='/myprofile' component={MyProfile} />
           <PrivateRoute
             exact
-            path="/student-dashboard"
+            path='/student-dashboard'
             component={StudentDashboard}
           />
           <PrivateRoute
             exact
-            path="/tutor-dashboard"
+            path='/tutor-dashboard'
             component={TutorDashboard}
           />
-          <PrivateRoute exact path="/messages" component={Messages} />
+          <PrivateRoute exact path='/messages' component={Messages} />
         </>
       </Router>
       <Footer />
