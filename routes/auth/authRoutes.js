@@ -18,16 +18,22 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 // /api/auth/signup
 // handle the tutor signup POST
 router.post('/signup-tutor', async (req, res) => {
-  // TODO: add something to check if their email already exists.... or this may already be done...
+
   let UserId;
   // create the User in the User table first
-  const dbUser = await db.User.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-    isTeacher: true,
-  });
+  let dbUser;
+  try {
+    dbUser = await db.User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      isTeacher: true,
+    });
+  } catch (e) {
+    res.json(e);
+  }
+
   console.log(dbUser.dataValues.id, 'This should be the id');
 
   const setUserId = () => {
@@ -71,13 +77,18 @@ router.post('/signup-tutor', async (req, res) => {
 router.post('/signup-student', async (req, res) => {
   // TODO: add something to check if their email already exists....let UserId;
   let UserId;
-  const dbUser = await db.User.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-    isTeacher: false,
-  });
+  let dbUser;
+  try {
+    dbUser = await db.User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      isTeacher: false,
+    });
+  } catch (e) {
+    res.json(e);
+  }
 
   const setUserId = () => {
     UserId = dbUser.dataValues.id;

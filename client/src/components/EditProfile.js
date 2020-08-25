@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Delivery from './Delivery';
-import Availability from './Availability';
 import Bio from './Bio';
 import Address from './Address';
 import Axios from 'axios';
@@ -17,9 +16,8 @@ export default function ProfileDisplay({
   setUserProfileInfo,
   userId,
 }) {
-  console.log(subjectsInfo);
-  console.log(availabilityInfo);
-  console.log(userProfileInfo);
+
+  const [alert, setAlert] = useState('off');
 
   const handleUserInputChange = (event) => {
     const { name, value } = event.target;
@@ -31,18 +29,54 @@ export default function ProfileDisplay({
     setUserProfileInfo({ ...userProfileInfo, [name]: value });
   };
 
-  const history = useHistory()
+  const history = useHistory();
 
   const handleSaveChanges = () => {
+    if (isTeacher) {
+      if (
+        !userInfo.firstName ||
+        !userInfo.lastName ||
+        !userInfo.email ||
+        !userProfileInfo.bio ||
+        !userProfileInfo.experience ||
+        !userProfileInfo.city ||
+        !userProfileInfo.state ||
+        !userProfileInfo.degree
+      ) {
+        setAlert('on');
+        return;
+      } else {
+        setAlert('off');
+        updateDatabase();
+      }
+    } else {
+      if (
+        !userInfo.firstName ||
+        !userInfo.lastName ||
+        !userInfo.email ||
+        !userProfileInfo.bio ||
+        !userProfileInfo.school ||
+        !userProfileInfo.city ||
+        !userProfileInfo.state ||
+        !userProfileInfo.grade
+      ) {
+        setAlert('on');
+        return;
+      } else {
+        setAlert('off');
+        updateDatabase();
+      }
+    }
+  };
+
+  const updateDatabase = () => {
     Axios.put(`/api/edit-profile/${userId}`, {
       user: userInfo,
       userProfile: userProfileInfo,
     }).then(() => {});
     setEditMode('off');
     history.push('/updatemessage');
-
   };
-
 
   return (
     <>
@@ -206,6 +240,13 @@ export default function ProfileDisplay({
         <div className="field-body">
           <div className="field">
             <div className="control">
+              {alert === 'on' ? (
+                <article class="message is-danger">
+                  <div class="message-body">
+                    You are missing a required field!
+                  </div>
+                </article>
+              ) : null}
               <button className="button is-primary" onClick={handleSaveChanges}>
                 Save Changes
               </button>

@@ -14,9 +14,6 @@ export default function Nav() {
 
   const [alert, setAlert] = useState('off');
 
-
-// TODO: Make a logout function that connects to logout backend
-
   useEffect(() => {
     console.log(userId);
   }, [userId])
@@ -44,7 +41,6 @@ export default function Nav() {
       password: formData.passwordInput,
     };
     login(inputCreds);
-    
   };
 
   const login = (loginCreds) => {
@@ -76,7 +72,7 @@ export default function Nav() {
           <h1 className="title title-margin label-text">Learning Link</h1>
         </div>
         {/* if the user is logged in, the LogoutButton displays, if not, the loginButton */}
-        { isAuth ? <LogoutButton /> : <LoginButton handleModalDisplay={handleModalDisplay} /> }
+        { isAuth ? <LogoutButton /> : window.location.pathname === '/' ? <LoginButton handleModalDisplay={handleModalDisplay} /> : null}
       </nav>
 
       {/* modal for the login */}

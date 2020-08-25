@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Address from '../components/Address';
 import Subjects from '../components/Subjects';
@@ -14,7 +14,20 @@ export default function ProfileForm(props) {
 
   const [days, setDays] = useState([]);
 
-  const [alert, setAlert] = useState('off');
+  const [successAlert, setSuccessAlert] = useState('off');
+
+  const [errorAlert, setErrorAlert] = useState('off');
+
+  const [passwordAlert, setPasswordAlert] = useState('off');
+
+  const [emailAlert, setEmailAlert] = useState('off');
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [])
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -35,8 +48,44 @@ export default function ProfileForm(props) {
   const history = useHistory();
 
   const tutorOnButtonSubmit = (event) => {
-    // for now, we'll put event.preventDefault(), but eventually we will redirect the user
     event.preventDefault();
+    // if any required fields are empty, display an alert
+    if (
+      !tutorFormInfo.firstName ||
+      !tutorFormInfo.lastName ||
+      !tutorFormInfo.email ||
+      !tutorFormInfo.password ||
+      !tutorFormInfo.bio ||
+      !tutorFormInfo.degree ||
+      !tutorFormInfo.experience ||
+      !tutorFormInfo.delivery_method ||
+      !tutorFormInfo.city ||
+      !tutorFormInfo.state ||
+      !subjects[0] ||
+      !days[0]
+    ) {
+      setPasswordAlert('off')
+      setErrorAlert('on');
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+      return;
+    } else if (tutorFormInfo.password !== tutorFormInfo.confirmPassword) {
+      setPasswordAlert('on');
+      setErrorAlert('off')
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    } else {
+      setErrorAlert('off');
+      setPasswordAlert('off');
+      postToDatabase();
+    }
+  };
+
+  const postToDatabase = () => {
     Axios.post('/api/auth/signup-tutor', {
       firstName: tutorFormInfo.firstName,
       lastName: tutorFormInfo.lastName,
@@ -52,31 +101,53 @@ export default function ProfileForm(props) {
       subjects: subjects,
       days: days,
     }).then((response) => {
-      console.log(response.data, "This is the response!");
+      console.log(response.data, 'This is the response!');
       // do we need a redirect?
-      setAlert('on');
+      // If there is an error because of an existing email address, display email alert and return.
+      if (response.data.name === 'SequelizeUniqueConstraintError') {
+        setEmailAlert('on');
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+        return
+      }
+      // if successful post, display success message and then redirect
+      setSuccessAlert('on');
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
       });
       setTimeout(() => {
-       history.push('/');
-       setAlert('off') 
+        history.push('/');
+        setSuccessAlert('off');
       }, 3000);
-      
     });
   };
 
   return (
     <div className="container mt-5 mb-5">
       <h1 className="title">Tutor Form</h1>
-      {alert === 'on' ? (
-                <article class="message is-primary">
-                  <div class="message-body">
-                    You have successfully Signed up!  Redirecting to the homepage.  Please login...
-                  </div>
-                </article>
-              ) : null}
+      {successAlert === 'on' ? (
+        <article class="message is-primary">
+          <div class="message-body">
+            You have successfully Signed up! Redirecting to the homepage. Please
+            login...
+          </div>
+        </article>
+      ) : errorAlert === 'on' ? (
+        <article className="message is-danger">
+          <div className="message-body">You are missing a required field! (Only the rate is optional)</div>
+        </article>
+      ) : passwordAlert === 'on' ? (
+        <article className="message is-danger">
+          <div className="message-body">Your passwords do not match!</div>
+        </article>
+      ) : emailAlert === 'on' ? (
+        <article className="message is-danger">
+          <div className="message-body">That email already has an account.</div>
+        </article>
+      ) : null}
       <UserInfo handleInputChange={handleInputChange} />
 
       <Bio handleInputChange={handleInputChange} />

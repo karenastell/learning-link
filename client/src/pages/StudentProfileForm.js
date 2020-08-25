@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserInfo from '../components/UserInfo';
 import Address from '../components/Address';
@@ -11,13 +11,24 @@ export default function StudentProfileForm(props) {
   const [studentFormInfo, setStudentFormInfo] = useState({});
   const [subjects, setSubjects] = useState([]);
 
-  const [alert, setAlert] = useState('off');
+  const [successAlert, setSuccessAlert] = useState('off');
+
+  const [errorAlert, setErrorAlert] = useState('off');
+
+  const [passwordAlert, setPasswordAlert] = useState('off');
+
+  const [emailAlert, setEmailAlert] = useState('off');
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [])
 
   const handleInputChange = (event) => {
-    // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
     const { name, value } = event.target;
 
-    console.log(value, name);
     // use brackets to signify the name in the state
     setStudentFormInfo({ ...studentFormInfo, [name]: value });
   };
@@ -26,13 +37,48 @@ export default function StudentProfileForm(props) {
     setSubjects([...subjects, event.target.value]);
   };
 
-  console.log(studentFormInfo);
-  console.log(subjects);
 
   const history = useHistory();
 
   const onButtonSubmit = (event) => {
     event.preventDefault();
+    // if any required fields are empty, display an alert
+    if (
+      !studentFormInfo.firstName ||
+      ! studentFormInfo.lastName ||
+      !studentFormInfo.email ||
+      !studentFormInfo.password ||
+      !studentFormInfo.bio ||
+      !studentFormInfo.grade ||
+      !studentFormInfo.school ||
+      !studentFormInfo.city ||
+      !studentFormInfo.state ||
+      !studentFormInfo.special_ed ||
+      !studentFormInfo.delivery_method ||
+      !subjects[0]
+    ) {
+      setPasswordAlert('off')
+      setErrorAlert('on');
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+      return;
+    } else if (studentFormInfo.password !== studentFormInfo.confirmPassword) {
+      setPasswordAlert('on');
+      setErrorAlert('off')
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    } else {
+      setErrorAlert('off');
+      setPasswordAlert('off');
+      postToDatabase();
+    }
+  };
+
+  const postToDatabase = () => {
     Axios.post('/api/auth/signup-student', {
       firstName: studentFormInfo.firstName,
       lastName: studentFormInfo.lastName,
@@ -49,27 +95,47 @@ export default function StudentProfileForm(props) {
       duration: studentFormInfo.duration,
     }).then((response) => {
       console.log(response, 'Sign Up Form Has Been Posted');
-      setAlert('on');
+      if (response.data.name === 'SequelizeUniqueConstraintError') {
+        setEmailAlert('on');
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+        return
+      }
+      setSuccessAlert('on');
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
       });
       setTimeout(() => {
        history.push('/');
-       setAlert('off') 
+       setSuccessAlert('off') 
       }, 3000);
       
     });
-  };
+  }
 
   return (
     <div className='container mt-5 mb-5'>
       <h1 className='title'>Student Form</h1>
-      {alert === 'on' ? (
-                <article class="message is-primary">
-                  <div class="message-body">
+      {successAlert === 'on' ? (
+                <article className="message is-primary">
+                  <div className="message-body">
                     You have successfully Signed up!  Redirecting to the homepage.  Please login...
                   </div>
+                </article>
+              ) : errorAlert === 'on' ? (
+                <article className="message is-danger">
+                  <div className="message-body">You are missing a required field! (Only the length of time is optional)</div>
+                </article>
+              ) : passwordAlert === 'on' ? (
+                <article className="message is-danger">
+                  <div className="message-body">Your passwords do not match!</div>
+                </article>
+              ) : emailAlert === 'on' ? (
+                <article className="message is-danger">
+                  <div className="message-body">That email already has an account.</div>
                 </article>
               ) : null}
       <UserInfo handleInputChange={handleInputChange} />

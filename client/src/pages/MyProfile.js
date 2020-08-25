@@ -47,7 +47,7 @@ export default function MyProfile(props) {
       }
   }, []);
 
-//   This useE
+//   This useEffect isn't being triggered... take it out? or fiddle with it??
   useEffect(() => {
     if (userId) {
         Axios.get(`/api/myprofile/${userId}`).then((response) => {
