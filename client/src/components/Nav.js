@@ -14,9 +14,6 @@ export default function Nav() {
 
   const [alert, setAlert] = useState('off');
 
-
-// TODO: Make a logout function that connects to logout backend
-
   useEffect(() => {
     console.log(userId);
   }, [userId])
