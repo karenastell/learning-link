@@ -20,6 +20,8 @@ export default function ProfileForm(props) {
 
   const [passwordAlert, setPasswordAlert] = useState('off');
 
+  const [emailAlert, setEmailAlert] = useState('off');
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTutorFormInfo({
@@ -94,6 +96,16 @@ export default function ProfileForm(props) {
     }).then((response) => {
       console.log(response.data, 'This is the response!');
       // do we need a redirect?
+      // If there is an error because of an existing email address, display email alert and return.
+      if (response.data.name === 'SequelizeUniqueConstraintError') {
+        setEmailAlert('on');
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+        return
+      }
+      // if successful post, display success message and then redirect
       setSuccessAlert('on');
       window.scrollTo({
         top: 0,
@@ -123,6 +135,10 @@ export default function ProfileForm(props) {
       ) : passwordAlert === 'on' ? (
         <article className="message is-danger">
           <div className="message-body">Your passwords do not match!</div>
+        </article>
+      ) : emailAlert === 'on' ? (
+        <article className="message is-danger">
+          <div className="message-body">That email already has an account.</div>
         </article>
       ) : null}
       <UserInfo handleInputChange={handleInputChange} />

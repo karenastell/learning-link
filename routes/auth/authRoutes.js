@@ -21,13 +21,19 @@ router.post('/signup-tutor', async (req, res) => {
   // TODO: add something to check if their email already exists.... or this may already be done...
   let UserId;
   // create the User in the User table first
-  const dbUser = await db.User.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-    isTeacher: true,
-  });
+  let dbUser;
+  try {
+    dbUser = await db.User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      isTeacher: true,
+    });
+  } catch (e) {
+    res.json(e);
+  }
+
   console.log(dbUser.dataValues.id, 'This should be the id');
 
   const setUserId = () => {
