@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Delivery from './Delivery';
-import Availability from './Availability';
 import Bio from './Bio';
 import Address from './Address';
 import Axios from 'axios';
@@ -17,9 +16,6 @@ export default function ProfileDisplay({
   setUserProfileInfo,
   userId,
 }) {
-  console.log(subjectsInfo);
-  console.log(availabilityInfo);
-  console.log(userProfileInfo);
 
   const [alert, setAlert] = useState('off');
 
