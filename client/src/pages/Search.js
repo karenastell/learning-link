@@ -7,8 +7,6 @@ import Availability from '../components/Availability';
 import Subjects from '../components/Subjects';
 import Nav from '../components/Nav';
 
-import TutorSearchResult from '../components/TutorSearchResult';
-
 export default function Search(props) {
   const [search, setSearch] = useState({});
   const [subjects, setSubjects] = useState([]);
@@ -23,6 +21,7 @@ export default function Search(props) {
     Saturday: false,
   });
   const [results, setResults] = useState([]);
+  const [searchComplete, setSearchComplete] = useState(false);
 
   let responseArray = [];
   let responseData;
@@ -47,22 +46,20 @@ export default function Search(props) {
   //   comment this function out to get Prettier to work
   const handleDaysCheckBoxes = (event) => {
     const { value } = event.target;
-      if (check.[value] === false) {
-          // set the state to true
-          // student is seeking tutoring on that day
-         setCheck({ ...check, [value]: true });
-      if(days.includes(value)){
-          setDays([...days])
+    if (check[value] === false) {
+      // set the state to true
+      // student is seeking tutoring on that day
+      setCheck({ ...check, [value]: true });
+      if (days.includes(value)) {
+        setDays([...days]);
       } else {
-          setDays([...days, value])
+        setDays([...days, value]);
       }
-
-      } else {
-          // set state to false
-          // student is not seeking tutoring on that day
-       setCheck({ ...check, [value]: false });
-
-      }
+    } else {
+      // set state to false
+      // student is not seeking tutoring on that day
+      setCheck({ ...check, [value]: false });
+    }
   };
 
   const handleRemove = (value) => {
@@ -75,7 +72,7 @@ export default function Search(props) {
 
   const findATutor = async () => {
     if (days.length >= 1) {
-       days.forEach(async (day) => {
+      days.forEach(async (day) => {
         const response = await Axios.get(`api/search/day/${day}`);
         console.log('day: ', response);
         response.data.forEach((item) => {
@@ -92,12 +89,12 @@ export default function Search(props) {
     }
 
     if (subjects.length >= 1) {
-       subjects.forEach(async(subject) => {
+      subjects.forEach(async (subject) => {
         const response2 = await Axios.get(`api/search/subject/${subject}`);
         console.log('subject: ', response2);
         response2.data.forEach((item) => {
           responseData = {
-            subject: item.subject,
+            subject: item.Subjects.subject,
             id: item.id,
             UserId: item.UserId,
           };
@@ -144,16 +141,13 @@ export default function Search(props) {
 
   console.log(results, 'results');
 
-  if (results.length > 0) {
-  }
-
-  results.forEach((result) => {
+    results.forEach((result) => {
     console.log(result.id);
   });
 
   return (
     <>
-    <Nav />
+      <Nav />
       <SideBarMenu />
       <div className='container'>
         <h1 className='title has-text-centered'>Search For a Tutor</h1>
@@ -178,13 +172,6 @@ export default function Search(props) {
             </div>
           </div>
         </div>
-        <TutorSearchResult />
-        {subjects.map((subject) => (
-          <p>{subject}</p>
-        ))}
-        {results.map((tutor) => (
-          <p>{tutor.id}</p>
-        ))}
       </div>
     </>
   );
