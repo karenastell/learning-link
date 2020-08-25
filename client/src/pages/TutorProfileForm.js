@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Address from '../components/Address';
 import Subjects from '../components/Subjects';
@@ -21,6 +21,13 @@ export default function ProfileForm(props) {
   const [passwordAlert, setPasswordAlert] = useState('off');
 
   const [emailAlert, setEmailAlert] = useState('off');
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [])
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
