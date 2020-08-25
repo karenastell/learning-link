@@ -18,6 +18,7 @@ import TutorDashboard from './pages/TutorDashboard';
 import StudentDashboard from './pages/StudentDashboard';
 import Messages from './pages/Messages';
 import Calendar from './pages/Calendar';
+import UpdatedProfileMessage from './pages/UpdatedProfileMessage';
 
 
 // import Home from "./pages/Home";
@@ -48,12 +49,12 @@ function App() {
       <Nav />
       <Router>
         <>
-          <Route exact path='/' component={Main} />
-          <Route exact path='/signup-tutor' component={TutorProfileForm} />
-          <Route exact path='/signup-student' component={StudentProfileForm} />
-          <PrivateRoute exact path='/calendar' component={Calendar} />
-          <Route exact path='/search' component={Search} />
-          <Route exact path='/myprofile' component={MyProfile} />
+          <Route exact path="/" component={Main} />
+          <Route exact path="/signup-tutor" component={TutorProfileForm} />
+          <Route exact path="/signup-student" component={StudentProfileForm} />
+          <PrivateRoute exact path="/calendar" component={Calendar} />
+          <Route exact path="/search" component={Search} />
+          <PrivateRoute exact path="/myprofile" component={MyProfile} />
           <PrivateRoute
             exact
             path='/student-dashboard'
@@ -64,7 +65,8 @@ function App() {
             path='/tutor-dashboard'
             component={TutorDashboard}
           />
-          <PrivateRoute exact path='/messages' component={Messages} />
+          <PrivateRoute exact path="/messages" component={Messages} />
+          <PrivateRoute exact path="/updatemessage" component={UpdatedProfileMessage} />
         </>
       </Router>
       <Footer />

@@ -88,8 +88,10 @@ export default function UserInfo(props) {
               <input
                 className='input'
                 id='confirm-password'
+                name="confirmPassword"
                 type='password'
                 placeholder='Confirm Password'
+                onChange={props.handleInputChange}
               />
                <span className='icon is-small is-left'>
                 <i className='fas fa-lock'></i>

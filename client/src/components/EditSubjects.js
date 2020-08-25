@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Subjects from '../components/Subjects';
 import { AuthContext } from '../AuthContext';
 import Axios from 'axios';
 
-export default function EditSubjects({ setEditSubjectsMode }) {
+export default function EditSubjects({ setEditSubjectsMode, isTeacher }) {
   const { userId } = useContext(AuthContext);
 
   const [subjects, setSubjects] = useState([]);
@@ -14,17 +15,27 @@ export default function EditSubjects({ setEditSubjectsMode }) {
     setSubjects([...subjects, event.target.value]);
   };
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
+  const history = useHistory();
+
   const handleSaveChanges = () => {
     // Make sure they have at least one subject checked...
     if (subjects[0]) {
       Axios.put(`/api/edit-profile/subjects/${userId}`, subjects).then(() => {
-      console.log("Edit was successful!")
-    });
-    setEditSubjectsMode('off');  
+        console.log('Edit was successful!');
+      });
+      setEditSubjectsMode('off');
+      history.push('/updatemessage');
+
     } else {
-        setAlert('on');
+      setAlert('on');
     }
-    
   };
 
   return (
@@ -35,11 +46,13 @@ export default function EditSubjects({ setEditSubjectsMode }) {
         <div className="field-body">
           <div className="field">
             <div className="control">
-            {alert === 'on' ? (
-          <article class="message is-danger">
-            <div class="message-body">You must select at least one subject!</div>
-          </article>
-        ) : null}
+              {alert === 'on' ? (
+                <article className="message is-danger">
+                  <div className="message-body">
+                    You must select at least one subject!
+                  </div>
+                </article>
+              ) : null}
               <button className="button is-primary" onClick={handleSaveChanges}>
                 Save Changes
               </button>

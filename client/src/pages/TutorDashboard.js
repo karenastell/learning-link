@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu';
 
 export default function TutorDashboard(props) {

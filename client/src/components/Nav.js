@@ -7,12 +7,12 @@ import Axios from 'axios';
 export default function Nav() {
   const { isAuth, setIsAuth, setUserId, userId} = useContext(AuthContext);
   const emptyCreds = { emailInput: '', passwordInput: '' };
-  const errorMessage = 'invalid credentials';
+  const errorMessage = 'Incorrect email or password';
   const [formData, setFormData] = useState(emptyCreds);
   const [credsAreInvalid, setCredsAreInvalid] = useState('');
   const [modal, setModal] = useState('modal');
 
-// TODO: Make a logout function that connects to logout backend
+  const [alert, setAlert] = useState('off');
 
   useEffect(() => {
     console.log(userId);
@@ -41,7 +41,6 @@ export default function Nav() {
       password: formData.passwordInput,
     };
     login(inputCreds);
-    setFormData(emptyCreds);
   };
 
   const login = (loginCreds) => {
@@ -52,9 +51,12 @@ export default function Nav() {
         setUserId(user.data.id);
         setIsAuth(true);
         setModal('modal');
+        setAlert('off');
+        setFormData(emptyCreds);
       })
       .catch((err) => {
         setCredsAreInvalid(errorMessage);
+        setAlert('on')
         console.log(err);
       });
   };
@@ -70,7 +72,7 @@ export default function Nav() {
           <h1 className="title title-margin label-text">Learning Link</h1>
         </div>
         {/* if the user is logged in, the LogoutButton displays, if not, the loginButton */}
-        { isAuth ? <LogoutButton /> : <LoginButton handleModalDisplay={handleModalDisplay} /> }
+        { isAuth ? <LogoutButton /> : window.location.pathname === '/' ? <LoginButton handleModalDisplay={handleModalDisplay} /> : null}
       </nav>
 
       {/* modal for the login */}
@@ -87,6 +89,13 @@ export default function Nav() {
           </header>
           {/* email input */}
           <section className="modal-card-body">
+          {alert === 'on' ? (
+                <article className="message is-danger">
+                  <div className="message-body">
+                    {errorMessage}
+                  </div>
+                </article>
+              ) : null}
             <div className="field is-horizontal">
               <div className="field-label is-normal">
                 <label className="label">Email</label>
@@ -101,6 +110,7 @@ export default function Nav() {
                       placeholder="Email"
                       name="emailInput"
                       onChange={handleInputChange}
+                      value={formData.emailInput}
                     />
                   </p>
                 </div>
@@ -121,6 +131,7 @@ export default function Nav() {
                       placeholder="Password"
                       name="passwordInput"
                       onChange={handleInputChange}
+                      value={formData.passwordInput}
                     />
                   </p>
                 </div>

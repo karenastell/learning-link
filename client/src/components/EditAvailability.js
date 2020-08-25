@@ -1,9 +1,12 @@
-import React, { useState, useContext } from 'react';
-import Availability from '../components/Availability';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import Axios from 'axios';
 
-export default function EditAvailability({ setEditAvailabilityMode }) {
+export default function EditAvailability({
+  setEditAvailabilityMode,
+  isTeacher,
+}) {
   const { userId } = useContext(AuthContext);
 
   const [days, setDays] = useState([]);
@@ -14,6 +17,15 @@ export default function EditAvailability({ setEditAvailabilityMode }) {
     setDays([...days, event.target.value]);
   };
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
+  const history = useHistory();
+
   const handleSaveChanges = () => {
     // First make sure they checked at least one day...
     if (days[0]) {
@@ -21,6 +33,8 @@ export default function EditAvailability({ setEditAvailabilityMode }) {
         console.log('Edit was successful!');
       });
       setEditAvailabilityMode('off');
+      history.push('/updatemessage');
+
     } else {
       setAlert('on');
     }
@@ -131,7 +145,12 @@ export default function EditAvailability({ setEditAvailabilityMode }) {
               <button className="button is-primary" onClick={handleSaveChanges}>
                 Save Changes
               </button>
-              <button className="button is-light mx-4" onClick={() => setEditAvailabilityMode('off')} >Cancel</button>
+              <button
+                className="button is-light mx-4"
+                onClick={() => setEditAvailabilityMode('off')}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
