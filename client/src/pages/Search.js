@@ -73,91 +73,83 @@ export default function Search(props) {
     }
   };
 
-  const findATutor = () => {
+  const findATutor = async () => {
     if (days.length >= 1) {
-      days.forEach((day) => {
-        Axios.get(`api/search/day/${day}`).then((response) => {
-          console.log('day: ', response);
-          response.data.forEach((item) => {
-            responseData = {
-              id: item.id,
-              day: item.day,
-            };
-            responseArray.push(responseData);
-          });
+       days.forEach(async (day) => {
+        const response = await Axios.get(`api/search/day/${day}`);
+        console.log('day: ', response);
+        response.data.forEach((item) => {
+          responseData = {
+            id: item.id,
+            day: item.day,
+            firstName: item.firstName,
+            lastName: item.lastName,
+            UserId: item.UserId,
+          };
+          responseArray.push(responseData);
         });
       });
     }
 
     if (subjects.length >= 1) {
-      subjects.forEach((subject) => {
-        Axios.get(`api/search/subject/${subject}`).then((response) => {
-          console.log('subject: ', response);
-          response.data.forEach((item) => {
-            responseData = {
-              subject: item.subject,
-              id: item.id,
-            };
-            responseArray.push(responseData);
-          });
+       subjects.forEach(async(subject) => {
+        const response2 = await Axios.get(`api/search/subject/${subject}`);
+        console.log('subject: ', response2);
+        response2.data.forEach((item) => {
+          responseData = {
+            subject: item.subject,
+            id: item.id,
+            UserId: item.UserId,
+          };
+          responseArray.push(responseData);
         });
       });
     }
 
-
-
     if (search.delivery_method) {
-      Axios.get(`api/search/delivery_method/${search.delivery_method}`).then(
-        (response) => {
-          console.log('delivery: ', response);
-          response.data.forEach((item) => {
-            responseData = {
-              id: item.id,
-              delivery: item.delivery_method,
-            };
-            responseArray.push(responseData)
-          });
-        }
+      const response3 = await Axios.get(
+        `api/search/delivery_method/${search.delivery_method}`
       );
+
+      console.log('delivery: ', response3);
+      response3.data.forEach((item) => {
+        responseData = {
+          id: item.id,
+          delivery: item.delivery_method,
+          UserId: item.UserId,
+        };
+        responseArray.push(responseData);
+      });
     }
 
-    if (search.city && search.state) {
-      Axios.get(`api/search/city/${search.city}/state/${search.state}`).then(
-        (response) => {
-          console.log('city/state: ', response);
-          response.data.forEach((item)=>{
-                responseData = {
-              id: item.id,
-              city: item.city,
-              state: item.state
-          }
-          responseArray.push(responseData);
-          })
-        
-        }
+    if (search.city || search.state) {
+      const response4 = await Axios.get(
+        `api/search/city/${search.city}/state/${search.state}`
       );
+      console.log('city/state: ', response4);
+      response4.data.forEach((item) => {
+        responseData = {
+          id: item.id,
+          city: item.city,
+          state: item.state,
+          UserId: item.UserId,
+        };
+        responseArray.push(responseData);
+      });
     }
 
-    setResults([...results, responseArray]);
+    setResults(responseArray);
+    console.log(results, 'results');
   };
-
 
   console.log(results, 'results');
 
-  
+  if (results.length > 0) {
+  }
 
   results.forEach((result) => {
     console.log(result.id);
   });
-
-
-
-
-
-
-
-
-
 
   return (
     <>

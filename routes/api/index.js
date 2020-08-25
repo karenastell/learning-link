@@ -24,9 +24,15 @@ router.get('/myprofile/:id', (req, res) => {
 router.get('/search/day/:day', (req, res) => {
   console.log(req.params);
   console.log(req.params.day);
-  db.Availability.findAll({
-    where: { day: req.params.day },
-    include: [{ model: db.User }],
+  db.User.findAll({
+    include: [
+      db.UserProfile,
+      db.Subjects,
+      {
+        model: db.Availability,
+        where: { day: req.params.day },
+      },
+    ],
   }).then((data) => {
     console.log(data);
     res.json(data);
@@ -35,9 +41,15 @@ router.get('/search/day/:day', (req, res) => {
 
 router.get('/search/city/:city/state/:state', (req, res) => {
   console.log(req.params.city, req.params.state);
-  db.UserProfile.findAll({
-    where: { city: req.params.city, state: req.params.state },
-    include: [{ model: db.User }],
+  db.User.findAll({
+    include: [
+      {
+        model: db.UserProfile,
+        where: { state: req.params.state },
+      },
+      { model: db.Availability },
+      { model: db.Subject },
+    ],
   }).then((data) => {
     console.log(data);
     res.json(data);
@@ -46,9 +58,15 @@ router.get('/search/city/:city/state/:state', (req, res) => {
 
 router.get('/search/subject/:subject', (req, res) => {
   console.log(req.params.subject);
-  db.Subject.findAll({
-    where: { subject: req.params.subject },
-    include: [{ model: db.User }],
+  db.User.findAll({
+    include: [
+      db.UserProfile,
+      db.Availability,
+      {
+        model: db.Subject,
+        where: { subject: req.params.subject },
+      },
+    ],
   }).then((data) => {
     console.log(data);
     res.json(data);
@@ -57,9 +75,15 @@ router.get('/search/subject/:subject', (req, res) => {
 
 router.get('/search/delivery_method/:delivery_method', (req, res) => {
   console.log(req.params.delivery_method);
-  db.UserProfile.findAll({
-    where: { delivery_method: req.params.delivery_method },
-    include: [{ model: db.User }],
+  db.User.findAll({
+    include: [
+      db.Subject,
+      db.Availability,
+      {
+        model: db.UserProfile,
+        where: { delivery_method: req.params.delivery_method },
+      },
+    ],
   }).then((data) => {
     console.log(data);
     res.json(data);
