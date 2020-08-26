@@ -4,5 +4,6 @@ module.exports = (sequelize, Datatypes) => {
     TutorId: Datatypes.INTEGER,
   });
 
+
   return TutorStudent;
 };

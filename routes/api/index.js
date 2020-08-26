@@ -1,11 +1,8 @@
 const router = require('express').Router();
 const db = require('../../models');
-const isAuthenticated = require('../../config/middleware/isAuthenticated');
+// const isAuthenticated = require('../../config/middleware/isAuthenticated');
 
-router.get('/secrets', isAuthenticated, (req, res) => {
-  res.json('Talk is cheap. Show me the code. -Linus Torvalds');
-});
-
+// Get the User's profile information to populate the My Profile page
 router.get('/myprofile/:id', (req, res) => {
   console.log(req.params.id, 'this is the params');
   db.User.findOne({
@@ -21,6 +18,7 @@ router.get('/myprofile/:id', (req, res) => {
   });
 });
 
+// Search route if the user searches by availability
 router.get('/search/day/:day', (req, res) => {
   console.log(req.params);
   console.log(req.params.day);
@@ -39,6 +37,7 @@ router.get('/search/day/:day', (req, res) => {
   });
 });
 
+// search route if user searches by location
 router.get('/search/city/:city/state/:state', (req, res) => {
   console.log(req.params.city, req.params.state);
   db.User.findAll({
@@ -56,6 +55,7 @@ router.get('/search/city/:city/state/:state', (req, res) => {
   });
 });
 
+// search route if user searches by subjects
 router.get('/search/subject/:subject', (req, res) => {
   console.log(req.params.subject);
   db.User.findAll({
@@ -73,6 +73,7 @@ router.get('/search/subject/:subject', (req, res) => {
   });
 });
 
+
 router.post('/TutorStudent', (req, res) => {
   console.log('req.body', req.body);
   db.TutorStudent.create({
@@ -81,6 +82,9 @@ router.post('/TutorStudent', (req, res) => {
 
   res.send('Tutor was added to the Student Dashboard');
 });
+
+
+// search route if user searches by method of delivery
 
 router.get('/search/delivery_method/:delivery_method', (req, res) => {
   console.log(req.params.delivery_method);
@@ -99,6 +103,7 @@ router.get('/search/delivery_method/:delivery_method', (req, res) => {
   });
 });
 
+// Route to edit the myprofile page subjects
 router.put('/edit-profile/subjects/:id', async (req, res) => {
   // delete existing subjects, then post the new ones
   console.log(req.body);
@@ -114,6 +119,7 @@ router.put('/edit-profile/subjects/:id', async (req, res) => {
   res.json(req.body);
 });
 
+// route to edit the myprofile availability
 router.put('/edit-profile/availability/:id', async (req, res) => {
   // delete existing subjects, then post the new ones
   console.log(req.body);
@@ -130,6 +136,7 @@ router.put('/edit-profile/availability/:id', async (req, res) => {
   res.json(req.body);
 });
 
+// route to edit the user's basic profile information
 router.put('/edit-profile/:id', async (req, res) => {
   console.log(req.body);
 

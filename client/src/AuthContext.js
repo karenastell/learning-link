@@ -10,6 +10,8 @@ export const AuthProvider = ({ children }) => {
     // have the userid available were needed
     const [userId, setUserId] = useState(undefined)
 
+    const [isTeacher, setIsTeacher] = useState(undefined)
+
     useEffect(() => {
         checkAuth()
     }, [])
@@ -34,5 +36,5 @@ export const AuthProvider = ({ children }) => {
           .catch(err => console.log(err));
       };
 
-    return <AuthContext.Provider value={{ isAuth, userId, setUserId, setIsAuth, checkAuth, logout }}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={{ isAuth, userId, setUserId, setIsAuth, isTeacher, setIsTeacher, checkAuth, logout }}>{children}</AuthContext.Provider>;
 };

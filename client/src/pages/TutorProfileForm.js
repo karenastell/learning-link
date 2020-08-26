@@ -9,17 +9,13 @@ import Axios from 'axios';
 
 export default function ProfileForm(props) {
   const [tutorFormInfo, setTutorFormInfo] = useState({});
-
   const [subjects, setSubjects] = useState([]);
-
   const [days, setDays] = useState([]);
 
+  // These handle validation alerts
   const [successAlert, setSuccessAlert] = useState('off');
-
   const [errorAlert, setErrorAlert] = useState('off');
-
   const [passwordAlert, setPasswordAlert] = useState('off');
-
   const [emailAlert, setEmailAlert] = useState('off');
 
   useEffect(() => {
