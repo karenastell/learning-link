@@ -78,6 +78,7 @@ router.post('/TutorStudent', (req, res) => {
   console.log('req.body', req.body);
   db.TutorStudent.create({
     TutorId: req.body.TutorId,
+    StudentId: req.body.StudentId,
   });
 
   res.send('Tutor was added to the Student Dashboard');
