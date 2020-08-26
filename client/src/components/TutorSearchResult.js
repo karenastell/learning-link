@@ -36,11 +36,18 @@ export default function TutorSearchResult(props) {
               <ul>
                 <li>Email: {result.email}</li>
                 <li>Day(s) Available: {result.day.join(', ')}</li>
-                <li>Location: {result.city}, {result.state}</li>
+                <li>
+                  Location: {result.city}, {result.state}
+                </li>
                 <li>Bio: {result.bio}</li>
                 <li>Degree: {result.degree}</li>
                 <li>Experience: {result.experience}</li>
-                <li>Subjects:</li>
+                <li>Subjects: </li>
+                <ul>
+                  {result.subject.map((sub) => (
+                    <li>{sub}</li>
+                  ))}
+                </ul>
                 <li>Delivery Method: {result.delivery_method}</li>
               </ul>
             </div>

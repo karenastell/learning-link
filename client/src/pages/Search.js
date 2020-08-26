@@ -77,12 +77,18 @@ export default function Search(props) {
     if (days.length >= 1) {
       days.forEach(async (day) => {
         const response = await Axios.get(`api/search/day/${day}`);
+        console.log('day: ', response.data);
         if (response.data.length >= 1) {
           response.data.forEach(async(tutor)=>{
             let dayArray = [];
+            let subArray = [];
             await tutor.Availabilities.forEach((day)=>{
               dayArray.push(day.day)
               console.log(dayArray);
+            })
+            await tutor.Subjects.forEach((subject)=>{
+              subArray.push(subject.subject)
+              console.log(subArray);
             })
             responseData = {
               UserId: tutor.UserProfile.UserId,
@@ -94,7 +100,7 @@ export default function Search(props) {
               bio: tutor.UserProfile.bio,
               degree: tutor.UserProfile.degree,
               experience: tutor.UserProfile.experience,
-              subject: tutor.Subjects[0].subject,
+              subject: subArray,
               day: dayArray,
               delivery_method: tutor.UserProfile.delivery_method,
               isTeacher: tutor.isTeacher,
@@ -118,9 +124,13 @@ export default function Search(props) {
         if (response2.data.length >= 1) {
           response2.data.forEach(async(tutor)=>{
             let dayArray = [];
+            let subArray = [];
             await tutor.Availabilities.forEach((day)=>{
               dayArray.push(day.day)
               console.log(dayArray);
+            })
+            await tutor.Subjects.forEach((subject)=>{
+              subArray.push(subject.subject)
             })
             responseData = {
               UserId: tutor.UserProfile.UserId,
@@ -132,7 +142,7 @@ export default function Search(props) {
               bio: tutor.UserProfile.bio,
               degree: tutor.UserProfile.degree,
               experience: tutor.UserProfile.experience,
-              subject: tutor.Subjects[0].subject,
+              subject: subArray,
               day: dayArray,
               delivery_method: tutor.UserProfile.delivery_method,
               isTeacher: tutor.isTeacher,
@@ -155,9 +165,13 @@ export default function Search(props) {
        if (response3.data.length >= 1) {
         response3.data.forEach(async(tutor)=>{
             let dayArray = [];
+            let subArray = [];
             await tutor.Availabilities.forEach((day)=>{
               dayArray.push(day.day)
               console.log(dayArray);
+            })
+            await tutor.Subjects.forEach((subject)=>{
+              subArray.push(subject.subject)
             })
             responseData = {
               UserId: tutor.UserProfile.UserId,
@@ -169,7 +183,7 @@ export default function Search(props) {
               bio: tutor.UserProfile.bio,
               degree: tutor.UserProfile.degree,
               experience: tutor.UserProfile.experience,
-              subject: tutor.Subjects[0].subject,
+              subject: subArray,
               day: dayArray,
               delivery_method: tutor.UserProfile.delivery_method,
               isTeacher: tutor.isTeacher,
@@ -192,9 +206,13 @@ export default function Search(props) {
       if (response4.data.length >= 1) {
         response4.data.forEach(async(tutor)=>{
           let dayArray = [];
+          let subArray = [];
           await tutor.Availabilities.forEach((day)=>{
             dayArray.push(day.day)
             console.log(dayArray);
+          })
+          await tutor.Subjects.forEach((subject)=>{
+            subArray.push(subject.subject)
           })
           responseData = {
             UserId: tutor.UserProfile.UserId,
@@ -206,7 +224,7 @@ export default function Search(props) {
             bio: tutor.UserProfile.bio,
             degree: tutor.UserProfile.degree,
             experience: tutor.UserProfile.experience,
-            subject: tutor.Subjects[0].subject,
+            subject: subArray,
             day: dayArray,
             delivery_method: tutor.UserProfile.delivery_method,
             isTeacher: tutor.isTeacher,
