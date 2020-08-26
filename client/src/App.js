@@ -52,7 +52,7 @@ function App() {
           <Route exact path="/signup-tutor" component={TutorProfileForm} />
           <Route exact path="/signup-student" component={StudentProfileForm} />
           <PrivateRoute exact path="/calendar" component={Calendar} />
-          <Route exact path="/search" component={Search} />
+          <PrivateRoute exact path="/search" component={Search} />
           <PrivateRoute exact path="/myprofile" component={MyProfile} />
           <PrivateRoute
             exact
