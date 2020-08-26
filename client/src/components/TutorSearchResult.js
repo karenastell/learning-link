@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Axios from 'axios';
+import { AuthContext } from '../AuthContext';
 
 export default function TutorSearchResult(props) {
-  const addTutor = (value) => {
-
+  const { userId } = useContext(AuthContext);
+  console.log(userId);
+  const addTutor = (id) => {
     console.log(props.results);
     Axios.post('/api/TutorStudent', {
-      TutorId: value,
+      TutorId: id,
+      StudentId: userId,
     }).then((response) => {
       console.log(response.data);
     });
@@ -39,7 +42,11 @@ export default function TutorSearchResult(props) {
             <a href='#' className='card-footer-item'>
               Message This Tutor
             </a>
-            <a href='#' onClick={()=>addTutor(result.UserId)} className='card-footer-item'>
+            <a
+              href='#'
+              onClick={() => addTutor(result.UserId)}
+              className='card-footer-item'
+            >
               Add Tutor To Your Dashboard
             </a>
           </footer>
