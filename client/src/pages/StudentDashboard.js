@@ -3,6 +3,7 @@ import { AuthContext } from '../AuthContext';
 import Nav from '../components/Nav';
 import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu';
+import DashboardCard from '../components/DashboardCards';
 
 export default function ParentView(props) {
   const { userId, isTeacher } = useContext(AuthContext);
@@ -19,6 +20,10 @@ export default function ParentView(props) {
       getMyStudentsOrTutors();
     }
   }, []);
+
+  useEffect(() => {
+    renderDashboardCard()
+  }, [results])
 
   const getUserInfo = () => {
     Axios.get(`/api/myprofile/${userId}`).then((response) => {
@@ -37,10 +42,12 @@ export default function ParentView(props) {
     });
   };
 
-  const myPeepsArray = [];
-
+     const myPeepsArray = [];
+        let responseData;
 
   const getMyStudentsOrTutors = async () => {
+ 
+
     // Get the student-tutor pairs from the TutorStudent table
     const tutorStudentPairs = await Axios.get(`/api/mydashboard/${userId}`);
 
@@ -60,12 +67,11 @@ export default function ParentView(props) {
           `/api/mydashboard/mypeeps/${studentId}`
         );
         let dayArray = [];
-        let responseData;
         let subjectArray = [];
-        await studentUserInfo.data.Subjects.forEach((subject) => {
+         studentUserInfo.data.Subjects.forEach((subject) => {
           subjectArray.push(subject.subject);
         });
-        await console.log(studentUserInfo.data, 'look here!!!!!');
+
 
         responseData = {
           firstName: studentUserInfo.data.firstName,
@@ -80,7 +86,7 @@ export default function ParentView(props) {
           delivery_method: studentUserInfo.data.UserProfile.delivery_method,
         };
 
-        await myPeepsArray.push(responseData);
+         myPeepsArray.push(responseData);
       });
     } else {
       // if !isTeacher, get the tutorIds and do a get for all users with those ids
@@ -90,13 +96,12 @@ export default function ParentView(props) {
           `/api/mydashboard/mypeeps/${TutorId}`
         );
         let dayArray = [];
-        let responseData;
         let subjectArray = [];
-        await myTutorsInfo.data.Subjects.forEach((subject) => {
+         myTutorsInfo.data.Subjects.forEach((subject) => {
           subjectArray.push(subject.subject);
         });
 
-        await myTutorsInfo.data.Availabilities.forEach((day) => {
+         myTutorsInfo.data.Availabilities.forEach((day) => {
           dayArray.push(day.day);
         });
 
@@ -114,17 +119,21 @@ export default function ParentView(props) {
           delivery_method: myTutorsInfo.data.UserProfile.delivery_method,
         };
 
-        await myPeepsArray.push(responseData);
+         myPeepsArray.push(responseData);
       });
     }
     await console.log(myPeepsArray);
 
     // Set the result state
-    await setResults(myPeepsArray);
-
+    setResults(myPeepsArray);
   };
+    console.log(results)
 
-
+  const renderDashboardCard = () => {
+    results.forEach((result) => {
+      return <DashboardCard result={result} />
+    })
+  }
 
   return (
     <>
@@ -137,6 +146,7 @@ export default function ParentView(props) {
           <h1 className="title">
             Hello {userInfo.firstName} {userInfo.lastName}!
           </h1>
+          <DashboardCard results={results} />
           {isTeacher ? (
             <div>
               <p className="has-text-centered">
