@@ -11,12 +11,10 @@ export default function StudentProfileForm(props) {
   const [studentFormInfo, setStudentFormInfo] = useState({});
   const [subjects, setSubjects] = useState([]);
 
+  // These handle validation alert messages
   const [successAlert, setSuccessAlert] = useState('off');
-
   const [errorAlert, setErrorAlert] = useState('off');
-
   const [passwordAlert, setPasswordAlert] = useState('off');
-
   const [emailAlert, setEmailAlert] = useState('off');
 
   useEffect(() => {

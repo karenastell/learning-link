@@ -12,7 +12,7 @@ const { isAuth, userId} = useContext(AuthContext);
 // ternary: if the user is authenticated, they are redirected to their profile page.
   return (
     <>
-    { isAuth ? <Redirect to='/myprofile' /> : 
+    { isAuth ? <Redirect to='/student-dashboard' /> : 
     <>
     <Nav />
       <img src="./coloredpencils.jpg" alt="learning image" />

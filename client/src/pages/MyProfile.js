@@ -18,55 +18,21 @@ export default function MyProfile(props) {
   const [subjectsInfo, setSubjectsInfo] = useState([]);
   const [availabilityInfo, setAvailabilityInfo] = useState([]);
 
+  // These control the rendering of the various editable compontents
   const [editMode, setEditMode] = useState('off');
-
   const [editAvailabilityMode, setEditAvailabilityMode] = useState('off');
-
   const [editSubjectsMode, setEditSubjectsMode] = useState('off');
 
   const isTeacher = userInfo.isTeacher;
 
-  //   console.log(userId, 'this should be the id');
-  // will need to get the user's profile data from the database
+  //  get the user's profile data from the database
   useEffect(() => {
     if (userId) {
-      Axios.get(`/api/myprofile/${userId}`).then((response) => {
-        console.log(response);
-        const data = response.data;
-        setUserInfo({
-          ...userInfo,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          isTeacher: data.isTeacher,
-        });
-        setUserProfileInfo(data.UserProfile);
-        setSubjectsInfo(data.Subjects);
-        setAvailabilityInfo(data.Availabilities);
-      });
+      getUserInfo()
     }
   }, []);
 
-  //   This useEffect isn't being triggered... take it out? or fiddle with it??
-  useEffect(() => {
-    if (userId) {
-      Axios.get(`/api/myprofile/${userId}`).then((response) => {
-        console.log(response);
-        const data = response.data;
-        setUserInfo({
-          ...userInfo,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          isTeacher: data.isTeacher,
-        });
-        setUserProfileInfo(data.UserProfile);
-        setSubjectsInfo(data.Subjects);
-        setAvailabilityInfo(data.Availabilities);
-      });
-    }
-  }, [editMode]);
-
+// 
   const getUserInfo = () => {
     if (userId) {
       Axios.get(`/api/myprofile/${userId}`).then((response) => {
