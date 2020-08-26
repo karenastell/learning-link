@@ -26,7 +26,7 @@ export default function Search(props) {
 
   let responseArray = [];
   let responseData;
-  let dayArray = [];
+  
 
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
@@ -73,39 +73,46 @@ export default function Search(props) {
   };
 
   const findATutor = async () => {
+
     if (days.length >= 1) {
       days.forEach(async (day) => {
         const response = await Axios.get(`api/search/day/${day}`);
-
-
-
+        console.log('day: ', response.data);
         if (response.data.length >= 1) {
-          response.data[0].Availabilities.forEach((day) => {
-            dayArray.push(day.day);
-          });
+          response.data.forEach(async(tutor)=>{
+            let dayArray = [];
+            let subArray = [];
+            await tutor.Availabilities.forEach((day)=>{
+              dayArray.push(day.day)
+              console.log(dayArray);
+            })
+            await tutor.Subjects.forEach((subject)=>{
+              subArray.push(subject.subject)
+              console.log(subArray);
+            })
+            responseData = {
+              UserId: tutor.UserProfile.UserId,
+              firstName: tutor.firstName,
+              lastName: tutor.lastName,
+              email: tutor.email,
+              city: tutor.UserProfile.city,
+              state: tutor.UserProfile.state,
+              bio: tutor.UserProfile.bio,
+              degree: tutor.UserProfile.degree,
+              experience: tutor.UserProfile.experience,
+              subject: subArray,
+              day: dayArray,
+              delivery_method: tutor.UserProfile.delivery_method,
+              isTeacher: tutor.isTeacher,
+            };
+            responseArray.push(responseData);
+          })
+      
         } else {
-          console.log('no responses for your subject search');
+          console.log('no responses for your day search');
         }
 
-        console.log('day: ', response);
-        response.data.forEach((item) => {
-          responseData = {
-            UserId: item.UserProfile.UserId,
-            firstName: item.firstName,
-            lastName: item.lastName,
-            email: item.email,
-            city: item.UserProfile.city,
-            state: item.UserProfile.state,
-            bio: item.UserProfile.bio,
-            degree: item.UserProfile.degree,
-            experience: item.UserProfile.experience,
-            subject: item.Subjects[0].subject,
-            day: dayArray,
-            delivery_method: item.UserProfile.delivery_method,
-            isTeacher: item.isTeacher,
-          };
-          responseArray.push(responseData);
-        });
+  
       });
     }
 
@@ -115,32 +122,37 @@ export default function Search(props) {
         console.log('subject: ', response2);
 
         if (response2.data.length >= 1) {
-          response2.data[0].Availabilities.forEach((day) => {
-            dayArray.push(day.day);
-          });
+          response2.data.forEach(async(tutor)=>{
+            let dayArray = [];
+            let subArray = [];
+            await tutor.Availabilities.forEach((day)=>{
+              dayArray.push(day.day)
+              console.log(dayArray);
+            })
+            await tutor.Subjects.forEach((subject)=>{
+              subArray.push(subject.subject)
+            })
+            responseData = {
+              UserId: tutor.UserProfile.UserId,
+              firstName: tutor.firstName,
+              lastName: tutor.lastName,
+              email: tutor.email,
+              city: tutor.UserProfile.city,
+              state: tutor.UserProfile.state,
+              bio: tutor.UserProfile.bio,
+              degree: tutor.UserProfile.degree,
+              experience: tutor.UserProfile.experience,
+              subject: subArray,
+              day: dayArray,
+              delivery_method: tutor.UserProfile.delivery_method,
+              isTeacher: tutor.isTeacher,
+            };
+            responseArray.push(responseData);
+          })
+      
         } else {
           console.log('no responses for your subject search');
         }
-
-        console.log(dayArray, 'day array');
-        response2.data.forEach((item) => {
-          responseData = {
-            UserId: item.UserProfile.UserId,
-            firstName: item.firstName,
-            lastName: item.lastName,
-            email: item.email,
-            city: item.UserProfile.city,
-            state: item.UserProfile.state,
-            bio: item.UserProfile.bio,
-            degree: item.UserProfile.degree,
-            experience: item.UserProfile.experience,
-            subject: item.Subjects[0].subject,
-            day: dayArray,
-            delivery_method: item.UserProfile.delivery_method,
-            isTeacher: item.isTeacher,
-          };
-          responseArray.push(responseData);
-        });
       });
     }
 
@@ -149,31 +161,41 @@ export default function Search(props) {
         `api/search/delivery_method/${search.delivery_method}`
       );
       console.log('delivery: ', response3);
-      if (response3.data.length >= 1) {
-        response3.data[0].Availabilities.forEach((day) => {
-          dayArray.push(day.day);
-        });
-      } else {
-        console.log('no responses for your subject search');
-      }
-      response3.data.forEach((item) => {
-        responseData = {
-          UserId: item.UserProfile.UserId,
-          firstName: item.firstName,
-          lastName: item.lastName,
-          email: item.email,
-          city: item.UserProfile.city,
-          state: item.UserProfile.state,
-          bio: item.UserProfile.bio,
-          degree: item.UserProfile.degree,
-          experience: item.UserProfile.experience,
-          subject: item.Subjects[0].subject,
-          day: dayArray,
-          delivery_method: item.UserProfile.delivery_method,
-          isTeacher: item.isTeacher,
-        };
-        responseArray.push(responseData);
-      });
+
+       if (response3.data.length >= 1) {
+        response3.data.forEach(async(tutor)=>{
+            let dayArray = [];
+            let subArray = [];
+            await tutor.Availabilities.forEach((day)=>{
+              dayArray.push(day.day)
+              console.log(dayArray);
+            })
+            await tutor.Subjects.forEach((subject)=>{
+              subArray.push(subject.subject)
+            })
+            responseData = {
+              UserId: tutor.UserProfile.UserId,
+              firstName: tutor.firstName,
+              lastName: tutor.lastName,
+              email: tutor.email,
+              city: tutor.UserProfile.city,
+              state: tutor.UserProfile.state,
+              bio: tutor.UserProfile.bio,
+              degree: tutor.UserProfile.degree,
+              experience: tutor.UserProfile.experience,
+              subject: subArray,
+              day: dayArray,
+              delivery_method: tutor.UserProfile.delivery_method,
+              isTeacher: tutor.isTeacher,
+            };
+            responseArray.push(responseData);
+          })
+      
+        } else {
+          console.log('no responses for your delivery method search');
+        }
+
+      
     }
 
     if (search.city && search.state) {
@@ -182,30 +204,38 @@ export default function Search(props) {
       );
       console.log('city/state: ', response4);
       if (response4.data.length >= 1) {
-        response4.data[0].Availabilities.forEach((day) => {
-          dayArray.push(day.day);
-        });
+        response4.data.forEach(async(tutor)=>{
+          let dayArray = [];
+          let subArray = [];
+          await tutor.Availabilities.forEach((day)=>{
+            dayArray.push(day.day)
+            console.log(dayArray);
+          })
+          await tutor.Subjects.forEach((subject)=>{
+            subArray.push(subject.subject)
+          })
+          responseData = {
+            UserId: tutor.UserProfile.UserId,
+            firstName: tutor.firstName,
+            lastName: tutor.lastName,
+            email: tutor.email,
+            city: tutor.UserProfile.city,
+            state: tutor.UserProfile.state,
+            bio: tutor.UserProfile.bio,
+            degree: tutor.UserProfile.degree,
+            experience: tutor.UserProfile.experience,
+            subject: subArray,
+            day: dayArray,
+            delivery_method: tutor.UserProfile.delivery_method,
+            isTeacher: tutor.isTeacher,
+          };
+          responseArray.push(responseData);
+        })
+    
       } else {
-        console.log('no responses for your subject search');
+        console.log('no responses for your location search');
       }
-      response4.data.forEach((item) => {
-        responseData = {
-          UserId: item.UserProfile.UserId,
-          firstName: item.firstName,
-          lastName: item.lastName,
-          email: item.email,
-          city: item.UserProfile.city,
-          state: item.UserProfile.state,
-          bio: item.UserProfile.bio,
-          degree: item.UserProfile.degree,
-          experience: item.UserProfile.experience,
-          subject: item.Subjects[0].subject,
-          day: dayArray,
-          delivery_method: item.UserProfile.delivery_method,
-          isTeacher: item.isTeacher,
-        };
-        responseArray.push(responseData);
-      });
+
     }
     setResults(responseArray);
   };
