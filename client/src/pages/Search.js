@@ -240,7 +240,7 @@ export default function Search(props) {
               </div>
             </div>
           </div>
-          <TutorSearchResult results={results} />
+          <TutorSearchResult key={results.UserId} results={results} />
         </div>
       </div>
     </>

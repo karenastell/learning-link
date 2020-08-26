@@ -1,7 +1,17 @@
 import React from 'react';
-
+import Axios from 'axios';
 
 export default function TutorSearchResult(props) {
+  const addTutor = (value) => {
+
+    console.log(props.results);
+    Axios.post('/api/TutorStudent', {
+      TutorId: value,
+    }).then((response) => {
+      console.log(response.data);
+    });
+  };
+
   return (
     <div className='mt-6'>
       <h1 className='title'>Tutor Search Results</h1>
@@ -20,6 +30,7 @@ export default function TutorSearchResult(props) {
                 <li>Bio: {result.bio}</li>
                 <li>Degree: {result.degree}</li>
                 <li>Experience: {result.experience}</li>
+                <li>Subjects:</li>
                 <li>Delivery Method: {result.delivery_method}</li>
               </ul>
             </div>
@@ -28,7 +39,7 @@ export default function TutorSearchResult(props) {
             <a href='#' className='card-footer-item'>
               Message This Tutor
             </a>
-            <a href='#' className='card-footer-item'>
+            <a href='#' onClick={()=>addTutor(result.UserId)} className='card-footer-item'>
               Add Tutor To Your Dashboard
             </a>
           </footer>
