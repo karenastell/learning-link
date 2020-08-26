@@ -8,7 +8,6 @@ import {
 import { AuthProvider, AuthContext } from './AuthContext';
 
 import Main from './pages/Main';
-import Nav from './components/Nav';
 import Footer from './components/Footer';
 import StudentProfileForm from './pages/StudentProfileForm';
 import TutorProfileForm from './pages/TutorProfileForm';
@@ -49,7 +48,6 @@ function App() {
       
       <Router>
         <>
-        {/* <Nav /> */}
           <Route exact path="/" component={Main} />
           <Route exact path="/signup-tutor" component={TutorProfileForm} />
           <Route exact path="/signup-student" component={StudentProfileForm} />
