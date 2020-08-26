@@ -8,7 +8,7 @@ import Subjects from '../components/Subjects';
 import Nav from '../components/Nav';
 import TutorSearchResult from '../components/TutorSearchResult';
 
-export default function Search(props) {
+export default function Search() {
   const [search, setSearch] = useState({});
   const [subjects, setSubjects] = useState([]);
   const [days, setDays] = useState([]);
