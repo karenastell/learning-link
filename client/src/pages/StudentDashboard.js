@@ -40,19 +40,28 @@ export default function ParentView(props) {
           <SideBarMenu />
         </div>
         <div className="column">
-          { userInfo.isTeacher ? (
-            <h1 className="title">
-              Hello {userInfo.firstName} {userInfo.lastName}! Here are your
-              current students:
-            </h1>
+          <h1 className="title">
+            Hello {userInfo.firstName} {userInfo.lastName}!
+          </h1>
+          {isTeacher ? (
+            <div>
+              <p className="has-text-centered">
+                Welcome to your Learning Link Dashboard! Looks like you
+                currently do not have any students!
+                <br />
+                Now that you have an account, students and parents can reach out
+                to you for tutoring services!  Be sure to regularly check your messages and your dashboard in case parents or students contact you for tutoring.
+              </p>
+            </div>
           ) : (
-            <h1 className="title">
-              Hello {userInfo.firstName} {userInfo.lastName}! Here are your
-              current tutors:
-            </h1>
+            <div>
+              <p className="has-text-centered">Welcome to your Learning Link Dashboard! Looks like you
+                currently do not have any tutors!
+                <br/>
+                To get started, search for tutors that meet your needs using the "Search for a Tutor" button in the menu.  From there, you'll be able to view tutors, add them to your dashboard, and send them a message.
+                </p>
+            </div>
           )}
-
-          <p>User id is {userId}</p>
         </div>
       </div>
     </>
