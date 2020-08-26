@@ -25,7 +25,7 @@ router.get('/search/day/:day', (req, res) => {
   db.User.findAll({
     include: [
       db.UserProfile,
-      db.Subjects,
+      db.Subject,
       {
         model: db.Availability,
         where: { day: req.params.day },
@@ -44,7 +44,7 @@ router.get('/search/city/:city/state/:state', (req, res) => {
     include: [
       {
         model: db.UserProfile,
-        where: { state: req.params.state },
+        where: { city: req.params.city, state: req.params.state },
       },
       { model: db.Availability },
       { model: db.Subject },
