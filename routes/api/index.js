@@ -73,7 +73,19 @@ router.get('/search/subject/:subject', (req, res) => {
   });
 });
 
+
+router.post('/TutorStudent', (req, res) => {
+  console.log('req.body', req.body);
+  db.TutorStudent.create({
+    TutorId: req.body.TutorId,
+  });
+
+  res.send('Tutor was added to the Student Dashboard');
+});
+
+
 // search route if user searches by method of delivery
+
 router.get('/search/delivery_method/:delivery_method', (req, res) => {
   console.log(req.params.delivery_method);
   db.User.findAll({
@@ -135,7 +147,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } },
+    { where: { id: req.params.id } }
   );
 
   await db.UserProfile.update(
@@ -151,7 +163,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } },
+    { where: { UserId: req.params.id } }
   );
   res.json(req.body);
 });
