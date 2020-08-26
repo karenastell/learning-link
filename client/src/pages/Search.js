@@ -6,6 +6,7 @@ import Address from '../components/Address';
 import Availability from '../components/Availability';
 import Subjects from '../components/Subjects';
 import Nav from '../components/Nav';
+import TutorSearchResult from '../components/TutorSearchResult';
 
 export default function Search(props) {
   const [search, setSearch] = useState({});
@@ -25,6 +26,7 @@ export default function Search(props) {
 
   let responseArray = [];
   let responseData;
+  let dayArray = [];
 
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
@@ -74,14 +76,33 @@ export default function Search(props) {
     if (days.length >= 1) {
       days.forEach(async (day) => {
         const response = await Axios.get(`api/search/day/${day}`);
+
+
+
+        if (response.data.length >= 1) {
+          response.data[0].Availabilities.forEach((day) => {
+            dayArray.push(day.day);
+          });
+        } else {
+          console.log('no responses for your subject search');
+        }
+
         console.log('day: ', response);
         response.data.forEach((item) => {
           responseData = {
-            id: item.id,
-            day: item.day,
+            UserId: item.UserProfile.UserId,
             firstName: item.firstName,
             lastName: item.lastName,
-            UserId: item.UserId,
+            email: item.email,
+            city: item.UserProfile.city,
+            state: item.UserProfile.state,
+            bio: item.UserProfile.bio,
+            degree: item.UserProfile.degree,
+            experience: item.UserProfile.experience,
+            subject: item.Subjects[0].subject,
+            day: dayArray,
+            delivery_method: item.UserProfile.delivery_method,
+            isTeacher: item.isTeacher,
           };
           responseArray.push(responseData);
         });
@@ -92,11 +113,31 @@ export default function Search(props) {
       subjects.forEach(async (subject) => {
         const response2 = await Axios.get(`api/search/subject/${subject}`);
         console.log('subject: ', response2);
+
+        if (response2.data.length >= 1) {
+          response2.data[0].Availabilities.forEach((day) => {
+            dayArray.push(day.day);
+          });
+        } else {
+          console.log('no responses for your subject search');
+        }
+
+        console.log(dayArray, 'day array');
         response2.data.forEach((item) => {
           responseData = {
-            subject: item.Subjects.subject,
-            id: item.id,
-            UserId: item.UserId,
+            UserId: item.UserProfile.UserId,
+            firstName: item.firstName,
+            lastName: item.lastName,
+            email: item.email,
+            city: item.UserProfile.city,
+            state: item.UserProfile.state,
+            bio: item.UserProfile.bio,
+            degree: item.UserProfile.degree,
+            experience: item.UserProfile.experience,
+            subject: item.Subjects[0].subject,
+            day: dayArray,
+            delivery_method: item.UserProfile.delivery_method,
+            isTeacher: item.isTeacher,
           };
           responseArray.push(responseData);
         });
@@ -107,70 +148,99 @@ export default function Search(props) {
       const response3 = await Axios.get(
         `api/search/delivery_method/${search.delivery_method}`
       );
-
       console.log('delivery: ', response3);
+      if (response3.data.length >= 1) {
+        response3.data[0].Availabilities.forEach((day) => {
+          dayArray.push(day.day);
+        });
+      } else {
+        console.log('no responses for your subject search');
+      }
       response3.data.forEach((item) => {
         responseData = {
-          id: item.id,
-          delivery: item.delivery_method,
-          UserId: item.UserId,
+          UserId: item.UserProfile.UserId,
+          firstName: item.firstName,
+          lastName: item.lastName,
+          email: item.email,
+          city: item.UserProfile.city,
+          state: item.UserProfile.state,
+          bio: item.UserProfile.bio,
+          degree: item.UserProfile.degree,
+          experience: item.UserProfile.experience,
+          subject: item.Subjects[0].subject,
+          day: dayArray,
+          delivery_method: item.UserProfile.delivery_method,
+          isTeacher: item.isTeacher,
         };
         responseArray.push(responseData);
       });
     }
 
-    if (search.city || search.state) {
+    if (search.city && search.state) {
       const response4 = await Axios.get(
         `api/search/city/${search.city}/state/${search.state}`
       );
       console.log('city/state: ', response4);
+      if (response4.data.length >= 1) {
+        response4.data[0].Availabilities.forEach((day) => {
+          dayArray.push(day.day);
+        });
+      } else {
+        console.log('no responses for your subject search');
+      }
       response4.data.forEach((item) => {
         responseData = {
-          id: item.id,
-          city: item.city,
-          state: item.state,
-          UserId: item.UserId,
+          UserId: item.UserProfile.UserId,
+          firstName: item.firstName,
+          lastName: item.lastName,
+          email: item.email,
+          city: item.UserProfile.city,
+          state: item.UserProfile.state,
+          bio: item.UserProfile.bio,
+          degree: item.UserProfile.degree,
+          experience: item.UserProfile.experience,
+          subject: item.Subjects[0].subject,
+          day: dayArray,
+          delivery_method: item.UserProfile.delivery_method,
+          isTeacher: item.isTeacher,
         };
         responseArray.push(responseData);
       });
     }
-
     setResults(responseArray);
-    console.log(results, 'results');
   };
-
-  console.log(results, 'results');
-
-    results.forEach((result) => {
-    console.log(result.id);
-  });
 
   return (
     <>
       <Nav />
-      <SideBarMenu />
-      <div className='container'>
-        <h1 className='title has-text-centered'>Search For a Tutor</h1>
-        <h3 className='subtitle is-4 mt-5'>Choose Your Search Criteria:</h3>
-        <Subjects handleCheckboxes={handleCheckboxes} />
-        <Delivery handleInputChange={handleInputChange} />
-        <Address handleInputChange={handleInputChange} />
-        <Availability
-          check={check}
-          handleDaysCheckBoxes={handleDaysCheckBoxes}
-          handleRemove={handleRemove}
-        />
-        <div className='field is-horizontal'>
-          <div className='field-label'></div>
-          <div className='field-body'>
-            <div className='field'>
-              <div className='control'>
-                <button onClick={findATutor} className='button is-primary'>
-                  Find a Tutor
-                </button>
+      <div className='columns'>
+        <div className='column is-narrow'>
+          <SideBarMenu />
+        </div>
+        <div className='container column'>
+          <h1 className='title has-text-centered'>Search For a Tutor</h1>
+          <h3 className='subtitle is-4 mt-5'>Choose Your Search Criteria:</h3>
+          <Subjects handleCheckboxes={handleCheckboxes} />
+          <Delivery handleInputChange={handleInputChange} />
+          <Address handleInputChange={handleInputChange} />
+          <Availability
+            check={check}
+            handleDaysCheckBoxes={handleDaysCheckBoxes}
+            handleRemove={handleRemove}
+          />
+          <div className='field is-horizontal'>
+            <div className='field-label'></div>
+            <div className='field-body'>
+              <div className='field'>
+                <div className='control'>
+                  <button onClick={findATutor} className='button is-primary'>
+                    Find a Tutor
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+          <TutorSearchResult results={results} />
         </div>
       </div>
     </>
