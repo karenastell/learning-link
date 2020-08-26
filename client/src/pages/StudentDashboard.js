@@ -12,25 +12,31 @@ export default function ParentView(props) {
   const [subjectsInfo, setSubjectsInfo] = useState([]);
   const [availabilityInfo, setAvailabilityInfo] = useState([]);
 
-  // This is temporary.... change this once we get the tutor-student assigning capabilities running
+  
   useEffect(() => {
     if (userId) {
-      Axios.get(`/api/myprofile/${userId}`).then((response) => {
-        console.log(response);
-        const data = response.data;
-        setUserInfo({
-          ...userInfo,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          isTeacher: data.isTeacher,
-        });
-        setUserProfileInfo(data.UserProfile);
-        setSubjectsInfo(data.Subjects);
-        setAvailabilityInfo(data.Availabilities);
-      });
+
     }
   }, []);
+
+  const getMyStudentsOrTutors = async () => {
+    const tutorStudentPairs = await Axios.get(`/api/mydashboard/${userId}`)
+
+    await console.log(tutorStudentPairs, 'these are the tutor student pairs')
+      // if isTeacher, get the studentIds and do a get for all users with those ids
+      if (isTeacher) {
+        // forEach studentId in the response...
+        await Axios.get(`/api/mystudents/${studentId}`)
+      }
+
+      // if !isTeacher, get the tutorIds and do a get for all users with those ids
+
+
+      // setUserProfileInfo(data.UserProfile);
+      // setSubjectsInfo(data.Subjects);
+      // setAvailabilityInfo(data.Availabilities);
+    });
+  }
 
   return (
     <>
