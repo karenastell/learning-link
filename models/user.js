@@ -69,6 +69,11 @@ module.exports = function (sequelize, DataTypes) {
 
     // User.hasMany(models.Message, {
     //   onDelete: 'casecade',
+    //   foreignKey: 'recieverId',
+    // });
+    // User.hasMany(models.Message, {
+    //   onDelete: 'casecade',
+    //   foreignKey: 'senderId',
     // });
   };
 

@@ -5,7 +5,7 @@ import { AuthContext } from '../AuthContext';
 import Axios from 'axios';
 
 export default function Nav() {
-  const { isAuth, setIsAuth, setUserId, userId} = useContext(AuthContext);
+  const { isAuth, setIsAuth, setUserId, userId, setIsTeacher} = useContext(AuthContext);
   const emptyCreds = { emailInput: '', passwordInput: '' };
   const errorMessage = 'Incorrect email or password';
   const [formData, setFormData] = useState(emptyCreds);
@@ -49,6 +49,7 @@ export default function Nav() {
         console.log('login response ', user);
         console.log(user.data.id, "This should be the id...")
         setUserId(user.data.id);
+        setIsTeacher(user.data.isTeacher);
         setIsAuth(true);
         setModal('modal');
         setAlert('off');
