@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { Op } = require('sequelize');
 const db = require('../../models');
 // const isAuthenticated = require('../../config/middleware/isAuthenticated');
 
@@ -73,7 +74,6 @@ router.get('/search/subject/:subject', (req, res) => {
   });
 });
 
-
 router.post('/TutorStudent', (req, res) => {
   console.log('req.body', req.body);
   db.TutorStudent.create({
@@ -83,7 +83,6 @@ router.post('/TutorStudent', (req, res) => {
 
   res.send('Tutor was added to the Student Dashboard');
 });
-
 
 // search route if user searches by method of delivery
 
@@ -148,7 +147,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } },
+    { where: { id: req.params.id } }
   );
 
   await db.UserProfile.update(
@@ -164,9 +163,34 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } },
+    { where: { UserId: req.params.id } }
   );
   res.json(req.body);
+});
+
+// Get the tutor-student matches to use for displaying on the dashboard
+router.get('/mydashboard/:id', (req, res) => {
+  db.TutorStudent.findAll({
+    where: {
+      [Op.or]: [{ StudentId: req.params.id }, { TutorId: req.params.id }],
+    },
+  }).then((data) => {
+    res.json(data);
+  });
+});
+
+router.get('/mydashboard/mypeeps/:id', (req, res) => {
+  db.User.findOne({
+    where: { id: req.params.id },
+    include: [
+      { model: db.UserProfile },
+      { model: db.Subject },
+      { model: db.Availability },
+    ],
+  }).then((data) => {
+    // console.log(data);
+    res.json(data);
+  });
 });
 
 module.exports = router;
