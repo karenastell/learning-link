@@ -84,7 +84,6 @@ router.post('/TutorStudent', (req, res) => {
   res.send('Tutor was added to the Student Dashboard');
 });
 
-
 // search route if user searches by method of delivery
 
 router.get('/search/delivery_method/:delivery_method', (req, res) => {
