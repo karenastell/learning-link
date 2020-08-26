@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { Op } = require('sequelize');
 const db = require('../../models');
 // const isAuthenticated = require('../../config/middleware/isAuthenticated');
 
@@ -165,6 +166,31 @@ router.put('/edit-profile/:id', async (req, res) => {
     { where: { UserId: req.params.id } }
   );
   res.json(req.body);
+});
+
+// Get the tutor-student matches to use for displaying on the dashboard
+router.get('/mydashboard/:id', (req, res) => {
+  db.TutorStudent.findAll({
+    where: {
+      [Op.or]: [{ StudentId: req.params.id }, { TutorId: req.params.id }],
+    },
+  }).then((data) => {
+    res.json(data);
+  });
+});
+
+router.get('/mydashboard/mypeeps/:id', (req, res) => {
+  db.User.findOne({
+    where: { id: req.params.id },
+    include: [
+      { model: db.UserProfile },
+      { model: db.Subject },
+      { model: db.Availability },
+    ],
+  }).then((data) => {
+    // console.log(data);
+    res.json(data);
+  });
 });
 
 module.exports = router;
