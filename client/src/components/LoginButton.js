@@ -8,9 +8,9 @@ export default function LoginButton(props) {
       <div id="navbarBasicExample" className="navbar-end">
         <div className="navbar-end">
           <div className="buttons">
-            <a className="button ml-2 mr-5 is-primary" onClick={props.handleModalDisplay}>
+            <button className="button ml-2 mr-5 is-primary" onClick={props.handleModalDisplay}>
               Log in
-            </a>
+            </button>
           </div>
         </div>
       </div>

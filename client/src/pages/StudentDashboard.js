@@ -8,7 +8,6 @@ import DashboardCard from '../components/DashboardCards';
 export default function ParentView(props) {
   const { userId, isTeacher } = useContext(AuthContext);
   const [results, setResults] = useState([]);
-
   const [userInfo, setUserInfo] = useState({});
   const [userProfileInfo, setUserProfileInfo] = useState({});
   const [subjectsInfo, setSubjectsInfo] = useState([]);
@@ -17,13 +16,13 @@ export default function ParentView(props) {
   useEffect(() => {
     if (userId) {
       getUserInfo();
-      getMyStudentsOrTutors();
+      getMyStudentTutorPairs();
     }
   }, []);
 
   useEffect(() => {
-    renderDashboardCard()
-  }, [results])
+    console.log(results);
+  }, [results]);
 
   const getUserInfo = () => {
     Axios.get(`/api/myprofile/${userId}`).then((response) => {
@@ -42,98 +41,99 @@ export default function ParentView(props) {
     });
   };
 
-     const myPeepsArray = [];
-        let responseData;
-
-  const getMyStudentsOrTutors = async () => {
- 
-
+  // This gets all of the tutor/student matches that matchup with the current user
+  const getMyStudentTutorPairs = async () => {
     // Get the student-tutor pairs from the TutorStudent table
     const tutorStudentPairs = await Axios.get(`/api/mydashboard/${userId}`);
+    console.log(tutorStudentPairs.data);
+    getMyPeepsInfo(tutorStudentPairs.data);
+    // tempFunctionGet(tutorStudentPairs.data)
+  };
 
-    await console.log(
-      tutorStudentPairs.data,
-      'these are the tutor student pairs'
-    );
+  // TODO: Get rid of this... once you feel comfortable that everything is working.... or use this one instead: it is less code, but the state isn't as nicely organized. Just add the if isTeacher stuff
+  // const Array = [];
+  // const tempFunctionGet = async (data) => {
+  //   for (let i = 0; i < data.length; i++) {
+  //     await Axios.get(`/api/mydashboard/mypeeps/${data[i].StudentId}`).then(
+  //       (response) => {
+  //         console.log(response);
+  //         Array.push(response.data);
+  //       }
+  //     );
+  //   }
 
+  //   console.log(Array);
+  //   setResults(Array);
+  // };
+
+  const getMyPeepsInfo = async (data) => {
+    const myPeepsArray = [];
     // if isTeacher, get the studentIds and do a get for all users with those ids
     if (isTeacher) {
-      
       // forEach studentId in the response...
-      await tutorStudentPairs.data.forEach(async (entry) => {
-        
-        let studentId = entry.StudentId;
+      for (let i = 0; i < data.length; i++) {
         let studentUserInfo = await Axios.get(
-          `/api/mydashboard/mypeeps/${studentId}`
+          `/api/mydashboard/mypeeps/${data[i].StudentId}`
         );
-        let dayArray = [];
+        const response = studentUserInfo.data;
         let subjectArray = [];
-         studentUserInfo.data.Subjects.forEach((subject) => {
+        studentUserInfo.data.Subjects.forEach((subject) => {
           subjectArray.push(subject.subject);
         });
-
-
-        responseData = {
-          firstName: studentUserInfo.data.firstName,
-          lastName: studentUserInfo.data.lastName,
-          email: studentUserInfo.data.email,
-          city: studentUserInfo.data.UserProfile.city,
-          state: studentUserInfo.data.UserProfile.state,
-          bio: studentUserInfo.data.UserProfile.bio,
-          degree: studentUserInfo.data.UserProfile.degree,
-          experience: studentUserInfo.data.UserProfile.experience,
+        // console.log(subjectArray, "subject array")
+        let responseData = {
+          firstName: response.firstName,
+          lastName: response.lastName,
+          email: response.email,
+          city: response.UserProfile.city,
+          state: response.UserProfile.state,
+          bio: response.UserProfile.bio,
+          grade: response.UserProfile.grade,
+          school: response.UserProfile.school,
+          special_ed: response.UserProfile.special_ed,
           subjects: subjectArray,
-          delivery_method: studentUserInfo.data.UserProfile.delivery_method,
+          delivery_method: response.UserProfile.delivery_method,
         };
-
-         myPeepsArray.push(responseData);
-      });
+        myPeepsArray.push(responseData);
+      }
     } else {
       // if !isTeacher, get the tutorIds and do a get for all users with those ids
-      await tutorStudentPairs.data.forEach(async (entry) => {
-        let TutorId = entry.TutorId;
+
+      for (let i = 0; i < data.length; i++) {
         let myTutorsInfo = await Axios.get(
-          `/api/mydashboard/mypeeps/${TutorId}`
+          `/api/mydashboard/mypeeps/${data[i].TutorId}`
         );
+        const response = myTutorsInfo.data;
         let dayArray = [];
         let subjectArray = [];
-         myTutorsInfo.data.Subjects.forEach((subject) => {
+        myTutorsInfo.data.Subjects.forEach((subject) => {
           subjectArray.push(subject.subject);
         });
 
-         myTutorsInfo.data.Availabilities.forEach((day) => {
+        myTutorsInfo.data.Availabilities.forEach((day) => {
           dayArray.push(day.day);
         });
 
-        responseData = {
-          firstName: myTutorsInfo.data.firstName,
-          lastName: myTutorsInfo.data.lastName,
-          email: myTutorsInfo.data.email,
-          city: myTutorsInfo.data.UserProfile.city,
-          state: myTutorsInfo.data.UserProfile.state,
-          bio: myTutorsInfo.data.UserProfile.bio,
-          degree: myTutorsInfo.data.UserProfile.degree,
-          experience: myTutorsInfo.data.UserProfile.experience,
+        let responseData = {
+          firstName: response.firstName,
+          lastName: response.lastName,
+          email: response.email,
+          city: response.UserProfile.city,
+          state: response.UserProfile.state,
+          bio: response.UserProfile.bio,
+          degree: response.UserProfile.degree,
+          experience: response.UserProfile.experience,
           subjects: subjectArray,
           days: dayArray,
-          delivery_method: myTutorsInfo.data.UserProfile.delivery_method,
+          delivery_method: response.UserProfile.delivery_method,
+          rate: response.UserProfile.rate,
         };
 
-         myPeepsArray.push(responseData);
-      });
+        myPeepsArray.push(responseData);
+      }
     }
-    await console.log(myPeepsArray);
-
-    // Set the result state
     setResults(myPeepsArray);
   };
-    console.log(results)
-
-  const renderDashboardCard = () => {
-    results.forEach((result) => {
-      return <DashboardCard result={result} />
-    })
-  }
 
   return (
     <>
@@ -144,27 +144,25 @@ export default function ParentView(props) {
         </div>
         <div className="column">
           <h1 className="title">
-            Hello {userInfo.firstName} {userInfo.lastName}!
+            Hello {userInfo.firstName} {userInfo.lastName}!{' '}
+            <span className="is-size-4">
+              Welcome to your Learning Link Dashboard!
+            </span>
           </h1>
-          <DashboardCard results={results} />
+
           {isTeacher ? (
-            <div>
-              <p className="has-text-centered">
-                Welcome to your Learning Link Dashboard! Looks like you
-                currently do not have any students!
-                <br />
-                Now that you have an account, students and parents can reach out
-                to you for tutoring services! Be sure to regularly check your
-                messages and your dashboard in case parents or students contact
-                you for tutoring.
+            <div className="mb-5">
+              <p>
+                Students and parents can add you to their dashboard and reach
+                out to you for tutoring services! When you are added to
+                someone's dashboard, they are also added to yours! Be sure to
+                regularly check your messages and your dashboard in case parents
+                or students contact you for tutoring.
               </p>
             </div>
           ) : (
-            <div>
-              <p className="has-text-centered">
-                Welcome to your Learning Link Dashboard! Looks like you
-                currently do not have any tutors!
-                <br />
+            <div className="mb-5">
+              <p>
                 To get started, search for tutors that meet your needs using the
                 "Search for a Tutor" button in the menu. From there, you'll be
                 able to view tutors, add them to your dashboard, and send them a
@@ -172,6 +170,13 @@ export default function ParentView(props) {
               </p>
             </div>
           )}
+          <div className="container">
+            <div className="columns is-multiline">
+              {results.map((person) => (
+                <DashboardCard key={person.firstName} result={person} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>
