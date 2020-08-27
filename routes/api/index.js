@@ -74,14 +74,26 @@ router.get('/search/subject/:subject', (req, res) => {
   });
 });
 
-router.post('/TutorStudent', (req, res) => {
+router.post('/TutorStudent', async (req, res) => {
   console.log('req.body', req.body);
-  db.TutorStudent.create({
-    TutorId: req.body.TutorId,
-    StudentId: req.body.StudentId,
+  // First check that this pair does not already exist
+  const alreadyExists = await db.TutorStudent.findOne({
+    where: {
+      StudentId: req.body.StudentId,
+      TutorId: req.body.TutorId,
+    },
   });
+  console.log(alreadyExists);
+  if (alreadyExists === null) {
+    db.TutorStudent.create({
+      TutorId: req.body.TutorId,
+      StudentId: req.body.StudentId,
+    });
 
-  res.send('Tutor was added to the Student Dashboard');
+    res.send('Tutor was added to the Student Dashboard');
+  } else {
+    res.send('This pair already exists');
+  }
 });
 
 // search route if user searches by method of delivery

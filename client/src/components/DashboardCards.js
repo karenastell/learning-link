@@ -50,6 +50,9 @@ export default function DashboardCard({ result }) {
             >
               Leave a Review
             </a> : null}
+            <a href='#' className='card-footer-item'>
+              Remove {result.firstName} {result.lastName} from my Dashboard
+            </a>
           </footer>
         </div>
     </div>

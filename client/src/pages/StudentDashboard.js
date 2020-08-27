@@ -41,9 +41,11 @@ export default function ParentView(props) {
     });
   };
 
+  // This gets all of the tutor/student matches that matchup with the current user
   const getMyStudentTutorPairs = async () => {
     // Get the student-tutor pairs from the TutorStudent table
     const tutorStudentPairs = await Axios.get(`/api/mydashboard/${userId}`);
+    console.log(tutorStudentPairs.data);
     getMyPeepsInfo(tutorStudentPairs.data);
     // tempFunctionGet(tutorStudentPairs.data)
   };
