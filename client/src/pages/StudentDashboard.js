@@ -142,14 +142,13 @@ export default function ParentView(props) {
         </div>
         <div className="column">
           <h1 className="title">
-            Hello {userInfo.firstName} {userInfo.lastName}!
+            Hello {userInfo.firstName} {userInfo.lastName}!  <span className="is-size-4">Welcome to your Learning Link Dashboard!</span>
           </h1>
 
           {isTeacher ? (
             <div>
-              <p className="has-text-centered">
-                Welcome to your Learning Link Dashboard!
-                <br />
+              <p>
+               
                 Students and parents can add you to their dashboard and reach
                 out to you for tutoring services! When you are added to
                 someone's dashboard, they are also added to yours! Be sure to
@@ -159,10 +158,7 @@ export default function ParentView(props) {
             </div>
           ) : (
             <div>
-              <p className="has-text-centered">
-                Welcome to your Learning Link Dashboard! Looks like you
-                currently do not have any tutors!
-                <br />
+              <p>
                 To get started, search for tutors that meet your needs using the
                 "Search for a Tutor" button in the menu. From there, you'll be
                 able to view tutors, add them to your dashboard, and send them a
@@ -172,7 +168,7 @@ export default function ParentView(props) {
           )}
           <div className="columns">
             {results.map((person) => (
-              <DashboardCard result={person} />
+              <DashboardCard key={person.firstName} result={person} />
             ))}
           </div>
         </div>
