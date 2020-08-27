@@ -57,9 +57,9 @@ router.get('/search/city/:city/state/:state', (req, res) => {
 });
 
 // search route if user searches by subjects
-router.get('/search/subject/:subject', (req, res) => {
+router.get('/search/subject/:subject', async (req, res) => {
   console.log(req.params.subject);
-  db.User.findAll({
+  const subjectSearch = await db.User.findAll({
     include: [
       db.UserProfile,
       db.Availability,
@@ -68,10 +68,35 @@ router.get('/search/subject/:subject', (req, res) => {
         where: { subject: req.params.subject },
       },
     ],
-  }).then((data) => {
-    console.log(data);
-    res.json(data);
   });
+
+  // const allSubjects = await db.Subject.findAll({
+  //   include: [
+  //     {
+  //       model: db.User,
+  //       where: { id: subjectSearch[0].dataValues.id },
+  //     },
+  //   ],
+  // });
+  let oneSubject;
+  const allSubjects = [];
+
+  await subjectSearch.forEach((user) => {
+    oneSubject = db.Subject.findAll({
+      include: [
+        {
+          model: db.User,
+          where: { id: user.dataValues.id },
+        },
+      ],
+    });
+    allSubjects.push(oneSubject);
+  });
+
+  console.log(subjectSearch);
+  console.log(allSubjects);
+
+  res.json({ allSubjects, subjectSearch });
 });
 
 router.post('/TutorStudent', (req, res) => {
