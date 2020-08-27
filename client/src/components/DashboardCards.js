@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import Axios from 'axios';
 import { AuthContext } from '../AuthContext';
 
 export default function DashboardCard({ result }) {
@@ -18,7 +17,7 @@ export default function DashboardCard({ result }) {
               {result.firstName} {result.lastName}
             </p>
           </header>
-          <div style={cardStyle} className='card-content'>
+          <div style={cardStyle} className='card-content is-size-7'>
             <div className='content'>
               <ul>
                 <li>Email: {result.email}</li>
@@ -31,8 +30,8 @@ export default function DashboardCard({ result }) {
                 { !isTeacher ? <li>Experience: {result.experience}</li> : <li>My School: {result.school}</li>}
                 <li>Subjects: </li>
                 <ul>
-                  {result.subjects.map((sub) => (
-                    <li>{sub}</li>
+                  {result.subjects.map((subject) => (
+                    <li key={result.lastName + subject}>{subject}</li>
                   ))}
                 </ul>
                 <li>Delivery Method: {result.delivery_method}</li>
@@ -50,6 +49,9 @@ export default function DashboardCard({ result }) {
               className='card-footer-item'
             >
               Leave a Review
+            </a> : null}
+            { !isTeacher ? <a href='#' className='card-footer-item'>
+              Remove {result.firstName} {result.lastName} from my Dashboard
             </a> : null}
           </footer>
         </div>
