@@ -1,10 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import Nav from '../components/Nav';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import { Redirect } from 'react-router-dom';
 
-import Axios from 'axios';
 
 export default function Main(props) {
 const { isAuth, userId} = useContext(AuthContext);

@@ -61,7 +61,7 @@ export default function Nav() {
         console.log(err);
       });
   };
-  console.log(window.location.pathname)
+
 
   return (
     <>
