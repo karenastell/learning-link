@@ -231,4 +231,13 @@ router.get('/mydashboard/mypeeps/:id', (req, res) => {
   });
 });
 
+router.post('/mydashboard/review/:id', (req, res) => {
+  db.Review.create({
+    review: req.body.review,
+    UserId: req.params.id,
+  }).then(() => {
+    res.json('Review was posted');
+  });
+});
+
 module.exports = router;
