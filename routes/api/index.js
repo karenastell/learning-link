@@ -84,6 +84,7 @@ router.post('/TutorStudent', async (req, res) => {
     },
   });
   console.log(alreadyExists);
+  // If the match does not exist, create it.  If not send a message saying it already exists
   if (alreadyExists === null) {
     db.TutorStudent.create({
       TutorId: req.body.TutorId,

@@ -126,7 +126,7 @@ export default function ParentView(props) {
           subjects: subjectArray,
           days: dayArray,
           delivery_method: response.UserProfile.delivery_method,
-          rate: response.UserProfile.rate
+          rate: response.UserProfile.rate,
         };
 
         myPeepsArray.push(responseData);
@@ -144,13 +144,15 @@ export default function ParentView(props) {
         </div>
         <div className="column">
           <h1 className="title">
-            Hello {userInfo.firstName} {userInfo.lastName}!  <span className="is-size-4">Welcome to your Learning Link Dashboard!</span>
+            Hello {userInfo.firstName} {userInfo.lastName}!{' '}
+            <span className="is-size-4">
+              Welcome to your Learning Link Dashboard!
+            </span>
           </h1>
 
           {isTeacher ? (
-            <div>
+            <div className="mb-5">
               <p>
-               
                 Students and parents can add you to their dashboard and reach
                 out to you for tutoring services! When you are added to
                 someone's dashboard, they are also added to yours! Be sure to
@@ -159,7 +161,7 @@ export default function ParentView(props) {
               </p>
             </div>
           ) : (
-            <div>
+            <div className="mb-5">
               <p>
                 To get started, search for tutors that meet your needs using the
                 "Search for a Tutor" button in the menu. From there, you'll be
@@ -168,10 +170,12 @@ export default function ParentView(props) {
               </p>
             </div>
           )}
-          <div className="columns">
-            {results.map((person) => (
-              <DashboardCard key={person.firstName} result={person} />
-            ))}
+          <div className="container">
+            <div className="columns is-multiline">
+              {results.map((person) => (
+                <DashboardCard key={person.firstName} result={person} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
