@@ -73,7 +73,7 @@ export default function ParentView(props) {
         let studentUserInfo = await Axios.get(
           `/api/mydashboard/mypeeps/${data[i].StudentId}`
         );
-        const response = studentUserInfo.data
+        const response = studentUserInfo.data;
         let subjectArray = [];
         studentUserInfo.data.Subjects.forEach((subject) => {
           subjectArray.push(subject.subject);
@@ -86,17 +86,17 @@ export default function ParentView(props) {
           city: response.UserProfile.city,
           state: response.UserProfile.state,
           bio: response.UserProfile.bio,
-          degree: response.UserProfile.degree,
-          experience: response.UserProfile.experience,
+          grade: response.UserProfile.grade,
+          school: response.UserProfile.school,
+          special_ed: response.UserProfile.special_ed,
           subjects: subjectArray,
           delivery_method: response.UserProfile.delivery_method,
         };
         myPeepsArray.push(responseData);
       }
-
     } else {
       // if !isTeacher, get the tutorIds and do a get for all users with those ids
-      
+
       for (let i = 0; i < data.length; i++) {
         let myTutorsInfo = await Axios.get(
           `/api/mydashboard/mypeeps/${data[i].TutorId}`
@@ -124,13 +124,13 @@ export default function ParentView(props) {
           subjects: subjectArray,
           days: dayArray,
           delivery_method: response.UserProfile.delivery_method,
+          rate: response.UserProfile.rate
         };
 
         myPeepsArray.push(responseData);
       }
     }
     setResults(myPeepsArray);
-
   };
 
   return (
@@ -144,20 +144,17 @@ export default function ParentView(props) {
           <h1 className="title">
             Hello {userInfo.firstName} {userInfo.lastName}!
           </h1>
-          {results.map((person) => (
-            <DashboardCard result={person} />
-          ))}
-          {/* <DashboardCard results={results} /> */}
+
           {isTeacher ? (
             <div>
               <p className="has-text-centered">
-                Welcome to your Learning Link Dashboard! Looks like you
-                currently do not have any students!
+                Welcome to your Learning Link Dashboard!
                 <br />
-                Now that you have an account, students and parents can reach out
-                to you for tutoring services! Be sure to regularly check your
-                messages and your dashboard in case parents or students contact
-                you for tutoring.
+                Students and parents can add you to their dashboard and reach
+                out to you for tutoring services! When you are added to
+                someone's dashboard, they are also added to yours! Be sure to
+                regularly check your messages and your dashboard in case parents
+                or students contact you for tutoring.
               </p>
             </div>
           ) : (
@@ -173,6 +170,11 @@ export default function ParentView(props) {
               </p>
             </div>
           )}
+          <div className="columns">
+            {results.map((person) => (
+              <DashboardCard result={person} />
+            ))}
+          </div>
         </div>
       </div>
     </>
