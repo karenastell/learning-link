@@ -61,8 +61,6 @@ router.get('/search/subject/:subject', async (req, res) => {
   console.log(req.params.subject);
   const subjectSearch = await db.User.findAll({
     include: [
-      db.UserProfile,
-      db.Availability,
       {
         model: db.Subject,
         where: { subject: req.params.subject },
@@ -70,33 +68,34 @@ router.get('/search/subject/:subject', async (req, res) => {
     ],
   });
 
-  // const allSubjects = await db.Subject.findAll({
-  //   include: [
-  //     {
-  //       model: db.User,
-  //       where: { id: subjectSearch[0].dataValues.id },
-  //     },
-  //   ],
-  // });
-  let oneSubject;
-  const allSubjects = [];
+  const allUserIds = [];
+  const usersSubjects = [];
 
-  await subjectSearch.forEach((user) => {
-    oneSubject = db.Subject.findAll({
-      include: [
-        {
-          model: db.User,
-          where: { id: user.dataValues.id },
-        },
-      ],
-    });
-    allSubjects.push(oneSubject);
+  subjectSearch.forEach((user) => {
+    console.log('other for each', user.dataValues.id);
+    allUserIds.push(user.dataValues.id);
   });
 
-  console.log(subjectSearch);
-  console.log(allSubjects);
+  console.log(allUserIds);
 
-  res.json({ allSubjects, subjectSearch });
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < allUserIds.length; i++) {
+    // eslint-disable-next-line no-await-in-loop
+    const oneUser = await db.User.findOne({
+      where: { id: allUserIds[i] },
+      include: [
+        { model: db.Subject },
+        { model: db.UserProfile },
+        { model: db.Availability },
+      ],
+    });
+    console.log('one user', i);
+    console.log(oneUser);
+    usersSubjects.push(oneUser);
+  }
+
+  res.json(usersSubjects);
+  res.json(usersSubjects);
 });
 
 router.post('/TutorStudent', async (req, res) => {
