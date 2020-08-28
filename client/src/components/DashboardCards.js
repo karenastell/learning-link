@@ -3,10 +3,12 @@ import { AuthContext } from '../AuthContext';
 import Axios from 'axios';
 
 export default function DashboardCard({ result }) {
-  const { isTeacher } = useContext(AuthContext)
-  const [modal, setModal] = useState('modal');
+  const { isTeacher, userId } = useContext(AuthContext)
+  const [reviewModal, setReviewModal] = useState('modal');
   const [review, setReview] = useState({});
   const [reviewer, setReviewer] = useState({});
+  const [removeMessage, setRemoveMessage] = useState('modal');
+
 
   const cardStyle = {
     maxHeight: '200px',
@@ -14,11 +16,12 @@ export default function DashboardCard({ result }) {
   }
 
   const activateModal = () => {
-    setModal('modal is-active');
+    setReviewModal('modal is-active');
   }
 
   const handleModalClose = () => {
-    setModal('modal');
+    setReviewModal('modal');
+    setRemoveMessage('modal');
   }
 
   const handleInputChange = (event) => {
@@ -44,10 +47,20 @@ export default function DashboardCard({ result }) {
     }
     await Axios.post(`/api/mydashboard/review/${result.id}`, reviewObject)
     // make modal disappear
-    setModal("modal");
+    setReviewModal("modal");
     // reset the review state
     setReview({});
     setReviewer({});
+  }
+
+  const handleRemoveModal = () => {
+    setRemoveMessage('modal is-active');
+  }
+
+  const removeFromDashboard = () => {
+    // do a delete where, if isTeacher, the userId from context is the tutor id and the result.id is the student id
+    Axios.delete(`/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`)
+    // if !isTeacher the userId from context is the studentid and the result id is tutorid
   }
 
   return (
@@ -82,25 +95,24 @@ export default function DashboardCard({ result }) {
             </div>
           </div>
           <footer className='card-footer'>
-            <a href='#' className='card-footer-item'>
+            <button className='card-footer-item button is-size-7 is-white'>
               Message {result.firstName} {result.lastName}
-            </a>
-            { !isTeacher ? <a
-              href='#'
+            </button>
+            { !isTeacher ? <button
               onClick={activateModal}
-              className='card-footer-item'
+              className='card-footer-item button is-size-7 is-white'
             >
               Leave a Review
-            </a> : null}
-            { !isTeacher ? <a href='#' className='card-footer-item'>
-              Remove {result.firstName} {result.lastName} from my Dashboard
-            </a> : null}
+            </button> : null}
+            <button className='card-footer-item button is-size-7 is-white' onClick={handleRemoveModal}>
+              Remove {result.firstName}
+            </button>
           </footer>
         </div>
     </div>
 
-       {/* Modal */}
-       <div className={modal}>
+       {/* Review Modal */}
+       <div className={reviewModal}>
         <div className="modal-background"></div>
         <div className="modal-card">
           <header className="modal-card-head">
@@ -111,7 +123,7 @@ export default function DashboardCard({ result }) {
             <textarea className="textarea" name="review" placeholder="Leave your review here..." onChange={handleInputChange}></textarea>
             <div className='field'>
             <p className='control is-expanded has-icons-left my-4'>
-              <label className="label" for="Name">Your Name<input
+              <label className="label" htmlFor="Name">Your Name<input
                 className='input'
                 id='Name'
                 type='text'
@@ -124,6 +136,23 @@ export default function DashboardCard({ result }) {
           </section>
           <footer className="modal-card-foot">
             <button className="button is-success" onClick={handleReviewSubmit}>Submit Review</button>
+            <button className="button" onClick={handleModalClose}>Cancel</button>
+          </footer>
+        </div>
+      </div>
+              {/* remove Modal */}
+      <div className={removeMessage}>
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head">
+              <p className="modal-card-title">You are about to remove {result.firstName} {result.lastName} from your Dashboard</p>
+            <button className="delete" aria-label="close" onClick={handleModalClose}></button>
+          </header>
+          <section className="modal-card-body">
+            <p>Are you sure you want to remove {result.firstName} {result.lastName} from your dashboard?</p>
+          </section>
+          <footer className="modal-card-foot">
+            <button className="button is-success" onClick={removeFromDashboard}>Yes, I'm sure</button>
             <button className="button" onClick={handleModalClose}>Cancel</button>
           </footer>
         </div>

@@ -244,7 +244,7 @@ router.get('/mydashboard/mypeeps/:id', (req, res) => {
 });
 
 router.post('/mydashboard/review/:id', (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   db.Review.create({
     review: req.body.review,
     reviewer: req.body.reviewer,
@@ -252,6 +252,27 @@ router.post('/mydashboard/review/:id', (req, res) => {
   }).then(() => {
     res.json('Review was posted');
   });
+});
+
+router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
+  const { idOne, idTwo, isTeacher } = req.params;
+  console.log(idOne, idTwo, isTeacher);
+  if (isTeacher === 'true') {
+    db.TutorStudent.destroy({
+      where: {
+        TutorId: idOne,
+        StudentId: idTwo,
+      },
+    });
+  } else {
+    db.TutorStudent.destroy({
+      where: {
+        TutorId: idTwo,
+        StudentId: idOne,
+      },
+    });
+  }
+  res.json('Entry deleted');
 });
 
 module.exports = router;
