@@ -12,6 +12,7 @@ export default function TutorSearchResult(props) {
       StudentId: userId,
     }).then((response) => {
       console.log(response.data);
+      // if (response.data === "This pair already exists")
     });
   };
 
