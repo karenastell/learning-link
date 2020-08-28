@@ -20,22 +20,38 @@ router.get('/myprofile/:id', (req, res) => {
 });
 
 // Search route if the user searches by availability
-router.get('/search/day/:day', (req, res) => {
-  console.log(req.params);
-  console.log(req.params.day);
-  db.User.findAll({
+router.get('/search/day/:day', async (req, res) => {
+  const daySearch = await db.User.findAll({
     include: [
-      db.UserProfile,
-      db.Subject,
       {
         model: db.Availability,
         where: { day: req.params.day },
       },
     ],
-  }).then((data) => {
-    console.log(data);
-    res.json(data);
   });
+
+  const allUserIds = [];
+  const usersDays = [];
+
+  daySearch.forEach((user) => {
+    allUserIds.push(user.dataValues.id);
+  });
+
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < allUserIds.length; i++) {
+    // eslint-disable-next-line no-await-in-loop
+    const oneUser = await db.User.findOne({
+      where: { id: allUserIds[i] },
+      include: [
+        { model: db.Subject },
+        { model: db.UserProfile },
+        { model: db.Availability },
+      ],
+    });
+    usersDays.push(oneUser);
+  }
+
+  res.json(usersDays);
 });
 
 // search route if user searches by location
@@ -89,12 +105,9 @@ router.get('/search/subject/:subject', async (req, res) => {
         { model: db.Availability },
       ],
     });
-    console.log('one user', i);
-    console.log(oneUser);
     usersSubjects.push(oneUser);
   }
 
-  res.json(usersSubjects);
   res.json(usersSubjects);
 });
 
