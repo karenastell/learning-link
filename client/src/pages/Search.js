@@ -26,7 +26,6 @@ export default function Search() {
 
   let responseArray = [];
   let responseData;
-  
 
   const handleInputChange = (event) => {
     // some more info go here: https://reactjs.org/docs/forms.html#controlled-components
@@ -45,7 +44,6 @@ export default function Search() {
     }
   };
 
-  //   comment this function out to get Prettier to work
   const handleDaysCheckBoxes = (event) => {
     const { value } = event.target;
     if (check[value] === false) {
@@ -73,23 +71,22 @@ export default function Search() {
   };
 
   const findATutor = async () => {
-
     if (days.length >= 1) {
       days.forEach(async (day) => {
         const response = await Axios.get(`api/search/day/${day}`);
         console.log('day: ', response.data);
         if (response.data.length >= 1) {
-          response.data.forEach(async(tutor)=>{
+          response.data.forEach(async (tutor) => {
             let dayArray = [];
             let subArray = [];
-            await tutor.Availabilities.forEach((day)=>{
-              dayArray.push(day.day)
+            await tutor.Availabilities.forEach((day) => {
+              dayArray.push(day.day);
               console.log(dayArray);
-            })
-            await tutor.Subjects.forEach((subject)=>{
-              subArray.push(subject.subject)
+            });
+            await tutor.Subjects.forEach((subject) => {
+              subArray.push(subject.subject);
               console.log(subArray);
-            })
+            });
             responseData = {
               UserId: tutor.UserProfile.UserId,
               firstName: tutor.firstName,
@@ -106,13 +103,10 @@ export default function Search() {
               isTeacher: tutor.isTeacher,
             };
             responseArray.push(responseData);
-          })
-      
+          });
         } else {
           console.log('no responses for your day search');
         }
-
-  
       });
     }
 
@@ -122,16 +116,16 @@ export default function Search() {
         console.log('subject: ', response2);
 
         if (response2.data.length >= 1) {
-          response2.data.forEach(async(tutor)=>{
+          response2.data.forEach(async (tutor) => {
             let dayArray = [];
             let subArray = [];
-            await tutor.Availabilities.forEach((day)=>{
-              dayArray.push(day.day)
+            await tutor.Availabilities.forEach((day) => {
+              dayArray.push(day.day);
               console.log(dayArray);
-            })
-            await tutor.Subjects.forEach((subject)=>{
-              subArray.push(subject.subject)
-            })
+            });
+            await tutor.Subjects.forEach((subject) => {
+              subArray.push(subject.subject);
+            });
             responseData = {
               UserId: tutor.UserProfile.UserId,
               firstName: tutor.firstName,
@@ -148,8 +142,7 @@ export default function Search() {
               isTeacher: tutor.isTeacher,
             };
             responseArray.push(responseData);
-          })
-      
+          });
         } else {
           console.log('no responses for your subject search');
         }
@@ -162,58 +155,17 @@ export default function Search() {
       );
       console.log('delivery: ', response3);
 
-       if (response3.data.length >= 1) {
-        response3.data.forEach(async(tutor)=>{
-            let dayArray = [];
-            let subArray = [];
-            await tutor.Availabilities.forEach((day)=>{
-              dayArray.push(day.day)
-              console.log(dayArray);
-            })
-            await tutor.Subjects.forEach((subject)=>{
-              subArray.push(subject.subject)
-            })
-            responseData = {
-              UserId: tutor.UserProfile.UserId,
-              firstName: tutor.firstName,
-              lastName: tutor.lastName,
-              email: tutor.email,
-              city: tutor.UserProfile.city,
-              state: tutor.UserProfile.state,
-              bio: tutor.UserProfile.bio,
-              degree: tutor.UserProfile.degree,
-              experience: tutor.UserProfile.experience,
-              subject: subArray,
-              day: dayArray,
-              delivery_method: tutor.UserProfile.delivery_method,
-              isTeacher: tutor.isTeacher,
-            };
-            responseArray.push(responseData);
-          })
-      
-        } else {
-          console.log('no responses for your delivery method search');
-        }
-
-      
-    }
-
-    if (search.city && search.state) {
-      const response4 = await Axios.get(
-        `api/search/city/${search.city}/state/${search.state}`
-      );
-      console.log('city/state: ', response4);
-      if (response4.data.length >= 1) {
-        response4.data.forEach(async(tutor)=>{
+      if (response3.data.length >= 1) {
+        response3.data.forEach(async (tutor) => {
           let dayArray = [];
           let subArray = [];
-          await tutor.Availabilities.forEach((day)=>{
-            dayArray.push(day.day)
+          await tutor.Availabilities.forEach((day) => {
+            dayArray.push(day.day);
             console.log(dayArray);
-          })
-          await tutor.Subjects.forEach((subject)=>{
-            subArray.push(subject.subject)
-          })
+          });
+          await tutor.Subjects.forEach((subject) => {
+            subArray.push(subject.subject);
+          });
           responseData = {
             UserId: tutor.UserProfile.UserId,
             firstName: tutor.firstName,
@@ -230,15 +182,66 @@ export default function Search() {
             isTeacher: tutor.isTeacher,
           };
           responseArray.push(responseData);
-        })
-    
+        });
+      } else {
+        console.log('no responses for your delivery method search');
+      }
+    }
+
+    if (search.city && search.state) {
+      const response4 = await Axios.get(
+        `api/search/city/${search.city}/state/${search.state}`
+      );
+      console.log('city/state: ', response4);
+      if (response4.data.length >= 1) {
+        response4.data.forEach(async (tutor) => {
+          let dayArray = [];
+          let subArray = [];
+          await tutor.Availabilities.forEach((day) => {
+            dayArray.push(day.day);
+            console.log(dayArray);
+          });
+          await tutor.Subjects.forEach((subject) => {
+            subArray.push(subject.subject);
+          });
+          responseData = {
+            UserId: tutor.UserProfile.UserId,
+            firstName: tutor.firstName,
+            lastName: tutor.lastName,
+            email: tutor.email,
+            city: tutor.UserProfile.city,
+            state: tutor.UserProfile.state,
+            bio: tutor.UserProfile.bio,
+            degree: tutor.UserProfile.degree,
+            experience: tutor.UserProfile.experience,
+            subject: subArray,
+            day: dayArray,
+            delivery_method: tutor.UserProfile.delivery_method,
+            isTeacher: tutor.isTeacher,
+          };
+          responseArray.push(responseData);
+        });
       } else {
         console.log('no responses for your location search');
       }
-
     }
     setResults(responseArray);
+
+    // filteredResults = await [...new Set(results)];
+    // await console.log('!!!!!!!!!!!!!!!!!!!!!', filteredResults);
+    // setResults(filteredResults);
+
+    // setSearchComplete(true);
   };
+
+  // const filterResults = () => {
+  //   let filteredResults = [...new Set(results)];
+  //   console.log('!!!!!!!!!!!!!!!!!!!!!', filteredResults);
+  //   setResults(filteredResults)
+  // };
+
+
+  useEffect(() => {});
 
   return (
     <>
@@ -247,6 +250,7 @@ export default function Search() {
         <div className='column is-narrow'>
           <SideBarMenu />
         </div>
+        {/* {searchComplete ? ( */}
         <div className='container column'>
           <h1 className='title has-text-centered'>Search For a Tutor</h1>
           <h3 className='subtitle is-4 mt-5'>Choose Your Search Criteria:</h3>
@@ -270,8 +274,12 @@ export default function Search() {
               </div>
             </div>
           </div>
-          <TutorSearchResult key={results.UserId} results={results} />
         </div>
+        {/* ) : ( */}
+        {/* <div className='container column'> */}
+        <TutorSearchResult key={results.UserId} results={results} />
+        {/* </div> */}
+        {/* )} */}
       </div>
     </>
   );

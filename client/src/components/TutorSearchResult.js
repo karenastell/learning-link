@@ -4,8 +4,8 @@ import { AuthContext } from '../AuthContext';
 
 export default function TutorSearchResult(props) {
   const { userId } = useContext(AuthContext);
-
   console.log(userId);
+
   const addTutor = (id) => {
     Axios.post('/api/TutorStudent', {
       TutorId: id,
@@ -15,11 +15,16 @@ export default function TutorSearchResult(props) {
     });
   };
 
-  console.log(props.results);
-  const tutorResults = props.results.filter(
-    (result) => result.isTeacher === true
-  );
-  console.log(tutorResults);
+  console.log('props.results tutor search page', props.results);
+  const allTutors = props.results.filter((result) => result.isTeacher === true);
+
+  console.log(allTutors);
+
+  // https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript answer #28
+  const tutorResults = (Object.values(allTutors.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{})))
+
+
+  console.log('tutor results', tutorResults);
 
   return (
     <div className='mt-6'>
@@ -53,9 +58,6 @@ export default function TutorSearchResult(props) {
             </div>
           </div>
           <footer className='card-footer'>
-            <a href='#' className='card-footer-item'>
-              Message This Tutor
-            </a>
             <a
               href='#'
               onClick={() => addTutor(result.UserId)}
