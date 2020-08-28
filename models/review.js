@@ -3,6 +3,10 @@ module.exports = (sequelize, Datatypes) => {
     review: {
       type: Datatypes.TEXT,
     },
+    reviewer: {
+      type: Datatypes.STRING,
+      defaultValue: 'Anonymous',
+    },
   });
 
   Review.associate = (models) => {
