@@ -192,7 +192,7 @@ export default function ProfileDisplay({
                     className=""
                     placeholder="$"
                     onChange={handleProfileInfoChange}
-                    value={userProfileInfo.rate}
+                    value={userProfileInfo.rate || ''}
                   ></input>
                 </div>
               </div>
