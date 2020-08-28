@@ -6,7 +6,7 @@ export default function DashboardCard({ result }) {
   const { isTeacher } = useContext(AuthContext)
   const [modal, setModal] = useState('modal');
   const [review, setReview] = useState({});
-
+  const [reviewer, setReviewer] = useState({});
 
   const cardStyle = {
     maxHeight: '200px',
@@ -28,14 +28,26 @@ export default function DashboardCard({ result }) {
       [name]: value,
     });
   };
+  const handleReviewerInputChange = (event) => {
+    const { name, value } = event.target;
+    setReviewer({
+      ...reviewer,
+      [name]: value,
+    });
+  };
 
   const handleReviewSubmit = async () => {
     // post the review
-    await Axios.post(`/api/mydashboard/review/${result.id}`, review)
+    const reviewObject = {
+      review: review.review,
+      reviewer: reviewer.Name
+    }
+    await Axios.post(`/api/mydashboard/review/${result.id}`, reviewObject)
     // make modal disappear
     setModal("modal");
     // reset the review state
     setReview({});
+    setReviewer({});
   }
 
   return (
@@ -97,6 +109,18 @@ export default function DashboardCard({ result }) {
           </header>
           <section className="modal-card-body">
             <textarea className="textarea" name="review" placeholder="Leave your review here..." onChange={handleInputChange}></textarea>
+            <div className='field'>
+            <p className='control is-expanded has-icons-left my-4'>
+              <label className="label" for="Name">Your Name<input
+                className='input'
+                id='Name'
+                type='text'
+                placeholder='Your Name'
+                name='Name'
+                onChange={handleReviewerInputChange}
+              /></label>
+            </p>
+          </div>
           </section>
           <footer className="modal-card-foot">
             <button className="button is-success" onClick={handleReviewSubmit}>Submit Review</button>
