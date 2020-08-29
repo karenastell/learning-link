@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Axios from 'axios';
 import { AuthContext } from '../AuthContext';
 
 export default function TutorSearchResult(props) {
-  const { userId } = useContext(AuthContext);
+  // const [results, setResults] = useState(props);
+
+  const { userId, results } = useContext(AuthContext);
+
   console.log(userId);
 
   const addTutor = (id) => {
@@ -15,21 +18,24 @@ export default function TutorSearchResult(props) {
     });
   };
 
-  console.log('props.results tutor search page', props.results);
-  const allTutors = props.results.filter((result) => result.isTeacher === true);
+  console.log('results tutor search page', results);
+  const allTutors = results.filter((result) => result.isTeacher === true);
 
   console.log(allTutors);
 
-  // https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript answer #28
-  const tutorResults = (Object.values(allTutors.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{})))
-
+  // https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript
+  const tutorResults = Object.values(
+    allTutors.reduce((acc, cur) => Object.assign(acc, { [cur.id]: cur }), {})
+  );
 
   console.log('tutor results', tutorResults);
+  console.log(results, 'results!!!!!!!!!!!!!!!!!!!!!!!');
+  // console.log(results.day);
 
   return (
-    <div className='mt-6'>
+    <div className='mt-6 container'>
       <h1 className='title'>Tutor Search Results</h1>
-      {tutorResults.map((result) => (
+     {results.length > 0 ? tutorResults.map((result) => (
         <div className='card mb-6'>
           <header className='card-header'>
             <p className='card-header-title'>
@@ -67,7 +73,9 @@ export default function TutorSearchResult(props) {
             </a>
           </footer>
         </div>
-      ))}
+      )) : <h1>There are no results for your search, please try again</h1>}
+      
+
     </div>
   );
 }

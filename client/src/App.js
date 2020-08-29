@@ -18,6 +18,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import Messages from './pages/Messages';
 import Calendar from './pages/Calendar';
 import UpdatedProfileMessage from './pages/UpdatedProfileMessage';
+import TutorSearchResult from './pages/TutorSearchResult';
 
 
 // import Home from "./pages/Home";
@@ -53,6 +54,7 @@ function App() {
           <Route exact path="/signup-student" component={StudentProfileForm} />
           <PrivateRoute exact path="/calendar" component={Calendar} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/search-results" component={TutorSearchResult} />
           <PrivateRoute exact path="/myprofile" component={MyProfile} />
           <PrivateRoute
             exact
