@@ -66,24 +66,20 @@ export default function Messages({ location }) {
     if (message) {
       socket.emit('sendMessage', message, () => setMessage(''));
     }
-  };
-
-  const postMessage = (event) => {
-    event.preventDefault();
     const { user1, user2 } = queryString.parse(location.search);
-    sendMessage();
     if (isTeacher) {
       Axios.post(
         `/api/message/tutor${user1}/student${user2}/sender${user1}/room${room}`,
-        message
+        {message: message}
       );
     } else {
       Axios.post(
         `/api/message/tutor${user2}/student${user1}/sender${user1}/room${room}`,
-        message
+        {message: message}
       );
     }
   };
+
 
   console.log(message, messages);
 
@@ -123,10 +119,10 @@ export default function Messages({ location }) {
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               onKeyPress={(event) =>
-                event.key === 'Enter' ? postMessage(event) : null
+                event.key === 'Enter' ? sendMessage(event) : null
               }
             />
-            <button className='button' onClick={(event) => postMessage(event)}>
+            <button className='button' onClick={(event) => sendMessage(event)}>
               Send
             </button>
           </form>
