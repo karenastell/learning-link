@@ -66,6 +66,7 @@ export default function DashboardCard({ result }) {
   };
 
   const removeFromDashboard = () => {
+    setRemoveMessage('modal')
     // do a delete where, if isTeacher, the userId from context is the tutor id and the result.id is the student id
     Axios.delete(`/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`);
     // if !isTeacher the userId from context is the studentid and the result id is tutorid
