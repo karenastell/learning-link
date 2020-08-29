@@ -20,27 +20,6 @@ export default function Messages({ location }) {
   const ENDPOINT = 'localhost:3000';
 
   useEffect(() => {
-    // const startFunction = async () => {
-    //   const { user1, user2 } = queryString.parse(location.search);
-    //   if (isTeacher) {
-    //     const messageRoomInfo = await Axios.get(
-    //       `/api/message-room/tutor${user1}/student${user2}`
-    //     );
-    //     console.log(messageRoomInfo);
-    //     await setRoom(messageRoomInfo.data[0].room);
-    //   } else {
-    //     const messageRoomInfo = await Axios.get(
-    //       `/api/message-room/tutor${user2}/student${user1}`
-    //     );
-    //     console.log(messageRoomInfo);
-    //     console.log(messageRoomInfo.data[0].room);
-    //     await setRoom(messageRoomInfo.data[0].room);
-    //   }
-    // };
-    // startFunction();
-  }, []);
-
-  useEffect(() => {
     const { user1, user2 } = queryString.parse(location.search);
     const startFunction = async () => {
       const { user1, user2 } = queryString.parse(location.search);
@@ -86,6 +65,16 @@ export default function Messages({ location }) {
     event.preventDefault();
     if (message) {
       socket.emit('sendMessage', message, () => setMessage(''));
+    }
+  };
+
+  const postMessage = (event) => {
+    event.preventDefault();
+    sendMessage();
+    if (isTeacher) {
+      Axios.post(`/api/message/tutor${user1}/student${user2}`, message);
+    } else {
+      Axios.post(`/api/message/tutor${user2}/student${user1}`, message);
     }
   };
 
