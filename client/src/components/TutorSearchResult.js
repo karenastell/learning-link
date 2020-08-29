@@ -12,6 +12,7 @@ export default function TutorSearchResult(props) {
       StudentId: userId,
     }).then((response) => {
       console.log(response.data);
+      // if (response.data === "This pair already exists")
     });
   };
 
@@ -25,7 +26,7 @@ export default function TutorSearchResult(props) {
     <div className='mt-6'>
       <h1 className='title'>Tutor Search Results</h1>
       {tutorResults.map((result) => (
-        <div className='card mb-6'>
+        <div key={result.lastName}className='card mb-6'>
           <header className='card-header'>
             <p className='card-header-title'>
               {result.firstName} {result.lastName}
@@ -45,7 +46,7 @@ export default function TutorSearchResult(props) {
                 <li>Subjects: </li>
                 <ul>
                   {result.subject.map((sub) => (
-                    <li>{sub}</li>
+                    <li key={sub}>{sub}</li>
                   ))}
                 </ul>
                 <li>Delivery Method: {result.delivery_method}</li>

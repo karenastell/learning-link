@@ -59,7 +59,7 @@ export default function MyProfile(props) {
         <div className="column is-narrow">
           <SideBarMenu />
         </div>
-        <div className="column">
+        <div className="column is-10">
           <h1 className="title">
           {userInfo.firstName} {userInfo.lastName}'s profile
         </h1>
@@ -69,7 +69,7 @@ export default function MyProfile(props) {
             <div className="level-right">
               {editMode === 'off' ? (
                 <a
-                  className="level-item button is-outlined is-pulled-right is-info"
+                  className="level-item button is-small is-outlined is-pulled-right is-info"
                   onClick={() => setEditMode('on')}
                 >
                   Edit Profile
