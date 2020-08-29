@@ -1,16 +1,23 @@
+
 module.exports = (sequelize, Datatypes) => {
   const Message = sequelize.define('Message', {
     message: {
       type: Datatypes.TEXT,
     },
+    room: {
+      type: Datatypes.INTEGER,
+    },
   });
 
   Message.associate = (models) => {
     Message.belongsTo(models.User, {
-      foreignKey: 'senderId',
+      foreignKey: 'SenderId',
     });
     Message.belongsTo(models.User, {
-      foreignKey: 'recieverId',
+      foreignKey: 'StudentId',
+    });
+    Message.belongsTo(models.User, {
+      foreignKey: 'TutorId',
     });
   };
 

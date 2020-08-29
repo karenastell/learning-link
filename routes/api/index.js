@@ -197,7 +197,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } },
+    { where: { id: req.params.id } }
   );
 
   await db.UserProfile.update(
@@ -213,7 +213,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } },
+    { where: { UserId: req.params.id } }
   );
   res.json(req.body);
 });
@@ -273,6 +273,39 @@ router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
     });
   }
   res.json('Entry deleted');
+});
+
+router.get('/message-room/tutor:TutorId/student:StudentId', (req, res) => {
+  const room = Math.floor(Math.random() * 900000000);
+  console.log(req.params.TutorId, req.params.StudentId);
+  db.Message.findOrCreate({
+    where: {
+      TutorId: req.params.TutorId,
+      StudentId: req.params.StudentId,
+    },
+    defaults: {
+      room: room,
+    },
+  }).then((data) => {
+    console.log(data);
+  });
+  // db.Message.findOne({
+  //   where: {
+  //     TutorId: req.params.TutorId,
+  //     StudentId: req.params.StudentId,
+  //   },
+  // }).then((data) => {
+  //   console.log(data);
+  //   if (data === null) {
+  //     db.Message.create({
+  //       TutorId: req.params.TutorId,
+  //       StudentId: req.params.StudentId,
+  //       room: room,
+  //     }).then((moreData) => {
+  //       console.log('message set up', moreData);
+  //     });
+  //   }
+  // });
 });
 
 module.exports = router;
