@@ -244,7 +244,7 @@ router.get('/mydashboard/mypeeps/:id', (req, res) => {
 });
 
 router.post('/mydashboard/review/:id', (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   db.Review.create({
     review: req.body.review,
     reviewer: req.body.reviewer,
@@ -252,6 +252,60 @@ router.post('/mydashboard/review/:id', (req, res) => {
   }).then(() => {
     res.json('Review was posted');
   });
+});
+
+router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
+  const { idOne, idTwo, isTeacher } = req.params;
+  console.log(idOne, idTwo, isTeacher);
+  if (isTeacher === 'true') {
+    db.TutorStudent.destroy({
+      where: {
+        TutorId: idOne,
+        StudentId: idTwo,
+      },
+    });
+  } else {
+    db.TutorStudent.destroy({
+      where: {
+        TutorId: idTwo,
+        StudentId: idOne,
+      },
+    });
+  }
+  res.json('Entry deleted');
+});
+
+router.get('/message-room/tutor:TutorId/student:StudentId', (req, res) => {
+  const room = Math.floor(Math.random() * 900000000);
+  console.log(req.params.TutorId, req.params.StudentId);
+  db.Message.findOrCreate({
+    where: {
+      TutorId: req.params.TutorId,
+      StudentId: req.params.StudentId,
+    },
+    defaults: {
+      room: room,
+    },
+  }).then((data) => {
+    console.log(data);
+  });
+  // db.Message.findOne({
+  //   where: {
+  //     TutorId: req.params.TutorId,
+  //     StudentId: req.params.StudentId,
+  //   },
+  // }).then((data) => {
+  //   console.log(data);
+  //   if (data === null) {
+  //     db.Message.create({
+  //       TutorId: req.params.TutorId,
+  //       StudentId: req.params.StudentId,
+  //       room: room,
+  //     }).then((moreData) => {
+  //       console.log('message set up', moreData);
+  //     });
+  //   }
+  // });
 });
 
 module.exports = router;

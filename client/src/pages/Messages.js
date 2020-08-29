@@ -32,6 +32,10 @@ export default function Messages({ location }) {
     };
   }, [ENDPOINT, location.search]);
 
+  // List all of the users that they have messages with
+
+  // If they click on a person, a modal pops up and they can live message them (fingers crossed)
+  // Have a message modal component
   return (
     <>
       <Nav />

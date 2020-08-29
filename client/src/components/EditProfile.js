@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Delivery from './Delivery';
 import Bio from './Bio';
@@ -192,7 +192,7 @@ export default function ProfileDisplay({
                     className=""
                     placeholder="$"
                     onChange={handleProfileInfoChange}
-                    value={userProfileInfo.rate}
+                    value={userProfileInfo.rate || ''}
                   ></input>
                 </div>
               </div>
