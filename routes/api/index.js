@@ -197,7 +197,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } }
+    { where: { id: req.params.id } },
   );
 
   await db.UserProfile.update(
@@ -213,7 +213,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } }
+    { where: { UserId: req.params.id } },
   );
   res.json(req.body);
 });
@@ -284,12 +284,26 @@ router.get('/message-room/tutor:TutorId/student:StudentId', (req, res) => {
       StudentId: req.params.StudentId,
     },
     defaults: {
-      room: room,
+      room,
     },
   }).then((data) => {
     console.log(data);
     res.json(data);
   });
 });
+
+router.post(
+  '/message/tutor:TutorId/student:StudentId/sender:SenderId/room:room',
+  (req, res) => {
+    db.Message.create({
+      message: req.body.message,
+      SenderId: req.params.SenderId,
+      TutorId: req.params.TutorId,
+      StudentId: req.params.StudentId,
+      room: req.params.room,
+    });
+    res.json('message was posted to database');
+  },
+);
 
 module.exports = router;
