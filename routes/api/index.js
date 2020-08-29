@@ -292,4 +292,17 @@ router.get('/message-room/tutor:TutorId/student:StudentId', (req, res) => {
   });
 });
 
+router.post(
+  '/message/tutor:TutorId/student:StudentId/sender:SenderId/room:room',
+  (req, res) => {
+    db.Message.create({
+      message: req.body.message,
+      SenderId: req.params.SenderId,
+      TutorId: req.params.TutorId,
+      StudentId: req.params.StudentId,
+      room: req.params.room,
+    });
+  }
+);
+
 module.exports = router;
