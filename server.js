@@ -22,7 +22,25 @@ io.on('connection', (socket) => {
     console.log(user1, room);
     const { user } = addUser({ id: socket.id, user1, room });
 
+    socket.emit('message', {
+      user: 'admin',
+      text: `user: ${user.user1}, room: ${user.room}`,
+    });
+
+    socket.broadcast.to(user.room).emit('message', {
+      user: 'admin',
+      text: `user: ${user.name} has joined`,
+    });
+
     socket.join(user.room);
+
+    callback();
+  });
+
+  socket.on('sendMessage', (message, callback) => {
+    const user = getUser(socket.id);
+
+    io.to(user.room).emit('message', { user: user.user1, text: message });
 
     callback();
   });
