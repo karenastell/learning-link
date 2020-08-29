@@ -290,24 +290,6 @@ router.get('/message-room/tutor:TutorId/student:StudentId', (req, res) => {
     console.log(data);
     res.json(data);
   });
-
-  // db.Message.findOne({
-  //   where: {
-  //     TutorId: req.params.TutorId,
-  //     StudentId: req.params.StudentId,
-  //   },
-  // }).then((data) => {
-  //   console.log(data);
-  //   if (data === null) {
-  //     db.Message.create({
-  //       TutorId: req.params.TutorId,
-  //       StudentId: req.params.StudentId,
-  //       room: room,
-  //     }).then((moreData) => {
-  //       console.log('message set up', moreData);
-  //     });
-  //   }
-  // });
 });
 
 module.exports = router;
