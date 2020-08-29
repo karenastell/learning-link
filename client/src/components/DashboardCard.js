@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../AuthContext';
+import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
 export default function DashboardCard({ result }) {
@@ -8,8 +9,13 @@ export default function DashboardCard({ result }) {
   const [review, setReview] = useState({});
   const [reviewer, setReviewer] = useState({});
   const [removeMessage, setRemoveMessage] = useState('modal');
+  const [room, setRoom] = useState('');
 
   const [emptyReviewMessage, setEmptyReviewMessage] = useState('off');
+
+  useEffect(() => {
+    setMessageRoom();
+  }, []);
 
   const cardStyle = {
     maxHeight: '200px',
@@ -72,25 +78,33 @@ export default function DashboardCard({ result }) {
     // if !isTeacher the userId from context is the studentid and the result id is tutorid
   };
 
-  const setMessageRoom = () => {
+  const setMessageRoom = async() => {
     if (isTeacher) {
-      Axios.get(`/api/message-room/tutor${userId}/student${result.id}`);
+      const getRoomInfo = await Axios.get(
+        `/api/message-room/tutor${userId}/student${result.id}`
+      );
+      console.log(getRoomInfo.data);
+      setRoom(getRoomInfo.data[0].room);
     } else {
-      Axios.get(`/api/message-room/tutor${result.id}/student${userId}`);
+      const getRoomInfo = await Axios.get(
+        `/api/message-room/tutor${result.id}/student${userId}`
+      );
+      console.log(getRoomInfo.data);
+      setRoom(getRoomInfo.data[0].room);
     }
   };
 
   return (
     <>
-      <div className="column is-one-third">
-        <div className="card mb-6">
-          <header className="card-header">
-            <p className="card-header-title">
+      <div className='column is-one-third'>
+        <div className='card mb-6'>
+          <header className='card-header'>
+            <p className='card-header-title'>
               {result.firstName} {result.lastName}
             </p>
           </header>
-          <div style={cardStyle} className="card-content is-size-7">
-            <div className="content">
+          <div style={cardStyle} className='card-content is-size-7'>
+            <div className='content'>
               <ul>
                 <li>Email: {result.email}</li>
                 {!isTeacher ? (
@@ -121,23 +135,25 @@ export default function DashboardCard({ result }) {
               </ul>
             </div>
           </div>
-          <footer className="card-footer">
-            <button
-              className="card-footer-item button is-size-7 is-white"
+          <footer className='card-footer'>
+            <Link
+              to={`/message?user1=${userId}&user2=${result.id}&room=${room}`}
+              className='card-footer-item button is-size-7 is-white'
               onClick={setMessageRoom}
             >
-              Message {result.firstName}
-            </button>
+              Message {result.firstName} {result.lastName}
+            </Link>
+
             {!isTeacher ? (
               <button
                 onClick={activateModal}
-                className="card-footer-item button is-size-7 is-white"
+                className='card-footer-item button is-size-7 is-white'
               >
                 Leave a Review
               </button>
             ) : null}
             <button
-              className="card-footer-item button is-size-7 is-white"
+              className='card-footer-item button is-size-7 is-white'
               onClick={handleRemoveModal}
             >
               Remove {result.firstName}
@@ -148,53 +164,53 @@ export default function DashboardCard({ result }) {
 
       {/* Review Modal */}
       <div className={reviewModal}>
-        <div className="modal-background"></div>
-        <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">
+        <div className='modal-background'></div>
+        <div className='modal-card'>
+          <header className='modal-card-head'>
+            <p className='modal-card-title'>
               Write a review for {result.firstName} {result.lastName}
             </p>
             <button
-              className="delete"
-              aria-label="close"
+              className='delete'
+              aria-label='close'
               onClick={handleModalClose}
             ></button>
           </header>
-          <section className="modal-card-body">
+          <section className='modal-card-body'>
             {emptyReviewMessage === 'on' ? (
-              <article className="message is-danger">
-                <div className="message-body">
+              <article className='message is-danger'>
+                <div className='message-body'>
                   Oops! You cannon submit an empty review!
                 </div>
               </article>
             ) : null}
             <textarea
-              className="textarea"
-              name="review"
-              placeholder="Leave your review here..."
+              className='textarea'
+              name='review'
+              placeholder='Leave your review here...'
               onChange={handleInputChange}
             ></textarea>
-            <div className="field">
-              <p className="control is-expanded has-icons-left my-4">
-                <label className="label" htmlFor="Name">
+            <div className='field'>
+              <p className='control is-expanded has-icons-left my-4'>
+                <label className='label' htmlFor='Name'>
                   Your Name
                   <input
-                    className="input"
-                    id="Name"
-                    type="text"
-                    placeholder="Your Name"
-                    name="Name"
+                    className='input'
+                    id='Name'
+                    type='text'
+                    placeholder='Your Name'
+                    name='Name'
                     onChange={handleReviewerInputChange}
                   />
                 </label>
               </p>
             </div>
           </section>
-          <footer className="modal-card-foot">
-            <button className="button is-success" onClick={handleReviewSubmit}>
+          <footer className='modal-card-foot'>
+            <button className='button is-success' onClick={handleReviewSubmit}>
               Submit Review
             </button>
-            <button className="button" onClick={handleModalClose}>
+            <button className='button' onClick={handleModalClose}>
               Cancel
             </button>
           </footer>
@@ -202,30 +218,30 @@ export default function DashboardCard({ result }) {
       </div>
       {/* remove Modal */}
       <div className={removeMessage}>
-        <div className="modal-background"></div>
-        <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">
+        <div className='modal-background'></div>
+        <div className='modal-card'>
+          <header className='modal-card-head'>
+            <p className='modal-card-title'>
               You are about to remove {result.firstName} {result.lastName} from
               your Dashboard
             </p>
             <button
-              className="delete"
-              aria-label="close"
+              className='delete'
+              aria-label='close'
               onClick={handleModalClose}
             ></button>
           </header>
-          <section className="modal-card-body">
+          <section className='modal-card-body'>
             <p>
               Are you sure you want to remove {result.firstName}{' '}
               {result.lastName} from your dashboard?
             </p>
           </section>
-          <footer className="modal-card-foot">
-            <button className="button is-success" onClick={removeFromDashboard}>
+          <footer className='modal-card-foot'>
+            <button className='button is-success' onClick={removeFromDashboard}>
               Yes, I'm sure
             </button>
-            <button className="button" onClick={handleModalClose}>
+            <button className='button' onClick={handleModalClose}>
               Cancel
             </button>
           </footer>

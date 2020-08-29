@@ -17,6 +17,7 @@ import MyDashboard from './pages/MyDashboard';
 import Messages from './pages/Messages';
 import Calendar from './pages/Calendar';
 import UpdatedProfileMessage from './pages/UpdatedProfileMessage';
+import TutorSearchResult from './pages/TutorSearchResult';
 
 
 function App() {
@@ -46,14 +47,15 @@ function App() {
           <Route exact path="/signup-tutor" component={TutorProfileForm} />
           <Route exact path="/signup-student" component={StudentProfileForm} />
           <PrivateRoute exact path="/calendar" component={Calendar} />
-          <Route exact path="/search" component={Search} />
+          <PrivateRoute exact path="/search" component={Search} />
+          <PrivateRoute exact path="/search-results" component={TutorSearchResult} />
           <PrivateRoute exact path="/myprofile" component={MyProfile} />
           <PrivateRoute
             exact
             path='/student-dashboard'
             component={MyDashboard}
           />
-          <PrivateRoute exact path="/messages" component={Messages} />
+          <PrivateRoute exact path="/message" component={Messages} />
           <PrivateRoute exact path="/updatemessage" component={UpdatedProfileMessage} />
         </>
       </Router>

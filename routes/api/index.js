@@ -288,6 +288,7 @@ router.get('/message-room/tutor:TutorId/student:StudentId', (req, res) => {
     },
   }).then((data) => {
     console.log(data);
+    res.json(data);
   });
 });
 
