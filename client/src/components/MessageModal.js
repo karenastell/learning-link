@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import io from 'socket.io-client';
+import queryString from 'query-string';
 
-export default function MessageModal() {
+export default function MessageModal({ location }) {
+  useEffect(() => {
+    const data = queryString.parse(location.search);
+
+    console.log(data, location.search);
+  });
+
   return (
     <div className='modal is-active'>
       <div className='modal-background'></div>
@@ -15,7 +23,6 @@ export default function MessageModal() {
           <button className='button'>Cancel</button>
         </footer>
       </div>
-   
     </div>
   );
 }

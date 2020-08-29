@@ -105,6 +105,7 @@ export default function Search() {
               subject: subArray,
               day: dayArray,
               delivery_method: response.data[y].UserProfile.delivery_method,
+              rate: response.data[y].UserProfile.rate,
               isTeacher: response.data[y].isTeacher,
             };
             responseArray.push(responseData);
@@ -146,6 +147,7 @@ export default function Search() {
               subject: subArray,
               day: dayArray,
               delivery_method: response2.data[y].UserProfile.delivery_method,
+              rate: response2.data[y].UserProfile.rate,
               isTeacher: response2.data[y].isTeacher,
             };
             responseArray.push(responseData);
@@ -188,6 +190,7 @@ export default function Search() {
             subject: subArray,
             day: dayArray,
             delivery_method: response3.data[y].UserProfile.delivery_method,
+            rate: response3.data[y].UserProfile.rate,
             isTeacher: response3.data[y].isTeacher,
           };
           responseArray.push(responseData);
@@ -229,6 +232,7 @@ export default function Search() {
             subject: subArray,
             day: dayArray,
             delivery_method: response4.data[y].UserProfile.delivery_method,
+            rate: response4.data[y].UserProfile.rate,
             isTeacher: response4.data[y].isTeacher,
           };
           responseArray.push(responseData);
@@ -240,13 +244,13 @@ export default function Search() {
 
     setResults(responseArray);
     console.log(responseArray);
-    
 
     if (responseArray.length > 0) {
       history.push('/search-results');
+      setNoResults(false);
     } else {
       console.log(responseArray.length);
-      setNoResults(true)
+      setNoResults(true);
     }
   };
 

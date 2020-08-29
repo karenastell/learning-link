@@ -66,7 +66,7 @@ function App() {
             path='/tutor-dashboard'
             component={TutorDashboard}
           />
-          <PrivateRoute exact path="/messages" component={Messages} />
+          <PrivateRoute exact path="/message" component={Messages} />
           <PrivateRoute exact path="/updatemessage" component={UpdatedProfileMessage} />
         </>
       </Router>

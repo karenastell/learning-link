@@ -10,6 +10,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const db = require('./models');
 const routes = require('./routes');
+const { addUser, getUser } = require('./users');
 
 const PORT = process.env.PORT || 8080;
 
@@ -17,6 +18,14 @@ const io = socketio(server);
 
 io.on('connection', (socket) => {
   console.log('we have a new connection!!!!!!');
+  socket.on('join', ({ user1, user2 }, callback) => {
+    console.log(user1, user2);
+    const { user } = addUser({ id: socket.id, user1, user2 });
+
+    socket.join(user.user2);
+
+    callback();
+  });
 
   socket.on('disconnect', () => {
     console.log('user has left!!!!');
