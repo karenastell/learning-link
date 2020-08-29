@@ -5,6 +5,8 @@ import Axios from 'axios';
 import Nav from '../components/Nav';
 import SideBarMenu from '../components/SideBarMenu';
 import { AuthContext } from '../AuthContext';
+import ScrollToBottom from 'react-scroll-to-bottom';
+import Message from '../components/Message';
 // import MessageModal from '../components/MessageModal';
 
 let socket;
@@ -20,7 +22,6 @@ export default function Messages({ location }) {
   useEffect(() => {
     // const startFunction = async () => {
     //   const { user1, user2 } = queryString.parse(location.search);
-
     //   if (isTeacher) {
     //     const messageRoomInfo = await Axios.get(
     //       `/api/message-room/tutor${user1}/student${user2}`
@@ -66,9 +67,7 @@ export default function Messages({ location }) {
 
     console.log(socket);
 
-    socket.emit('join', { user1, room }, () => {
-      
-    });
+    socket.emit('join', { user1, room }, () => {});
 
     return () => {
       socket.emit('disconnect');
@@ -105,13 +104,36 @@ export default function Messages({ location }) {
         </div>
         <div className='column'>
           <h1 className='title'>messages</h1>
-          <input
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-            onKeyPress={(event) =>
-              event.key === 'Enter' ? sendMessage(event) : null
-            }
-          />
+          <div>
+            <div>
+              <h3>{room}</h3>
+            </div>
+            <div>
+              {/*  might need to get rid of this */}
+              {/* <a href='/'>XXXXX</a> */}
+            </div>
+          </div>
+          <ScrollToBottom>
+            {messages.map((message, i) => (
+              <div key={i}>
+                <Message message={message} user1={user1} />
+              </div>
+            ))}
+          </ScrollToBottom>
+          <form>
+            <input
+              type='text'
+              placeholder='Enter a message...'
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              onKeyPress={(event) =>
+                event.key === 'Enter' ? sendMessage(event) : null
+              }
+            />
+            <button className='button' onClick={(event) => sendMessage(event)}>
+              Send
+            </button>
+          </form>
         </div>
       </div>
     </>
