@@ -18,11 +18,11 @@ const io = socketio(server);
 
 io.on('connection', (socket) => {
   console.log('we have a new connection!!!!!!');
-  socket.on('join', ({ user1, user2 }, callback) => {
-    console.log(user1, user2);
-    const { user } = addUser({ id: socket.id, user1, user2 });
+  socket.on('join', ({ user1, room }, callback) => {
+    console.log(user1, room);
+    const { user } = addUser({ id: socket.id, user1, room });
 
-    socket.join(user.user2);
+    socket.join(user.room);
 
     callback();
   });

@@ -10,20 +10,22 @@ let socket;
 
 export default function Messages({ location }) {
   const [user1, setUser1] = useState('');
-  const [user2, setUser2] = useState('');
+  const [room, setRoom] = useState('');
   const ENDPOINT = 'localhost:3000';
 
   useEffect(() => {
+Axios.get('/api/')
+
     const { user1, user2 } = queryString.parse(location.search);
 
     socket = io(ENDPOINT);
 
     setUser1(user1);
-    setUser2(user2);
+    setroom(room);
 
     console.log(socket);
 
-    socket.emit('join', { user1, user2 }, () => {});
+    socket.emit('join', { user1, room }, () => {});
 
     return () => {
       socket.emit('disconnect');
