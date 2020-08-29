@@ -3,7 +3,7 @@ import { AuthContext } from '../AuthContext';
 import Nav from '../components/Nav';
 import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu';
-import DashboardCard from '../components/DashboardCards';
+import DashboardCard from '../components/DashboardCard';
 
 export default function MyDashboard(props) {
   const { userId, isTeacher } = useContext(AuthContext);

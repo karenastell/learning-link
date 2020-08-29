@@ -52,13 +52,13 @@ export default function DashboardCard({ result }) {
       review: review.review,
       reviewer: reviewer.Name,
     };
-    await Axios.post(`/api/mydashboard/review/${result.id}`, reviewObject)
+    await Axios.post(`/api/mydashboard/review/${result.id}`, reviewObject);
     // make modal disappear
     setReviewModal('modal');
     // reset the review state
     setReview({});
     setReviewer({});
-    setEmptyReviewMessage('off')
+    setEmptyReviewMessage('off');
   };
 
   const handleRemoveModal = () => {
@@ -66,10 +66,18 @@ export default function DashboardCard({ result }) {
   };
 
   const removeFromDashboard = () => {
-    setRemoveMessage('modal')
+    setRemoveMessage('modal');
     // do a delete where, if isTeacher, the userId from context is the tutor id and the result.id is the student id
     Axios.delete(`/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`);
     // if !isTeacher the userId from context is the studentid and the result id is tutorid
+  };
+
+  const setMessageRoom = () => {
+    if (isTeacher) {
+      Axios.get(`/api/message-room/tutor${userId}/student${result.id}`);
+    } else {
+      Axios.get(`/api/message-room/tutor${result.id}/student${userId}`);
+    }
   };
 
   return (
@@ -114,8 +122,11 @@ export default function DashboardCard({ result }) {
             </div>
           </div>
           <footer className="card-footer">
-            <button className="card-footer-item button is-size-7 is-white">
-              Message {result.firstName} {result.lastName}
+            <button
+              className="card-footer-item button is-size-7 is-white"
+              onClick={setMessageRoom}
+            >
+              Message {result.firstName}
             </button>
             {!isTeacher ? (
               <button
@@ -150,13 +161,13 @@ export default function DashboardCard({ result }) {
             ></button>
           </header>
           <section className="modal-card-body">
-          {emptyReviewMessage === 'on' ? (
-                <article className="message is-danger">
-                  <div className="message-body">
-                    Oops! You cannon submit an empty review!
-                  </div>
-                </article>
-              ) : null}
+            {emptyReviewMessage === 'on' ? (
+              <article className="message is-danger">
+                <div className="message-body">
+                  Oops! You cannon submit an empty review!
+                </div>
+              </article>
+            ) : null}
             <textarea
               className="textarea"
               name="review"
