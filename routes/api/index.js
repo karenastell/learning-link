@@ -288,7 +288,9 @@ router.get('/message-room/tutor:TutorId/student:StudentId', (req, res) => {
     },
   }).then((data) => {
     console.log(data);
+    res.json(data);
   });
+
   // db.Message.findOne({
   //   where: {
   //     TutorId: req.params.TutorId,

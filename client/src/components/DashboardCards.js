@@ -1,21 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../AuthContext';
-import { Link } from 'react-router-dom';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function DashboardCard({ result }) {
   const { isTeacher, userId } = useContext(AuthContext);
-  const [reviewModal, setReviewModal] = useState('modal');
+  const [modal, setModal] = useState('modal');
   const [review, setReview] = useState({});
   const [reviewer, setReviewer] = useState({});
-  const [removeMessage, setRemoveMessage] = useState('modal');
-  const [room, setRoom] = useState('');
-
-  const [emptyReviewMessage, setEmptyReviewMessage] = useState('off');
-
-  useEffect(() => {
-    setMessageRoom();
-  }, []);
 
   const cardStyle = {
     maxHeight: '200px',
@@ -23,13 +15,11 @@ export default function DashboardCard({ result }) {
   };
 
   const activateModal = () => {
-    setReviewModal('modal is-active');
+    setModal('modal is-active');
   };
 
   const handleModalClose = () => {
-    setReviewModal('modal');
-    setRemoveMessage('modal');
-    setEmptyReviewMessage('off');
+    setModal('modal');
   };
 
   const handleInputChange = (event) => {
@@ -49,49 +39,16 @@ export default function DashboardCard({ result }) {
 
   const handleReviewSubmit = async () => {
     // post the review
-    if (!review.review) {
-      console.log('Oops, empty box');
-      setEmptyReviewMessage('on');
-      return;
-    }
     const reviewObject = {
       review: review.review,
       reviewer: reviewer.Name,
     };
     await Axios.post(`/api/mydashboard/review/${result.id}`, reviewObject);
     // make modal disappear
-    setReviewModal('modal');
+    setModal('modal');
     // reset the review state
     setReview({});
     setReviewer({});
-    setEmptyReviewMessage('off');
-  };
-
-  const handleRemoveModal = () => {
-    setRemoveMessage('modal is-active');
-  };
-
-  const removeFromDashboard = () => {
-    setRemoveMessage('modal');
-    // do a delete where, if isTeacher, the userId from context is the tutor id and the result.id is the student id
-    Axios.delete(`/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`);
-    // if !isTeacher the userId from context is the studentid and the result id is tutorid
-  };
-
-  const setMessageRoom = async() => {
-    if (isTeacher) {
-      const getRoomInfo = await Axios.get(
-        `/api/message-room/tutor${userId}/student${result.id}`
-      );
-      console.log(getRoomInfo.data);
-      setRoom(getRoomInfo.data[0].room);
-    } else {
-      const getRoomInfo = await Axios.get(
-        `/api/message-room/tutor${result.id}/student${userId}`
-      );
-      console.log(getRoomInfo.data);
-      setRoom(getRoomInfo.data[0].room);
-    }
   };
 
   return (
@@ -136,34 +93,25 @@ export default function DashboardCard({ result }) {
             </div>
           </div>
           <footer className='card-footer'>
-            <Link
-              to={`/message?user1=${userId}&user2=${result.id}&room=${room}`}
-              className='card-footer-item button is-size-7 is-white'
-              onClick={setMessageRoom}
-            >
+            <Link to={`/message?user1=${userId}&user2=${result.id}`} className='card-footer-item'>
               Message {result.firstName} {result.lastName}
             </Link>
-
             {!isTeacher ? (
-              <button
-                onClick={activateModal}
-                className='card-footer-item button is-size-7 is-white'
-              >
+              <a href='#' onClick={activateModal} className='card-footer-item'>
                 Leave a Review
-              </button>
+              </a>
             ) : null}
-            <button
-              className='card-footer-item button is-size-7 is-white'
-              onClick={handleRemoveModal}
-            >
-              Remove {result.firstName}
-            </button>
+            {!isTeacher ? (
+              <a href='#' className='card-footer-item'>
+                Remove {result.firstName} {result.lastName} from my Dashboard
+              </a>
+            ) : null}
           </footer>
         </div>
       </div>
 
-      {/* Review Modal */}
-      <div className={reviewModal}>
+      {/* Modal */}
+      <div className={modal}>
         <div className='modal-background'></div>
         <div className='modal-card'>
           <header className='modal-card-head'>
@@ -177,13 +125,6 @@ export default function DashboardCard({ result }) {
             ></button>
           </header>
           <section className='modal-card-body'>
-            {emptyReviewMessage === 'on' ? (
-              <article className='message is-danger'>
-                <div className='message-body'>
-                  Oops! You cannon submit an empty review!
-                </div>
-              </article>
-            ) : null}
             <textarea
               className='textarea'
               name='review'
@@ -192,7 +133,7 @@ export default function DashboardCard({ result }) {
             ></textarea>
             <div className='field'>
               <p className='control is-expanded has-icons-left my-4'>
-                <label className='label' htmlFor='Name'>
+                <label className='label' for='Name'>
                   Your Name
                   <input
                     className='input'
@@ -209,37 +150,6 @@ export default function DashboardCard({ result }) {
           <footer className='modal-card-foot'>
             <button className='button is-success' onClick={handleReviewSubmit}>
               Submit Review
-            </button>
-            <button className='button' onClick={handleModalClose}>
-              Cancel
-            </button>
-          </footer>
-        </div>
-      </div>
-      {/* remove Modal */}
-      <div className={removeMessage}>
-        <div className='modal-background'></div>
-        <div className='modal-card'>
-          <header className='modal-card-head'>
-            <p className='modal-card-title'>
-              You are about to remove {result.firstName} {result.lastName} from
-              your Dashboard
-            </p>
-            <button
-              className='delete'
-              aria-label='close'
-              onClick={handleModalClose}
-            ></button>
-          </header>
-          <section className='modal-card-body'>
-            <p>
-              Are you sure you want to remove {result.firstName}{' '}
-              {result.lastName} from your dashboard?
-            </p>
-          </section>
-          <footer className='modal-card-foot'>
-            <button className='button is-success' onClick={removeFromDashboard}>
-              Yes, I'm sure
             </button>
             <button className='button' onClick={handleModalClose}>
               Cancel
