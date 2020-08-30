@@ -13,6 +13,10 @@ export default function DashboardCard({ result }) {
 
   const [emptyReviewMessage, setEmptyReviewMessage] = useState('off');
 
+  const [readReviewModal, setReadReviewModal] = useState('modal');
+
+  const [tutorReviews, setTutorReviews] = useState([]);
+
   useEffect(() => {
     setMessageRoom();
   }, []);
@@ -30,6 +34,7 @@ export default function DashboardCard({ result }) {
     setReviewModal('modal');
     setRemoveMessage('modal');
     setEmptyReviewMessage('off');
+    setReadReviewModal('modal');
   };
 
   const handleInputChange = (event) => {
@@ -71,6 +76,15 @@ export default function DashboardCard({ result }) {
     setRemoveMessage('modal is-active');
   };
 
+  // Get the reviews for the tutor that is clicked and display them in the readreview modal
+  const handleReadReview = () => {
+    Axios.get(`/api/read-reviews/${result.id}`).then((response) => {
+      console.log(response.data);
+      setTutorReviews(response.data);
+    });
+    setReadReviewModal('modal is-active');
+  };
+
   const removeFromDashboard = () => {
     setRemoveMessage('modal');
     // do a delete where, if isTeacher, the userId from context is the tutor id and the result.id is the student id
@@ -101,12 +115,11 @@ export default function DashboardCard({ result }) {
           <header className="card-header">
             <p className="column">
               {result.firstName} {result.lastName}
-              <br/>
-              
+              <br />
             </p>
             {!isTeacher ? (
               <button
-                // onClick={activateModal}
+                onClick={handleReadReview}
                 className="is-size-7 button is-white"
               >
                 See {result.firstName}'s Reviews
@@ -147,30 +160,30 @@ export default function DashboardCard({ result }) {
           </div>
           <footer className="card-footer">
             <div className="buttons">
-            <Link
-              to={`/message?user1=${userId}&user2=${result.id}&room=${room}`}
-              className="card-footer-item button is-size-7 is-white"
-              onClick={setMessageRoom}
-            >
-              Message {result.firstName}
-            </Link>
+              <Link
+                to={`/message?user1=${userId}&user2=${result.id}&room=${room}`}
+                className="card-footer-item button is-size-7 is-white"
+                onClick={setMessageRoom}
+              >
+                Message {result.firstName}
+              </Link>
 
-            {!isTeacher ? (
+              {!isTeacher ? (
+                <button
+                  href="#"
+                  onClick={activateModal}
+                  className="card-footer-item button is-size-7 is-white"
+                >
+                  Leave a Review
+                </button>
+              ) : null}
               <button
                 href="#"
-                onClick={activateModal}
                 className="card-footer-item button is-size-7 is-white"
+                onClick={handleRemoveModal}
               >
-                Leave a Review
+                Remove {result.firstName}
               </button>
-            ) : null}
-            <button
-              href="#"
-              className="card-footer-item button is-size-7 is-white"
-              onClick={handleRemoveModal}
-            >
-              Remove {result.firstName}
-            </button>  
             </div>
           </footer>
         </div>
@@ -257,6 +270,36 @@ export default function DashboardCard({ result }) {
             </button>
             <button className="button" onClick={handleModalClose}>
               Cancel
+            </button>
+          </footer>
+        </div>
+      </div>
+
+      {/* read reviews Modal */}
+      <div className={readReviewModal}>
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">
+              Reviews for {result.firstName} {result.lastName}:
+            </p>
+            <button
+              className="delete"
+              aria-label="close"
+              onClick={handleModalClose}
+            ></button>
+          </header>
+          <section className="modal-card-body">
+            {tutorReviews.map((review) => (
+              <div key={review.createdAt} className="my-4">
+                <p>{review.review}</p>
+                <h3>-{review.reviewer}</h3>
+              </div>
+            ))}
+          </section>
+          <footer className="modal-card-foot">
+            <button className="button" onClick={handleModalClose}>
+              Close
             </button>
           </footer>
         </div>
