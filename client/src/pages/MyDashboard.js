@@ -145,15 +145,16 @@ export default function MyDashboard(props) {
           <SideBarMenu />
         </div>
         <div className="column">
-          <h1 className="title">
-            Hello {userInfo.firstName} {userInfo.lastName}!{' '}
-            <span className="is-size-4">
+          <h1 className="title is-centered">
+            Hello {userInfo.firstName},
+          </h1>  
+            <h2 className="is-centered is-size-4">
               Welcome to your Learning Link Dashboard!
-            </span>
-          </h1>
+            </h2>
+          
 
           {isTeacher ? (
-            <div className="mb-5">
+            <div className="mb-5 mt-4">
               <p>
                 Students and parents can add you to their dashboard and reach
                 out to you for tutoring services! When you are added to
@@ -163,7 +164,7 @@ export default function MyDashboard(props) {
               </p>
             </div>
           ) : (
-            <div className="mb-5">
+            <div className="mb-5 mt-4">
               <p>
                 To get started, search for tutors that meet your needs using the
                 "Search for a Tutor" button in the menu. From there, you'll be

@@ -17,7 +17,7 @@ export default function Messages({ location }) {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const { isTeacher } = useContext(AuthContext);
-  const ENDPOINT = 'localhost:3000';
+  const ENDPOINT = process.env.PORT || 'localhost:3000';
 
   useEffect(() => {
     const { user1, user2 } = queryString.parse(location.search);
