@@ -133,19 +133,19 @@ export default function TutorSearchResult(props) {
                 </div>
               </div>
               <footer className="card-footer">
-                <a href="#" className="card-footer-item">
+                <a href="#" className="card-footer-item button is-size-7 is-white">
                   Message This Tutor
                 </a>
-                <a
+                <button
                   href="#"
                   onClick={() => addTutor(result.UserId)}
-                  className="card-footer-item"
+                  className="card-footer-item button is-size-7 is-white"
                 >
-                  Add Tutor To Your Dashboard
-                </a>
+                  Add To Dashboard
+                </button>
                 <button
                   onClick={() => handleReadReview(result.UserId, result.firstName)}
-                  className="is-size-7 button is-white"
+                  className="card-footer-item button is-size-7 is-white"
                 >
                   See {result.firstName}'s Reviews
                 </button>

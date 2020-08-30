@@ -170,7 +170,6 @@ export default function DashboardCard({ result }) {
 
               {!isTeacher ? (
                 <button
-                  href="#"
                   onClick={activateModal}
                   className="card-footer-item button is-size-7 is-white"
                 >
@@ -178,7 +177,6 @@ export default function DashboardCard({ result }) {
                 </button>
               ) : null}
               <button
-                href="#"
                 className="card-footer-item button is-size-7 is-white"
                 onClick={handleRemoveModal}
               >
