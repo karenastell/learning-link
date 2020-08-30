@@ -2,12 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import Axios from 'axios';
 import { AuthContext } from '../AuthContext';
 import SideBarMenu from '../components/SideBarMenu';
-import Nav from '../components/Nav'
+import Nav from '../components/Nav';
 
 export default function TutorSearchResult(props) {
   // const [results, setResults] = useState(props);
 
   const { userId, results } = useContext(AuthContext);
+
+  const [readReviewModal, setReadReviewModal] = useState('modal');
+  const [tutorReviews, setTutorReviews] = useState([]);
+  const [tutorToBeReviewed, setTutorToBeReviewed] = useState('');
 
   console.log(userId);
 
@@ -33,6 +37,20 @@ export default function TutorSearchResult(props) {
   console.log('tutor results', tutorResults);
   console.log(results, 'results!!!!!!!!!!!!!!!!!!!!!!!');
   // console.log(results.day);
+
+  // Get the reviews for the tutor that is clicked and display them in the readreview modal
+  const handleReadReview = (UserId, name) => {
+    Axios.get(`/api/read-reviews/${UserId}`).then((response) => {
+      console.log(response.data);
+      setTutorReviews(response.data);
+    });
+    setReadReviewModal('modal is-active');
+    setTutorToBeReviewed(name);
+  };
+
+  const handleModalClose = () => {
+    setReadReviewModal('modal');
+  };
 
   return (
     // <div className='mt-6 container'>
@@ -79,21 +97,21 @@ export default function TutorSearchResult(props) {
     // </div>
     <>
       <Nav />
-      <div className='columns'>
-        <div className='column is-narrow'>
+      <div className="columns">
+        <div className="column is-narrow">
           <SideBarMenu />
         </div>
-        <div className='mt-6'>
-          <h1 className='title'>Tutor Search Results</h1>
+        <div className="mt-6">
+          <h1 className="title">Tutor Search Results</h1>
           {tutorResults.map((result) => (
-            <div key={result.lastName} className='card mb-6'>
-              <header className='card-header'>
-                <p className='card-header-title'>
+            <div key={result.lastName} className="card mb-6">
+              <header className="card-header">
+                <p className="card-header-title">
                   {result.firstName} {result.lastName}
                 </p>
               </header>
-              <div className='card-content'>
-                <div className='content'>
+              <div className="card-content">
+                <div className="content">
                   <ul>
                     <li>Email: {result.email}</li>
                     <li>Day(s) Available: {result.day.join(', ')}</li>
@@ -114,20 +132,54 @@ export default function TutorSearchResult(props) {
                   </ul>
                 </div>
               </div>
-              <footer className='card-footer'>
-                <a href='#' className='card-footer-item'>
+              <footer className="card-footer">
+                <a href="#" className="card-footer-item">
                   Message This Tutor
                 </a>
                 <a
-                  href='#'
+                  href="#"
                   onClick={() => addTutor(result.UserId)}
-                  className='card-footer-item'
+                  className="card-footer-item"
                 >
                   Add Tutor To Your Dashboard
                 </a>
+                <button
+                  onClick={() => handleReadReview(result.UserId, result.firstName)}
+                  className="is-size-7 button is-white"
+                >
+                  See {result.firstName}'s Reviews
+                </button>
               </footer>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* read reviews Modal */}
+      <div className={readReviewModal}>
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">Reviews for {tutorToBeReviewed}: </p>
+            <button
+              className="delete"
+              aria-label="close"
+              onClick={handleModalClose}
+            ></button>
+          </header>
+          <section className="modal-card-body">
+            {tutorReviews.map((review) => (
+              <div key={review.createdAt} className="my-4">
+                <p>{review.review}</p>
+                <h3>-{review.reviewer}</h3>
+              </div>
+            ))}
+          </section>
+          <footer className="modal-card-foot">
+            <button className="button" onClick={handleModalClose}>
+              Close
+            </button>
+          </footer>
         </div>
       </div>
     </>
