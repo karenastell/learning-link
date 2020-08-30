@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import { AuthContext } from '../AuthContext';
 import SideBarMenu from '../components/SideBarMenu';
@@ -12,15 +13,26 @@ export default function TutorSearchResult(props) {
   const [readReviewModal, setReadReviewModal] = useState('modal');
   const [tutorReviews, setTutorReviews] = useState([]);
   const [tutorToBeReviewed, setTutorToBeReviewed] = useState('');
+  const [tutorAddedMessage, setTutorAddedMessage] = useState('off');
 
   console.log(userId);
 
+  const history = useHistory();
   const addTutor = (id) => {
     Axios.post('/api/TutorStudent', {
       TutorId: id,
       StudentId: userId,
     }).then((response) => {
       console.log(response.data);
+      setTutorAddedMessage('on');
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+      setTimeout(() => {
+        setTutorAddedMessage('off');
+        history.push('/student-dashboard');
+      }, 1500);
     });
   };
 
@@ -103,6 +115,13 @@ export default function TutorSearchResult(props) {
         </div>
         <div className="mt-6">
           <h1 className="title">Tutor Search Results</h1>
+          {tutorAddedMessage === 'on' ? (
+            <article class="message is-primary">
+              <div class="message-body">
+                Tutor has been added to your Dashboard!
+              </div>
+            </article>
+          ) : null}
           {tutorResults.map((result) => (
             <div key={result.lastName} className="card mb-6">
               <header className="card-header">
@@ -133,7 +152,10 @@ export default function TutorSearchResult(props) {
                 </div>
               </div>
               <footer className="card-footer">
-                <a href="#" className="card-footer-item button is-size-7 is-white">
+                <a
+                  href="#"
+                  className="card-footer-item button is-size-7 is-white"
+                >
                   Message This Tutor
                 </a>
                 <button
@@ -144,7 +166,9 @@ export default function TutorSearchResult(props) {
                   Add To Dashboard
                 </button>
                 <button
-                  onClick={() => handleReadReview(result.UserId, result.firstName)}
+                  onClick={() =>
+                    handleReadReview(result.UserId, result.firstName)
+                  }
                   className="card-footer-item button is-size-7 is-white"
                 >
                   See {result.firstName}'s Reviews
@@ -160,7 +184,9 @@ export default function TutorSearchResult(props) {
         <div className="modal-background"></div>
         <div className="modal-card">
           <header className="modal-card-head">
-            <p className="modal-card-title">Reviews for {tutorToBeReviewed}: </p>
+            <p className="modal-card-title">
+              Reviews for {tutorToBeReviewed}:{' '}
+            </p>
             <button
               className="delete"
               aria-label="close"

@@ -6,7 +6,7 @@ export default function SideBarMenu() {
   const { isTeacher } = useContext(AuthContext);
   
   return (
-    <aside className="menu ml-4">
+    <aside className="menu ml-4 pt-6">
       <p className="menu-label">Menu</p>
       <ul className="menu-list">
         <li>
