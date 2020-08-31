@@ -9,9 +9,7 @@ export default function MyDashboard(props) {
   const { userId, isTeacher } = useContext(AuthContext);
   const [results, setResults] = useState([]);
   const [userInfo, setUserInfo] = useState({});
-  // const [userProfileInfo, setUserProfileInfo] = useState({});
-  // const [subjectsInfo, setSubjectsInfo] = useState([]);
-  // const [availabilityInfo, setAvailabilityInfo] = useState([]);
+
 
   useEffect(() => {
     if (userId) {
@@ -35,9 +33,6 @@ export default function MyDashboard(props) {
         email: data.email,
         isTeacher: data.isTeacher,
       });
-      // setUserProfileInfo(data.UserProfile);
-      // setSubjectsInfo(data.Subjects);
-      // setAvailabilityInfo(data.Availabilities);
     });
   };
 
@@ -47,9 +42,7 @@ export default function MyDashboard(props) {
     const tutorStudentPairs = await Axios.get(`/api/mydashboard/${userId}`);
     console.log(tutorStudentPairs.data);
     getMyPeepsInfo(tutorStudentPairs.data);
-    // tempFunctionGet(tutorStudentPairs.data)
   };
-
 
   const getMyPeepsInfo = async (data) => {
     const myPeepsArray = [];
@@ -101,7 +94,7 @@ export default function MyDashboard(props) {
         });
 
         let responseData = {
-          id:response.id,
+          id: response.id,
           firstName: response.firstName,
           lastName: response.lastName,
           email: response.email,
@@ -130,13 +123,10 @@ export default function MyDashboard(props) {
           <SideBarMenu />
         </div>
         <div className="column">
-          <h1 className="title is-centered">
-            Hello {userInfo.firstName},
-          </h1>  
-            <h2 className="is-centered is-size-4">
-              Welcome to your Learning Link Dashboard!
-            </h2>
-          
+          <h1 className="title is-centered">Hello {userInfo.firstName},</h1>
+          <h2 className="is-centered is-size-4">
+            Welcome to your Learning Link Dashboard!
+          </h2>
 
           {isTeacher ? (
             <div className="mb-5 mt-4">
@@ -147,7 +137,7 @@ export default function MyDashboard(props) {
                 regularly check your messages and your dashboard in case parents
                 or students contact you for tutoring.
               </p>
-              <h3 className='is-size-4 mt-5'>Your Current Students: </h3>
+              <h3 className="is-size-4 mt-5">Your Current Students: </h3>
             </div>
           ) : (
             <div className="mb-5 mt-4">
@@ -157,13 +147,17 @@ export default function MyDashboard(props) {
                 able to view tutors, add them to your dashboard, and send them a
                 message.
               </p>
-              <h3 className='is-size-4 mt-5'>Your Current Tutors: </h3>
+              <h3 className="is-size-4 mt-5">Your Current Tutors: </h3>
             </div>
           )}
           <div className="container">
             <div className="columns is-multiline">
               {results.map((person) => (
-                <DashboardCard key={person.firstName} result={person} getMyStudentTutorPairs={getMyStudentTutorPairs} />
+                <DashboardCard
+                  key={person.firstName}
+                  result={person}
+                  getMyStudentTutorPairs={getMyStudentTutorPairs}
+                />
               ))}
             </div>
           </div>

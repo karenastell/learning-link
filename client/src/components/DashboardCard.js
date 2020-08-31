@@ -188,7 +188,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
         </div>
       </div>
 
-      {/* Review Modal */}
+      {/* Write a Review Modal */}
       <div className={reviewModal}>
         <div className="modal-background"></div>
         <div className="modal-card">
@@ -242,7 +242,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
           </footer>
         </div>
       </div>
-      {/* remove Modal */}
+      {/* remove from Dashboard Modal */}
       <div className={removeMessage}>
         <div className="modal-background"></div>
         <div className="modal-card">

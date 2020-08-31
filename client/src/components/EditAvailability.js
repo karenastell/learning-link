@@ -10,7 +10,7 @@ export default function EditAvailability({
   const { userId } = useContext(AuthContext);
 
   const [days, setDays] = useState([]);
-
+// alert displays if they try to save without checking off a day
   const [alert, setAlert] = useState('off');
 
   const handleDaysCheckBoxes = (event) => {
@@ -30,6 +30,7 @@ export default function EditAvailability({
     if (days[0]) {
       Axios.put(`/api/edit-profile/availability/${userId}`, days).then(() => {
         console.log('Edit was successful!');
+        // get the updated userinfo from the database
         getUserInfo();
         setEditAvailabilityMode('off');
       });
