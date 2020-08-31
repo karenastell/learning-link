@@ -9,9 +9,9 @@ export default function MyDashboard(props) {
   const { userId, isTeacher } = useContext(AuthContext);
   const [results, setResults] = useState([]);
   const [userInfo, setUserInfo] = useState({});
-  const [userProfileInfo, setUserProfileInfo] = useState({});
-  const [subjectsInfo, setSubjectsInfo] = useState([]);
-  const [availabilityInfo, setAvailabilityInfo] = useState([]);
+  // const [userProfileInfo, setUserProfileInfo] = useState({});
+  // const [subjectsInfo, setSubjectsInfo] = useState([]);
+  // const [availabilityInfo, setAvailabilityInfo] = useState([]);
 
   useEffect(() => {
     if (userId) {
@@ -35,9 +35,9 @@ export default function MyDashboard(props) {
         email: data.email,
         isTeacher: data.isTeacher,
       });
-      setUserProfileInfo(data.UserProfile);
-      setSubjectsInfo(data.Subjects);
-      setAvailabilityInfo(data.Availabilities);
+      // setUserProfileInfo(data.UserProfile);
+      // setSubjectsInfo(data.Subjects);
+      // setAvailabilityInfo(data.Availabilities);
     });
   };
 
@@ -50,21 +50,6 @@ export default function MyDashboard(props) {
     // tempFunctionGet(tutorStudentPairs.data)
   };
 
-  // TODO: Get rid of this... once you feel comfortable that everything is working.... or use this one instead: it is less code, but the state isn't as nicely organized. Just add the if isTeacher stuff
-  // const Array = [];
-  // const tempFunctionGet = async (data) => {
-  //   for (let i = 0; i < data.length; i++) {
-  //     await Axios.get(`/api/mydashboard/mypeeps/${data[i].StudentId}`).then(
-  //       (response) => {
-  //         console.log(response);
-  //         Array.push(response.data);
-  //       }
-  //     );
-  //   }
-
-  //   console.log(Array);
-  //   setResults(Array);
-  // };
 
   const getMyPeepsInfo = async (data) => {
     const myPeepsArray = [];
@@ -140,7 +125,7 @@ export default function MyDashboard(props) {
   return (
     <>
       <Nav />
-      <div className="columns">
+      <div className="columns pt-4">
         <div className="column is-narrow">
           <SideBarMenu />
         </div>
@@ -162,6 +147,7 @@ export default function MyDashboard(props) {
                 regularly check your messages and your dashboard in case parents
                 or students contact you for tutoring.
               </p>
+              <h3 className='is-size-4 mt-5'>Your Current Students: </h3>
             </div>
           ) : (
             <div className="mb-5 mt-4">
@@ -171,12 +157,13 @@ export default function MyDashboard(props) {
                 able to view tutors, add them to your dashboard, and send them a
                 message.
               </p>
+              <h3 className='is-size-4 mt-5'>Your Current Tutors: </h3>
             </div>
           )}
           <div className="container">
             <div className="columns is-multiline">
               {results.map((person) => (
-                <DashboardCard key={person.firstName} result={person} />
+                <DashboardCard key={person.firstName} result={person} getMyStudentTutorPairs={getMyStudentTutorPairs} />
               ))}
             </div>
           </div>

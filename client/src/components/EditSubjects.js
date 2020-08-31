@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import Subjects from '../components/Subjects';
 import { AuthContext } from '../AuthContext';
 import Axios from 'axios';
 
-export default function EditSubjects({ setEditSubjectsMode, isTeacher }) {
+export default function EditSubjects({
+  setEditSubjectsMode,
+  getUserInfo,
+  isTeacher,
+}) {
   const { userId } = useContext(AuthContext);
 
   const [subjects, setSubjects] = useState([]);
@@ -22,17 +25,14 @@ export default function EditSubjects({ setEditSubjectsMode, isTeacher }) {
     });
   }, []);
 
-  const history = useHistory();
-
   const handleSaveChanges = () => {
     // Make sure they have at least one subject checked...
     if (subjects[0]) {
       Axios.put(`/api/edit-profile/subjects/${userId}`, subjects).then(() => {
         console.log('Edit was successful!');
+        getUserInfo();
+        setEditSubjectsMode('off');
       });
-      setEditSubjectsMode('off');
-      history.push('/updatemessage');
-
     } else {
       setAlert('on');
     }

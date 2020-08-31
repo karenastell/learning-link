@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import Axios from 'axios';
 
 export default function EditAvailability({
   setEditAvailabilityMode,
   isTeacher,
+  getUserInfo,
 }) {
   const { userId } = useContext(AuthContext);
 
@@ -24,17 +24,15 @@ export default function EditAvailability({
     });
   }, []);
 
-  const history = useHistory();
 
   const handleSaveChanges = () => {
     // First make sure they checked at least one day...
     if (days[0]) {
       Axios.put(`/api/edit-profile/availability/${userId}`, days).then(() => {
         console.log('Edit was successful!');
+        getUserInfo();
+        setEditAvailabilityMode('off');
       });
-      setEditAvailabilityMode('off');
-      history.push('/updatemessage');
-
     } else {
       setAlert('on');
     }
@@ -136,8 +134,8 @@ export default function EditAvailability({
           <div className="field">
             <div className="control">
               {alert === 'on' ? (
-                <article class="message is-danger">
-                  <div class="message-body">
+                <article className="message is-danger">
+                  <div className="message-body">
                     You must select at least one day!
                   </div>
                 </article>

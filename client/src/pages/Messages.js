@@ -22,7 +22,7 @@ export default function Messages({ location }) {
   useEffect(() => {
     const { user1, user2 } = queryString.parse(location.search);
     const startFunction = async () => {
-    const { user1, user2 } = queryString.parse(location.search);
+      const { user1, user2 } = queryString.parse(location.search);
 
       if (isTeacher) {
         const messageRoomInfo = await Axios.get(
@@ -70,16 +70,15 @@ export default function Messages({ location }) {
     if (isTeacher) {
       Axios.post(
         `/api/message/tutor${user1}/student${user2}/sender${user1}/room${room}`,
-        {message: message}
+        { message: message }
       );
     } else {
       Axios.post(
         `/api/message/tutor${user2}/student${user1}/sender${user1}/room${room}`,
-        {message: message}
+        { message: message }
       );
     }
   };
-
 
   console.log(message, messages);
 
@@ -90,12 +89,12 @@ export default function Messages({ location }) {
   return (
     <>
       <Nav />
-      <div className='columns'>
-        <div className='column is-narrow'>
+      <div className="columns">
+        <div className="column is-narrow">
           <SideBarMenu />
         </div>
-        <div className='column'>
-          <h1 className='title'>messages</h1>
+        <div className="column">
+          <h1 className="title">messages</h1>
           <div>
             <div>
               <h3>{room}</h3>
@@ -114,15 +113,15 @@ export default function Messages({ location }) {
           </ScrollToBottom>
           <form>
             <input
-              type='text'
-              placeholder='Enter a message...'
+              type="text"
+              placeholder="Enter a message..."
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               onKeyPress={(event) =>
                 event.key === 'Enter' ? sendMessage(event) : null
               }
             />
-            <button className='button' onClick={(event) => sendMessage(event)}>
+            <button className="button" onClick={(event) => sendMessage(event)}>
               Send
             </button>
           </form>

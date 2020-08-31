@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import Delivery from './Delivery';
 import Bio from './Bio';
 import Address from './Address';
@@ -15,6 +14,7 @@ export default function ProfileDisplay({
   setUserInfo,
   setUserProfileInfo,
   userId,
+  getUserInfo
 }) {
 
   const [alert, setAlert] = useState('off');
@@ -28,8 +28,6 @@ export default function ProfileDisplay({
     const { name, value } = event.target;
     setUserProfileInfo({ ...userProfileInfo, [name]: value });
   };
-
-  const history = useHistory();
 
   const handleSaveChanges = () => {
     if (isTeacher) {
@@ -75,7 +73,7 @@ export default function ProfileDisplay({
       userProfile: userProfileInfo,
     }).then(() => {});
     setEditMode('off');
-    history.push('/updatemessage');
+    getUserInfo();
   };
 
   return (

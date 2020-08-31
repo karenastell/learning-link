@@ -3,7 +3,7 @@ import { AuthContext } from '../AuthContext';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
-export default function DashboardCard({ result }) {
+export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   const { isTeacher, userId } = useContext(AuthContext);
   const [reviewModal, setReviewModal] = useState('modal');
   const [review, setReview] = useState({});
@@ -85,11 +85,12 @@ export default function DashboardCard({ result }) {
     setReadReviewModal('modal is-active');
   };
 
-  const removeFromDashboard = () => {
+  const removeFromDashboard = async () => {
     setRemoveMessage('modal');
     // do a delete where, if isTeacher, the userId from context is the tutor id and the result.id is the student id
-    Axios.delete(`/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`);
+    await Axios.delete(`/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`)
     // if !isTeacher the userId from context is the studentid and the result id is tutorid
+    getMyStudentTutorPairs()
   };
 
   const setMessageRoom = async () => {
