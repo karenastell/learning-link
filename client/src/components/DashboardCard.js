@@ -100,14 +100,14 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
       const getRoomInfo = await Axios.get(
         `/api/message-room/tutor${userId}/student${result.id}`
       );
-      console.log(getRoomInfo.data);
-      setRoom(getRoomInfo.data[0].room);
+      console.log(getRoomInfo.data.roomInfo);
+      setRoom(getRoomInfo.data.roomInfo[0].room);
     } else {
       const getRoomInfo = await Axios.get(
         `/api/message-room/tutor${result.id}/student${userId}`
       );
-      console.log(getRoomInfo.data);
-      setRoom(getRoomInfo.data[0].room);
+      console.log(getRoomInfo.data.roomInfo);
+      setRoom(getRoomInfo.data.roomInfo[0].room);
     }
   };
 

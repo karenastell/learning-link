@@ -1,0 +1,12 @@
+.tileStyle {
+  margin-bottom: 0px !important;
+  min-width: 100px;
+  width: 400px;
+  height: 500px;
+  max-height: 500px;
+}
+
+.messageContent {
+    min-width: 95px;
+    width: 390px;
+}
