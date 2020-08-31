@@ -88,16 +88,19 @@ export default function MyProfile(props) {
               setUserInfo={setUserInfo}
               setUserProfileInfo={setUserProfileInfo}
               userId={userId}
+              getUserInfo={getUserInfo}
             />
           ) : editAvailabilityMode === 'on' ? (
             <EditAvailability
               setEditAvailabilityMode={setEditAvailabilityMode}
               isTeacher={isTeacher}
+              getUserInfo={getUserInfo}
             />
           ) : editSubjectsMode === 'on' ? (
             <EditSubjects
               setEditSubjectsMode={setEditSubjectsMode}
               isTeacher={isTeacher}
+              getUserInfo={getUserInfo}
             />
           ) : (
             <ProfileDisplay

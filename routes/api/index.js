@@ -50,7 +50,7 @@ router.get('/search/day/:day', async (req, res) => {
     });
     usersDays.push(oneUser);
   }
-
+  console.log(usersDays, "Look here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
   res.json(usersDays);
 });
 

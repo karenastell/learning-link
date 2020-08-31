@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
@@ -85,8 +84,6 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
     });
     setReadReviewModal('modal is-active');
   };
-
-  const history = useHistory();
 
   const removeFromDashboard = async () => {
     setRemoveMessage('modal');

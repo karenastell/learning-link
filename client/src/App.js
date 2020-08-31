@@ -16,7 +16,6 @@ import MyProfile from './pages/MyProfile';
 import MyDashboard from './pages/MyDashboard';
 import Messages from './pages/Messages';
 import Calendar from './pages/Calendar';
-import UpdatedProfileMessage from './pages/UpdatedProfileMessage';
 import TutorSearchResult from './pages/TutorSearchResult';
 
 
@@ -56,7 +55,6 @@ function App() {
             component={MyDashboard}
           />
           <PrivateRoute exact path="/message" component={Messages} />
-          <PrivateRoute exact path="/updatemessage" component={UpdatedProfileMessage} />
         </>
       </Router>
       <Footer />
