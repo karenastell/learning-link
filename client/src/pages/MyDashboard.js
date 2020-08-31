@@ -163,7 +163,7 @@ export default function MyDashboard(props) {
           <div className="container">
             <div className="columns is-multiline">
               {results.map((person) => (
-                <DashboardCard key={person.firstName} result={person} />
+                <DashboardCard key={person.firstName} result={person} getMyStudentTutorPairs={getMyStudentTutorPairs} />
               ))}
             </div>
           </div>
