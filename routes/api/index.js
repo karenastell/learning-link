@@ -342,11 +342,18 @@ router.post(
 
 router.get('/all-messages/:id', (req, res) => {
   console.log(req.params.id);
-  db.User.findAll({
-    include: [
-      db.UserProfile,
-      { model: db.Message, where: { SenderId: req.params.id } },
-    ],
+  db.Message.findAll({
+    where: { SenderId: req.params.id },
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
+
+router.get('/sent-messages-to/:personId', (req, res) => {
+  console.log(req.params.personId);
+  db.User.findOne({
+    where: { id: req.params.personId },
   }).then((data) => {
     console.log(data);
     res.json(data);
