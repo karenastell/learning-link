@@ -7,6 +7,14 @@ module.exports = (sequelize, Datatypes) => {
     room: {
       type: Datatypes.INTEGER,
     },
+    tutorRead: {
+      type: Datatypes.BOOLEAN,
+      defaultValue: false,
+    },
+    studentRead: {
+      type: Datatypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
 
   Message.associate = (models) => {
