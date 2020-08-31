@@ -103,14 +103,14 @@ export default function Messages({ location }) {
         <div className='column is-narrow'>
           <SideBarMenu />
         </div>
-        <div className='column'>
+        {/* <div className='column'>
           <h3 className='title is-3'>Your Messages</h3>
           <div>
             <p>Click on a name to send and view messages.</p>
 
           </div>
-        </div>
-        <div className='column is-three-quarters container'>
+        </div> */}
+        <div className='column container'>
           <h1 className='title'>Send {senderName} a message...</h1>
           <div className='messageArea'>
             <article className='tile box tileStyle'>
@@ -129,7 +129,7 @@ export default function Messages({ location }) {
             </article>
             <form className='form'>
               <input
-                className='input'
+                className='message-input'
                 type='text'
                 placeholder='Enter a message...'
                 value={message}
