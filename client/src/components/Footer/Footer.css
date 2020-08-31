@@ -1,0 +1,16 @@
+.foot {
+    background-color: #4fa1df;
+    border-top: 2px #f0763a solid;
+    min-height: 60px;
+    padding-top: 10px;
+    color: white;
+}
+
+.footer-links {
+    color: #f3bb22;
+}
+
+.footer-links:hover {
+    color: white;
+    text-decoration: none;
+}
