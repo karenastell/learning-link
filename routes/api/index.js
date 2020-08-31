@@ -50,7 +50,7 @@ router.get('/search/day/:day', async (req, res) => {
     });
     usersDays.push(oneUser);
   }
-  console.log(usersDays, "Look here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+  console.log(usersDays, 'Look here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
   res.json(usersDays);
 });
 
@@ -303,13 +303,29 @@ router.get('/message-room/tutor:TutorId/student:StudentId', (req, res) => {
 router.post(
   '/message/tutor:TutorId/student:StudentId/sender:SenderId/room:room',
   (req, res) => {
-    db.Message.create({
-      message: req.body.message,
-      SenderId: req.params.SenderId,
-      TutorId: req.params.TutorId,
-      StudentId: req.params.StudentId,
-      room: req.params.room,
-    });
+    console.log(req.params.SenderId, 'sender');
+    console.log(req.params.StudentId, 'student');
+    console.log(req.params.TutorId, 'Tutor');
+    if (req.params.SenderId === req.params.StudentId) {
+      db.Message.create({
+        message: req.body.message,
+        SenderId: req.params.SenderId,
+        TutorId: req.params.TutorId,
+        StudentId: req.params.StudentId,
+        room: req.params.room,
+        studentRead: true,
+      });
+    } else {
+      db.Message.create({
+        message: req.body.message,
+        SenderId: req.params.SenderId,
+        TutorId: req.params.TutorId,
+        StudentId: req.params.StudentId,
+        room: req.params.room,
+        tutorRead: true,
+      });
+    }
+
     res.json('message was posted to database');
   }
 );

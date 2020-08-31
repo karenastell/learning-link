@@ -5,7 +5,7 @@ import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu';
 import DashboardCard from '../components/DashboardCard';
 
-export default function MyDashboard(props) {
+export default function MyDashboard() {
   const { userId, isTeacher } = useContext(AuthContext);
   const [results, setResults] = useState([]);
   const [userInfo, setUserInfo] = useState({});
@@ -154,7 +154,7 @@ export default function MyDashboard(props) {
             <div className="columns is-multiline">
               {results.map((person) => (
                 <DashboardCard
-                  key={person.firstName}
+                  key={person.id}
                   result={person}
                   getMyStudentTutorPairs={getMyStudentTutorPairs}
                 />

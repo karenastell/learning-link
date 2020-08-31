@@ -125,8 +125,8 @@ export default function ProfileForm(props) {
     <div className="container mt-5 mb-5">
       <h1 className="title">Tutor Form</h1>
       {successAlert === 'on' ? (
-        <article class="message is-primary">
-          <div class="message-body">
+        <article className="message is-primary">
+          <div className="message-body">
             You have successfully Signed up! Redirecting to the homepage. Please
             login...
           </div>

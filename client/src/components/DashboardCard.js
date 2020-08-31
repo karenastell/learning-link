@@ -88,11 +88,13 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   const removeFromDashboard = async () => {
     setRemoveMessage('modal');
     // do a delete where, if isTeacher, the userId from context is the tutor id and the result.id is the student id
-    await Axios.delete(`/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`)
     // if !isTeacher the userId from context is the studentid and the result id is tutorid
+    await Axios.delete(`/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`)
+    
     getMyStudentTutorPairs()
   };
 
+  // set up a room between the user and any tutor/student on their dashboard so that they can message each other
   const setMessageRoom = async () => {
     if (isTeacher) {
       const getRoomInfo = await Axios.get(
