@@ -17,6 +17,7 @@ import MyDashboard from './pages/MyDashboard';
 import Messages from './pages/Messages/Messages';
 import Calendar from './pages/Calendar';
 import TutorSearchResult from './pages/TutorSearchResult';
+import AllMessages from './pages/AllMessages/AllMessages'
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
             component={MyDashboard}
           />
           <PrivateRoute exact path="/message" component={Messages} />
+          <PrivateRoute exact path="/all-messages" component={AllMessages} />
         </>
       </Router>
       <Footer />

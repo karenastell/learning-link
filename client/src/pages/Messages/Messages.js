@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import io from 'socket.io-client';
 import queryString from 'query-string';
 import Axios from 'axios';
-import Nav from '../../components/Nav';
+import Nav from '../../components/Nav/Nav'
 import SideBarMenu from '../../components/SideBarMenu';
 import { AuthContext } from '../../AuthContext';
 import ScrollToBottom from 'react-scroll-to-bottom';
@@ -16,9 +16,12 @@ export default function Messages({ location }) {
   const [room, setRoom] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const { isTeacher } = useContext(AuthContext);
+  const { isTeacher, userId } = useContext(AuthContext);
   const [senderName, setSenderName] = useState('');
   const [receiverName, setReceiverName] = useState('');
+
+
+  console.log(userId);
 
   const ENDPOINT = process.env.PORT || 'localhost:3000';
 
@@ -100,9 +103,16 @@ export default function Messages({ location }) {
         <div className='column is-narrow'>
           <SideBarMenu />
         </div>
-        <div className='column container'>
+        <div className='column'>
+          <h3 className='title is-3'>Your Messages</h3>
+          <div>
+            <p>Click on a name to send and view messages.</p>
+
+          </div>
+        </div>
+        <div className='column is-three-quarters container'>
           <h1 className='title'>Send {senderName} a message...</h1>
-          <div className='container'>
+          <div className='messageArea'>
             <article className='tile box tileStyle'>
               <ScrollToBottom>
                 {messages.map((message, i) => (
@@ -117,9 +127,9 @@ export default function Messages({ location }) {
                 ))}
               </ScrollToBottom>
             </article>
-            <form className='form1'>
+            <form className='form'>
               <input
-                className='input1'
+                className='input'
                 type='text'
                 placeholder='Enter a message...'
                 value={message}
@@ -129,7 +139,7 @@ export default function Messages({ location }) {
                 }
               />
               <button
-                className='sendButton'
+                className='sendButton button is-info is-light'
                 onClick={(event) => sendMessage(event)}
               >
                 Send
@@ -137,9 +147,7 @@ export default function Messages({ location }) {
             </form>
           </div>
         </div>
-        <div className='column'>
-          <h3 className='title is-3'>Your Messages</h3>
-        </div>
+       
       </div>
     </>
   );

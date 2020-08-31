@@ -307,7 +307,7 @@ router.get(
     });
 
     res.json({ roomInfo, userInfo });
-  },
+  }
 );
 
 router.post(
@@ -339,5 +339,18 @@ router.post(
     res.json('message was posted to database');
   }
 );
+
+router.get('/all-messages/:id', (req, res) => {
+  console.log(req.params.id);
+  db.User.findAll({
+    include: [
+      db.UserProfile,
+      { model: db.Message, where: { SenderId: req.params.id } },
+    ],
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
 
 module.exports = router;

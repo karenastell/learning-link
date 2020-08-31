@@ -21,7 +21,7 @@ export default function SideBarMenu() {
           </li>
         ) : null}
         <li>
-          <Link to="/messages">Messages</Link>
+          <Link to="/all-messages">Messages</Link>
         </li>
         <li>
           <Link to="/calendar">Calendar</Link>
