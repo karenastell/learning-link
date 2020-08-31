@@ -21,12 +21,12 @@ const { isAuth, userId} = useContext(AuthContext);
       <div className="container has-text-centered mt-3">
         <div className="container my-5 has-text-centered">
           <h3 className="mb-3 title is-4">Sign up to get started!</h3>
-          <Link to="/signup-tutor">
+          <Link to="/signup-tutor" className="button-main">
             <button className="button is-info button-main mx-2">
               Sign up as a teacher/tutor
             </button>
           </Link>
-          <Link to="/signup-student">
+          <Link to="/signup-student" className="button-main">
             <button className="button is-info button-main mx-2">
               Sign up a student
             </button>

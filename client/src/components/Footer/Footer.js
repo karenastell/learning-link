@@ -3,7 +3,7 @@ import './Footer.css';
 
 export default function Footer() {
     return (
-        <footer className="foot footer has-text-centered mt-6">
+        <footer className="foot  has-text-centered mt-6">
         <h2>Learning Link</h2>
         <p>
           &copy; 2020
