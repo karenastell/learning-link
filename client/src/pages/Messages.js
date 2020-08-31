@@ -89,20 +89,17 @@ export default function Messages({ location }) {
   return (
     <>
       <Nav />
-      <div className="columns">
-        <div className="column is-narrow">
+      <div className='columns'>
+        <div className='column is-narrow'>
           <SideBarMenu />
         </div>
-        <div className="column">
-          <h1 className="title">messages</h1>
+        <div className='column'>
+          <h1 className='title'>messages</h1>
           <div>
             <div>
-              <h3>{room}</h3>
+              <h3>{user1} you are messaging: </h3>
             </div>
-            <div>
-              {/*  might need to get rid of this */}
-              {/* <a href='/'>XXXXX</a> */}
-            </div>
+            <div></div>
           </div>
           <ScrollToBottom>
             {messages.map((message, i) => (
@@ -113,18 +110,29 @@ export default function Messages({ location }) {
           </ScrollToBottom>
           <form>
             <input
-              type="text"
-              placeholder="Enter a message..."
+              type='text'
+              placeholder='Enter a message...'
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               onKeyPress={(event) =>
                 event.key === 'Enter' ? sendMessage(event) : null
               }
             />
-            <button className="button" onClick={(event) => sendMessage(event)}>
+            <button className='button' onClick={(event) => sendMessage(event)}>
               Send
             </button>
           </form>
+          <div className='container'>
+               <div class='tile is-ancestor'>
+            <div class='tile is-parent'>
+              <article class='tile is-child box'>
+                <p class='title'>One</p>
+                <p class='subtitle'>Subtitle</p>
+              </article>
+            </div>
+          </div>
+          </div>
+       
         </div>
       </div>
     </>
