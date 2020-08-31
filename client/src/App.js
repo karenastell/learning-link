@@ -54,7 +54,7 @@ function App() {
             path='/student-dashboard'
             component={MyDashboard}
           />
-          <PrivateRoute exact path="/message" component={Messages} />
+          <Route exact path="/message" component={Messages} />
         </>
       </Router>
       <Footer />

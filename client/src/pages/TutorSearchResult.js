@@ -41,10 +41,10 @@ export default function TutorSearchResult(props) {
 
   console.log(allTutors);
 
-  // https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript
-  const tutorResults = Object.values(
-    allTutors.reduce((acc, cur) => Object.assign(acc, { [cur.id]: cur }), {})
-  );
+  // https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
+  const tutorResults = [...new Map(allTutors.map(item => [JSON.stringify(item), item])).values()];
+
+
 
   console.log('tutor results', tutorResults);
   console.log(results, 'results!!!!!!!!!!!!!!!!!!!!!!!');
