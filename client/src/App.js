@@ -14,7 +14,7 @@ import TutorProfileForm from './pages/TutorProfileForm';
 import Search from './pages/Search';
 import MyProfile from './pages/MyProfile';
 import MyDashboard from './pages/MyDashboard';
-import Messages from './pages/Messages';
+import Messages from './pages/Messages/Messages';
 import Calendar from './pages/Calendar';
 import TutorSearchResult from './pages/TutorSearchResult';
 
@@ -54,7 +54,7 @@ function App() {
             path='/student-dashboard'
             component={MyDashboard}
           />
-          <Route exact path="/message" component={Messages} />
+          <PrivateRoute exact path="/message" component={Messages} />
         </>
       </Router>
       <Footer />

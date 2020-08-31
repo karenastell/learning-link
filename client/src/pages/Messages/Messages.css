@@ -1,0 +1,39 @@
+.tileStyle {
+  margin-bottom: 0px !important;
+  min-width: 100px;
+  width: 400px;
+  height: 500px;
+  max-height: 500px;
+}
+
+.messageContent {
+    min-width: 95px;
+    width: 390px;
+}
+
+.input1 {
+  border: none;
+  border-radius: 0;
+  padding: 5%;
+  width: 80%;
+  font-size: 1.2em;
+}
+
+input:focus, textarea:focus, select:focus{
+  outline: none;
+}
+
+.sendButton {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979FF;
+  padding: 20px;
+  display: inline-block;
+  border: none;
+  width: 20%;
+}
+
+.form1 {
+  width: 80%;
+}

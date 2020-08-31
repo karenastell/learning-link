@@ -197,7 +197,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } },
+    { where: { id: req.params.id } }
   );
 
   await db.UserProfile.update(
@@ -213,7 +213,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } },
+    { where: { UserId: req.params.id } }
   );
   res.json(req.body);
 });
@@ -283,22 +283,32 @@ router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
   res.json('Entry deleted');
 });
 
-router.get('/message-room/tutor:TutorId/student:StudentId', (req, res) => {
-  const room = Math.floor(Math.random() * 900000000);
-  console.log(req.params.TutorId, req.params.StudentId);
-  db.Message.findOrCreate({
-    where: {
-      TutorId: req.params.TutorId,
-      StudentId: req.params.StudentId,
-    },
-    defaults: {
-      room,
-    },
-  }).then((data) => {
-    console.log(data);
-    res.json(data);
-  });
-});
+router.get(
+  '/message-room/tutor:TutorId/student:StudentId',
+  async (req, res) => {
+    const room = Math.floor(Math.random() * 900000000);
+    console.log(req.params.TutorId, req.params.StudentId);
+    const roomInfo = await db.Message.findOrCreate({
+      where: {
+        TutorId: req.params.TutorId,
+        StudentId: req.params.StudentId,
+      },
+      defaults: {
+        room,
+      },
+      include: [{ model: db.User }],
+    });
+
+    const userInfo = await db.User.findOne({
+      where: {
+        id: req.params.StudentId,
+      },
+      include: [{ model: db.UserProfile }],
+    });
+
+    res.json({ roomInfo, userInfo });
+  },
+);
 
 router.post(
   '/message/tutor:TutorId/student:StudentId/sender:SenderId/room:room',
@@ -327,7 +337,7 @@ router.post(
     }
 
     res.json('message was posted to database');
-  },
+  }
 );
 
 module.exports = router;
