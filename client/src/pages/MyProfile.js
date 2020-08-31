@@ -57,9 +57,9 @@ export default function MyProfile(props) {
         <div className="column is-narrow">
           <SideBarMenu />
         </div>
-        <div className="column is-10 mt-4">
+        <div className="column is-10 mt-5">
           <h1 className="title">
-            {userInfo.firstName} {userInfo.lastName}'s profile
+            Your profile
           </h1>
           <div className="container">
             <div className="level">
