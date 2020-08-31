@@ -12,8 +12,17 @@
   align-items: center;
 }
 
+.adminText {
+    font-size: 20px;
+    color: #eef6fc;
+    display: flex;
+    align-items: center;
+}
+
+.adminBackground {
+    background: #2C3C70;
+}
 .messageBox {
-  background: #f3f3f3;
   border-radius: 20px;
   padding: 5px 20px;
   color: white;
@@ -45,6 +54,7 @@
   display: flex;
   padding: 0 5%;
   margin-top: 3px;
+  margin-bottom: 15px;
 }
 
 .pl-10 {
@@ -54,3 +64,5 @@
 .pr-10 {
   padding-right: 10px;
 }
+
+

@@ -35,7 +35,7 @@ export default function Messages({ location }) {
         await setRoom(messageRoomInfo.data.roomInfo[0].room);
         console.log(messageRoomInfo.data.userInfo.firstName);
         await setSenderName(messageRoomInfo.data.userInfo.firstName);
-        await setReceiverName(messageRoomInfo.data.roomInfo[0].User.firstName)
+        await setReceiverName(messageRoomInfo.data.roomInfo[0].User.firstName);
         console.log(senderName, receiverName);
       } else {
         const messageRoomInfo = await Axios.get(
@@ -101,25 +101,25 @@ export default function Messages({ location }) {
           <SideBarMenu />
         </div>
         <div className='column container'>
-          <h1 className='title'>Messages With {senderName}</h1>
-
-          <div>
-            <div>
-              {/* <h3 className='title is-5'>
-                {receiverName} you're Messaging with {senderName}
-              </h3> */}
-            </div>
+          <h1 className='title'>Send {senderName} a message...</h1>
+          <div className='container'>
             <article className='tile box tileStyle'>
               <ScrollToBottom>
                 {messages.map((message, i) => (
                   <div className='messageContent' key={i}>
-                    <Message senderName={senderName} receiverName={receiverName} message={message} user1={user1} />
+                    <Message
+                      senderName={senderName}
+                      receiverName={receiverName}
+                      message={message}
+                      user1={user1}
+                    />
                   </div>
                 ))}
               </ScrollToBottom>
             </article>
-            <form>
+            <form className='form1'>
               <input
+                className='input1'
                 type='text'
                 placeholder='Enter a message...'
                 value={message}
@@ -129,13 +129,16 @@ export default function Messages({ location }) {
                 }
               />
               <button
-                className='button'
+                className='sendButton'
                 onClick={(event) => sendMessage(event)}
               >
                 Send
               </button>
             </form>
           </div>
+        </div>
+        <div className='column'>
+          <h3 className='title is-3'>Your Messages</h3>
         </div>
       </div>
     </>

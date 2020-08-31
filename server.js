@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const session = require('express-session');
 const path = require('path');
@@ -24,13 +25,13 @@ io.on('connection', (socket) => {
 
     socket.emit('message', {
       user: 'admin',
-      text: `user: ${user.user1}, room: ${user.room}`,
+      text: 'Welcome to Learning Link Messaging!',
     });
 
-    socket.broadcast.to(user.room).emit('message', {
-      user: 'admin',
-      text: `user: ${user.name} has joined`,
-    });
+    // socket.broadcast.to(user.room).emit('message', {
+    //   user: 'admin',
+    //   text: `user: ${user.name} has joined`,
+    // });
 
     socket.join(user.room);
 
