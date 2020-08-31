@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../AuthContext';
 import { Redirect } from 'react-router-dom';
 
+import './Main.css';
+
 
 export default function Main(props) {
 const { isAuth, userId} = useContext(AuthContext);
@@ -14,18 +16,18 @@ const { isAuth, userId} = useContext(AuthContext);
     { isAuth ? <Redirect to='/student-dashboard' /> : 
     <>
     <Nav />
-    <div className="image-div">
+    <div className="image-div main-body">
       <img src="./coloredpencilscropped.jpg" alt="learning image" />
       <div className="container has-text-centered mt-3">
         <div className="container my-5 has-text-centered">
           <h3 className="mb-3 title is-4">Sign up to get started!</h3>
           <Link to="/signup-tutor">
-            <button className="button is-info mx-2">
+            <button className="button is-info button-main mx-2">
               Sign up as a teacher/tutor
             </button>
           </Link>
           <Link to="/signup-student">
-            <button className="button is-info mx-2">
+            <button className="button is-info button-main mx-2">
               Sign up a student
             </button>
           </Link>
