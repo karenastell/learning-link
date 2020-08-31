@@ -1,25 +1,29 @@
 .tileStyle {
   margin-bottom: 0px !important;
   min-width: 100px;
-  width: 400px;
+  width: 500px;
   height: 500px;
   max-height: 500px;
 }
 
 .messageContent {
-    min-width: 95px;
-    width: 390px;
+  min-width: 95px;
+  width: 390px;
 }
 
-.input {
-  border: none;
-  border-radius: 0;
-  padding: 5%;
+.message-input {
+  padding: 1%;
   width: 80% !important;
   font-size: 1.2em;
+  background-color: white;
+  border-color: #dbdbdb;
+  border-radius: 4px;
+  color: #363636;
 }
 
-input:focus, textarea:focus, select:focus{
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
 }
 
@@ -27,8 +31,7 @@ input:focus, textarea:focus, select:focus{
   width: 20%;
 }
 
-
-
 .messageArea {
-  width: 400px;
+  width: 500px;
+  margin: auto;
 }
