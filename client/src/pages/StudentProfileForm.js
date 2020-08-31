@@ -231,7 +231,7 @@ export default function StudentProfileForm(props) {
         <div className='field-body'>
           <div className='field'>
             <div className='control'>
-              <button className='button is-primary' onClick={onButtonSubmit}>
+              <button className='button is-info' onClick={onButtonSubmit}>
                 Submit
               </button>
             </div>

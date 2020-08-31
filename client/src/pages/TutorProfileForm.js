@@ -299,7 +299,7 @@ export default function ProfileForm(props) {
           <div className="field">
             <div className="control">
               <button
-                className="button is-primary"
+                className="button is-info"
                 onClick={tutorOnButtonSubmit}
               >
                 Submit

@@ -1,16 +1,20 @@
 .foot {
-    background-color: #4fa1df !important;
-    border-top: 2px #f0763a solid;
-    min-height: 60px;
-    padding-top: 10px;
-    color: white;
+  background-color: #4fa1df !important;
+  border-top: 2px #f0763a solid;
+  min-height: 60px;
+  padding-top: 10px;
+  color: white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-links {
-    color: #2c3c70;
+  color: #2c3c70;
 }
 
 .footer-links:hover {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
