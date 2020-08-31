@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import io from 'socket.io-client';
 import queryString from 'query-string';
 import Axios from 'axios';
-import Nav from '../components/Nav';
+import Nav from '../components/Nav/Nav';
 import SideBarMenu from '../components/SideBarMenu';
 import { AuthContext } from '../AuthContext';
 import ScrollToBottom from 'react-scroll-to-bottom';

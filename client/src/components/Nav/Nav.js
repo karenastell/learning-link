@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import LoginButton from '../components/LoginButton';
-import LogoutButton from '../components/LogoutButton';
-import { AuthContext } from '../AuthContext';
+import LoginButton from '../LoginButton';
+import LogoutButton from '../../components/LogoutButton';
+import { AuthContext } from '../../AuthContext';
 import Axios from 'axios';
+
+import './Nav.css';
 
 export default function Nav() {
   const { isAuth, setIsAuth, setUserId, userId, setIsTeacher} = useContext(AuthContext);
@@ -66,12 +68,12 @@ export default function Nav() {
   return (
     <>
       <nav
-        className="navbar is-flex-desktop nav-style"
+        className="navbar is-flex-desktop nav-style nav-and-modal"
         role="navigation"
         aria-label="main navigation"
       >
         <div className="navbar-brand">
-          <h1 className="title title-margin label-text">Learning Link</h1>
+          <h1 className="title title-margin label-text nav-and-modal-text">Learning Link</h1>
         </div>
         {/* if the user is logged in, the LogoutButton displays, if not, the loginButton */}
         { isAuth ? <LogoutButton /> : <LoginButton handleModalDisplay={handleModalDisplay} /> }
@@ -81,8 +83,8 @@ export default function Nav() {
       <div className={modal}>
         <div className="modal-background"></div>
         <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">Login to Learning Link</p>
+          <header className="modal-card-head nav-and-modal">
+            <p className="modal-card-title nav-and-modal-text">Login to Learning Link</p>
             <button
               className="delete"
               aria-label="close"
@@ -141,7 +143,7 @@ export default function Nav() {
             </div>
             <div className="control has-text-centered">
               <button
-                className="button is-primary is-fullwidth"
+                className="button is-info is-fullwidth"
                 onClick={handleFormSubmit}
               >
                 Submit

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import { AuthContext } from '../AuthContext';
 import SideBarMenu from '../components/SideBarMenu';
-import Nav from '../components/Nav';
+import Nav from '../components/Nav/Nav';
 
 export default function TutorSearchResult(props) {
   // const [results, setResults] = useState(props);

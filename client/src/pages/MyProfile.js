@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu';
-import Nav from '../components/Nav';
+import Nav from '../components/Nav/Nav';
 import ProfileDisplay from '../components/ProfileDisplay';
 import EditProfile from '../components/EditProfile';
 import EditAvailability from '../components/EditAvailability';

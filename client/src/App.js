@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './AuthContext';
 
-import Main from './pages/Main';
+import Main from './pages/Main/Main';
 import Footer from './components/Footer';
 import StudentProfileForm from './pages/StudentProfileForm';
 import TutorProfileForm from './pages/TutorProfileForm';
