@@ -7,7 +7,7 @@ export default function LogoutButton() {
     <div id="navbarBasicExample" className="navbar-end">
       <div className="navbar-end">
         <div className="buttons">
-          <button className="button is-light ml-2" onClick={logout} >Logout</button>
+          <button className="button is-info is-light ml-2" onClick={logout} >Logout</button>
         </div>
       </div>
     </div>

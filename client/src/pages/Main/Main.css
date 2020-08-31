@@ -1,0 +1,11 @@
+.main-body {
+    height: 82vh;
+}
+.button-main {
+    width: 300px;
+    margin: 5px;
+}
+
+.button-main:hover {
+    text-decoration: none;
+}
