@@ -14,9 +14,8 @@ export default function ProfileDisplay({
   setUserInfo,
   setUserProfileInfo,
   userId,
-  getUserInfo
+  getUserInfo,
 }) {
-
   const [alert, setAlert] = useState('off');
 
   const handleUserInputChange = (event) => {
@@ -71,9 +70,10 @@ export default function ProfileDisplay({
     Axios.put(`/api/edit-profile/${userId}`, {
       user: userInfo,
       userProfile: userProfileInfo,
-    }).then(() => {});
-    setEditMode('off');
-    getUserInfo();
+    }).then(() => {
+      setEditMode('off');
+      getUserInfo();
+    });
   };
 
   return (

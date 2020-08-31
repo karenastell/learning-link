@@ -1,12 +1,13 @@
 import React, { useEffect, useContext, useState } from 'react';
 import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu';
-import Nav from '../components/Nav';
-import ProfileDisplay from '../components/ProfileDisplay';
+import Nav from '../components/Nav/Nav';
+import ProfileDisplay from '../components/ProfileDisplay/ProfileDisplay';
 import EditProfile from '../components/EditProfile';
 import EditAvailability from '../components/EditAvailability';
 import EditSubjects from '../components/EditSubjects';
 import { AuthContext } from '../AuthContext';
+
 
 export default function MyProfile(props) {
   // get the userId and isTeacher from context
@@ -56,9 +57,9 @@ export default function MyProfile(props) {
         <div className="column is-narrow">
           <SideBarMenu />
         </div>
-        <div className="column is-10">
+        <div className="column is-10 mt-5">
           <h1 className="title">
-            {userInfo.firstName} {userInfo.lastName}'s profile
+            Your profile
           </h1>
           <div className="container">
             <div className="level">

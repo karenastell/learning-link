@@ -1,0 +1,16 @@
+.box-style {
+  background-color: #eef6fc !important;
+}
+
+.profile-text {
+  color: #2c3c70;
+  padding-left: 10px;
+  font-size: 18px;
+  margin-left: 40px;
+}
+
+.profile-span {
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 15px;
+}

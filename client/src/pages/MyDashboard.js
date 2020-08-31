@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../AuthContext';
-import Nav from '../components/Nav';
+import Nav from '../components/Nav/Nav';
 import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu';
 import DashboardCard from '../components/DashboardCard';

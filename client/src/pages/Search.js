@@ -5,7 +5,7 @@ import Delivery from '../components/Delivery';
 import Address from '../components/Address';
 import Availability from '../components/Availability';
 import Subjects from '../components/Subjects';
-import Nav from '../components/Nav';
+import Nav from '../components/Nav/Nav';
 import { AuthContext } from '../AuthContext';
 import { useHistory } from 'react-router-dom';
 
