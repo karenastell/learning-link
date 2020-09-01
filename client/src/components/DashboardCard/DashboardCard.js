@@ -85,9 +85,11 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
     setRemoveMessage('modal');
     // do a delete where, if isTeacher, the userId from context is the tutor id and the result.id is the student id
     // if !isTeacher the userId from context is the studentid and the result id is tutorid
-    await Axios.delete(`/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`)
-    
-    getMyStudentTutorPairs()
+    await Axios.delete(
+      `/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`
+    );
+
+    getMyStudentTutorPairs();
   };
 
   // set up a room between the user and any tutor/student on their dashboard so that they can message each other
@@ -116,14 +118,6 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
               {result.firstName} {result.lastName}
               <br />
             </p>
-            {!isTeacher ? (
-              <button
-                onClick={handleReadReview}
-                className="is-size-7 button is-info is-light card-buttons"
-              >
-                See {result.firstName}'s Reviews
-              </button>
-            ) : null}
           </header>
           <div className="card-content is-size-7 card-body-style">
             <div className="content">
@@ -173,6 +167,14 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
                   className="card-footer-item card-buttons button is-size-7 is-white is-info is-light"
                 >
                   Leave a Review
+                </button>
+              ) : null}
+              {!isTeacher ? (
+                <button
+                  onClick={handleReadReview}
+                  className="card-footer-item card-buttons button is-size-7 is-white is-info is-light"
+                >
+                  See {result.firstName}'s Reviews
                 </button>
               ) : null}
               <button

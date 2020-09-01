@@ -304,6 +304,12 @@ export default function ProfileForm(props) {
               >
                 Submit
               </button>
+              <button
+                className="button is-light mx-4"
+                onClick={() => history.push('/')}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
