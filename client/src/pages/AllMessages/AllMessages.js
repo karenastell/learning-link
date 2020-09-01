@@ -19,20 +19,24 @@ export default function AllMessages() {
   const [senderName, setSenderName] = useState('');
 
   console.log(userId);
-
-  const handleDelete = (event) => {
-    event.preventDefault();
-    alert(event.target.value);
-  };
+  console.log(isTeacher);
 
   const getMessages = async () => {
-    const allMessages = await Axios.get(`api/all-messages/${userId}/`);
-    console.log(allMessages);
-    for (let i = 0; i < allMessages.data.length; i++) {
-      senderIdArray.push(allMessages.data[i].TutorId);
-      console.log(senderIdArray);
+    if (!isTeacher) {
+      const allMessages = await Axios.get(`api/all-messages/student${userId}/`);
+      console.log(allMessages);
+      for (let i = 0; i < allMessages.data.length; i++) {
+        senderIdArray.push(allMessages.data[i].TutorId);
+        console.log(senderIdArray);
+      }
+    } else {
+      const allMessages = await Axios.get(`api/all-messages/tutor${userId}`);
+      console.log(allMessages);
+      for (let i = 0; i < allMessages.data.length; i++) {
+        senderIdArray.push(allMessages.data[i].StudentId);
+        console.log(senderIdArray);
+      }
     }
-
     noDuplicates = [...new Set(senderIdArray)];
     console.log(noDuplicates);
 

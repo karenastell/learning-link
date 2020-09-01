@@ -340,10 +340,20 @@ router.post(
   }
 );
 
-router.get('/all-messages/:id', (req, res) => {
-  console.log(req.params.id);
+router.get('/all-messages/student:studentId', (req, res) => {
+  console.log(req.params.studentId);
   db.Message.findAll({
-    where: { SenderId: req.params.id },
+    where: { StudentId: req.params.studentId },
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
+
+router.get('/all-messages/tutor:tutorId', (req, res) => {
+  console.log(req.params.tutorId);
+  db.Message.findAll({
+    where: { TutorId: req.params.tutorId },
   }).then((data) => {
     console.log(data);
     res.json(data);
