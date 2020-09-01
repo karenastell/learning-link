@@ -1,5 +1,5 @@
 .main-body {
-    height: 82vh;
+    min-height: 900px;
 }
 .button-main {
     width: 300px;

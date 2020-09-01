@@ -116,7 +116,7 @@ export default function StudentProfileForm(props) {
 
   return (
     <div className='container mt-5 mb-5'>
-      <h1 className='title'>Student Form</h1>
+      <h1 className='title'>Sign up as a Student</h1>
       {successAlert === 'on' ? (
                 <article className="message is-primary">
                   <div className="message-body">
@@ -231,7 +231,7 @@ export default function StudentProfileForm(props) {
         <div className='field-body'>
           <div className='field'>
             <div className='control'>
-              <button className='button is-primary' onClick={onButtonSubmit}>
+              <button className='button is-info mb-6' onClick={onButtonSubmit}>
                 Submit
               </button>
             </div>

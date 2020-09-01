@@ -78,7 +78,6 @@ export default function ProfileDisplay({
 
   return (
     <>
-      <h1>Edit profile page</h1>
       <div className="field is-horizontal">
         <div className="field-label is-normal">
           <label className="label">Your Information</label>
@@ -245,7 +244,7 @@ export default function ProfileDisplay({
                   </div>
                 </article>
               ) : null}
-              <button className="button is-primary" onClick={handleSaveChanges}>
+              <button className="button is-info" onClick={handleSaveChanges}>
                 Save Changes
               </button>
               <button
