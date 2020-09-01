@@ -360,4 +360,15 @@ router.get('/sent-messages-to/:personId', (req, res) => {
   });
 });
 
+router.get('/all-messages/:studentId/:tutorId', (req, res) => {
+  console.log(req.params);
+  db.Message.findAll({
+    where: { StudentId: req.params.studentId, TutorId: req.params.tutorId },
+    include: { model: db.User },
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
+
 module.exports = router;

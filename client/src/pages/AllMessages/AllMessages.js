@@ -10,24 +10,14 @@ export default function AllMessages() {
   let tempArray = [];
   let noDuplicates;
 
-  const { userId } = useContext(AuthContext);
+  const { userId, isTeacher } = useContext(AuthContext);
   const [senderNameArray, setSenderNameArray] = useState([]);
-  const [readReviewModal, setReadReviewModal] = useState('modal');
-  const [reviewModal, setReviewModal] = useState('modal');
-  const [removeMessage, setRemoveMessage] = useState('modal');
-
 
   console.log(userId);
 
-  const handleModalClose = () => {
-    setReviewModal('modal');
-    setRemoveMessage('modal');
-    setReadReviewModal('modal');
-  };
-
   const handleDelete = (event) => {
     event.preventDefault();
-    setRemoveMessage('modal is-active')
+    alert(event.target.value);
   };
 
   const getMessages = async () => {
@@ -55,10 +45,28 @@ export default function AllMessages() {
     }
   };
 
-  useEffect(async () => {
-    await getMessages();
-    await setSenderNameArray(tempArray);
+  useEffect(() => {
+    const thisFunction = async () => {
+      await getMessages();
+      await setSenderNameArray(tempArray);
+    };
+    thisFunction();
   }, []);
+
+  const viewAllMessages = async (id) => {
+      console.log(id);
+    if (isTeacher) {
+      const allCorrespondence = await Axios.get(
+        `api/all-messages/${id}/${userId}`
+      );
+      console.log(allCorrespondence);
+    } else {
+      const allCorrespondence = await Axios.get(
+        `api/all-messages/${userId}/${id}`
+      );
+      console.log(allCorrespondence);
+    }
+  };
 
   return (
     <>
@@ -75,43 +83,17 @@ export default function AllMessages() {
             <ul>
               <li>
                 {person.firstName} {person.lastName}{' '}
-                <button
-                  onClick={handleDelete}
-                  className='is-danger delete'
-                  value={person.id}
-                ></button>
+                <button onClick={()=>viewAllMessages(person.id)} className='delete'></button>
               </li>
             </ul>
           ))}
         </div>
-      </div>
-
-      <div className={removeMessage}>
-        <div className='modal-background'></div>
-        <div className='modal-card'>
-          <header className='modal-card-head'>
-            <p className='modal-card-title'>
-              You are about to remove from your Dashboard
-            </p>
-            <button
-              className='delete'
-              aria-label='close'
-              onClick={handleModalClose}
-            ></button>
-          </header>
-          <section className='modal-card-body'>
-            <p>Are you sure you want to remove from your dashboard?</p>
-          </section>
-          <footer className='modal-card-foot'>
-            <button className='button is-success' 
-            // onClick={removeFromDashboard}
-            >
-              Yes, I'm sure
-            </button>
-            <button className='button' onClick={handleModalClose}>
-              Cancel
-            </button>
-          </footer>
+        <div className='column is-two-thirds'>
+            <h3 className ='title is-3'>Your Messages With ***</h3>
+            {allCorrespondence.data.map((message)=>{
+                
+            })}
+            
         </div>
       </div>
     </>
