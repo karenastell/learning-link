@@ -1,3 +1,11 @@
 .allMessages-messages {
     border: 1px solid grey;
+    max-height: 600px;
+    overflow: scroll;
+}
+
+.all-messages-div {
+    min-height: 90vh;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
 }

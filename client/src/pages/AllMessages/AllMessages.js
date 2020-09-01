@@ -91,7 +91,7 @@ export default function AllMessages() {
         <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
-        <div className='container columns m-2'>
+        <div className='container columns m-2 all-messages-div'>
           <div className='column is-one-quarter'>
             <p className='mb-2'>Click on a name to view messages:</p>
             {senderNameArray.map((person) => (
