@@ -1,0 +1,13 @@
+.oneMessage-message {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.senderName-message {
+  text-decoration: underline;
+  margin-right: 5px;
+}
+
+.oneMessage-div {
+  margin: 5px;
+}
