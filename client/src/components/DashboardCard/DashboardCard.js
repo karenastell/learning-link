@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { AuthContext } from '../AuthContext';
+import { AuthContext } from '../../AuthContext';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
+import './DashboardCard.css';
 
 export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   const { isTeacher, userId } = useContext(AuthContext);
@@ -20,11 +21,6 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   useEffect(() => {
     setMessageRoom();
   }, []);
-
-  const cardStyle = {
-    maxHeight: '200px',
-    overflow: 'scroll',
-  };
 
   const activateModal = () => {
     setReviewModal('modal is-active');
@@ -114,8 +110,8 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   return (
     <>
       <div className="column is-half-tablet is-one-third-desktop">
-        <div className="card mb-6">
-          <header className="card-header">
+        <div className="card mb-6 card-style">
+          <header className="card-header card-head-style">
             <p className="column">
               {result.firstName} {result.lastName}
               <br />
@@ -123,13 +119,13 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
             {!isTeacher ? (
               <button
                 onClick={handleReadReview}
-                className="is-size-7 button is-white"
+                className="is-size-7 button is-info is-light card-buttons"
               >
                 See {result.firstName}'s Reviews
               </button>
             ) : null}
           </header>
-          <div style={cardStyle} className="card-content is-size-7">
+          <div className="card-content is-size-7 card-body-style">
             <div className="content">
               <ul>
                 <li>Email: {result.email}</li>
@@ -148,7 +144,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
                 {!isTeacher ? (
                   <li>Experience: {result.experience}</li>
                 ) : (
-                  <li>My School: {result.school}</li>
+                  <li>School: {result.school}</li>
                 )}
                 <li>Subjects: </li>
                 <ul>
@@ -161,11 +157,11 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
               </ul>
             </div>
           </div>
-          <footer className="card-footer">
-            <div className="buttons">
+          <footer className="card-footer card-foot">
+            <div className="buttons card-buttons">
               <Link
                 to={`/message?user1=${userId}&user2=${result.id}&room=${room}`}
-                className="card-footer-item button is-size-7 is-white"
+                className="card-footer-item card-buttons button is-info is-light is-size-7 is-white"
                 onClick={setMessageRoom}
               >
                 Message {result.firstName}
@@ -174,13 +170,13 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
               {!isTeacher ? (
                 <button
                   onClick={activateModal}
-                  className="card-footer-item button is-size-7 is-white"
+                  className="card-footer-item card-buttons button is-size-7 is-white is-info is-light"
                 >
                   Leave a Review
                 </button>
               ) : null}
               <button
-                className="card-footer-item button is-size-7 is-white"
+                className="card-footer-item card-buttons button is-size-7 is-white is-info is-light"
                 onClick={handleRemoveModal}
               >
                 Remove {result.firstName}

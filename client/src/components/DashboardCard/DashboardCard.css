@@ -1,0 +1,28 @@
+.card-head-style {
+  background-color: #4fa1df !important;
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.card-body-style {
+  max-height: 200px;
+  overflow: scroll;
+  background-color: white !important;
+}
+
+.card-foot {
+  margin: auto;
+}
+
+.card-style {
+  background-color: #eef6fc !important;
+}
+
+.card-buttons {
+  color: #2c3c70 !important;
+}
+
+.card-buttons:hover {
+  text-decoration: none !important;
+}

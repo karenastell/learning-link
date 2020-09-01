@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import SideBarMenu from '../components/SideBarMenu';
+import SideBarMenu from '../components/SideBarMenu/SideBarMenu';
 import Nav from '../components/Nav/Nav';
 
 export default function Calendar(props) {
@@ -8,7 +8,7 @@ export default function Calendar(props) {
     <>
       <Nav />
       <div className="columns">
-        <div className="column is-narrow">
+        <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
         <div className="container column">

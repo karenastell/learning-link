@@ -1,0 +1,18 @@
+.side-bar {
+    background-color: #eef6fc !important;
+    border-right: 1px solid #4fa1df;
+}
+
+@media only screen and (max-width: 768px) {
+    .side-bar {height: auto}
+}
+
+.menu-style {
+    color: #2c3c70 !important;
+}
+
+.menu-style:hover {
+    background-color: #f3bb22 !important;
+    color: #2c3c70 !important;
+    border-radius: 10px;
+}

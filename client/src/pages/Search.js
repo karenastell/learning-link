@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Axios from 'axios';
-import SideBarMenu from '../components/SideBarMenu';
+import SideBarMenu from '../components/SideBarMenu/SideBarMenu';
 import Delivery from '../components/Delivery';
 import Address from '../components/Address';
 import Availability from '../components/Availability';
@@ -258,7 +258,7 @@ export default function Search() {
     <>
       <Nav />
       <div className='columns'>
-        <div className='column is-narrow'>
+        <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
         <div className='container column'>
