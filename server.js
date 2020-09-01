@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const db = require('./models');
 const routes = require('./routes');
 const { addUser, getUser } = require('./users');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 8080;
 
@@ -71,7 +72,7 @@ app.use(passport.session());
 // Routing
 // =============================================
 app.use('/api', routes);
-
+app.use(cors());
 // Everything that is not an api request is sent to index.html
 // for client side routing.
 app.get('*', (req, res) => {
