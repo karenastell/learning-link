@@ -5,6 +5,7 @@ import Axios from 'axios';
 import Nav from '../../components/Nav/Nav';
 import SideBarMenu from '../../components/SideBarMenu';
 import OneMessage from '../../components/OneMessage/OneMessage';
+import './AllMessages.css';
 
 export default function AllMessages() {
   let senderIdArray = [];
@@ -79,37 +80,38 @@ export default function AllMessages() {
         <div className='column is-narrow'>
           <SideBarMenu />
         </div>
-        <div className='column'>
-          <h1 className='title is-3'>
-            Click on a name to send and view messages
-          </h1>
-          {senderNameArray.map((person) => (
-            <ul>
-              <li>
-                {person.firstName} {person.lastName}{' '}
-                <button
-                  onClick={() => viewAllMessages(person.id)}
-                  className='delete'
-                ></button>
-              </li>
-            </ul>
-          ))}
-        </div>
-        <div className='column is-two-thirds'>
-          {senderName ? (
-            <h3 className='title is-3'>Your Messages With {senderName}</h3>
-          ) : null}
-
-          {correspondence.map((message) => (
-            <OneMessage
-              key={message.createdAt}
-              senderId={message.SenderId}
-              userId={userId}
-              isTeacher={isTeacher}
-              message={message.message}
-              firstName={message.User.firstName}
-            />
-          ))}
+        <div className='container columns m-2'>
+          <div className='column is-one-quarter'>
+            <p className='mb-2'>Click on a name to view messages:</p>
+            {senderNameArray.map((person) => (
+              <ul>
+                <li>
+                  <button
+                    onClick={() => viewAllMessages(person.id)}
+                    className='button is-info is-light mb-2'
+                  >
+                    {person.firstName} {person.lastName}
+                  </button>
+                </li>
+              </ul>
+            ))}
+          </div>
+          <div className='column is-two-thirds'>
+            {senderName ? (
+              <div className='allMessages-messages'>
+                <h3 className='title is-3'>Your Messages With {senderName}</h3>
+                {correspondence.map((message) => (
+                  <OneMessage
+                    key={message.createdAt}
+                    senderId={message.SenderId}
+                    userId={userId}
+                    message={message.message}
+                    firstName={message.User.firstName}
+                  />
+                ))}
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </>
