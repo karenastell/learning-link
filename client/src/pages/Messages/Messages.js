@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import queryString from 'query-string';
 import Axios from 'axios';
 import Nav from '../../components/Nav/Nav'
-import SideBarMenu from '../../components/SideBarMenu';
+import SideBarMenu from '../../components/SideBarMenu/SideBarMenu';
 import { AuthContext } from '../../AuthContext';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import Message from '../../components/Message/Message';
@@ -100,7 +100,7 @@ export default function Messages({ location }) {
     <>
       <Nav />
       <div className='columns'>
-        <div className='column is-narrow'>
+        <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
         {/* <div className='column'>

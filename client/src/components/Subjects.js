@@ -19,7 +19,7 @@ export default function Subjects(props) {
             <tbody>
               <tr>
                 <td>
-                  <label className='checkbox mr-5'>
+                  <label className='checkbox mr-5 is-size-7-mobile'>
                     <input
                       className='mr-2'
                       value='Elementary: Language Arts'
@@ -31,7 +31,7 @@ export default function Subjects(props) {
                   </label>
                 </td>
                 <td>
-                  <label className='checkbox mr-5'>
+                  <label className='checkbox mr-5 is-size-7-mobile'>
                     <input
                       className='mr-2'
                       value='Middle School: Language Arts'
@@ -46,7 +46,7 @@ export default function Subjects(props) {
 
               <tr>
                 <td>
-                  <label className='checkbox mr-5'>
+                  <label className='checkbox mr-5 is-size-7-mobile'>
                     <input
                       className='mr-2'
                       value='Elementary: Math'
@@ -58,7 +58,7 @@ export default function Subjects(props) {
                   </label>
                 </td>
                 <td>
-                  <label className='checkbox mr-5'>
+                  <label className='checkbox mr-5 is-size-7-mobile'>
                     <input
                       className='mr-2'
                       value='Middle School: Basic Math'
@@ -72,7 +72,7 @@ export default function Subjects(props) {
               </tr>
               <tr>
                 <td>
-                  <label className='checkbox mr-5'>
+                  <label className='checkbox mr-5 is-size-7-mobile'>
                     <input
                       className='mr-2'
                       value='Elementary: Science'
@@ -84,7 +84,7 @@ export default function Subjects(props) {
                   </label>
                 </td>
                 <td>
-                  <label className='checkbox mr-5'>
+                  <label className='checkbox mr-5 is-size-7-mobile'>
                     <input
                       className='mr-2'
                       value='Middle School: Pre-Algebra'
@@ -98,7 +98,7 @@ export default function Subjects(props) {
               </tr>
               <tr>
                 <td>
-                  <label className='checkbox mr-5'>
+                  <label className='checkbox mr-5 is-size-7-mobile'>
                     <input
                       className='mr-2'
                       value='Elementary: Social Studies'
@@ -110,7 +110,7 @@ export default function Subjects(props) {
                   </label>
                 </td>
                 <td>
-                  <label className='checkbox mr-5'>
+                  <label className='checkbox mr-5 is-size-7-mobile'>
                     <input
                       className='mr-2'
                       value='Middle School: Science'
@@ -125,7 +125,7 @@ export default function Subjects(props) {
               <tr>
                 <td></td>
                 <td>
-                  <label className='checkbox mr-5'>
+                  <label className='checkbox mr-5 is-size-7-mobile'>
                     <input
                       className='mr-2'
                       value='Middle School: Social Studies'
@@ -157,7 +157,7 @@ export default function Subjects(props) {
               <tbody>
                 <tr>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: English'
@@ -169,7 +169,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Biology'
@@ -181,7 +181,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Government'
@@ -196,7 +196,7 @@ export default function Subjects(props) {
 
                 <tr>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Algebra'
@@ -208,7 +208,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Physics'
@@ -220,7 +220,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Business'
@@ -234,7 +234,7 @@ export default function Subjects(props) {
                 </tr>
                 <tr>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Geometry'
@@ -246,7 +246,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Chemistry'
@@ -258,7 +258,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: US History'
@@ -272,7 +272,7 @@ export default function Subjects(props) {
                 </tr>
                 <tr>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Trigonometry'
@@ -284,7 +284,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Physical Science'
@@ -296,7 +296,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Geography'
@@ -310,7 +310,7 @@ export default function Subjects(props) {
                 </tr>
                 <tr>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Statistics'
@@ -323,7 +323,7 @@ export default function Subjects(props) {
                   </td>
 
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Spanish'
@@ -335,7 +335,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Psychology'
@@ -349,7 +349,7 @@ export default function Subjects(props) {
                 </tr>
                 <tr>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Pre-Calculus'
@@ -361,7 +361,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: French'
@@ -375,7 +375,7 @@ export default function Subjects(props) {
                 </tr>
                 <tr>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: Calculus'
@@ -387,7 +387,7 @@ export default function Subjects(props) {
                     </label>
                   </td>
                   <td>
-                    <label className='checkbox mr-5'>
+                    <label className='checkbox mr-5 is-size-7-mobile'>
                       <input
                         className='mr-2'
                         value='High School: German'

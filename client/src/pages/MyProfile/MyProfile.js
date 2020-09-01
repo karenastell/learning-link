@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import Axios from 'axios';
-import SideBarMenu from '../../components/SideBarMenu';
+import SideBarMenu from '../../components/SideBarMenu/SideBarMenu';
 import Nav from '../../components/Nav/Nav';
 import ProfileDisplay from '../../components/ProfileDisplay/ProfileDisplay';
 import EditProfile from '../../components/EditProfile';
@@ -55,7 +55,7 @@ export default function MyProfile(props) {
     <>
       <Nav />
       <div className="columns my-profile-div">
-        <div className="column is-narrow">
+        <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
         <div className="column is-10 mt-5">

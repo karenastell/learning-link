@@ -3,7 +3,7 @@ import { AuthContext } from '../../AuthContext';
 import Axios from 'axios';
 
 import Nav from '../../components/Nav/Nav';
-import SideBarMenu from '../../components/SideBarMenu';
+import SideBarMenu from '../../components/SideBarMenu/SideBarMenu';
 import OneMessage from '../../components/OneMessage/OneMessage';
 import './AllMessages.css';
 
@@ -77,7 +77,7 @@ export default function AllMessages() {
     <>
       <Nav />
       <div className='columns'>
-        <div className='column is-narrow'>
+        <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
         <div className='container columns m-2'>
