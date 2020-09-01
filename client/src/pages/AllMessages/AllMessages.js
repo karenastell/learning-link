@@ -4,14 +4,18 @@ import Axios from 'axios';
 
 import Nav from '../../components/Nav/Nav';
 import SideBarMenu from '../../components/SideBarMenu';
+import OneMessage from '../../components/OneMessage/OneMessage';
 
 export default function AllMessages() {
   let senderIdArray = [];
   let tempArray = [];
   let noDuplicates;
+  let allCorrespondence;
 
   const { userId, isTeacher } = useContext(AuthContext);
   const [senderNameArray, setSenderNameArray] = useState([]);
+  const [correspondence, setCorrespondence] = useState([]);
+  const [senderName, setSenderName] = useState('');
 
   console.log(userId);
 
@@ -54,17 +58,17 @@ export default function AllMessages() {
   }, []);
 
   const viewAllMessages = async (id) => {
-      console.log(id);
+    console.log(id);
     if (isTeacher) {
-      const allCorrespondence = await Axios.get(
-        `api/all-messages/${id}/${userId}`
-      );
+      allCorrespondence = await Axios.get(`api/all-messages/${id}/${userId}`);
       console.log(allCorrespondence);
+      setCorrespondence(allCorrespondence.data);
+      setSenderName(allCorrespondence.data[0].User.firstName);
     } else {
-      const allCorrespondence = await Axios.get(
-        `api/all-messages/${userId}/${id}`
-      );
+      allCorrespondence = await Axios.get(`api/all-messages/${userId}/${id}`);
       console.log(allCorrespondence);
+      setCorrespondence(allCorrespondence.data);
+      setSenderName(allCorrespondence.data[0].User.firstName);
     }
   };
 
@@ -83,17 +87,29 @@ export default function AllMessages() {
             <ul>
               <li>
                 {person.firstName} {person.lastName}{' '}
-                <button onClick={()=>viewAllMessages(person.id)} className='delete'></button>
+                <button
+                  onClick={() => viewAllMessages(person.id)}
+                  className='delete'
+                ></button>
               </li>
             </ul>
           ))}
         </div>
         <div className='column is-two-thirds'>
-            <h3 className ='title is-3'>Your Messages With ***</h3>
-            {allCorrespondence.data.map((message)=>{
-                
-            })}
-            
+          {senderName ? (
+            <h3 className='title is-3'>Your Messages With {senderName}</h3>
+          ) : null}
+
+          {correspondence.map((message) => (
+            <OneMessage
+              key={message.createdAt}
+              senderId={message.SenderId}
+              userId={userId}
+              isTeacher={isTeacher}
+              message={message.message}
+              firstName={message.User.firstName}
+            />
+          ))}
         </div>
       </div>
     </>
