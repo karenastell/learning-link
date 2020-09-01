@@ -123,7 +123,7 @@ export default function ProfileForm(props) {
 
   return (
     <div className="container mt-5 mb-5">
-      <h1 className="title">Tutor Form</h1>
+      <h1 className="title">Sign up as a tutor</h1>
       {successAlert === 'on' ? (
         <article className="message is-primary">
           <div className="message-body">
@@ -299,7 +299,7 @@ export default function ProfileForm(props) {
           <div className="field">
             <div className="control">
               <button
-                className="button is-primary"
+                className="button is-info mb-6"
                 onClick={tutorOnButtonSubmit}
               >
                 Submit

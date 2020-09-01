@@ -1,12 +1,13 @@
 import React, { useEffect, useContext, useState } from 'react';
 import Axios from 'axios';
-import SideBarMenu from '../components/SideBarMenu';
-import Nav from '../components/Nav/Nav';
-import ProfileDisplay from '../components/ProfileDisplay/ProfileDisplay';
-import EditProfile from '../components/EditProfile';
-import EditAvailability from '../components/EditAvailability';
-import EditSubjects from '../components/EditSubjects';
-import { AuthContext } from '../AuthContext';
+import SideBarMenu from '../../components/SideBarMenu';
+import Nav from '../../components/Nav/Nav';
+import ProfileDisplay from '../../components/ProfileDisplay/ProfileDisplay';
+import EditProfile from '../../components/EditProfile';
+import EditAvailability from '../../components/EditAvailability/EditAvailability';
+import EditSubjects from '../../components/EditSubjects/EditSubjects';
+import { AuthContext } from '../../AuthContext';
+import './MyProfile.css';
 
 
 export default function MyProfile(props) {
@@ -53,7 +54,7 @@ export default function MyProfile(props) {
   return (
     <>
       <Nav />
-      <div className="columns">
+      <div className="columns my-profile-div">
         <div className="column is-narrow">
           <SideBarMenu />
         </div>
@@ -65,7 +66,7 @@ export default function MyProfile(props) {
             <div className="level">
               <div className="level-left"></div>
               <div className="level-right">
-                {editMode === 'off' ? (
+                {editMode === 'off' && editAvailabilityMode === 'off' && editSubjectsMode === 'off' ? (
                   <a
                     className="level-item button is-small is-outlined is-pulled-right is-info"
                     onClick={() => setEditMode('on')}

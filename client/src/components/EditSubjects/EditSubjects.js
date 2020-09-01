@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Subjects from '../components/Subjects';
-import { AuthContext } from '../AuthContext';
+import Subjects from '../../components/Subjects';
+import { AuthContext } from '../../AuthContext';
 import Axios from 'axios';
+import './EditSubjects.css';
 
 export default function EditSubjects({
   setEditSubjectsMode,
@@ -39,7 +40,7 @@ export default function EditSubjects({
   };
 
   return (
-    <>
+    <div className="edit-subject-div">
       <Subjects handleCheckboxes={handleCheckboxes} />
       <div className="field is-horizontal">
         <div className="field-label"></div>
@@ -53,7 +54,7 @@ export default function EditSubjects({
                   </div>
                 </article>
               ) : null}
-              <button className="button is-primary" onClick={handleSaveChanges}>
+              <button className="button is-info" onClick={handleSaveChanges}>
                 Save Changes
               </button>
               <button
@@ -66,6 +67,6 @@ export default function EditSubjects({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
