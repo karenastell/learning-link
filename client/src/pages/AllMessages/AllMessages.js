@@ -12,6 +12,7 @@ export default function AllMessages() {
   let tempArray = [];
   let noDuplicates;
   let allCorrespondence;
+  let studentName;
 
   const { userId, isTeacher } = useContext(AuthContext);
   const [senderNameArray, setSenderNameArray] = useState([]);
@@ -67,7 +68,11 @@ export default function AllMessages() {
     if (isTeacher) {
       allCorrespondence = await Axios.get(`api/all-messages/${id}/${userId}`);
       console.log(allCorrespondence);
-      setCorrespondence(allCorrespondence.data);
+      await setCorrespondence(allCorrespondence.data);
+
+      studentName = await Axios.get(`api/all-messages/student-name/${allCorrespondence.data[0].StudentId}`)
+      console.log(studentName);
+
       setSenderName(allCorrespondence.data[0].User.firstName);
     } else {
       allCorrespondence = await Axios.get(`api/all-messages/${userId}/${id}`);
@@ -103,14 +108,17 @@ export default function AllMessages() {
           <div className='column is-two-thirds'>
             {senderName ? (
               <div className='allMessages-messages'>
-                <h3 className='title is-3'>Your Messages With {senderName}</h3>
+                  {!isTeacher ? ( <h3 className='title is-3'>Your Messages With {senderName}</h3>): (<h3 className='title is-3'>Your Messages With ****</h3>)}
+               
                 {correspondence.map((message) => (
                   <OneMessage
                     key={message.createdAt}
+                    isTeacher={isTeacher}
                     senderId={message.SenderId}
                     userId={userId}
                     message={message.message}
                     firstName={message.User.firstName}
+                    senderNameArray={senderNameArray}
                   />
                 ))}
               </div>

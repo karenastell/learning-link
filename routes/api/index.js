@@ -360,6 +360,16 @@ router.get('/all-messages/tutor:tutorId', (req, res) => {
   });
 });
 
+router.get('/all-messages/student-name/:studentId', (req, res) => {
+  console.log(req.params.studentId);
+  db.User.findOne({
+    where: { id: req.params.studentId },
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
+
 router.get('/sent-messages-to/:personId', (req, res) => {
   console.log(req.params.personId);
   db.User.findOne({
