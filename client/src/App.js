@@ -13,7 +13,7 @@ import StudentProfileForm from './pages/StudentProfileForm';
 import TutorProfileForm from './pages/TutorProfileForm';
 import Search from './pages/Search';
 import MyProfile from './pages/MyProfile/MyProfile';
-import MyDashboard from './pages/MyDashboard';
+import MyDashboard from './pages/MyDashboard/MyDashboard';
 import Messages from './pages/Messages/Messages';
 import Calendar from './pages/Calendar';
 import TutorSearchResult from './pages/TutorSearchResult';

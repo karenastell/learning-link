@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { AuthContext } from '../AuthContext';
-import Nav from '../components/Nav/Nav';
+import { AuthContext } from '../../AuthContext';
+import Nav from '../../components/Nav/Nav';
 import Axios from 'axios';
-import SideBarMenu from '../components/SideBarMenu/SideBarMenu';
-import DashboardCard from '../components/DashboardCard';
+import SideBarMenu from '../../components/SideBarMenu/SideBarMenu';
+import DashboardCard from '../../components/DashboardCard/DashboardCard';
+import './MyDashboard.css';
 
 export default function MyDashboard() {
   const { userId, isTeacher } = useContext(AuthContext);
@@ -122,7 +123,7 @@ export default function MyDashboard() {
         <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
-        <div className="column mt-5">
+        <div className="column mt-5  my-dash-div">
           <h1 className="title is-centered">Hello {userInfo.firstName},</h1>
           <h2 className="is-centered is-size-4">
             Welcome to your Learning Link Dashboard!
