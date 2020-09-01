@@ -23,7 +23,7 @@ export default function Messages({ location }) {
 
   console.log(userId);
 
-  const ENDPOINT = process.env.PORT || 'localhost:3000';
+  const ENDPOINT = "https://ancient-brushlands-96177.herokuapp.com/" || 'localhost:3000';
 
   useEffect(() => {
     const { user1, user2 } = queryString.parse(location.search);
