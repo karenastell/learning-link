@@ -12,6 +12,7 @@ export default function AllMessages() {
   let tempArray = [];
   let noDuplicates;
   let allCorrespondence;
+  let studentName;
 
   const { userId, isTeacher } = useContext(AuthContext);
   const [senderNameArray, setSenderNameArray] = useState([]);
@@ -19,20 +20,24 @@ export default function AllMessages() {
   const [senderName, setSenderName] = useState('');
 
   console.log(userId);
-
-  const handleDelete = (event) => {
-    event.preventDefault();
-    alert(event.target.value);
-  };
+  console.log(isTeacher);
 
   const getMessages = async () => {
-    const allMessages = await Axios.get(`api/all-messages/${userId}/`);
-    console.log(allMessages);
-    for (let i = 0; i < allMessages.data.length; i++) {
-      senderIdArray.push(allMessages.data[i].TutorId);
-      console.log(senderIdArray);
+    if (!isTeacher) {
+      const allMessages = await Axios.get(`api/all-messages/student${userId}/`);
+      console.log(allMessages);
+      for (let i = 0; i < allMessages.data.length; i++) {
+        senderIdArray.push(allMessages.data[i].TutorId);
+        console.log(senderIdArray);
+      }
+    } else {
+      const allMessages = await Axios.get(`api/all-messages/tutor${userId}`);
+      console.log(allMessages);
+      for (let i = 0; i < allMessages.data.length; i++) {
+        senderIdArray.push(allMessages.data[i].StudentId);
+        console.log(senderIdArray);
+      }
     }
-
     noDuplicates = [...new Set(senderIdArray)];
     console.log(noDuplicates);
 
@@ -63,8 +68,14 @@ export default function AllMessages() {
     if (isTeacher) {
       allCorrespondence = await Axios.get(`api/all-messages/${id}/${userId}`);
       console.log(allCorrespondence);
-      setCorrespondence(allCorrespondence.data);
-      setSenderName(allCorrespondence.data[0].User.firstName);
+      await setCorrespondence(allCorrespondence.data);
+
+      studentName = await Axios.get(
+        `api/all-messages/student-name/${allCorrespondence.data[0].StudentId}`
+      );
+      console.log(studentName);
+      console.log(studentName.data.firstName);
+      setSenderName(studentName.data.firstName);
     } else {
       allCorrespondence = await Axios.get(`api/all-messages/${userId}/${id}`);
       console.log(allCorrespondence);
@@ -103,10 +114,12 @@ export default function AllMessages() {
                 {correspondence.map((message) => (
                   <OneMessage
                     key={message.createdAt}
+                    isTeacher={isTeacher}
                     senderId={message.SenderId}
                     userId={userId}
                     message={message.message}
                     firstName={message.User.firstName}
+                    senderName={senderName}
                   />
                 ))}
               </div>
