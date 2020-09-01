@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../AuthContext';
 import Nav from '../components/Nav/Nav';
 import Axios from 'axios';
-import SideBarMenu from '../components/SideBarMenu';
+import SideBarMenu from '../components/SideBarMenu/SideBarMenu';
 import DashboardCard from '../components/DashboardCard';
 
 export default function MyDashboard() {
@@ -118,11 +118,11 @@ export default function MyDashboard() {
   return (
     <>
       <Nav />
-      <div className="columns pt-4">
-        <div className="column is-narrow">
+      <div className="columns">
+        <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
-        <div className="column">
+        <div className="column mt-5">
           <h1 className="title is-centered">Hello {userInfo.firstName},</h1>
           <h2 className="is-centered is-size-4">
             Welcome to your Learning Link Dashboard!

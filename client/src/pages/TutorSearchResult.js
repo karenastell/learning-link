@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import { AuthContext } from '../AuthContext';
-import SideBarMenu from '../components/SideBarMenu';
+import SideBarMenu from '../components/SideBarMenu/SideBarMenu';
 import Nav from '../components/Nav/Nav';
 
 export default function TutorSearchResult(props) {
@@ -110,7 +110,7 @@ export default function TutorSearchResult(props) {
     <>
       <Nav />
       <div className="columns">
-        <div className="column is-narrow">
+        <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
         <div className="mt-6">
