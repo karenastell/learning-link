@@ -1,13 +1,15 @@
 .foot {
   background-color: #4fa1df !important;
   border-top: 2px #f0763a solid;
-  min-height: 60px;
+  min-height: 90px !important;
   padding-top: 10px;
   color: white;
-  position: fixed;
+  /* position: fixed;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: 100%; */
+  margin: 0px !important;
+  padding: 15px !important
 }
 
 .footer-links {

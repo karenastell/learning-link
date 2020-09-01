@@ -1,7 +1,6 @@
 .side-bar {
     background-color: #eef6fc !important;
     border-right: 1px solid #4fa1df;
-    height: 100vh;
 }
 
 @media only screen and (max-width: 768px) {
@@ -10,7 +9,6 @@
 
 .menu-style {
     color: #2c3c70 !important;
-    
 }
 
 .menu-style:hover {
