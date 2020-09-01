@@ -70,10 +70,12 @@ export default function AllMessages() {
       console.log(allCorrespondence);
       await setCorrespondence(allCorrespondence.data);
 
-      studentName = await Axios.get(`api/all-messages/student-name/${allCorrespondence.data[0].StudentId}`)
+      studentName = await Axios.get(
+        `api/all-messages/student-name/${allCorrespondence.data[0].StudentId}`
+      );
       console.log(studentName);
-
-      setSenderName(allCorrespondence.data[0].User.firstName);
+      console.log(studentName.data.firstName);
+      setSenderName(studentName.data.firstName);
     } else {
       allCorrespondence = await Axios.get(`api/all-messages/${userId}/${id}`);
       console.log(allCorrespondence);
@@ -108,8 +110,7 @@ export default function AllMessages() {
           <div className='column is-two-thirds'>
             {senderName ? (
               <div className='allMessages-messages'>
-                  {!isTeacher ? ( <h3 className='title is-3'>Your Messages With {senderName}</h3>): (<h3 className='title is-3'>Your Messages With ****</h3>)}
-               
+                <h3 className='title is-3'>Your Messages With {senderName}</h3>
                 {correspondence.map((message) => (
                   <OneMessage
                     key={message.createdAt}
@@ -118,7 +119,7 @@ export default function AllMessages() {
                     userId={userId}
                     message={message.message}
                     firstName={message.User.firstName}
-                    senderNameArray={senderNameArray}
+                    senderName={senderName}
                   />
                 ))}
               </div>
