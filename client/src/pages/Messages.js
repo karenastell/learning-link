@@ -93,6 +93,7 @@ export default function Messages({ location }) {
         <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
+        <div className='column'>names</div>
         <div className='column'>
           <h1 className='title'>messages</h1>
           <div>
@@ -122,17 +123,9 @@ export default function Messages({ location }) {
               Send
             </button>
           </form>
-          <div className='container'>
-               <div class='tile is-ancestor'>
-            <div class='tile is-parent'>
-              <article class='tile is-child box'>
-                <p class='title'>One</p>
-                <p class='subtitle'>Subtitle</p>
-              </article>
-            </div>
-          </div>
-          </div>
-       
+        </div>
+        <div className='column'>
+          messages
         </div>
       </div>
     </>
