@@ -287,7 +287,7 @@ router.get(
   '/message-room/tutor:TutorId/student:StudentId',
   async (req, res) => {
     const room = Math.floor(Math.random() * 900000000);
-    console.log(req.params.TutorId, req.params.StudentId);
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', req.params.TutorId, req.params.StudentId);
     const roomInfo = await db.Message.findOrCreate({
       where: {
         TutorId: req.params.TutorId,
