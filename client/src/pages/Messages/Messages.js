@@ -8,6 +8,7 @@ import { AuthContext } from '../../AuthContext';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import Message from '../../components/Message/Message';
 import './Messages.css';
+import OneMessage from '../../components/OneMessage/OneMessage';
 
 let socket;
 
@@ -184,12 +185,6 @@ export default function Messages({ location }) {
         <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
-        <div className='column'>
-          <h3 className='title is-3'>Your Messages</h3>
-          <div>
-            <p>Click on a name to view past messages.</p>
-          </div>
-        </div>
         <div className='column container'>
           <h1 className='title'>Send {senderName} a message...</h1>
           <div className='messageArea'>
@@ -227,7 +222,20 @@ export default function Messages({ location }) {
             </form>
           </div>
         </div>
-        <div className='column'>messages</div>
+        <div className='column'>
+          <h3 className='title is-three'>Previous Messages with {senderName} </h3>
+          {correspondence.map((message) => (
+                  <OneMessage
+                    key={message.createdAt}
+                    isTeacher={isTeacher}
+                    senderId={message.SenderId}
+                    userId={userId}
+                    message={message.message}
+                    firstName={message.User.firstName}
+                    senderName={senderName}
+                  />
+                ))}
+        </div>
       </div>
     </>
   );
