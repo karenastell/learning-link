@@ -1,0 +1,13 @@
+.card-text-style {
+    color: white !important;
+}
+
+.search-card-body {
+    max-height: 400px;
+    overflow: scroll;
+    background-color: white !important;
+}
+
+.search-card-style {
+    width: 500px;
+}

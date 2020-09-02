@@ -18,7 +18,7 @@ import MyDashboard from './pages/MyDashboard/MyDashboard';
 
 import Messages from './pages/Messages/Messages';
 import Calendar from './pages/Calendar';
-import TutorSearchResult from './pages/TutorSearchResult';
+import TutorSearchResult from './pages/TutorSearchResults/TutorSearchResult';
 import AllMessages from './pages/AllMessages/AllMessages'
 
 

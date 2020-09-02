@@ -8,7 +8,7 @@ export default function Subjects(props) {
           <label className='label'>Subjects</label>
         </div>
         <div className='field-body'>
-          <table className='table'>
+          <table className='table is-narrow'>
             <thead>
               <tr>
                 <th>Elementary School Subjects</th>
@@ -147,7 +147,7 @@ export default function Subjects(props) {
         </div>
         <div className='field-body'>
           <div className='field'>
-            <table className='table'>
+            <table className='table is-narrow'>
               <thead>
                 <tr>
                   <th>High School Subjects</th>

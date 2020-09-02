@@ -12,6 +12,7 @@ router.get('/myprofile/:id', (req, res) => {
       { model: db.UserProfile },
       { model: db.Subject },
       { model: db.Availability },
+      { model: db.Review },
     ],
   }).then((data) => {
     // console.log(data);
