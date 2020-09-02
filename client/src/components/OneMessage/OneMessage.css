@@ -4,9 +4,8 @@
 }
 
 .senderName-message {
-  text-decoration: underline;
-  margin-right: 5px;
-  font-size: 18px;
+  font-size: 10px;
+  color: black;
 }
 
 .oneMessage-div {

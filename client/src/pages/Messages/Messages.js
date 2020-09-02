@@ -6,7 +6,6 @@ import Nav from '../../components/Nav/Nav';
 import SideBarMenu from '../../components/SideBarMenu/SideBarMenu';
 import { AuthContext } from '../../AuthContext';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import Message from '../../components/Message/Message';
 import './Messages.css';
 import OneMessage from '../../components/OneMessage/OneMessage';
 
