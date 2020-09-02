@@ -22,7 +22,7 @@ router.get('/myprofile/:id', (req, res) => {
     .catch((err) => {
       res.status(500).json({
         message: 'An error occurred',
-        error: err.errors,
+        error: err,
       });
     });
 });
@@ -77,6 +77,11 @@ router.get('/search/city/:city/state/:state', (req, res) => {
   }).then((data) => {
     console.log(data);
     res.json(data);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
@@ -158,6 +163,11 @@ router.get('/search/delivery_method/:delivery_method', (req, res) => {
   }).then((data) => {
     console.log(data);
     res.json(data);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
@@ -205,7 +215,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } }
+    { where: { id: req.params.id } },
   );
 
   await db.UserProfile.update(
@@ -221,7 +231,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } }
+    { where: { UserId: req.params.id } },
   );
   res.json(req.body);
 });
@@ -234,6 +244,11 @@ router.get('/mydashboard/:id', (req, res) => {
     },
   }).then((data) => {
     res.json(data);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
@@ -248,6 +263,11 @@ router.get('/mydashboard/mypeeps/:id', (req, res) => {
   }).then((data) => {
     // console.log(data);
     res.json(data);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
@@ -259,6 +279,11 @@ router.post('/mydashboard/review/:id', (req, res) => {
     UserId: req.params.id,
   }).then(() => {
     res.json('Review was posted');
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
@@ -267,6 +292,11 @@ router.get('/read-reviews/:id', (req, res) => {
     where: { UserId: req.params.id },
   }).then((reviews) => {
     res.json(reviews);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
@@ -315,7 +345,7 @@ router.get(
     });
 
     res.json({ roomInfo, userInfo });
-  }
+  },
 );
 
 router.post(
@@ -345,7 +375,7 @@ router.post(
     }
 
     res.json('message was posted to database');
-  }
+  },
 );
 
 router.get('/all-messages/student:studentId', (req, res) => {
@@ -355,6 +385,11 @@ router.get('/all-messages/student:studentId', (req, res) => {
   }).then((data) => {
     // console.log(data);
     res.json(data);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
@@ -365,6 +400,11 @@ router.get('/all-messages/tutor:tutorId', (req, res) => {
   }).then((data) => {
     // console.log(data);
     res.json(data);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
@@ -375,6 +415,11 @@ router.get('/all-messages/student-name/:studentId', (req, res) => {
   }).then((data) => {
     // console.log(data);
     res.json(data);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
@@ -385,17 +430,27 @@ router.get('/sent-messages-to/:personId', (req, res) => {
   }).then((data) => {
     // console.log(data);
     res.json(data);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
 router.get('/all-messages/:studentId/:tutorId', (req, res) => {
-  console.log(req.params, "LOOK HEREHHHHASDFaskjsaldkjflkj");
+  console.log(req.params, 'LOOK HEREHHHHASDFaskjsaldkjflkj');
   db.Message.findAll({
     where: { StudentId: req.params.studentId, TutorId: req.params.tutorId },
     include: { model: db.User },
   }).then((data) => {
-    console.log(data, "l;sdkjaf;alsjkdf;alskjdf;lakjsd;lfjk!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log(data, 'l;sdkjaf;alsjkdf;alskjdf;lakjsd;lfjk!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     res.json(data);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
   });
 });
 
