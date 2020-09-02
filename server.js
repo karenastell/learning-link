@@ -9,10 +9,10 @@ const socketio = require('socket.io');
 const logger = require('morgan');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const db = require('./models');
 const routes = require('./routes');
 const { addUser, getUser } = require('./users');
-const cors = require('cors');
 
 const PORT = process.env.PORT || 8080;
 
@@ -64,7 +64,7 @@ app.use(bodyParser.json());
 // Express session middleware
 // =============================================
 app.use(
-  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
+  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }),
 );
 app.use(passport.initialize());
 app.use(passport.session());

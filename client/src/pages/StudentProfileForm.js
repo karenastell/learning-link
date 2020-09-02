@@ -234,6 +234,12 @@ export default function StudentProfileForm(props) {
               <button className='button is-info mb-6' onClick={onButtonSubmit}>
                 Submit
               </button>
+              <button
+                className="button is-light mx-4"
+                onClick={() => history.push('/')}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
