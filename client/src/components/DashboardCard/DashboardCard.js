@@ -36,7 +36,6 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setReview({
-      ...review,
       [name]: value,
     });
   };
@@ -192,7 +191,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
       <div className={reviewModal}>
         <div className="modal-background"></div>
         <div className="modal-card">
-          <header className="modal-card-head">
+          <header className="modal-card-head modal-header-style">
             <p className="modal-card-title">
               Write a review for {result.firstName} {result.lastName}
             </p>
@@ -213,6 +212,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
             <textarea
               className="textarea"
               name="review"
+              value={review.review || undefined}
               placeholder="Leave your review here..."
               onChange={handleInputChange}
             ></textarea>
@@ -232,8 +232,8 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
               </p>
             </div>
           </section>
-          <footer className="modal-card-foot">
-            <button className="button is-success" onClick={handleReviewSubmit}>
+          <footer className="modal-card-foot modal-bottom-style">
+            <button className="button is-info" onClick={handleReviewSubmit}>
               Submit Review
             </button>
             <button className="button" onClick={handleModalClose}>
@@ -242,11 +242,12 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
           </footer>
         </div>
       </div>
+
       {/* remove from Dashboard Modal */}
       <div className={removeMessage}>
         <div className="modal-background"></div>
         <div className="modal-card">
-          <header className="modal-card-head">
+          <header className="modal-card-head modal-header-style">
             <p className="modal-card-title">
               You are about to remove {result.firstName} {result.lastName} from
               your Dashboard
@@ -263,8 +264,8 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
               {result.lastName} from your dashboard?
             </p>
           </section>
-          <footer className="modal-card-foot">
-            <button className="button is-success" onClick={removeFromDashboard}>
+          <footer className="modal-card-foot modal-bottom-style">
+            <button className="button is-info" onClick={removeFromDashboard}>
               Yes, I'm sure
             </button>
             <button className="button" onClick={handleModalClose}>
@@ -278,7 +279,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
       <div className={readReviewModal}>
         <div className="modal-background"></div>
         <div className="modal-card">
-          <header className="modal-card-head">
+          <header className="modal-card-head modal-header-style">
             <p className="modal-card-title">
               Reviews for {result.firstName} {result.lastName}:
             </p>
@@ -289,14 +290,15 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
             ></button>
           </header>
           <section className="modal-card-body">
-            {tutorReviews.map((review) => (
-              <div key={review.createdAt} className="my-4">
+            {tutorReviews[0] ? tutorReviews.map((review) => (
+              <div key={review.createdAt} className="my-4 px-2">
                 <p>{review.review}</p>
                 <h3>-{review.reviewer}</h3>
+                <hr/>
               </div>
-            ))}
+            )) : <p>There are currently no reviews for this tutor...</p>}
           </section>
-          <footer className="modal-card-foot">
+          <footer className="modal-card-foot modal-bottom-style">
             <button className="button" onClick={handleModalClose}>
               Close
             </button>

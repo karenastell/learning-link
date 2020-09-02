@@ -26,3 +26,13 @@
 .card-buttons:hover {
   text-decoration: none !important;
 }
+
+.modal-header-style {
+  background: #4fa1df !important;
+  border-bottom: #f0763a solid 3px !important;
+  color: #2c3c70 !important;
+}
+
+.modal-bottom-style {
+  background-color: #eef6fc !important;
+}
