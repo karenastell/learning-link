@@ -190,7 +190,19 @@ export default function Messages({ location }) {
           <div className='messageArea'>
             <article className='tile box tileStyle'>
               <ScrollToBottom>
-                {messages.map((message, i) => (
+                {correspondence.map((message) => (
+                  <OneMessage
+                    key={message.createdAt}
+                    isTeacher={isTeacher}
+                    senderId={message.SenderId}
+                    userId={userId}
+                    message={message.message}
+                    firstName={message.User.firstName}
+                    senderName={senderName}
+                    date={message.createdAt}
+                  />
+                ))}
+                {/* {messages.map((message, i) => (
                   <div className='messageContent' key={i}>
                     <Message
                       senderName={senderName}
@@ -199,7 +211,7 @@ export default function Messages({ location }) {
                       user1={user1}
                     />
                   </div>
-                ))}
+                ))} */}
               </ScrollToBottom>
             </article>
             <form className='form'>
@@ -221,20 +233,6 @@ export default function Messages({ location }) {
               </button>
             </form>
           </div>
-        </div>
-        <div className='column'>
-          <h3 className='title is-three'>Previous Messages with {senderName} </h3>
-          {correspondence.map((message) => (
-                  <OneMessage
-                    key={message.createdAt}
-                    isTeacher={isTeacher}
-                    senderId={message.SenderId}
-                    userId={userId}
-                    message={message.message}
-                    firstName={message.User.firstName}
-                    senderName={senderName}
-                  />
-                ))}
         </div>
       </div>
     </>
