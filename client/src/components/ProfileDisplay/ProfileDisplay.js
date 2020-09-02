@@ -51,12 +51,12 @@ export default function ProfileDisplay({
                   </li>
                 ))}
               </dl>
-              <a
+              <button
                 className="button is-outlined is-small is-pulled-right is-info"
                 onClick={() => setEditAvailabilityMode('on')}
               >
                 Edit Availability
-              </a>
+              </button>
             </div>
           ) : null}
           {isTeacher === false ? (
@@ -129,12 +129,12 @@ export default function ProfileDisplay({
                 </li>
               ))}
             </dl>
-            <a
+            <button
               className="button is-small is-pulled-right is-outlined is-info"
               onClick={() => setEditSubjectsMode('on')}
             >
               Edit Subjects
-            </a>
+            </button>
           </div>
         </div>
       </div>
