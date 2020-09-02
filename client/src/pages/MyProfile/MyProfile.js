@@ -11,7 +11,6 @@ import EditSubjects from '../../components/EditSubjects/EditSubjects';
 import { AuthContext } from '../../AuthContext';
 import './MyProfile.css';
 
-
 export default function MyProfile(props) {
   // get the userId and isTeacher from context
   let { userId, isTeacher } = useContext(AuthContext);
@@ -20,6 +19,7 @@ export default function MyProfile(props) {
   const [userProfileInfo, setUserProfileInfo] = useState({});
   const [subjectsInfo, setSubjectsInfo] = useState([]);
   const [availabilityInfo, setAvailabilityInfo] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   // These control the conditional rendering of the various editable compontents
   const [editMode, setEditMode] = useState('off');
@@ -37,7 +37,7 @@ export default function MyProfile(props) {
   const getUserInfo = () => {
     if (userId) {
       Axios.get(`/api/myprofile/${userId}`).then((response) => {
-        console.log(response);
+        console.log(response.data);
         const data = response.data;
         setUserInfo({
           ...userInfo,
@@ -49,6 +49,7 @@ export default function MyProfile(props) {
         setUserProfileInfo(data.UserProfile);
         setSubjectsInfo(data.Subjects);
         setAvailabilityInfo(data.Availabilities);
+        setReviews(data.Reviews);
       });
     }
   };
@@ -57,20 +58,18 @@ export default function MyProfile(props) {
     <>
       <Nav />
       <div className="columns my-profile-div">
-
         <div className="column is-narrow side-bar">
-
           <SideBarMenu />
         </div>
         <div className="column is-10 mt-5">
-          <h1 className="title">
-            Your profile
-          </h1>
+          <h1 className="title  has-text-centered ">My profile</h1>
           <div className="container">
             <div className="level">
               <div className="level-left"></div>
               <div className="level-right">
-                {editMode === 'off' && editAvailabilityMode === 'off' && editSubjectsMode === 'off' ? (
+                {editMode === 'off' &&
+                editAvailabilityMode === 'off' &&
+                editSubjectsMode === 'off' ? (
                   <a
                     className="level-item button is-small is-outlined is-pulled-right is-info"
                     onClick={() => setEditMode('on')}
@@ -115,6 +114,7 @@ export default function MyProfile(props) {
                 setEditAvailabilityMode={setEditAvailabilityMode}
                 setEditSubjectsMode={setEditSubjectsMode}
                 getUserInfo={getUserInfo}
+                reviews={reviews}
               />
             )}
           </div>

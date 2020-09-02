@@ -125,7 +125,7 @@ export default function MyDashboard() {
         </div>
         <div className="column mt-5  my-dash-div">
           <h1 className="title is-centered">Hello {userInfo.firstName},</h1>
-          <h2 className="is-centered is-size-4">
+          <h2 className="subtitle is-size-4">
             Welcome to your Learning Link Dashboard!
           </h2>
 
