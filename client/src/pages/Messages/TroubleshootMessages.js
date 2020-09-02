@@ -37,33 +37,7 @@ export default function Messages({ location }) {
 
   useEffect(() => {
     const { user1, user2 } = queryString.parse(location.search);
-    const startFunction = async () => {
-      const { user1, user2 } = queryString.parse(location.search);
 
-      if (isTeacher) {
-        const messageRoomInfo = await Axios.get(
-          `/api/message-room/tutor${user1}/student${user2}`
-        );
-        console.log(messageRoomInfo);
-        await setRoom(messageRoomInfo.data.roomInfo[0].room);
-        console.log(messageRoomInfo.data.userInfo.firstName);
-        await setSenderName(messageRoomInfo.data.userInfo.firstName);
-        await setReceiverName(messageRoomInfo.data.roomInfo[0].User.firstName);
-        await setSenderId(messageRoomInfo.data.userInfo.id);
-        console.log(senderName, receiverName);
-      } else {
-        const messageRoomInfo = await Axios.get(
-          `/api/message-room/tutor${user2}/student${user1}`
-        );
-        console.log(messageRoomInfo);
-        await setRoom(messageRoomInfo.data.roomInfo[0].room);
-        console.log(messageRoomInfo.data.userInfo.firstName);
-        await setReceiverName(messageRoomInfo.data.userInfo.firstName);
-        await setSenderName(messageRoomInfo.data.roomInfo[0].User.firstName);
-        await setSenderId(messageRoomInfo.data.roomInfo[0].User.id);
-        console.log(senderName, receiverName);
-      }
-    };
     startFunction();
     getMessages();
     socket = io(ENDPOINT);
@@ -80,6 +54,33 @@ export default function Messages({ location }) {
       socket.off();
     };
   }, [ENDPOINT, location.search]);
+  
+  const startFunction = async () => {
+    const { user1, user2 } = queryString.parse(location.search);
+    if (isTeacher) {
+      const messageRoomInfo = await Axios.get(
+        `/api/message-room/tutor${user1}/student${user2}`
+      );
+      console.log(messageRoomInfo);
+      setRoom(messageRoomInfo.data.roomInfo[0].room);
+      console.log(messageRoomInfo.data.userInfo.firstName);
+      setSenderName(messageRoomInfo.data.userInfo.firstName);
+      setReceiverName(messageRoomInfo.data.roomInfo[0].User.firstName);
+      setSenderId(messageRoomInfo.data.userInfo.id);
+      console.log(senderName, receiverName);
+    } else {
+      const messageRoomInfo = await Axios.get(
+        `/api/message-room/tutor${user2}/student${user1}`
+      );
+      console.log(messageRoomInfo);
+      setRoom(messageRoomInfo.data.roomInfo[0].room);
+      console.log(messageRoomInfo.data.userInfo.firstName);
+      setReceiverName(messageRoomInfo.data.userInfo.firstName);
+      setSenderName(messageRoomInfo.data.roomInfo[0].User.firstName);
+      setSenderId(messageRoomInfo.data.roomInfo[0].User.id);
+      console.log(senderName, receiverName);
+    }
+  };
 
   const getMessages = async () => {
     if (!isTeacher) {
@@ -119,7 +120,7 @@ export default function Messages({ location }) {
     if (isTeacher) {
       allCorrespondence = await Axios.get(`api/all-messages/${id}/${userId}`);
       console.log(allCorrespondence);
-      await setCorrespondence(allCorrespondence.data);
+        setCorrespondence(allCorrespondence.data);
 
       studentName = await Axios.get(
         `api/all-messages/student-name/${allCorrespondence.data[0].StudentId}`
@@ -190,7 +191,7 @@ export default function Messages({ location }) {
           <div className='messageArea'>
             <article className='tile box tileStyle'>
               <ScrollToBottom>
-                {correspondence.map((message) => (
+                {/* {correspondence.map((message) => (
                   <OneMessage
                     key={message.createdAt}
                     isTeacher={isTeacher}
@@ -201,7 +202,7 @@ export default function Messages({ location }) {
                     senderName={senderName}
                     date={message.createdAt}
                   />
-                ))}
+                ))} */}
                 {/* {messages.map((message, i) => (
                   <div className='messageContent' key={i}>
                     <Message

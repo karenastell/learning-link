@@ -353,7 +353,7 @@ router.get('/all-messages/student:studentId', (req, res) => {
   db.Message.findAll({
     where: { StudentId: req.params.studentId },
   }).then((data) => {
-    console.log(data);
+    // console.log(data);
     res.json(data);
   });
 });
@@ -363,7 +363,7 @@ router.get('/all-messages/tutor:tutorId', (req, res) => {
   db.Message.findAll({
     where: { TutorId: req.params.tutorId },
   }).then((data) => {
-    console.log(data);
+    // console.log(data);
     res.json(data);
   });
 });
@@ -373,7 +373,7 @@ router.get('/all-messages/student-name/:studentId', (req, res) => {
   db.User.findOne({
     where: { id: req.params.studentId },
   }).then((data) => {
-    console.log(data);
+    // console.log(data);
     res.json(data);
   });
 });
@@ -383,13 +383,13 @@ router.get('/sent-messages-to/:personId', (req, res) => {
   db.User.findOne({
     where: { id: req.params.personId },
   }).then((data) => {
-    console.log(data);
+    // console.log(data);
     res.json(data);
   });
 });
 
 router.get('/all-messages/:studentId/:tutorId', (req, res) => {
-  console.log(req.params);
+  console.log(req.params, "LOOK HEREHHHHASDFaskjsaldkjflkj");
   db.Message.findAll({
     where: { StudentId: req.params.studentId, TutorId: req.params.tutorId },
     include: { model: db.User },
