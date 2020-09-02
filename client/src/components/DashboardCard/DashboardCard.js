@@ -293,7 +293,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
             {tutorReviews[0] ? tutorReviews.map((review) => (
               <div key={review.createdAt} className="my-4 px-2">
                 <p>{review.review}</p>
-                <h3>-{review.reviewer}</h3>
+                <h3 className="is-pulled-right mr-6">-{review.reviewer}</h3>
                 <hr/>
               </div>
             )) : <p>There are currently no reviews for this tutor...</p>}

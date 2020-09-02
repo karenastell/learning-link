@@ -262,9 +262,9 @@ export default function Search() {
           <SideBarMenu />
         </div>
         <div className='container column'>
-          <h1 className='title has-text-centered'>Search For a Tutor</h1>
+          <h1 className='title has-text-centered mt-3'>Search For a Tutor</h1>
           <h3 className='subtitle is-4 mt-5'>Choose Your Search Criteria:</h3>
-          <Subjects handleCheckboxes={handleCheckboxes} />
+          <p className="mb-2">You may select as many search parameters as you like.</p>
           <Delivery handleInputChange={handleInputChange} />
           <Address handleInputChange={handleInputChange} />
           <Availability
@@ -272,12 +272,13 @@ export default function Search() {
             handleDaysCheckBoxes={handleDaysCheckBoxes}
             handleRemove={handleRemove}
           />
+          <Subjects handleCheckboxes={handleCheckboxes} />
           <div className='field is-horizontal'>
             <div className='field-label'></div>
             <div className='field-body'>
               <div className='field'>
                 <div className='control'>
-                  <button onClick={findATutor} className='button is-primary'>
+                  <button onClick={findATutor} className='button is-info'>
                     Find a Tutor
                   </button>
                   {noResults === true ? (
