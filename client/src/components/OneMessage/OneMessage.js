@@ -8,6 +8,7 @@ export default function OneMessage({
   firstName,
   isTeacher,
   senderName,
+  date,
 }) {
   console.log(senderId);
   console.log(userId);
@@ -15,21 +16,66 @@ export default function OneMessage({
   console.log(firstName);
   console.log(isTeacher);
   console.log(senderName);
+  console.log(
+    new Date(date).toLocaleString([], { hour: '2-digit', minute: '2-digit' })
+  );
+  console.log(
+    new Date(date).toLocaleString([], { month: 'short', day: 'numeric' })
+  );
 
   return (
     <div className='oneMessage-div'>
       {senderId === null ? null : senderId === userId ? (
-        <p className='oneMessage-message'>
-          <span className='senderName-message'>You</span>: {message}
-        </p>
+        <div className='oneMessage-message messageContainer justifyStart'>
+          <span className='senderName-message pl-10'>You:</span>
+          <div className='messageBox backgroundLight'>
+            <p className='receiverText messageText'>{message}</p>
+            <p className='messageDate'>
+              {new Date(date).toLocaleString([], {
+                month: 'short',
+                day: 'numeric',
+              })}{' '}
+              {new Date(date).toLocaleString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </p>
+          </div>
+        </div>
       ) : !isTeacher ? (
-        <p className='oneMessage-message'>
-          <span className='senderName-message'>{firstName}</span>: {message}
-        </p>
+        <div className='oneMessage-message messageContainer justifyEnd'>
+          <span className='senderName-message pr-10'>{firstName}</span>:
+          <div className='messageBox backgroundBlue'>
+            <p className='senderText messageText'>{message}</p>
+            <p className='messageDate'>
+              {new Date(date).toLocaleString([], {
+                month: 'short',
+                day: 'numeric',
+              })}{' '}
+              {new Date(date).toLocaleString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </p>
+          </div>
+        </div>
       ) : (
-        <p className='oneMessage-message'>
-          <span className='senderName-message'>{senderName}</span>: {message}
-        </p>
+        <div className='oneMessage-message messageContainer justifyEnd'>
+          <span className='senderName-message pl-10'>{senderName}</span>:
+          <div className='messageBox backgroundBlue'>
+            <p className='senderText messageText'>{message}</p>
+            <p className='messageDate'>
+              {new Date(date).toLocaleString([], {
+                month: 'short',
+                day: 'numeric',
+              })}{' '}
+              {new Date(date).toLocaleString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );
