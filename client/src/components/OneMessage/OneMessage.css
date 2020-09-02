@@ -16,11 +16,13 @@
 .messageDate {
   font-size: 10px;
   margin-right: 5px;
+  color: black;
 }
 
 
 .receiverText {
   font-size: 20px;
+
   color: #4fa1df;
   display: flex;
   align-items: center;
