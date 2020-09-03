@@ -396,18 +396,41 @@ router.get('/all-messages/:studentId/:tutorId', (req, res) => {
   });
 });
 
-router.put('/all-messages/message:messageId', (req, res) => {
+router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
   console.log(req.params);
-  db.Message.update(
-    {
-      tutorRead: true,
-      studentRead: true,
-    },
-    { where: { id: req.params.messageId } }
-  ).then((data) => {
-    console.log('message has been marked as read', data);
-    res.json(req.body);
-  });
+  if (req.params.isTeacher === 'tutorfalse') {
+    db.Message.update(
+      {
+        studentRead: true,
+      },
+      { where: { id: req.params.messageId } }
+    );
+  } else if (req.params.isTeacher === 'tutortrue') {
+    db.Message.update(
+      {
+        tutorRead: true,
+      },
+      { where: { id: req.params.messageId } }
+    );
+  }
+  console.log('message has been marked as read');
+  res.json(req.body);
+});
+
+router.get('all-messages/userId:userId/:isTeacher', (req, res) => {
+  if (req.params.isTeacher === 'tutortrue') {
+    db.Message.findAll({
+      where: { tutorRead: false },
+    }).then((data) => {
+      res.json(data);
+    });
+  } else {
+    db.Message.findAll({
+      where: { studentRead: false },
+    }).then((data) => {
+      res.json(data);
+    });
+  }
 });
 
 module.exports = router;

@@ -120,7 +120,12 @@ export default function Messages({ location }) {
       allCorrespondence = await Axios.get(`api/all-messages/${id}/${userId}`);
       console.log(allCorrespondence);
       await setCorrespondence(allCorrespondence.data);
-
+      await console.log(allCorrespondence.data.length);
+      
+      for (let i = 0; i < allCorrespondence.data.length; i++) {
+        await setMessagesToRead(allCorrespondence.data[i].id);
+        console.log(allCorrespondence.data[i].id);
+      }
       studentName = await Axios.get(
         `api/all-messages/student-name/${allCorrespondence.data[0].StudentId}`
       );
@@ -131,29 +136,26 @@ export default function Messages({ location }) {
     } else {
       allCorrespondence = await Axios.get(`api/all-messages/${userId}/${id}`);
       console.log(allCorrespondence);
-      setCorrespondence(allCorrespondence.data);
-      setSenderName(allCorrespondence.data[0].User.firstName);
+      await setCorrespondence(allCorrespondence.data);
+      await setSenderName(allCorrespondence.data[0].User.firstName);
+      
+      await console.log(allCorrespondence.data.length);
+      for (let i = 0; i < allCorrespondence.data.length; i++) {
+        await setMessagesToRead(allCorrespondence.data[i].id);
+      }
     }
-
-    for (let i = 0; i < correspondence; i++) {
+    
+    await console.log(correspondence.length);
+    for (let i = 0; i < correspondence.length; i++) {
       setMessagesToRead(correspondence[i].id);
+      console.log(correspondence[i].id);
     }
   };
 
   const setMessagesToRead = (messageId) => {
-    if (isTeacher) {
-      Axios.put(`api/all-messages/message${messageId}`, {
-        tutorRead: true,
-      }).then((response) => {
+      Axios.put(`api/all-messages/message${messageId}/tutor${isTeacher}`).then((response) => {
         console.log(`messages has been marked to read.  ${response}`);
       });
-    } else {
-      Axios.put(`api/all-messages/message${messageId}`, {
-        studentRead: true,
-      }).then((response) => {
-        console.log(`messages has been marked to read.  ${response}`);
-      });
-    }
   };
 
   useEffect(() => {
