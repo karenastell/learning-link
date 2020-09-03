@@ -33,7 +33,7 @@ export default function OneMessage({
       ) : !isTeacher ? (
         <div className='oneMessage-message messageContainer justifyEnd'>
           <div className='messageBox backgroundBlue'>
-            <p className='senderName-message pr-10'>{firstName}</p>
+            <p className='senderName-message'>{firstName}</p>
             <p className='senderText messageText'>{message}</p>
             <p className='messageDate'>
               {new Date(date).toLocaleString([], {
@@ -50,7 +50,7 @@ export default function OneMessage({
       ) : (
         <div className='oneMessage-message messageContainer justifyEnd'>
           <div className='messageBox backgroundBlue'>
-            <p className='senderName-message pl-10'>{senderName}</p>
+            <p className='senderName-message'>{senderName}</p>
             <p className='senderText messageText'>{message}</p>
             <p className='messageDate'>
               {new Date(date).toLocaleString([], {
