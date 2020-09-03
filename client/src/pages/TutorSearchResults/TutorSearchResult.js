@@ -82,8 +82,8 @@ export default function TutorSearchResult(props) {
             tutors from your dashboard.
           </p>
           {tutorAddedMessage === 'on' ? (
-            <article class="message is-primary">
-              <div class="message-body">
+            <article className="message is-primary">
+              <div className="message-body">
                 Tutor has been added to your Dashboard!
               </div>
             </article>

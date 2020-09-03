@@ -309,6 +309,14 @@ router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
         TutorId: idOne,
         StudentId: idTwo,
       },
+    }).then(() => {
+      console.log('deleted');
+      res.json('Entry deleted');
+    }).catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
   } else {
     db.TutorStudent.destroy({
@@ -316,9 +324,15 @@ router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
         TutorId: idTwo,
         StudentId: idOne,
       },
+    }).then(() => {
+      res.json('Entry deleted');
+    }).catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
   }
-  res.json('Entry deleted');
 });
 
 router.get(
@@ -362,6 +376,13 @@ router.post(
         StudentId: req.params.StudentId,
         room: req.params.room,
         studentRead: true,
+      }).then(() => {
+        res.json('message was posted to database');
+      }).catch((err) => {
+        res.status(500).json({
+          message: 'An error occurred',
+          error: err,
+        });
       });
     } else {
       db.Message.create({
@@ -371,10 +392,15 @@ router.post(
         StudentId: req.params.StudentId,
         room: req.params.room,
         tutorRead: true,
+      }).then(() => {
+        res.json('message was posted to database');
+      }).catch((err) => {
+        res.status(500).json({
+          message: 'An error occurred',
+          error: err,
+        });
       });
     }
-
-    res.json('message was posted to database');
   },
 );
 

@@ -19,9 +19,9 @@ export default function MyDashboard() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(results);
-  }, [results]);
+  // useEffect(() => {
+  //   console.log(results);
+  // }, [results]);
 
   const getUserInfo = () => {
     Axios.get(`/api/myprofile/${userId}`).then((response) => {
@@ -39,29 +39,20 @@ export default function MyDashboard() {
 
   // This gets all of the tutor/student matches that matchup with the current user
   const getMyStudentTutorPairs = async () => {
-     // Solves the "can't perform react state update on an unmounted component" source: https://medium.com/@selvaganesh93/how-to-clean-up-subscriptions-in-react-components-using-abortcontroller-72335f19b6f7
-    const CancelToken = Axios.CancelToken;
-    const source = CancelToken.source();
     // Get the student-tutor pairs from the TutorStudent table
-    const tutorStudentPairs = await Axios.get(`/api/mydashboard/${userId}`, { cancelToken: source.token });
+    const tutorStudentPairs = await Axios.get(`/api/mydashboard/${userId}`);
     console.log(tutorStudentPairs.data);
     getMyPeepsInfo(tutorStudentPairs.data);
-    return () => {
-      source.cancel();
-    }
   };
 
   const getMyPeepsInfo = async (data) => {
-    // Solves the "can't perform react state update on an unmounted component" source: https://medium.com/@selvaganesh93/how-to-clean-up-subscriptions-in-react-components-using-abortcontroller-72335f19b6f7
-    const CancelToken = Axios.CancelToken;
-    const source = CancelToken.source();
     const myPeepsArray = [];
     // if isTeacher, get the studentIds and do a get for all users with those ids
     if (isTeacher) {
       // forEach studentId in the response...
       for (let i = 0; i < data.length; i++) {
         let studentUserInfo = await Axios.get(
-          `/api/mydashboard/mypeeps/${data[i].StudentId}`, { cancelToken: source.token }
+          `/api/mydashboard/mypeeps/${data[i].StudentId}`
         );
         const response = studentUserInfo.data;
         let subjectArray = [];
@@ -90,7 +81,7 @@ export default function MyDashboard() {
 
       for (let i = 0; i < data.length; i++) {
         let myTutorsInfo = await Axios.get(
-          `/api/mydashboard/mypeeps/${data[i].TutorId}`, { cancelToken: source.token }
+          `/api/mydashboard/mypeeps/${data[i].TutorId}`
         );
         const response = myTutorsInfo.data;
         let dayArray = [];
@@ -123,9 +114,6 @@ export default function MyDashboard() {
       }
     }
     setResults(myPeepsArray);
-    return () => {
-      source.cancel()
-    }
   };
 
   return (
