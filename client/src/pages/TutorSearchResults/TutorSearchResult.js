@@ -73,17 +73,35 @@ export default function TutorSearchResult(props) {
           <SideBarMenu />
         </div>
         <div className="column mt-5">
-          <h1 className="title">Here are the available tutors that match your search:</h1>
-          <p className="p-2">
-            Add a tutor to your dashboard to begin communications and have
-            messaging capabilities! Once you add a tutor to your dashboard, you
-            will appear on theirs as well and can easily begin corresponding.
-            Don't worry, if it is not the right match, you can always remove
-            tutors from your dashboard.
-          </p>
+          {tutorResults.length > 0 ? (
+            <>
+              <h1 className="title">
+                Here are the available tutors that match your search:
+              </h1>
+              <p className="p-2">
+                Add a tutor to your dashboard to begin communications and have
+                messaging capabilities! Once you add a tutor to your dashboard,
+                you will appear on theirs as well and can easily begin
+                corresponding. Don't worry, if it is not the right match, you
+                can always remove tutors from your dashboard.
+              </p>
+            </>
+          ) : (
+            <article className="mt-5 message is-danger">
+              <div className="message-body">
+                <h3 className="is-size-4">
+                  There were no tutors that matched your search criteria.
+                </h3>
+                <p className="is-size-5">
+                  Please, change your criteria and try again.
+                </p>
+              </div>
+            </article>
+          )}
+
           {tutorAddedMessage === 'on' ? (
-            <article class="message is-primary">
-              <div class="message-body">
+            <article className="message is-primary">
+              <div className="message-body">
                 Tutor has been added to your Dashboard!
               </div>
             </article>
@@ -91,7 +109,10 @@ export default function TutorSearchResult(props) {
           <div className="container mt-4">
             <div className="columns is-multiline is-centered">
               {tutorResults.map((result) => (
-                <div key={result.lastName} className="card search-card-style card-style mb-6 mx-2">
+                <div
+                  key={result.lastName}
+                  className="card search-card-style card-style mb-6 mx-2"
+                >
                   <header className="card-header card-head-style">
                     <p className="card-header-title card-text-style">
                       {result.firstName} {result.lastName}
@@ -115,7 +136,7 @@ export default function TutorSearchResult(props) {
                           ))}
                         </ul>
                         <li>Delivery Method: {result.delivery_method}</li>
-                        {result.rate === null || result.rate === "" ? null : (
+                        {result.rate === null || result.rate === '' ? null : (
                           <li>Rate: {result.rate}</li>
                         )}
                       </ul>
@@ -159,13 +180,17 @@ export default function TutorSearchResult(props) {
             ></button>
           </header>
           <section className="modal-card-body">
-            {tutorReviews.length > 0 ? tutorReviews.map((review) => (
-              <div key={review.createdAt} className="my-4">
-                <p>{review.review}</p>
-                <h3 className="is-pulled-right mr-6">-{review.reviewer}</h3>
-                <hr/>
-              </div>
-            )) : <p>There are currently no reviews for this tutor...</p>}
+            {tutorReviews.length > 0 ? (
+              tutorReviews.map((review) => (
+                <div key={review.createdAt} className="my-4">
+                  <p>{review.review}</p>
+                  <h3 className="is-pulled-right mr-6">-{review.reviewer}</h3>
+                  <hr />
+                </div>
+              ))
+            ) : (
+              <p>There are currently no reviews for this tutor...</p>
+            )}
           </section>
           <footer className="modal-card-foot modal-bottom-style">
             <button className="button" onClick={handleModalClose}>

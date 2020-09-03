@@ -19,9 +19,9 @@ export default function MyDashboard() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(results);
-  }, [results]);
+  // useEffect(() => {
+  //   console.log(results);
+  // }, [results]);
 
   const getUserInfo = () => {
     Axios.get(`/api/myprofile/${userId}`).then((response) => {
