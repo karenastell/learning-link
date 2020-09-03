@@ -73,7 +73,7 @@ export default function Nav() {
         aria-label="main navigation"
       >
         <div className="navbar-brand">
-          <h1 className="title title-margin label-text nav-and-modal-text">Learning Link</h1>
+          <h1 className="title title-margin label-text nav-and-modal-text nav-text">Learning Link</h1>
         </div>
         {/* if the user is logged in, the LogoutButton displays, if not, the loginButton */}
         { isAuth ? <LogoutButton /> : <LoginButton handleModalDisplay={handleModalDisplay} /> }

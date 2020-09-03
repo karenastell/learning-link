@@ -31,6 +31,8 @@
   background: #4fa1df !important;
   border-bottom: #f0763a solid 3px !important;
   color: #2c3c70 !important;
+  font-family: 'Zilla Slab', serif;
+  font-weight: 600 !important;
 }
 
 .modal-bottom-style {
