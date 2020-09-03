@@ -10,18 +10,6 @@ export default function OneMessage({
   senderName,
   date,
 }) {
-  console.log(senderId);
-  console.log(userId);
-  console.log(message);
-  console.log(firstName);
-  console.log(isTeacher);
-  console.log(senderName);
-  console.log(
-    new Date(date).toLocaleString([], { hour: '2-digit', minute: '2-digit' })
-  );
-  console.log(
-    new Date(date).toLocaleString([], { month: 'short', day: 'numeric' })
-  );
 
   return (
     <div className='oneMessage-div'>
@@ -45,7 +33,7 @@ export default function OneMessage({
       ) : !isTeacher ? (
         <div className='oneMessage-message messageContainer justifyEnd'>
           <div className='messageBox backgroundBlue'>
-            <p className='senderName-message pr-10'>top one{firstName}</p>
+            <p className='senderName-message pr-10'>{firstName}</p>
             <p className='senderText messageText'>{message}</p>
             <p className='messageDate'>
               {new Date(date).toLocaleString([], {
@@ -62,7 +50,7 @@ export default function OneMessage({
       ) : (
         <div className='oneMessage-message messageContainer justifyEnd'>
           <div className='messageBox backgroundBlue'>
-            <p className='senderName-message pl-10'>bottom one{senderName}</p>
+            <p className='senderName-message pl-10'>{senderName}</p>
             <p className='senderText messageText'>{message}</p>
             <p className='messageDate'>
               {new Date(date).toLocaleString([], {

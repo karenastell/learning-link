@@ -22,6 +22,7 @@ export default function Messages({ location }) {
   const [correspondence, setCorrespondence] = useState([]);
   const [senderNameArray, setSenderNameArray] = useState([]);
   const [senderId, setSenderId] = useState('');
+  const [read, setRead] = useState(false);
 
   let senderIdArray = [];
   let noDuplicates;
@@ -86,7 +87,7 @@ export default function Messages({ location }) {
       console.log(allMessages);
       for (let i = 0; i < allMessages.data.length; i++) {
         senderIdArray.push(allMessages.data[i].TutorId);
-        console.log(senderIdArray);
+        // console.log(senderIdArray);
       }
     } else {
       const allMessages = await Axios.get(`api/all-messages/tutor${userId}`);
@@ -123,6 +124,7 @@ export default function Messages({ location }) {
       studentName = await Axios.get(
         `api/all-messages/student-name/${allCorrespondence.data[0].StudentId}`
       );
+
       console.log(studentName);
       console.log(studentName.data.firstName);
       setSenderName(studentName.data.firstName);
@@ -132,6 +134,26 @@ export default function Messages({ location }) {
       setCorrespondence(allCorrespondence.data);
       setSenderName(allCorrespondence.data[0].User.firstName);
     }
+
+    for (let i = 0; i < correspondence; i++) {
+      setMessagesToRead(correspondence[i].id);
+    }
+  };
+
+  const setMessagesToRead = (messageId) => {
+    if (isTeacher) {
+      Axios.put(`api/all-messages/message${messageId}`, {
+        tutorRead: true,
+      }).then((response) => {
+        console.log(`messages has been marked to read.  ${response}`);
+      });
+    } else {
+      Axios.put(`api/all-messages/message${messageId}`, {
+        studentRead: true,
+      }).then((response) => {
+        console.log(`messages has been marked to read.  ${response}`);
+      });
+    }
   };
 
   useEffect(() => {
@@ -139,9 +161,11 @@ export default function Messages({ location }) {
       setMessages([...messages, message]);
     });
     viewAllMessages(senderId);
+    console.log(senderId);
   }, [messages]);
 
   useEffect(() => {
+    console.log(tempArray);
     setSenderNameArray(tempArray);
   }, []);
 
@@ -164,18 +188,18 @@ export default function Messages({ location }) {
     }
   };
 
-  console.log(message, messages);
+  // console.log(message, messages);
   console.log(senderName, receiverName);
 
-  const getSenderId = (senderName) => {
-    for (let i = 0; i < senderNameArray; i++) {
-      if (senderName === senderNameArray[i].firstName) {
-        return senderNameArray.id;
-      }
-    }
-  };
+  // const getSenderId = (senderName) => {
+  //   for (let i = 0; i < senderNameArray; i++) {
+  //     if (senderName === senderNameArray[i].firstName) {
+  //       return senderNameArray.id;
+  //     }
+  //   }
+  // };
 
-  console.log(getSenderId(senderName));
+  // console.log(getSenderId(senderName));
 
   return (
     <>
@@ -201,16 +225,6 @@ export default function Messages({ location }) {
                     date={message.createdAt}
                   />
                 ))}
-                {/* {messages.map((message, i) => (
-                  <div className='messageContent' key={i}>
-                    <Message
-                      senderName={senderName}
-                      receiverName={receiverName}
-                      message={message}
-                      user1={user1}
-                    />
-                  </div>
-                ))} */}
               </ScrollToBottom>
             </article>
             <form className='form'>

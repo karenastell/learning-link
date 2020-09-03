@@ -288,7 +288,11 @@ router.get(
   '/message-room/tutor:TutorId/student:StudentId',
   async (req, res) => {
     const room = Math.floor(Math.random() * 900000000);
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', req.params.TutorId, req.params.StudentId);
+    console.log(
+      '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+      req.params.TutorId,
+      req.params.StudentId
+    );
     const roomInfo = await db.Message.findOrCreate({
       where: {
         TutorId: req.params.TutorId,
@@ -389,6 +393,20 @@ router.get('/all-messages/:studentId/:tutorId', (req, res) => {
   }).then((data) => {
     console.log(data);
     res.json(data);
+  });
+});
+
+router.put('/all-messages/message:messageId', (req, res) => {
+  console.log(req.params);
+  db.Message.update(
+    {
+      tutorRead: true,
+      studentRead: true,
+    },
+    { where: { id: req.params.messageId } }
+  ).then((data) => {
+    console.log('message has been marked as read', data);
+    res.json(req.body);
   });
 });
 

@@ -21,12 +21,12 @@ export default function SideBarMenu() {
             <Link to="/search" className="menu-style">Search for a Tutor</Link>
           </li>
         ) : null}
-        <li>
+        {/* <li>
           <Link to="/all-messages" className="menu-style">Messages</Link>
         </li>
         <li>
           <Link to="/calendar" className="menu-style">Calendar</Link>
-        </li>
+        </li> */}
       </ul>
     </aside>
   );
