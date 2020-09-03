@@ -11,3 +11,9 @@
 .search-card-style {
     width: 500px;
 }
+
+.search-results-div {
+    min-height: 100vh;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}

@@ -18,6 +18,13 @@ export default function TutorSearchResult(props) {
 
   console.log(userId);
 
+  useEffect(() => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+  }, [])
+
   const history = useHistory();
   const addTutor = (id) => {
     Axios.post('/api/TutorStudent', {
@@ -72,7 +79,7 @@ export default function TutorSearchResult(props) {
         <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
-        <div className="column mt-5">
+        <div className="column mt-5 search-results-div">
           {tutorResults.length > 0 ? (
             <>
               <h1 className="title">
