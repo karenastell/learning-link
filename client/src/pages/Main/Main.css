@@ -1,5 +1,6 @@
 .main-body {
     min-height: 900px;
+    font-family: 'Raleway', sans-serif;
 }
 .button-main {
     width: 300px;
@@ -8,4 +9,9 @@
 
 .button-main:hover {
     text-decoration: none;
+}
+
+.button {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
 }

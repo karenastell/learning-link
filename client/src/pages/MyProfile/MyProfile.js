@@ -63,7 +63,7 @@ export default function MyProfile(props) {
         <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
-        <div className="column is-10 mt-5">
+        <div className="column is-10 mt-5 font-style">
           <h1 className="title  has-text-centered ">My profile</h1>
           <div className="container">
             <div className="level">

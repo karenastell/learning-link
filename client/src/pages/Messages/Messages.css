@@ -35,3 +35,7 @@ select:focus {
   width: 500px;
   margin: auto;
 }
+
+.message-div-style {
+  height: 88vh;
+}

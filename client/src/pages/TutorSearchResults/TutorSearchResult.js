@@ -79,7 +79,7 @@ export default function TutorSearchResult(props) {
         <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
-        <div className="column mt-5 search-results-div">
+        <div className="column mt-5 search-results-div font-style">
           {tutorResults.length > 0 ? (
             <>
               <h1 className="title">

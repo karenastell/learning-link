@@ -123,7 +123,7 @@ export default function MyDashboard() {
         <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
-        <div className="column mt-5  my-dash-div">
+        <div className="column mt-5  my-dash-div font-style">
           <h1 className="title is-centered">Hello {userInfo.firstName},</h1>
           <h2 className="subtitle is-size-4">
             Welcome to your Learning Link Dashboard!

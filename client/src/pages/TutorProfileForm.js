@@ -122,7 +122,7 @@ export default function ProfileForm(props) {
   };
 
   return (
-    <div className="container mt-5 mb-5">
+    <div className="container mt-5 mb-5 font-style">
       <h1 className="title">Sign up as a tutor</h1>
       {successAlert === 'on' ? (
         <article className="message is-primary">
