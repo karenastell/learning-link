@@ -244,28 +244,29 @@ export default function Search() {
 
     setResults(responseArray);
     console.log(responseArray);
-
-    checkForResults(responseArray);
+    history.push('/search-results');
+    // checkForResults(responseArray);
   };
 
-  const checkForResults = (arrayOfResults) => {
-    const allTutors = arrayOfResults.filter((result) => result.isTeacher === true);
+  // const checkForResults = (arrayOfResults) => {
+  //   const allTutors = arrayOfResults.filter((result) => result.isTeacher === true);
 
-    if (allTutors.length > 0) {
-      console.log(allTutors)
-      history.push('/search-results');
-      setNoResultsMessage('off');
-    } else {
-      console.log(allTutors.length);
-      // The setNoResultsMessage isn't working... but the alert does
-      setNoResultsMessage('on');
-      alert("no results match your search")
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    }
-  }
+  //   if (allTutors.length > 0) {
+  //     console.log(allTutors)
+  //     history.push('/search-results');
+  //     setNoResultsMessage('off');
+  //   } else {
+  //     console.log(allTutors.length);
+  //     // The setNoResultsMessage isn't working... but the alert does
+  //     history.push('/search-results');
+  //     setNoResultsMessage('on');
+  //     // alert("no results match your search")
+  //     // window.scrollTo({
+  //     //   top: 0,
+  //     //   behavior: 'smooth',
+  //     // });
+  //   }
+  // }
 
   return (
     <>
@@ -278,15 +279,15 @@ export default function Search() {
           <h1 className='title has-text-centered mt-3'>Search For a Tutor</h1>
           <h3 className='subtitle is-4 mt-5'>Choose Your Search Criteria:</h3>
           <p className="mb-2 subtitle is-5">You may select as many search parameters as you like.</p>
-          {noResultsMessage === 'on' ? (
+          {/* {noResultsMessage === 'on' ? (
                     <article className='mt-5 message is-danger'>
                       <div className='message-body'>
-                        <p>There are no results for your search.</p>
+                        <p>There were no tutors that matched your search criteria.</p>
                         <br />
                         <p>Please, change your criteria and try again.</p>
                       </div>
                     </article>
-                  ) : null}
+                  ) : null} */}
           <Delivery handleInputChange={handleInputChange} />
           <Address handleInputChange={handleInputChange} />
           <Availability
