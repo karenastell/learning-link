@@ -50,6 +50,8 @@ export default function MyProfile(props) {
         setSubjectsInfo(data.Subjects);
         setAvailabilityInfo(data.Availabilities);
         setReviews(data.Reviews);
+      }).catch((err) => {
+        console.log(err);
       });
     }
   };
@@ -70,12 +72,12 @@ export default function MyProfile(props) {
                 {editMode === 'off' &&
                 editAvailabilityMode === 'off' &&
                 editSubjectsMode === 'off' ? (
-                  <a
+                  <button
                     className="level-item button is-small is-outlined is-pulled-right is-info"
                     onClick={() => setEditMode('on')}
                   >
                     Edit Profile
-                  </a>
+                  </button>
                 ) : null}
               </div>
             </div>

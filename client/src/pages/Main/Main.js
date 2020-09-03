@@ -17,7 +17,7 @@ const { isAuth, userId} = useContext(AuthContext);
     <>
     <Nav />
     <div className="image-div main-body">
-      <img src="./coloredpencilscropped.jpg" alt="learning image" />
+      <img src="./coloredpencilscropped.jpg" alt="colored pencils" />
       <div className="container has-text-centered mt-3">
         <div className="container my-5 has-text-centered">
           <h3 className="mb-3 title is-4">Sign up to get started!</h3>
