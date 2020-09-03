@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import io from 'socket.io-client';
 import queryString from 'query-string';
 import Axios from 'axios';
-import Nav from '../../components/Nav/Nav';
+import Nav from '../../components/Nav/Nav'
 import SideBarMenu from '../../components/SideBarMenu/SideBarMenu';
 import { AuthContext } from '../../AuthContext';
 import ScrollToBottom from 'react-scroll-to-bottom';
@@ -20,26 +20,57 @@ export default function Messages({ location }) {
   const { isTeacher, userId } = useContext(AuthContext);
   const [senderName, setSenderName] = useState('');
   const [receiverName, setReceiverName] = useState('');
-  const [correspondence, setCorrespondence] = useState([]);
   const [senderNameArray, setSenderNameArray] = useState([]);
-  const [senderId, setSenderId] = useState('');
-
+  const [correspondence, setCorrespondence] = useState([]);
   let senderIdArray = [];
-  let noDuplicates;
   let tempArray = [];
+  let noDuplicates;
   let allCorrespondence;
   let studentName;
 
   console.log(userId);
 
-  const ENDPOINT =
-    'https://ancient-brushlands-96177.herokuapp.com/' || 'localhost:3000';
+  const ENDPOINT = 'https://ancient-brushlands-96177.herokuapp.com/' || 'localhost:3000';
+
+  useEffect(() => {
+    const thisFunction = async () => {
+      // await getMessages();
+      const { user1, user2 } = queryString.parse(location.search);
+      await viewAllMessages(user2)
+      await setSenderNameArray(tempArray);
+    };
+    thisFunction();
+  }, []);
 
   useEffect(() => {
     const { user1, user2 } = queryString.parse(location.search);
+    const startFunction = async () => {
+      const { user1, user2 } = queryString.parse(location.search);
 
+      if (isTeacher) {
+        const messageRoomInfo = await Axios.get(
+          `/api/message-room/tutor${user1}/student${user2}`
+        );
+        console.log(messageRoomInfo);
+        await setRoom(messageRoomInfo.data.roomInfo[0].room);
+        console.log(messageRoomInfo.data.userInfo.firstName);
+        await setSenderName(messageRoomInfo.data.userInfo.firstName);
+        await setReceiverName(messageRoomInfo.data.roomInfo[0].User.firstName);
+        console.log(senderName, receiverName);
+      } else {
+        const messageRoomInfo = await Axios.get(
+          `/api/message-room/tutor${user2}/student${user1}`
+        );
+        console.log(messageRoomInfo);
+        await setRoom(messageRoomInfo.data.roomInfo[0].room);
+        console.log(messageRoomInfo.data.userInfo.firstName);
+        await setReceiverName(messageRoomInfo.data.userInfo.firstName);
+        await setSenderName(messageRoomInfo.data.roomInfo[0].User.firstName);
+        console.log(senderName, receiverName);
+      }
+    };
     startFunction();
-    getMessages();
+    getMessages()
     socket = io(ENDPOINT);
 
     setUser1(user1);
@@ -54,31 +85,31 @@ export default function Messages({ location }) {
       socket.off();
     };
   }, [ENDPOINT, location.search]);
-  
-  const startFunction = async () => {
+
+  useEffect(() => {
+    const { user1, user2 } = queryString.parse(location.search);
+    socket.on('message', (message) => {
+      setMessages([...messages, message]);
+    });
+    viewAllMessages(user2)
+  }, [messages]);
+
+  const sendMessage = (event) => {
+    event.preventDefault();
+    if (message) {
+      socket.emit('sendMessage', message, () => setMessage(''));
+    }
     const { user1, user2 } = queryString.parse(location.search);
     if (isTeacher) {
-      const messageRoomInfo = await Axios.get(
-        `/api/message-room/tutor${user1}/student${user2}`
+      Axios.post(
+        `/api/message/tutor${user1}/student${user2}/sender${user1}/room${room}`,
+        { message: message }
       );
-      console.log(messageRoomInfo);
-      setRoom(messageRoomInfo.data.roomInfo[0].room);
-      console.log(messageRoomInfo.data.userInfo.firstName);
-      setSenderName(messageRoomInfo.data.userInfo.firstName);
-      setReceiverName(messageRoomInfo.data.roomInfo[0].User.firstName);
-      setSenderId(messageRoomInfo.data.userInfo.id);
-      console.log(senderName, receiverName);
     } else {
-      const messageRoomInfo = await Axios.get(
-        `/api/message-room/tutor${user2}/student${user1}`
+      Axios.post(
+        `/api/message/tutor${user2}/student${user1}/sender${user1}/room${room}`,
+        { message: message }
       );
-      console.log(messageRoomInfo);
-      setRoom(messageRoomInfo.data.roomInfo[0].room);
-      console.log(messageRoomInfo.data.userInfo.firstName);
-      setReceiverName(messageRoomInfo.data.userInfo.firstName);
-      setSenderName(messageRoomInfo.data.roomInfo[0].User.firstName);
-      setSenderId(messageRoomInfo.data.roomInfo[0].User.id);
-      console.log(senderName, receiverName);
     }
   };
 
@@ -95,7 +126,7 @@ export default function Messages({ location }) {
       console.log(allMessages);
       for (let i = 0; i < allMessages.data.length; i++) {
         senderIdArray.push(allMessages.data[i].StudentId);
-        console.log(senderIdArray);
+        // console.log(senderIdArray);
       }
     }
     noDuplicates = [...new Set(senderIdArray)];
@@ -120,7 +151,7 @@ export default function Messages({ location }) {
     if (isTeacher) {
       allCorrespondence = await Axios.get(`api/all-messages/${id}/${userId}`);
       console.log(allCorrespondence);
-        setCorrespondence(allCorrespondence.data);
+      await setCorrespondence(allCorrespondence.data);
 
       studentName = await Axios.get(
         `api/all-messages/student-name/${allCorrespondence.data[0].StudentId}`
@@ -136,48 +167,8 @@ export default function Messages({ location }) {
     }
   };
 
-  useEffect(() => {
-    socket.on('message', (message) => {
-      setMessages([...messages, message]);
-    });
-    viewAllMessages(senderId);
-  }, [messages]);
-
-  useEffect(() => {
-    setSenderNameArray(tempArray);
-  }, []);
-
-  const sendMessage = (event) => {
-    event.preventDefault();
-    if (message) {
-      socket.emit('sendMessage', message, () => setMessage(''));
-    }
-    const { user1, user2 } = queryString.parse(location.search);
-    if (isTeacher) {
-      Axios.post(
-        `/api/message/tutor${user1}/student${user2}/sender${user1}/room${room}`,
-        { message: message }
-      );
-    } else {
-      Axios.post(
-        `/api/message/tutor${user2}/student${user1}/sender${user1}/room${room}`,
-        { message: message }
-      );
-    }
-  };
-
   console.log(message, messages);
   console.log(senderName, receiverName);
-
-  const getSenderId = (senderName) => {
-    for (let i = 0; i < senderNameArray; i++) {
-      if (senderName === senderNameArray[i].firstName) {
-        return senderNameArray.id;
-      }
-    }
-  };
-
-  console.log(getSenderId(senderName));
 
   return (
     <>
@@ -191,28 +182,17 @@ export default function Messages({ location }) {
           <div className='messageArea'>
             <article className='tile box tileStyle'>
               <ScrollToBottom>
-                {/* {correspondence.map((message) => (
-                  <OneMessage
-                    key={message.createdAt}
-                    isTeacher={isTeacher}
-                    senderId={message.SenderId}
-                    userId={userId}
-                    message={message.message}
-                    firstName={message.User.firstName}
-                    senderName={senderName}
-                    date={message.createdAt}
+                {correspondence.map((message) => (
+                  <OneMessage key={message.id}
+                  isTeacher={isTeacher}
+                  senderId={message.SenderId}
+                  userId={userId}
+                  message={message.message}
+                  firstName={message.User.firstName}
+                  senderName={senderName}
+                  date={message.createdAt}
                   />
-                ))} */}
-                {/* {messages.map((message, i) => (
-                  <div className='messageContent' key={i}>
-                    <Message
-                      senderName={senderName}
-                      receiverName={receiverName}
-                      message={message}
-                      user1={user1}
-                    />
-                  </div>
-                ))} */}
+                ))}
               </ScrollToBottom>
             </article>
             <form className='form'>
@@ -235,6 +215,7 @@ export default function Messages({ location }) {
             </form>
           </div>
         </div>
+       
       </div>
     </>
   );

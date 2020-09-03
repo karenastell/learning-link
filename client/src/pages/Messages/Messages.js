@@ -135,10 +135,13 @@ export default function Messages({ location }) {
   };
 
   useEffect(() => {
+    // Kaleigh needed to add this for it to work
+    const { user1, user2 } = queryString.parse(location.search);
     socket.on('message', (message) => {
       setMessages([...messages, message]);
     });
-    viewAllMessages(senderId);
+    // and change this from senderId to user2
+    viewAllMessages(user2);
   }, [messages]);
 
   useEffect(() => {

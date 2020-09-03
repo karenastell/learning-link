@@ -23,7 +23,7 @@ export default function Search() {
     Saturday: false,
   });
   const { setResults } = useContext(AuthContext);
-  const [noResults, setNoResults] = useState(false);
+  const [noResultsMessage, setNoResultsMessage] = useState('off');
 
   let responseArray = [];
   let responseData;
@@ -159,7 +159,7 @@ export default function Search() {
     }
 
     if (search.delivery_method) {
-      const response3 = await await Axios.get(
+      const response3 = await Axios.get(
         `api/search/delivery_method/${search.delivery_method}`
       );
       console.log('delivery: ', response3.data);
@@ -245,21 +245,27 @@ export default function Search() {
     setResults(responseArray);
     console.log(responseArray);
 
-    const allTutors = responseArray.filter((result) => result.isTeacher === true);
+    checkForResults(responseArray);
+  };
+
+  const checkForResults = (arrayOfResults) => {
+    const allTutors = arrayOfResults.filter((result) => result.isTeacher === true);
 
     if (allTutors.length > 0) {
       console.log(allTutors)
       history.push('/search-results');
-      setNoResults(false);
+      setNoResultsMessage('off');
     } else {
       console.log(allTutors.length);
-      setNoResults(true);
+      // The setNoResultsMessage isn't working... but the alert does
+      setNoResultsMessage('on');
+      alert("no results match your search")
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
       });
     }
-  };
+  }
 
   return (
     <>
@@ -272,6 +278,15 @@ export default function Search() {
           <h1 className='title has-text-centered mt-3'>Search For a Tutor</h1>
           <h3 className='subtitle is-4 mt-5'>Choose Your Search Criteria:</h3>
           <p className="mb-2 subtitle is-5">You may select as many search parameters as you like.</p>
+          {noResultsMessage === 'on' ? (
+                    <article className='mt-5 message is-danger'>
+                      <div className='message-body'>
+                        <p>There are no results for your search.</p>
+                        <br />
+                        <p>Please, change your criteria and try again.</p>
+                      </div>
+                    </article>
+                  ) : null}
           <Delivery handleInputChange={handleInputChange} />
           <Address handleInputChange={handleInputChange} />
           <Availability
@@ -288,17 +303,6 @@ export default function Search() {
                   <button onClick={findATutor} className='button is-info'>
                     Find a Tutor
                   </button>
-                  {noResults === true ? (
-                    <article className='mt-5 message is-danger'>
-                      <div className='message-body'>
-                        <p>There are no results for your search.</p>
-                        <br />
-                        <p>Please, change your criteria and try again.</p>
-                      </div>
-                    </article>
-                  ) : (
-                    <div></div>
-                  )}
                 </div>
               </div>
             </div>
