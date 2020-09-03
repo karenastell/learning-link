@@ -339,6 +339,11 @@ router.get(
   '/message-room/tutor:TutorId/student:StudentId',
   async (req, res) => {
     const room = Math.floor(Math.random() * 900000000);
+    console.log(
+      '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+      req.params.TutorId,
+      req.params.StudentId
+    );
     console.log(req.params.TutorId, req.params.StudentId);
     const roomInfo = await db.Message.findOrCreate({
       where: {
@@ -478,6 +483,43 @@ router.get('/all-messages/:studentId/:tutorId', (req, res) => {
       error: err,
     });
   });
+});
+
+router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
+  console.log(req.params);
+  if (req.params.isTeacher === 'tutorfalse') {
+    db.Message.update(
+      {
+        studentRead: true,
+      },
+      { where: { id: req.params.messageId } }
+    );
+  } else if (req.params.isTeacher === 'tutortrue') {
+    db.Message.update(
+      {
+        tutorRead: true,
+      },
+      { where: { id: req.params.messageId } }
+    );
+  }
+  console.log('message has been marked as read');
+  res.json(req.body);
+});
+
+router.get('all-messages/userId:userId/:isTeacher', (req, res) => {
+  if (req.params.isTeacher === 'tutortrue') {
+    db.Message.findAll({
+      where: { tutorRead: false },
+    }).then((data) => {
+      res.json(data);
+    });
+  } else {
+    db.Message.findAll({
+      where: { studentRead: false },
+    }).then((data) => {
+      res.json(data);
+    });
+  }
 });
 
 module.exports = router;

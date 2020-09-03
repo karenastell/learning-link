@@ -22,6 +22,7 @@ export default function Messages({ location }) {
   const [correspondence, setCorrespondence] = useState([]);
   const [senderNameArray, setSenderNameArray] = useState([]);
   const [senderId, setSenderId] = useState('');
+  const [read, setRead] = useState(false);
 
   let senderIdArray = [];
   let noDuplicates;
@@ -86,7 +87,7 @@ export default function Messages({ location }) {
       console.log(allMessages);
       for (let i = 0; i < allMessages.data.length; i++) {
         senderIdArray.push(allMessages.data[i].TutorId);
-        console.log(senderIdArray);
+        // console.log(senderIdArray);
       }
     } else {
       const allMessages = await Axios.get(`api/all-messages/tutor${userId}`);
@@ -119,19 +120,42 @@ export default function Messages({ location }) {
       allCorrespondence = await Axios.get(`api/all-messages/${id}/${userId}`);
       console.log(allCorrespondence);
       await setCorrespondence(allCorrespondence.data);
-
+      await console.log(allCorrespondence.data.length);
+      
+      for (let i = 0; i < allCorrespondence.data.length; i++) {
+        await setMessagesToRead(allCorrespondence.data[i].id);
+        console.log(allCorrespondence.data[i].id);
+      }
       studentName = await Axios.get(
         `api/all-messages/student-name/${allCorrespondence.data[0].StudentId}`
       );
+
       console.log(studentName);
       console.log(studentName.data.firstName);
       setSenderName(studentName.data.firstName);
     } else {
       allCorrespondence = await Axios.get(`api/all-messages/${userId}/${id}`);
       console.log(allCorrespondence);
-      setCorrespondence(allCorrespondence.data);
-      setSenderName(allCorrespondence.data[0].User.firstName);
+      await setCorrespondence(allCorrespondence.data);
+      await setSenderName(allCorrespondence.data[0].User.firstName);
+      
+      await console.log(allCorrespondence.data.length);
+      for (let i = 0; i < allCorrespondence.data.length; i++) {
+        await setMessagesToRead(allCorrespondence.data[i].id);
+      }
     }
+    
+    await console.log(correspondence.length);
+    for (let i = 0; i < correspondence.length; i++) {
+      setMessagesToRead(correspondence[i].id);
+      console.log(correspondence[i].id);
+    }
+  };
+
+  const setMessagesToRead = (messageId) => {
+      Axios.put(`api/all-messages/message${messageId}/tutor${isTeacher}`).then((response) => {
+        console.log(`messages has been marked to read.  ${response}`);
+      });
   };
 
   useEffect(() => {
@@ -145,6 +169,7 @@ export default function Messages({ location }) {
   }, [messages]);
 
   useEffect(() => {
+    console.log(tempArray);
     setSenderNameArray(tempArray);
   }, []);
 
@@ -167,18 +192,18 @@ export default function Messages({ location }) {
     }
   };
 
-  console.log(message, messages);
+  // console.log(message, messages);
   console.log(senderName, receiverName);
 
-  const getSenderId = (senderName) => {
-    for (let i = 0; i < senderNameArray; i++) {
-      if (senderName === senderNameArray[i].firstName) {
-        return senderNameArray.id;
-      }
-    }
-  };
+  // const getSenderId = (senderName) => {
+  //   for (let i = 0; i < senderNameArray; i++) {
+  //     if (senderName === senderNameArray[i].firstName) {
+  //       return senderNameArray.id;
+  //     }
+  //   }
+  // };
 
-  console.log(getSenderId(senderName));
+  // console.log(getSenderId(senderName));
 
   return (
     <>
@@ -204,16 +229,6 @@ export default function Messages({ location }) {
                     date={message.createdAt}
                   />
                 ))}
-                {/* {messages.map((message, i) => (
-                  <div className='messageContent' key={i}>
-                    <Message
-                      senderName={senderName}
-                      receiverName={receiverName}
-                      message={message}
-                      user1={user1}
-                    />
-                  </div>
-                ))} */}
               </ScrollToBottom>
             </article>
             <form className='form'>
