@@ -542,13 +542,13 @@ router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
 router.get('/unread/:userId/:otherId/:isTeacher', (req, res) => {
   if (req.params.isTeacher === 'true') {
     db.Message.findAll({
-      where: { tutorRead: false, SenderId: req.params.otherId },
+      where: { tutorRead: false, tutorId: req.params.userId, SenderId: req.params.otherId },
     }).then((data) => {
       res.json(data);
     });
   } else {
     db.Message.findAll({
-      where: { studentRead: false, SenderId: req.params.otherId },
+      where: { studentRead: false, studentId: req.params.userId, SenderId: req.params.otherId },
     }).then((data) => {
       res.json(data);
     });
