@@ -14,6 +14,9 @@ export default function Calendar({ location }) {
 
   const { tutor } = queryString.parse(location.search);
 
+
+
+
   const handleDateToUTC = () => {
     if (session.date && session.startTime && session.endTime) {
       const utcDateTime = new Date(
@@ -67,6 +70,9 @@ export default function Calendar({ location }) {
     // })
   };
 
+
+
+
   return (
     <>
       <Nav />
@@ -79,7 +85,7 @@ export default function Calendar({ location }) {
             className='button is-light is-info'
             onClick={handleReadReview}
           >
-            Add An Event
+            Book a Tutoring Session
           </button>
           <FullCalendar plugins={[dayGridPlugin]} initialView='dayGridMonth' />
         </div>
