@@ -70,7 +70,7 @@ export default function Calendar({ location }) {
     setViewEventModal('modal');
   };
 
-  const handleReadReview = () => {
+  const handleBookSessionModal = () => {
     setBookSessionModal('modal is-active');
   };
 
@@ -130,7 +130,7 @@ export default function Calendar({ location }) {
         <div className='container column'>
           <button
             className='button is-light is-info'
-            onClick={handleReadReview}
+            onClick={handleBookSessionModal}
           >
             Book a Tutoring Session
           </button>
