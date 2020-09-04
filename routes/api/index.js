@@ -74,15 +74,17 @@ router.get('/search/city/:city/state/:state', (req, res) => {
       { model: db.Availability },
       { model: db.Subject },
     ],
-  }).then((data) => {
-    console.log(data);
-    res.json(data);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then((data) => {
+      console.log(data);
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 // search route if user searches by subjects
@@ -160,15 +162,17 @@ router.get('/search/delivery_method/:delivery_method', (req, res) => {
         where: { delivery_method: req.params.delivery_method },
       },
     ],
-  }).then((data) => {
-    console.log(data);
-    res.json(data);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then((data) => {
+      console.log(data);
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 // Route to edit the myprofile page subjects
@@ -215,7 +219,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } },
+    { where: { id: req.params.id } }
   );
 
   await db.UserProfile.update(
@@ -231,7 +235,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } },
+    { where: { UserId: req.params.id } }
   );
   res.json(req.body);
 });
@@ -242,14 +246,16 @@ router.get('/mydashboard/:id', (req, res) => {
     where: {
       [Op.or]: [{ StudentId: req.params.id }, { TutorId: req.params.id }],
     },
-  }).then((data) => {
-    res.json(data);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 router.get('/mydashboard/mypeeps/:id', (req, res) => {
@@ -260,15 +266,17 @@ router.get('/mydashboard/mypeeps/:id', (req, res) => {
       { model: db.Subject },
       { model: db.Availability },
     ],
-  }).then((data) => {
-    // console.log(data);
-    res.json(data);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then((data) => {
+      // console.log(data);
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 router.post('/mydashboard/review/:id', (req, res) => {
@@ -277,27 +285,31 @@ router.post('/mydashboard/review/:id', (req, res) => {
     review: req.body.review,
     reviewer: req.body.reviewer,
     UserId: req.params.id,
-  }).then(() => {
-    res.json('Review was posted');
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then(() => {
+      res.json('Review was posted');
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 router.get('/read-reviews/:id', (req, res) => {
   db.Review.findAll({
     where: { UserId: req.params.id },
-  }).then((reviews) => {
-    res.json(reviews);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then((reviews) => {
+      res.json(reviews);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
@@ -309,29 +321,33 @@ router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
         TutorId: idOne,
         StudentId: idTwo,
       },
-    }).then(() => {
-      console.log('deleted');
-      res.json('Entry deleted');
-    }).catch((err) => {
-      res.status(500).json({
-        message: 'An error occurred',
-        error: err,
+    })
+      .then(() => {
+        console.log('deleted');
+        res.json('Entry deleted');
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: 'An error occurred',
+          error: err,
+        });
       });
-    });
   } else {
     db.TutorStudent.destroy({
       where: {
         TutorId: idTwo,
         StudentId: idOne,
       },
-    }).then(() => {
-      res.json('Entry deleted');
-    }).catch((err) => {
-      res.status(500).json({
-        message: 'An error occurred',
-        error: err,
+    })
+      .then(() => {
+        res.json('Entry deleted');
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: 'An error occurred',
+          error: err,
+        });
       });
-    });
   }
 });
 
@@ -364,7 +380,7 @@ router.get(
     });
 
     res.json({ roomInfo, userInfo });
-  },
+  }
 );
 
 router.post(
@@ -381,14 +397,16 @@ router.post(
         StudentId: req.params.StudentId,
         room: req.params.room,
         studentRead: true,
-      }).then(() => {
-        res.json('message was posted to database');
-      }).catch((err) => {
-        res.status(500).json({
-          message: 'An error occurred',
-          error: err,
+      })
+        .then(() => {
+          res.json('message was posted to database');
+        })
+        .catch((err) => {
+          res.status(500).json({
+            message: 'An error occurred',
+            error: err,
+          });
         });
-      });
     } else {
       db.Message.create({
         message: req.body.message,
@@ -397,76 +415,86 @@ router.post(
         StudentId: req.params.StudentId,
         room: req.params.room,
         tutorRead: true,
-      }).then(() => {
-        res.json('message was posted to database');
-      }).catch((err) => {
-        res.status(500).json({
-          message: 'An error occurred',
-          error: err,
+      })
+        .then(() => {
+          res.json('message was posted to database');
+        })
+        .catch((err) => {
+          res.status(500).json({
+            message: 'An error occurred',
+            error: err,
+          });
         });
-      });
     }
-  },
+  }
 );
 
 router.get('/all-messages/student:studentId', (req, res) => {
   console.log(req.params.studentId);
   db.Message.findAll({
     where: { StudentId: req.params.studentId },
-  }).then((data) => {
-    // console.log(data);
-    res.json(data);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then((data) => {
+      // console.log(data);
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 router.get('/all-messages/tutor:tutorId', (req, res) => {
   console.log(req.params.tutorId);
   db.Message.findAll({
     where: { TutorId: req.params.tutorId },
-  }).then((data) => {
-    // console.log(data);
-    res.json(data);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then((data) => {
+      // console.log(data);
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 router.get('/all-messages/student-name/:studentId', (req, res) => {
   console.log(req.params.studentId);
   db.User.findOne({
     where: { id: req.params.studentId },
-  }).then((data) => {
-    // console.log(data);
-    res.json(data);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then((data) => {
+      // console.log(data);
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 router.get('/sent-messages-to/:personId', (req, res) => {
   console.log(req.params.personId);
   db.User.findOne({
     where: { id: req.params.personId },
-  }).then((data) => {
-    // console.log(data);
-    res.json(data);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then((data) => {
+      // console.log(data);
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 router.get('/all-messages/:studentId/:tutorId', (req, res) => {
@@ -474,15 +502,20 @@ router.get('/all-messages/:studentId/:tutorId', (req, res) => {
   db.Message.findAll({
     where: { StudentId: req.params.studentId, TutorId: req.params.tutorId },
     include: { model: db.User },
-  }).then((data) => {
-    console.log(data, 'l;sdkjaf;alsjkdf;alskjdf;lakjsd;lfjk!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-    res.json(data);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then((data) => {
+      console.log(
+        data,
+        'l;sdkjaf;alsjkdf;alskjdf;lakjsd;lfjk!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+      );
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
-  });
 });
 
 router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
@@ -506,16 +539,16 @@ router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
   res.json(req.body);
 });
 
-router.get('all-messages/userId:userId/:isTeacher', (req, res) => {
-  if (req.params.isTeacher === 'tutortrue') {
+router.get('/unread/:userId/:otherId/:isTeacher', (req, res) => {
+  if (req.params.isTeacher === 'true') {
     db.Message.findAll({
-      where: { tutorRead: false },
+      where: { tutorRead: false, tutorId: req.params.userId, SenderId: req.params.otherId },
     }).then((data) => {
       res.json(data);
     });
   } else {
     db.Message.findAll({
-      where: { studentRead: false },
+      where: { studentRead: false, studentId: req.params.userId, SenderId: req.params.otherId },
     }).then((data) => {
       res.json(data);
     });
