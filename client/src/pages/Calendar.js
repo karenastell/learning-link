@@ -8,10 +8,7 @@ import { AuthContext } from '../AuthContext';
 import queryString from 'query-string';
 
 export default function Calendar({ location }) {
-  const [emptyReviewMessage, setEmptyReviewMessage] = useState('off');
-  const [readReviewModal, setReadReviewModal] = useState('modal');
-  const [removeMessage, setRemoveMessage] = useState('modal');
-  const [reviewModal, setReviewModal] = useState('modal');
+  const [bookSessionModal, setBookSessionModal] = useState('modal');
   const { userId } = useContext(AuthContext);
   const [session, setSession] = useState([]);
 
@@ -43,14 +40,11 @@ export default function Calendar({ location }) {
   };
 
   const handleModalClose = () => {
-    setReviewModal('modal');
-    setRemoveMessage('modal');
-    setEmptyReviewMessage('off');
-    setReadReviewModal('modal');
+    setBookSessionModal('modal');
   };
 
   const handleReadReview = () => {
-    setReadReviewModal('modal is-active');
+    setBookSessionModal('modal is-active');
   };
 
   const handleBookSession = async () => {
@@ -92,8 +86,8 @@ export default function Calendar({ location }) {
       </div>
 
       {/* Add Event Modal */}
-      <div className={readReviewModal}>
-      {/* <div className='modal is-active'> */}
+      <div className={bookSessionModal}>
+        {/* <div className='modal is-active'> */}
         <div className='modal-background'></div>
         <div className='modal-card'>
           <header className='modal-card-head modal-header-style'>
