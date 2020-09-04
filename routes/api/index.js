@@ -639,6 +639,11 @@ router.get('/calendar/tutor/:tutorId', (req, res) => {
   });
 });
 
-// router.delete('/calendar/')
+// delete an event
+// router.delete('/calendar/tutor/:tutorId/event/:eventId', (rea, res) => {
+//   db.Event.destroy({
+//     where: {}
+//   })
+// });
 
 module.exports = router;

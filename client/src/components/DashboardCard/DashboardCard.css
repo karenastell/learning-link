@@ -57,3 +57,8 @@ ul {
   font-weight: 600;
   margin-right: 5px;
 }
+
+.calendar-button:hover {
+  background-color: #f3bb22;
+  border-radius: 30%;
+}

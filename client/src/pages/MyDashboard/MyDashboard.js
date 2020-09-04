@@ -147,6 +147,8 @@ export default function MyDashboard() {
                 "Search for a Tutor" button in the menu. From there, you'll be
                 able to view tutors, add them to your dashboard, and send them a
                 message.
+                <br/>
+                You can schedule tutoring sessions with your tutors by clicking the calendar icon <img src="./calendar.png" alt="calendar" width="40px"/> near their name on your dashboard.
               </p>
               <h3 className="is-size-4 mt-4">Your Current Tutors: </h3>
             </div>
