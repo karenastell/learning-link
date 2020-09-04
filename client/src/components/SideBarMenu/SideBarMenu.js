@@ -9,7 +9,7 @@ export default function SideBarMenu() {
   return (
     <aside className="menu ml-4 pt-4 font-style">
       <p className="menu-label">Menu</p>
-      <ul className="menu-list">
+      <ul className="menu-list is-size-5">
         <li>
           <Link to="/student-dashboard"  className="menu-style">Dashboard</Link>
         </li>

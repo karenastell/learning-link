@@ -256,7 +256,7 @@ export default function Search() {
         <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
-        <div className='container column font-style'>
+        <div className='container column px-5 font-style'>
           <h1 className='title has-text-centered mt-3'>Search For a Tutor</h1>
           <h3 className='subtitle is-4 mt-5'>Choose Your Search Criteria:</h3>
           <p className="mb-2 subtitle is-5">You may select as many search parameters as you like.</p>

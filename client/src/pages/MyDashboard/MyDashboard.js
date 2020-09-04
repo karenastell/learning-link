@@ -130,7 +130,7 @@ export default function MyDashboard() {
           </h2>
 
           {isTeacher ? (
-            <div className="mb-5 mt-4">
+            <div className="mb-5">
               <p>
                 Students and parents can add you to their dashboard and reach
                 out to you for tutoring services! When you are added to
@@ -138,17 +138,17 @@ export default function MyDashboard() {
                 regularly check your messages and your dashboard in case parents
                 or students contact you for tutoring.
               </p>
-              <h3 className="is-size-4 mt-5">Your Current Students: </h3>
+              <h3 className="is-size-4 mt-4">Your Current Students: </h3>
             </div>
           ) : (
-            <div className="mb-5 mt-4">
+            <div className="mb-5">
               <p>
                 To get started, search for tutors that meet your needs using the
                 "Search for a Tutor" button in the menu. From there, you'll be
                 able to view tutors, add them to your dashboard, and send them a
                 message.
               </p>
-              <h3 className="is-size-4 mt-5">Your Current Tutors: </h3>
+              <h3 className="is-size-4 mt-4">Your Current Tutors: </h3>
             </div>
           )}
           <div className="container">
