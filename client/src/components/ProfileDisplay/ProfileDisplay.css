@@ -3,7 +3,7 @@
 }
 
 .profile-text {
-  color: #2c3c70;
+  color: #2c3c70 !important;
   padding-left: 10px;
   font-size: 18px;
   margin-left: 40px;

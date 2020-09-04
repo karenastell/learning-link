@@ -30,12 +30,12 @@ useEffect(() => {
           <h3 className="mb-3 title is-4">Sign up to get started!</h3>
           <Link to="/signup-tutor" className="button-main">
             <button className="button is-info button-main mx-2">
-              Sign up as a teacher/tutor
+              I am a Tutor/Teacher
             </button>
           </Link>
           <Link to="/signup-student" className="button-main">
             <button className="button is-info button-main mx-2">
-              Sign up a student
+              I am a Student/Parent
             </button>
           </Link>
         </div>

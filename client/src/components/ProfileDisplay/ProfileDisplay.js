@@ -141,11 +141,11 @@ export default function ProfileDisplay({
 
       { isTeacher ? (<div className="tile is-ancestor">
         <div className="tile is-parent is-vertical is-12">
-          <div className="tile is-child box box-style">
-            <h3 className="title is-4">Your Reviews: </h3>
+          <div className="tile is-child box box-style profile-text">
+            <h3 className="title is-4 profile-text">Your Reviews: </h3>
             { reviews.length > 0 ? reviews.map(review => (<div key={review.id} className="p-1">
-            <p>"{review.review}"</p>
-            <p className="is-pulled-right pr-6">- {review.reviewer}</p>
+            <p className="profile-text">"{review.review}"</p>
+            <p className="is-pulled-right profile-text pr-6">- {review.reviewer}</p>
             <hr/>
             </div>)) : <p>You do not have any reviews yet...</p>}
           </div>
