@@ -1,7 +1,6 @@
 .foot {
   background-color: #4fa1df !important;
   border-top: 2px #f0763a solid;
-
   min-height: 90px !important;
   padding-top: 10px;
   color: white;
@@ -21,4 +20,8 @@
 .footer-links:hover {
   color: white;
   text-decoration: none;
+}
+
+.foot-font {
+  font-weight: 600;
 }

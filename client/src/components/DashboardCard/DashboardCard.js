@@ -134,35 +134,37 @@ console.log(unread);
               <br />
             </p>
           </header>
-          <div className='card-content is-size-7 card-body-style'>
-            <div className='content'>
+          <div className="card-content is-size-7-mobile card-body-style">
+            <div className="content">
               <ul>
-                <li>Email: {result.email}</li>
+                <li><span className="bold-span">Email: </span>{result.email}</li>
                 {!isTeacher ? (
-                  <li>Day(s) Available: {result.days.join(', ')}</li>
+                  <li><span className="bold-span">Day(s) Available: </span>{result.days.join(', ')}</li>
                 ) : null}
                 <li>
-                  Location: {result.city}, {result.state}
+                  <span className="bold-span">Location: </span>{result.city}, {result.state}
                 </li>
-                <li>Bio: {result.bio}</li>
+                <li><span className="bold-span">Bio: </span>{result.bio}</li>
                 {!isTeacher ? (
-                  <li>Degree: {result.degree}</li>
+                  <li><span className="bold-span">Degree: </span>{result.degree}</li>
                 ) : (
-                  <li>Grade: {result.grade}</li>
+                  <li><span className="bold-span">Grade: </span>{result.grade}</li>
                 )}
                 {!isTeacher ? (
-                  <li>Experience: {result.experience}</li>
+                  <li><span className="bold-span">Experience: </span>{result.experience}</li>
                 ) : (
-                  <li>School: {result.school}</li>
+                  <li><span className="bold-span">School: </span>{result.school}</li>
                 )}
-                <li>Subjects: </li>
+                {isTeacher ? (<li><span className="bold-span">Subjects {result.firstName} needs help with: </span></li>) : (
+                  <li><span className="bold-span">Subjects {result.firstName} can help with: </span></li>
+                )}
                 <ul>
                   {result.subjects.map((subject) => (
                     <li key={result.lastName + subject}>{subject}</li>
                   ))}
                 </ul>
-                <li>Delivery Method: {result.delivery_method}</li>
-                {result.rate ? <li>Rate: ${result.rate} per hour</li> : null}
+                <li><span className="bold-span">Delivery Method: </span>{result.delivery_method}</li>
+                {result.rate ? <li><span className="bold-span">Rate: </span>${result.rate} per hour</li> : null}
               </ul>
             </div>
           </div>

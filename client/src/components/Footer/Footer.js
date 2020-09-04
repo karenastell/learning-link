@@ -3,8 +3,8 @@ import './Footer.css';
 
 export default function Footer() {
     return (
-        <footer className="foot footer has-text-centered">
-        <h2>Learning Link</h2>
+        <footer className="foot footer has-text-centered foot-font font-style">
+        <h2 className="foot-font">Learning Link</h2>
         <p>
           &copy; 2020
           <a

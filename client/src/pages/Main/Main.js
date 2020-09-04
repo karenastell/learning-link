@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Nav from '../../components/Nav/Nav';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../AuthContext';
@@ -9,6 +9,13 @@ import './Main.css';
 
 export default function Main(props) {
 const { isAuth, userId} = useContext(AuthContext);
+
+useEffect(() => {
+  window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+}, [])
 
 // ternary: if the user is authenticated, they are redirected to their profile page.
   return (
