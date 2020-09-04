@@ -22,7 +22,7 @@ export default function Messages({ location }) {
   const [correspondence, setCorrespondence] = useState([]);
   const [senderNameArray, setSenderNameArray] = useState([]);
   const [senderId, setSenderId] = useState('');
-  const [read, setRead] = useState(false);
+
 
   let senderIdArray = [];
   let noDuplicates;
@@ -148,13 +148,12 @@ export default function Messages({ location }) {
     await console.log(correspondence.length);
     for (let i = 0; i < correspondence.length; i++) {
       setMessagesToRead(correspondence[i].id);
-      console.log(correspondence[i].id);
     }
   };
 
   const setMessagesToRead = (messageId) => {
       Axios.put(`api/all-messages/message${messageId}/tutor${isTeacher}`).then((response) => {
-        console.log(`messages has been marked to read.  ${response}`);
+        
       });
   };
 

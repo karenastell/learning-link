@@ -23,6 +23,15 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
     setMessageRoom();
   }, []);
 
+  useEffect(() => {
+    checkForUnreadMessages();
+    const interval = setInterval(() => {
+      checkForUnreadMessages();
+      console.log('This will run every second!');
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   const activateModal = () => {
     setReviewModal('modal is-active');
   };
@@ -110,19 +119,18 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   };
 
   const checkForUnreadMessages = () => {
-    Axios.get(
-      `/api/unread/${userId}/${result.id}/${isTeacher}`
-    ).then((response) => {
-      console.log(response);
-      if(response.data.length > 0){
-        setUnread(true)
+    Axios.get(`/api/unread/${userId}/${result.id}/${isTeacher}`).then(
+      (response) => {
+        console.log(response);
+        if (response.data.length > 0) {
+          setUnread(true);
+        }
       }
-    });
-  
+    );
   };
 
-  checkForUnreadMessages();
-console.log(unread);
+
+  console.log(unread);
 
   return (
     <>
@@ -134,37 +142,77 @@ console.log(unread);
               <br />
             </p>
           </header>
-          <div className="card-content is-size-7-mobile card-body-style">
-            <div className="content">
+          <div className='card-content is-size-7-mobile card-body-style'>
+            <div className='content'>
               <ul>
-                <li><span className="bold-span">Email: </span>{result.email}</li>
+                <li>
+                  <span className='bold-span'>Email: </span>
+                  {result.email}
+                </li>
                 {!isTeacher ? (
-                  <li><span className="bold-span">Day(s) Available: </span>{result.days.join(', ')}</li>
+                  <li>
+                    <span className='bold-span'>Day(s) Available: </span>
+                    {result.days.join(', ')}
+                  </li>
                 ) : null}
                 <li>
-                  <span className="bold-span">Location: </span>{result.city}, {result.state}
+                  <span className='bold-span'>Location: </span>
+                  {result.city}, {result.state}
                 </li>
-                <li><span className="bold-span">Bio: </span>{result.bio}</li>
+                <li>
+                  <span className='bold-span'>Bio: </span>
+                  {result.bio}
+                </li>
                 {!isTeacher ? (
-                  <li><span className="bold-span">Degree: </span>{result.degree}</li>
+                  <li>
+                    <span className='bold-span'>Degree: </span>
+                    {result.degree}
+                  </li>
                 ) : (
-                  <li><span className="bold-span">Grade: </span>{result.grade}</li>
+                  <li>
+                    <span className='bold-span'>Grade: </span>
+                    {result.grade}
+                  </li>
                 )}
                 {!isTeacher ? (
-                  <li><span className="bold-span">Experience: </span>{result.experience}</li>
+                  <li>
+                    <span className='bold-span'>Experience: </span>
+                    {result.experience}
+                  </li>
                 ) : (
-                  <li><span className="bold-span">School: </span>{result.school}</li>
+                  <li>
+                    <span className='bold-span'>School: </span>
+                    {result.school}
+                  </li>
                 )}
-                {isTeacher ? (<li><span className="bold-span">Subjects {result.firstName} needs help with: </span></li>) : (
-                  <li><span className="bold-span">Subjects {result.firstName} can help with: </span></li>
+                {isTeacher ? (
+                  <li>
+                    <span className='bold-span'>
+                      Subjects {result.firstName} needs help with:{' '}
+                    </span>
+                  </li>
+                ) : (
+                  <li>
+                    <span className='bold-span'>
+                      Subjects {result.firstName} can help with:{' '}
+                    </span>
+                  </li>
                 )}
                 <ul>
                   {result.subjects.map((subject) => (
                     <li key={result.lastName + subject}>{subject}</li>
                   ))}
                 </ul>
-                <li><span className="bold-span">Delivery Method: </span>{result.delivery_method}</li>
-                {result.rate ? <li><span className="bold-span">Rate: </span>${result.rate} per hour</li> : null}
+                <li>
+                  <span className='bold-span'>Delivery Method: </span>
+                  {result.delivery_method}
+                </li>
+                {result.rate ? (
+                  <li>
+                    <span className='bold-span'>Rate: </span>${result.rate} per
+                    hour
+                  </li>
+                ) : null}
               </ul>
             </div>
           </div>
@@ -176,7 +224,8 @@ console.log(unread);
                   className='card-footer-item card-buttons button is-info is-light is-size-7 is-white'
                   onClick={setMessageRoom}
                 >
-                 <span className='tag is-danger new-message'>{' '}</span> Message {result.firstName}
+                  <span className='tag is-danger new-message'> </span> Message{' '}
+                  {result.firstName}
                 </Link>
               ) : (
                 <Link
@@ -208,7 +257,7 @@ console.log(unread);
                 className='card-footer-item card-buttons button is-size-7 is-white is-info is-light'
                 onClick={handleRemoveModal}
               >
-                Remove {result.firstName} 
+                Remove {result.firstName}
               </button>
             </div>
           </footer>
