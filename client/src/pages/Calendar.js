@@ -53,24 +53,21 @@ export default function Calendar({ location }) {
     setReadReviewModal('modal is-active');
   };
 
-  const handleBookSession = async () => {
-    await handleDateToUTC();
-    const object = {
+  const handleBookSession = () => {
+    // await handleDateToUTC();
+    const eventObject = {
       event: `Tutoring Session with ${session.studentName}`,
-      start: session.utcStartTime,
-      end: session.utcEndTime,
-      start2: session.startTime,
-      end2: session.endTime
+      start: new Date(
+        `${session.date} ${session.startTime}`
+      ).toISOString(),
+      end: new Date(
+        `${session.date} ${session.endTime}`
+      ).toISOString()
     }
-    console.log(object);
-    // Axios.post(`api/calendar/tutor/${tutor}/student/${userId}`, {
-    //   event: `Tutoring Session with ${session.studentName}`,
-    //   start: session.utcStartTime,
-    //   end: session.utcEndTime,
-    // }).then((response)=>{
-    //   console.log('session has been booked', response);
-    //   handleModalClose();
-    // })
+    Axios.post(`api/calendar/tutor/${tutor}/student/${userId}`, eventObject).then((response)=>{
+      console.log('session has been booked', response);
+      handleModalClose();
+    })
   };
 
   return (
