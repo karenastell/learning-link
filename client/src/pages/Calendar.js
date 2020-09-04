@@ -13,17 +13,21 @@ export default function Calendar({ location }) {
   const [session, setSession] = useState([]);
   const [userEvents, setUserEvents] = useState([]);
 
-  const { forUser } = queryString.parse(location.search);
+  const { forUser, myCalendar } = queryString.parse(location.search);
 
   useEffect(() => {
     getAllEvents()
   }, [])
 
   const getAllEvents = () => {
-    Axios.get(`api/calendar/tutor/${forUser}`).then((response) => {
+    // if (myCalendar === "false") {
+      Axios.get(`api/calendar/id/${forUser}`).then((response) => {
       console.log(response)
       setUserEvents(response.data);
     })
+  // } else {
+  //   Axios.get(`api/calendar/`)
+  // }
   }
 
   const handleInputChange = (event) => {

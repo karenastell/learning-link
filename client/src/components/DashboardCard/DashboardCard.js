@@ -140,7 +140,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
               <br />
             </p>
             {!isTeacher ? (
-              <Link to={`/calendar?forUser=${result.id}`}>
+              <Link to={`/calendar?forUser=${result.id}&myCalendar=false`}>
                 <img src="./calendar.png" width="50px" className="calendar-button"/>
               </Link>
             ) : null}

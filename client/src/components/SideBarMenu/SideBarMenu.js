@@ -25,7 +25,7 @@ export default function SideBarMenu() {
           <Link to="/all-messages" className="menu-style">Messages</Link>
         </li> */}
         <li>
-          <Link to={`/calendar?forUser=${userId}`} className="menu-style">My Calendar</Link>
+          <Link to={`/calendar?forUser=${userId}&myCalendar=true`} className="menu-style">My Calendar</Link>
         </li>
       </ul>
     </aside>
