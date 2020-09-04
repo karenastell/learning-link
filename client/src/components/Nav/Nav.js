@@ -92,7 +92,7 @@ export default function Nav() {
             ></button>
           </header>
           {/* email input */}
-          <section className="modal-card-body">
+          <section className="modal-card-body font-style">
           {alert === 'on' ? (
                 <article className="message is-danger">
                   <div className="message-body">

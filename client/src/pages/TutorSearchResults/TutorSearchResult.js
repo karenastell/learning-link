@@ -128,23 +128,23 @@ export default function TutorSearchResult(props) {
                   <div className="card-content search-card-body">
                     <div className="content">
                       <ul>
-                        <li>Email: {result.email}</li>
-                        <li>Day(s) Available: {result.day.join(', ')}</li>
+                        <li><span className="bold-span">Email: </span>{result.email}</li>
+                        <li><span className="bold-span">Day(s) Available: </span>{result.day.join(', ')}</li>
                         <li>
-                          Location: {result.city}, {result.state}
+                        <span className="bold-span">Location: </span>{result.city}, {result.state}
                         </li>
-                        <li>Bio: {result.bio}</li>
-                        <li>Degree: {result.degree}</li>
-                        <li>Experience: {result.experience}</li>
-                        <li>Subjects: </li>
+                        <li><span className="bold-span">Bio: </span>{result.bio}</li>
+                        <li><span className="bold-span">Degree: </span>{result.degree}</li>
+                        <li><span className="bold-span">Experience: </span>{result.experience}</li>
+                        <li><span className="bold-span">Subjects: </span></li>
                         <ul>
                           {result.subject.map((sub) => (
                             <li key={sub}>{sub}</li>
                           ))}
                         </ul>
-                        <li>Delivery Method: {result.delivery_method}</li>
+                        <li><span className="bold-span">Delivery Method: </span>{result.delivery_method}</li>
                         {result.rate === null || result.rate === '' ? null : (
-                          <li>Rate: {result.rate}</li>
+                          <li><span className="bold-span">Rate: </span>${result.rate} per hour</li>
                         )}
                       </ul>
                     </div>
