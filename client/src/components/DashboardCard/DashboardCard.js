@@ -128,71 +128,75 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
     );
   };
 
-
   console.log(unread);
 
   return (
     <>
-      <div className='column is-half-tablet is-one-third-desktop'>
-        <div className='card mb-6 card-style'>
-          <header className='card-header card-head-style'>
-            <p className='column'>
+      <div className="column is-half-tablet is-one-third-desktop">
+        <div className="card mb-6 card-style">
+          <header className="card-header card-head-style">
+            <p className="column">
               {result.firstName} {result.lastName}
               <br />
             </p>
+            {!isTeacher ? (
+              <Link to={`/calendar/tutor/${result.id}`}>
+                <img src="./calendar.png" width="50px" className="calendar-button"/>
+              </Link>
+            ) : null}
           </header>
-          <div className='card-content is-size-7-mobile card-body-style'>
-            <div className='content'>
+          <div className="card-content is-size-7-mobile card-body-style">
+            <div className="content">
               <ul>
                 <li>
-                  <span className='bold-span'>Email: </span>
+                  <span className="bold-span">Email: </span>
                   {result.email}
                 </li>
                 {!isTeacher ? (
                   <li>
-                    <span className='bold-span'>Day(s) Available: </span>
+                    <span className="bold-span">Day(s) Available: </span>
                     {result.days.join(', ')}
                   </li>
                 ) : null}
                 <li>
-                  <span className='bold-span'>Location: </span>
+                  <span className="bold-span">Location: </span>
                   {result.city}, {result.state}
                 </li>
                 <li>
-                  <span className='bold-span'>Bio: </span>
+                  <span className="bold-span">Bio: </span>
                   {result.bio}
                 </li>
                 {!isTeacher ? (
                   <li>
-                    <span className='bold-span'>Degree: </span>
+                    <span className="bold-span">Degree: </span>
                     {result.degree}
                   </li>
                 ) : (
                   <li>
-                    <span className='bold-span'>Grade: </span>
+                    <span className="bold-span">Grade: </span>
                     {result.grade}
                   </li>
                 )}
                 {!isTeacher ? (
                   <li>
-                    <span className='bold-span'>Experience: </span>
+                    <span className="bold-span">Experience: </span>
                     {result.experience}
                   </li>
                 ) : (
                   <li>
-                    <span className='bold-span'>School: </span>
+                    <span className="bold-span">School: </span>
                     {result.school}
                   </li>
                 )}
                 {isTeacher ? (
                   <li>
-                    <span className='bold-span'>
+                    <span className="bold-span">
                       Subjects {result.firstName} needs help with:{' '}
                     </span>
                   </li>
                 ) : (
                   <li>
-                    <span className='bold-span'>
+                    <span className="bold-span">
                       Subjects {result.firstName} can help with:{' '}
                     </span>
                   </li>
@@ -203,33 +207,33 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
                   ))}
                 </ul>
                 <li>
-                  <span className='bold-span'>Delivery Method: </span>
+                  <span className="bold-span">Delivery Method: </span>
                   {result.delivery_method}
                 </li>
                 {result.rate ? (
                   <li>
-                    <span className='bold-span'>Rate: </span>${result.rate} per
+                    <span className="bold-span">Rate: </span>${result.rate} per
                     hour
                   </li>
                 ) : null}
               </ul>
             </div>
           </div>
-          <footer className='card-footer card-foot'>
-            <div className='buttons card-buttons'>
+          <footer className="card-footer card-foot">
+            <div className="buttons card-buttons">
               {unread === true ? (
                 <Link
                   to={`/message?user1=${userId}&user2=${result.id}&room=${room}`}
-                  className='card-footer-item card-buttons button is-info is-light is-size-7 is-white'
+                  className="card-footer-item card-buttons button is-info is-light is-size-7 is-white"
                   onClick={setMessageRoom}
                 >
-                  <span className='tag is-danger new-message'> </span> Message{' '}
+                  <span className="tag is-danger new-message"> </span> Message{' '}
                   {result.firstName}
                 </Link>
               ) : (
                 <Link
                   to={`/message?user1=${userId}&user2=${result.id}&room=${room}`}
-                  className='card-footer-item card-buttons button is-info is-light is-size-7 is-white'
+                  className="card-footer-item card-buttons button is-info is-light is-size-7 is-white"
                   onClick={setMessageRoom}
                 >
                   Message {result.firstName}
@@ -239,7 +243,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
               {!isTeacher ? (
                 <button
                   onClick={activateModal}
-                  className='card-footer-item card-buttons button is-size-7 is-white is-info is-light'
+                  className="card-footer-item card-buttons button is-size-7 is-white is-info is-light"
                 >
                   Leave a Review
                 </button>
@@ -247,13 +251,13 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
               {!isTeacher ? (
                 <button
                   onClick={handleReadReview}
-                  className='card-footer-item card-buttons button is-size-7 is-white is-info is-light'
+                  className="card-footer-item card-buttons button is-size-7 is-white is-info is-light"
                 >
                   See {result.firstName}'s Reviews
                 </button>
               ) : null}
               <button
-                className='card-footer-item card-buttons button is-size-7 is-white is-info is-light'
+                className="card-footer-item card-buttons button is-size-7 is-white is-info is-light"
                 onClick={handleRemoveModal}
               >
                 Remove {result.firstName}
@@ -265,54 +269,54 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
 
       {/* Write a Review Modal */}
       <div className={reviewModal}>
-        <div className='modal-background'></div>
-        <div className='modal-card'>
-          <header className='modal-card-head modal-header-style'>
-            <p className='modal-card-title'>
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head modal-header-style">
+            <p className="modal-card-title">
               Write a review for {result.firstName} {result.lastName}
             </p>
             <button
-              className='delete'
-              aria-label='close'
+              className="delete"
+              aria-label="close"
               onClick={handleModalClose}
             ></button>
           </header>
-          <section className='modal-card-body'>
+          <section className="modal-card-body">
             {emptyReviewMessage === 'on' ? (
-              <article className='message is-danger'>
-                <div className='message-body'>
+              <article className="message is-danger">
+                <div className="message-body">
                   Oops! You cannon submit an empty review!
                 </div>
               </article>
             ) : null}
             <textarea
-              className='textarea'
-              name='review'
+              className="textarea"
+              name="review"
               value={review.review || undefined}
-              placeholder='Leave your review here...'
+              placeholder="Leave your review here..."
               onChange={handleInputChange}
             ></textarea>
-            <div className='field'>
-              <p className='control is-expanded has-icons-left my-4'>
-                <label className='label' htmlFor='Name'>
+            <div className="field">
+              <p className="control is-expanded has-icons-left my-4">
+                <label className="label" htmlFor="Name">
                   Your Name
                   <input
-                    className='input'
-                    id='Name'
-                    type='text'
-                    placeholder='Your Name'
-                    name='Name'
+                    className="input"
+                    id="Name"
+                    type="text"
+                    placeholder="Your Name"
+                    name="Name"
                     onChange={handleReviewerInputChange}
                   />
                 </label>
               </p>
             </div>
           </section>
-          <footer className='modal-card-foot modal-bottom-style'>
-            <button className='button is-info' onClick={handleReviewSubmit}>
+          <footer className="modal-card-foot modal-bottom-style">
+            <button className="button is-info" onClick={handleReviewSubmit}>
               Submit Review
             </button>
-            <button className='button' onClick={handleModalClose}>
+            <button className="button" onClick={handleModalClose}>
               Cancel
             </button>
           </footer>
@@ -321,30 +325,30 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
 
       {/* remove from Dashboard Modal */}
       <div className={removeMessage}>
-        <div className='modal-background'></div>
-        <div className='modal-card'>
-          <header className='modal-card-head modal-header-style'>
-            <p className='modal-card-title'>
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head modal-header-style">
+            <p className="modal-card-title">
               You are about to remove {result.firstName} {result.lastName} from
               your Dashboard
             </p>
             <button
-              className='delete'
-              aria-label='close'
+              className="delete"
+              aria-label="close"
               onClick={handleModalClose}
             ></button>
           </header>
-          <section className='modal-card-body'>
+          <section className="modal-card-body">
             <p>
               Are you sure you want to remove {result.firstName}{' '}
               {result.lastName} from your dashboard?
             </p>
           </section>
-          <footer className='modal-card-foot modal-bottom-style'>
-            <button className='button is-info' onClick={removeFromDashboard}>
+          <footer className="modal-card-foot modal-bottom-style">
+            <button className="button is-info" onClick={removeFromDashboard}>
               Yes, I'm sure
             </button>
-            <button className='button' onClick={handleModalClose}>
+            <button className="button" onClick={handleModalClose}>
               Cancel
             </button>
           </footer>
@@ -353,24 +357,24 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
 
       {/* read reviews Modal */}
       <div className={readReviewModal}>
-        <div className='modal-background'></div>
-        <div className='modal-card'>
-          <header className='modal-card-head modal-header-style'>
-            <p className='modal-card-title'>
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head modal-header-style">
+            <p className="modal-card-title">
               Reviews for {result.firstName} {result.lastName}:
             </p>
             <button
-              className='delete'
-              aria-label='close'
+              className="delete"
+              aria-label="close"
               onClick={handleModalClose}
             ></button>
           </header>
-          <section className='modal-card-body'>
+          <section className="modal-card-body">
             {tutorReviews[0] ? (
               tutorReviews.map((review) => (
-                <div key={review.createdAt} className='my-4 px-2'>
+                <div key={review.createdAt} className="my-4 px-2">
                   <p>{review.review}</p>
-                  <h3 className='is-pulled-right mr-6'>-{review.reviewer}</h3>
+                  <h3 className="is-pulled-right mr-6">-{review.reviewer}</h3>
                   <hr />
                 </div>
               ))
@@ -378,8 +382,8 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
               <p>There are currently no reviews for this tutor...</p>
             )}
           </section>
-          <footer className='modal-card-foot modal-bottom-style'>
-            <button className='button' onClick={handleModalClose}>
+          <footer className="modal-card-foot modal-bottom-style">
+            <button className="button" onClick={handleModalClose}>
               Close
             </button>
           </footer>

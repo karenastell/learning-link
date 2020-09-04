@@ -23,10 +23,10 @@ export default function SideBarMenu() {
         ) : null}
         {/* <li>
           <Link to="/all-messages" className="menu-style">Messages</Link>
-        </li>
-        <li>
-          <Link to="/calendar" className="menu-style">Calendar</Link>
         </li> */}
+        <li>
+          <Link to="/calendar" className="menu-style">My Calendar</Link>
+        </li>
       </ul>
     </aside>
   );

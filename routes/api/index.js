@@ -126,6 +126,7 @@ router.get('/search/subject/:subject', async (req, res) => {
   res.json(usersSubjects);
 });
 
+// Post the tutorStudent pairs to add to dashboard
 router.post('/TutorStudent', async (req, res) => {
   console.log('req.body', req.body);
   // First check that this pair does not already exist
@@ -150,7 +151,6 @@ router.post('/TutorStudent', async (req, res) => {
 });
 
 // search route if user searches by method of delivery
-
 router.get('/search/delivery_method/:delivery_method', (req, res) => {
   console.log(req.params.delivery_method);
   db.User.findAll({
@@ -219,7 +219,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } }
+    { where: { id: req.params.id } },
   );
 
   await db.UserProfile.update(
@@ -235,7 +235,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } }
+    { where: { UserId: req.params.id } },
   );
   res.json(req.body);
 });
@@ -258,6 +258,8 @@ router.get('/mydashboard/:id', (req, res) => {
     });
 });
 
+// Get the user information for all the tutor's students for the dashboard
+// (or all the student's tutors if the user is a student)
 router.get('/mydashboard/mypeeps/:id', (req, res) => {
   db.User.findOne({
     where: { id: req.params.id },
@@ -279,6 +281,7 @@ router.get('/mydashboard/mypeeps/:id', (req, res) => {
     });
 });
 
+// POST a review of a tutor
 router.post('/mydashboard/review/:id', (req, res) => {
   console.log(req.body);
   db.Review.create({
@@ -297,6 +300,7 @@ router.post('/mydashboard/review/:id', (req, res) => {
     });
 });
 
+// Get all the reviews for a particular tutor
 router.get('/read-reviews/:id', (req, res) => {
   db.Review.findAll({
     where: { UserId: req.params.id },
@@ -312,6 +316,7 @@ router.get('/read-reviews/:id', (req, res) => {
     });
 });
 
+// Delete a TutorStudent match to remove them from the dashboard
 router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
   const { idOne, idTwo, isTeacher } = req.params;
   console.log(idOne, idTwo, isTeacher);
@@ -351,6 +356,7 @@ router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
   }
 });
 
+// Set up a room used with socket.io if there is not already one
 router.get(
   '/message-room/tutor:TutorId/student:StudentId',
   async (req, res) => {
@@ -358,7 +364,7 @@ router.get(
     console.log(
       '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
       req.params.TutorId,
-      req.params.StudentId
+      req.params.StudentId,
     );
     console.log(req.params.TutorId, req.params.StudentId);
     const roomInfo = await db.Message.findOrCreate({
@@ -380,9 +386,10 @@ router.get(
     });
 
     res.json({ roomInfo, userInfo });
-  }
+  },
 );
 
+// POST a message
 router.post(
   '/message/tutor:TutorId/student:StudentId/sender:SenderId/room:room',
   (req, res) => {
@@ -426,7 +433,7 @@ router.post(
           });
         });
     }
-  }
+  },
 );
 
 router.get('/all-messages/student:studentId', (req, res) => {
@@ -497,6 +504,7 @@ router.get('/sent-messages-to/:personId', (req, res) => {
     });
 });
 
+// Get all messages between a particular student and tutor
 router.get('/all-messages/:studentId/:tutorId', (req, res) => {
   console.log(req.params, 'LOOK HEREHHHHASDFaskjsaldkjflkj');
   db.Message.findAll({
@@ -518,6 +526,7 @@ router.get('/all-messages/:studentId/:tutorId', (req, res) => {
     });
 });
 
+// UPDATE when a message is read
 router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
   console.log(req.params);
   if (req.params.isTeacher === 'tutorfalse') {
@@ -526,33 +535,115 @@ router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
         studentRead: true,
       },
       { where: { id: req.params.messageId } }
-    );
+    )
+      .then(() => {
+        console.log('message has been marked as read');
+        res.json(req.body);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: 'An error occurred',
+          error: err,
+        });
+      });
   } else if (req.params.isTeacher === 'tutortrue') {
     db.Message.update(
       {
         tutorRead: true,
       },
       { where: { id: req.params.messageId } }
-    );
+    ).then(() => {
+      console.log('message has been marked as read');
+      res.json(req.body);
+    }).catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
+    });
   }
-  console.log('message has been marked as read');
-  res.json(req.body);
 });
 
+// Check if there are unread meassages for that user
 router.get('/unread/:userId/:otherId/:isTeacher', (req, res) => {
   if (req.params.isTeacher === 'true') {
     db.Message.findAll({
-      where: { tutorRead: false, tutorId: req.params.userId, SenderId: req.params.otherId },
-    }).then((data) => {
-      res.json(data);
-    });
+      where: {
+        tutorRead: false,
+        tutorId: req.params.userId,
+        SenderId: req.params.otherId,
+      },
+    })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: 'An error occurred',
+          error: err,
+        });
+      });
   } else {
     db.Message.findAll({
-      where: { studentRead: false, studentId: req.params.userId, SenderId: req.params.otherId },
-    }).then((data) => {
-      res.json(data);
-    });
+      where: {
+        studentRead: false,
+        studentId: req.params.userId,
+        SenderId: req.params.otherId,
+      },
+    })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: 'An error occurred',
+          error: err,
+        });
+      });
   }
 });
+
+// POST calendar events
+router.post('/calendar/tutor/:tutorId/student/:studentId', (req, res) => {
+  console.log(req.params);
+  db.Event.create({
+    event: req.body.event,
+    start: req.body.start,
+    end: req.body.end,
+    TutorId: req.params.tutorId,
+    StudentId: req.params.studentId,
+  })
+    .then(() => {
+      res.json('Event successfully created');
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
+    });
+});
+
+// Get all the tutor's calendar events
+router.get('/calendar/tutor/:tutorId', (req, res) => {
+  db.Event.findAll({
+    where: { TutorId: req.params.tutorId },
+  }).then((response) => {
+    console.log(response);
+    res.json(response);
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
+  });
+});
+
+// delete an event
+// router.delete('/calendar/tutor/:tutorId/event/:eventId', (rea, res) => {
+//   db.Event.destroy({
+//     where: {}
+//   })
+// });
 
 module.exports = router;
