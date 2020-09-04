@@ -626,9 +626,11 @@ router.post('/calendar/tutor/:tutorId/student/:studentId', (req, res) => {
 });
 
 // Get all the tutor's calendar events
-router.get('/calendar/tutor/:tutorId', (req, res) => {
+router.get('/calendar/id/:Id', (req, res) => {
   db.Event.findAll({
-    where: { TutorId: req.params.tutorId },
+    where: {
+      [Op.or]: [{ StudentId: req.params.Id }, { TutorId: req.params.Id }],
+    },
   }).then((response) => {
     console.log(response);
     res.json(response);

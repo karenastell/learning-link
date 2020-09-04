@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import Axios from 'axios';
@@ -11,27 +11,29 @@ export default function Calendar({ location }) {
   const [bookSessionModal, setBookSessionModal] = useState('modal');
   const { userId } = useContext(AuthContext);
   const [session, setSession] = useState([]);
+  const [userEvents, setUserEvents] = useState([]);
 
-  const { tutor } = queryString.parse(location.search);
+  const { forUser, myCalendar } = queryString.parse(location.search);
 
+  useEffect(() => {
+    getAllEvents();
+  }, []);
 
+  const getAllEvents = () => {
+    let eventArray = [];
+    Axios.get(`api/calendar/id/${forUser}`).then((response) => {
+      console.log(response);
+      for (let i = 0; i < response.data.length; i++) {
+        eventArray.push({
+          title: response.data[i].event,
+          start: response.data[i].start,
+          end: response.data[i].end,
+        });
+      }
+      console.log(eventArray);
+      setUserEvents(eventArray);
+    });
 
-
-  const handleDateToUTC = () => {
-    if (session.date && session.startTime && session.endTime) {
-      const utcDateTime = new Date(
-        `${session.date} ${session.startTime}`
-      ).toISOString();
-      const utcDateTime2 = new Date(
-        `${session.date} ${session.endTime}`
-      ).toISOString();
-      setSession({
-        ...session,
-        utcEndTime: utcDateTime2,
-        utcStartTime: utcDateTime,
-      });
-      console.log(session, "LOOK HERE")
-    }
   };
 
   const handleInputChange = (event) => {
@@ -50,28 +52,21 @@ export default function Calendar({ location }) {
     setBookSessionModal('modal is-active');
   };
 
-  const handleBookSession = async () => {
-    await handleDateToUTC();
-    const object = {
+  const handleBookSession = () => {
+    // await handleDateToUTC();
+    const eventObject = {
       event: `Tutoring Session with ${session.studentName}`,
-      start: session.utcStartTime,
-      end: session.utcEndTime,
-      start2: session.startTime,
-      end2: session.endTime
-    }
-    console.log(object);
-    // Axios.post(`api/calendar/tutor/${tutor}/student/${userId}`, {
-    //   event: `Tutoring Session with ${session.studentName}`,
-    //   start: session.utcStartTime,
-    //   end: session.utcEndTime,
-    // }).then((response)=>{
-    //   console.log('session has been booked', response);
-    //   handleModalClose();
-    // })
+      start: new Date(`${session.date} ${session.startTime}`).toISOString(),
+      end: new Date(`${session.date} ${session.endTime}`).toISOString(),
+    };
+    Axios.post(
+      `api/calendar/tutor/${forUser}/student/${userId}`,
+      eventObject
+    ).then((response) => {
+      console.log('session has been booked', response);
+      handleModalClose();
+    });
   };
-
-
-
 
   return (
     <>
@@ -87,7 +82,11 @@ export default function Calendar({ location }) {
           >
             Book a Tutoring Session
           </button>
-          <FullCalendar plugins={[dayGridPlugin]} initialView='dayGridMonth' />
+          <FullCalendar
+            plugins={[dayGridPlugin]}
+            initialView='dayGridMonth'
+            events={userEvents}
+          />
         </div>
       </div>
 
