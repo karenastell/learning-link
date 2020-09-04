@@ -7,7 +7,7 @@ import Nav from '../components/Nav/Nav';
 import { AuthContext } from '../AuthContext';
 import queryString from 'query-string';
 
-export default function Calendar(props) {
+export default function Calendar({ location }) {
   const [emptyReviewMessage, setEmptyReviewMessage] = useState('off');
   const [readReviewModal, setReadReviewModal] = useState('modal');
   const [removeMessage, setRemoveMessage] = useState('modal');
@@ -30,6 +30,7 @@ export default function Calendar(props) {
         utcEndTime: utcDateTime2,
         utcStartTime: utcDateTime,
       });
+      console.log(session, "LOOK HERE")
     }
   };
 
@@ -54,14 +55,22 @@ export default function Calendar(props) {
 
   const handleBookSession = async () => {
     await handleDateToUTC();
-    Axios.post(`api/calendar/tutor/${tutor}/student/${userId}`, {
+    const object = {
       event: `Tutoring Session with ${session.studentName}`,
       start: session.utcStartTime,
       end: session.utcEndTime,
-    }).then((response)=>{
-      console.log('session has been booked', response);
-      handleModalClose();
-    })
+      start2: session.startTime,
+      end2: session.endTime
+    }
+    console.log(object);
+    // Axios.post(`api/calendar/tutor/${tutor}/student/${userId}`, {
+    //   event: `Tutoring Session with ${session.studentName}`,
+    //   start: session.utcStartTime,
+    //   end: session.utcEndTime,
+    // }).then((response)=>{
+    //   console.log('session has been booked', response);
+    //   handleModalClose();
+    // })
   };
 
   return (

@@ -606,6 +606,7 @@ router.get('/unread/:userId/:otherId/:isTeacher', (req, res) => {
 // POST calendar events
 router.post('/calendar/tutor/:tutorId/student/:studentId', (req, res) => {
   console.log(req.params);
+  console.log(req.body, "lksadjf;laksjdf;laskjdf;alsjkdf~!~!!!!!")
   db.Event.create({
     event: req.body.event,
     start: req.body.start,
