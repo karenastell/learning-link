@@ -20,8 +20,7 @@ import Messages from './pages/Messages/Messages';
 import TroubleShootMessages from './pages/Messages/TroubleshootMessages';
 import Calendar from './pages/Calendar';
 import TutorSearchResult from './pages/TutorSearchResults/TutorSearchResult';
-import AllMessages from './pages/AllMessages/AllMessages'
-
+import AllMessages from './pages/AllMessages/AllMessages';
 
 function App() {
   const { isAuth, setIsAuth } = useContext(AuthContext);
@@ -43,23 +42,27 @@ function App() {
 
   return (
     <>
-      
       <Router>
         <>
-          <Route exact path="/" component={Main} />
-          <Route exact path="/signup-tutor" component={TutorProfileForm} />
-          <Route exact path="/signup-student" component={StudentProfileForm} />
-          <PrivateRoute exact path="/calendar" component={Calendar} />
-          <PrivateRoute exact path="/search" component={Search} />
-          <PrivateRoute exact path="/search-results" component={TutorSearchResult} />
-          <PrivateRoute exact path="/myprofile" component={MyProfile} />
+          <Route exact path='/calendar' component={Calendar} />
+          <Route exact path='/' component={Main} />
+          <Route exact path='/signup-tutor' component={TutorProfileForm} />
+          <Route exact path='/signup-student' component={StudentProfileForm} />
+          {/* <PrivateRoute exact path='/calendar' component={Calendar} /> */}
+          <PrivateRoute exact path='/search' component={Search} />
+          <PrivateRoute
+            exact
+            path='/search-results'
+            component={TutorSearchResult}
+          />
+          <PrivateRoute exact path='/myprofile' component={MyProfile} />
           <PrivateRoute
             exact
             path='/student-dashboard'
             component={MyDashboard}
           />
-          <PrivateRoute exact path="/message" component={Messages} />
-          <PrivateRoute exact path="/all-messages" component={AllMessages} />
+          <PrivateRoute exact path='/message' component={Messages} />
+          <PrivateRoute exact path='/all-messages' component={AllMessages} />
         </>
       </Router>
       <Footer />
@@ -74,4 +77,3 @@ export default () => {
     </AuthProvider>
   );
 };
-
