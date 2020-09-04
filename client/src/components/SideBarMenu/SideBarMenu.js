@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './SideBarMenu.css';
 
 export default function SideBarMenu() {
-  const { isTeacher } = useContext(AuthContext);
+  const { userId, isTeacher } = useContext(AuthContext);
   
   return (
     <aside className="menu ml-4 pt-4 font-style">
@@ -25,7 +25,7 @@ export default function SideBarMenu() {
           <Link to="/all-messages" className="menu-style">Messages</Link>
         </li> */}
         <li>
-          <Link to="/calendar" className="menu-style">My Calendar</Link>
+          <Link to={`/calendar?forUser=${userId}&myCalendar=true`} className="menu-style">My Calendar</Link>
         </li>
       </ul>
     </aside>
