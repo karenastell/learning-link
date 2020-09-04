@@ -44,11 +44,10 @@ function App() {
     <>
       <Router>
         <>
-          <Route exact path='/calendar' component={Calendar} />
           <Route exact path='/' component={Main} />
           <Route exact path='/signup-tutor' component={TutorProfileForm} />
           <Route exact path='/signup-student' component={StudentProfileForm} />
-          {/* <PrivateRoute exact path='/calendar' component={Calendar} /> */}
+          <PrivateRoute exact path='/calendar' component={Calendar} />
           <PrivateRoute exact path='/search' component={Search} />
           <PrivateRoute
             exact
