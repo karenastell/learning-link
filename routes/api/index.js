@@ -643,10 +643,17 @@ router.get('/calendar/id/:Id', (req, res) => {
 });
 
 // delete an event
-// router.delete('/calendar/tutor/:tutorId/event/:eventId', (rea, res) => {
-//   db.Event.destroy({
-//     where: {}
-//   })
-// });
+router.delete('/calendar/eventId/:id', (req, res) => {
+  db.Event.destroy({
+    where: { id: req.params.id },
+  }).then(() => {
+    res.json('Event was deleted');
+  }).catch((err) => {
+    res.status(500).json({
+      message: 'An error occurred',
+      error: err,
+    });
+  });
+});
 
 module.exports = router;
