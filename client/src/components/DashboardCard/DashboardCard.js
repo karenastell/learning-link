@@ -27,7 +27,6 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
     checkForUnreadMessages();
     const interval = setInterval(() => {
       checkForUnreadMessages();
-      console.log('This will run every second!');
     }, 10000);
     return () => clearInterval(interval);
   }, []);
