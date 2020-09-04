@@ -9,7 +9,7 @@ export default function UserInfo(props) {
         </div>
         <div className='field-body'>
           <div className='field'>
-            <p className='control is-expanded has-icons-left'>
+            <p className='control is-expanded'>
               <input
                 className='input'
                 id='first-name'
@@ -18,13 +18,10 @@ export default function UserInfo(props) {
                 name='firstName'
                 onChange={props.handleInputChange}
               />
-              <span className='icon is-small is-left'>
-                <i className='fas fa-user'></i>
-              </span>
             </p>
           </div>
           <div className='field'>
-            <p className='control is-expanded has-icons-left'>
+            <p className='control is-expanded'>
               <input
                 className='input'
                 id='last-name'
@@ -33,14 +30,11 @@ export default function UserInfo(props) {
                 name='lastName'
                 onChange={props.handleInputChange}
               />
-              <span className='icon is-small is-left'>
-                <i className='fas fa-user'></i>
-              </span>
             </p>
           </div>
 
           <div className='field'>
-            <p className='control is-expanded has-icons-left has-icons-right'>
+            <p className='control is-expanded'>
               <input
                 className='input'
                 type='email'
@@ -48,10 +42,6 @@ export default function UserInfo(props) {
                 name='email'
                 onChange={props.handleInputChange}
               />
-              <span className='icon is-small is-left'>
-                <i className='fas fa-envelope'></i>
-              </span>
-              <span className='icon is-small is-right'></span>
             </p>
           </div>
         </div>
@@ -62,7 +52,7 @@ export default function UserInfo(props) {
         </div>
         <div className='field-body'>
           <div className='field'>
-            <p className='control is-expanded has-icons-left has-icons-right'>
+            <p className='control is-expanded'>
               <input
                 className='input'
                 type='password'
@@ -70,10 +60,6 @@ export default function UserInfo(props) {
                 name='password'
                 onChange={props.handleInputChange}
               />
-               <span className='icon is-small is-left'>
-                <i className='fas fa-lock'></i>
-              </span>
-              <span className='icon is-small is-right'></span>
             </p>
           </div>
         </div>
@@ -84,7 +70,7 @@ export default function UserInfo(props) {
         </div>
         <div className='field-body'>
           <div className='field'>
-            <p className='control is-expanded has-icons-left has-icons-right'>
+            <p className='control is-expanded'>
               <input
                 className='input'
                 id='confirm-password'
@@ -93,10 +79,6 @@ export default function UserInfo(props) {
                 placeholder='Confirm Password'
                 onChange={props.handleInputChange}
               />
-               <span className='icon is-small is-left'>
-                <i className='fas fa-lock'></i>
-              </span>
-              <span className='icon is-small is-right'></span>
             </p>
           </div>
         </div>
