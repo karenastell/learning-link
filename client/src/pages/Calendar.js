@@ -16,19 +16,25 @@ export default function Calendar({ location }) {
   const { forUser, myCalendar } = queryString.parse(location.search);
 
   useEffect(() => {
-    getAllEvents()
-  }, [])
+    getAllEvents();
+  }, []);
 
   const getAllEvents = () => {
-    // if (myCalendar === "false") {
-      Axios.get(`api/calendar/id/${forUser}`).then((response) => {
-      console.log(response)
-      setUserEvents(response.data);
-    })
-  // } else {
-  //   Axios.get(`api/calendar/`)
-  // }
-  }
+    let eventArray = [];
+    Axios.get(`api/calendar/id/${forUser}`).then((response) => {
+      console.log(response);
+      for (let i = 0; i < response.data.length; i++) {
+        eventArray.push({
+          title: response.data[i].event,
+          start: response.data[i].start,
+          end: response.data[i].end,
+        });
+      }
+      console.log(eventArray);
+      setUserEvents(eventArray);
+    });
+
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -50,17 +56,16 @@ export default function Calendar({ location }) {
     // await handleDateToUTC();
     const eventObject = {
       event: `Tutoring Session with ${session.studentName}`,
-      start: new Date(
-        `${session.date} ${session.startTime}`
-      ).toISOString(),
-      end: new Date(
-        `${session.date} ${session.endTime}`
-      ).toISOString()
-    }
-    Axios.post(`api/calendar/tutor/${forUser}/student/${userId}`, eventObject).then((response)=>{
+      start: new Date(`${session.date} ${session.startTime}`).toISOString(),
+      end: new Date(`${session.date} ${session.endTime}`).toISOString(),
+    };
+    Axios.post(
+      `api/calendar/tutor/${forUser}/student/${userId}`,
+      eventObject
+    ).then((response) => {
       console.log('session has been booked', response);
       handleModalClose();
-    })
+    });
   };
 
   return (
@@ -75,9 +80,13 @@ export default function Calendar({ location }) {
             className='button is-light is-info'
             onClick={handleReadReview}
           >
-            Add An Event
+            Book a Tutoring Session
           </button>
-          <FullCalendar plugins={[dayGridPlugin]} initialView='dayGridMonth' />
+          <FullCalendar
+            plugins={[dayGridPlugin]}
+            initialView='dayGridMonth'
+            events={userEvents}
+          />
         </div>
       </div>
 
