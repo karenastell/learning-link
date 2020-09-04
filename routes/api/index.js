@@ -534,7 +534,7 @@ router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
       {
         studentRead: true,
       },
-      { where: { id: req.params.messageId } }
+      { where: { id: req.params.messageId } },
     )
       .then(() => {
         console.log('message has been marked as read');
@@ -551,7 +551,7 @@ router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
       {
         tutorRead: true,
       },
-      { where: { id: req.params.messageId } }
+      { where: { id: req.params.messageId } },
     ).then(() => {
       console.log('message has been marked as read');
       res.json(req.body);
@@ -606,7 +606,6 @@ router.get('/unread/:userId/:otherId/:isTeacher', (req, res) => {
 // POST calendar events
 router.post('/calendar/tutor/:tutorId/student/:studentId', (req, res) => {
   console.log(req.params);
-  console.log(req.body, "lksadjf;laksjdf;laskjdf;alsjkdf~!~!!!!!")
   db.Event.create({
     event: req.body.event,
     start: req.body.start,

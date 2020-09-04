@@ -91,11 +91,12 @@ export default function Calendar({ location }) {
     });
   };
 
+  // When you click an event a modal pops up with the event details.  If it is the user's own calendar, they have the option to cancel the event
   const handleEventClick = (clickInfo) => {
-    console.log(clickInfo.event.title)
-    console.log(clickInfo.event.id)
-    console.log(clickInfo.event.start)
-    console.log(clickInfo.event.end)
+    // console.log(clickInfo.event.title)
+    // console.log(clickInfo.event.id)
+    // console.log(clickInfo.event.start)
+    // console.log(clickInfo.event.end)
     setClickedEvent({
       id: clickInfo.event.id,
       title: clickInfo.event.title,
@@ -103,7 +104,6 @@ export default function Calendar({ location }) {
       end: clickInfo.event.end.toISOString()
     });
     setViewEventModal('modal is-active');
-    // clickInfo.event.remove()
   }
 
   const deleteEvent = (id) => {
@@ -111,10 +111,13 @@ export default function Calendar({ location }) {
       console.log(response.data, 'deleted');
       // close the modal
       setViewEventModal('modal');
+      // Then get all the events so the calendar will update
       getAllEvents();
+
+      // TODO: Then POST a message!!!!
     })
 
-    // TODO: Then POST a message!!!!
+    
   }
 
   return (
