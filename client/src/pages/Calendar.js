@@ -9,7 +9,7 @@ import queryString from 'query-string';
 
 export default function Calendar({ location }) {
   const [bookSessionModal, setBookSessionModal] = useState('modal');
-  const { userId } = useContext(AuthContext);
+  const { userId, isTeacher } = useContext(AuthContext);
   const [session, setSession] = useState([]);
   const [userEvents, setUserEvents] = useState([]);
 
@@ -23,13 +23,24 @@ export default function Calendar({ location }) {
     let eventArray = [];
     Axios.get(`api/calendar/id/${forUser}`).then((response) => {
       console.log(response);
-      for (let i = 0; i < response.data.length; i++) {
+      if(isTeacher){
+           for (let i = 0; i < response.data.length; i++) {
         eventArray.push({
           title: response.data[i].event,
           start: response.data[i].start,
           end: response.data[i].end,
         });
       }
+      } else {
+        for (let i = 0; i < response.data.length; i++) {
+          eventArray.push({
+            title: 'You have Tutoring',
+            start: response.data[i].start,
+            end: response.data[i].end,
+          });
+        }
+      }
+   
       console.log(eventArray);
       setUserEvents(eventArray);
     });
@@ -53,7 +64,7 @@ export default function Calendar({ location }) {
   };
 
   const handleBookSession = () => {
-    // await handleDateToUTC();
+
     const eventObject = {
       event: `Tutoring Session with ${session.studentName}`,
       start: new Date(`${session.date} ${session.startTime}`).toISOString(),
