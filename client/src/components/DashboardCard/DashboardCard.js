@@ -130,7 +130,7 @@ console.log(unread);
         <div className='card mb-6 card-style'>
           <header className='card-header card-head-style'>
             <p className='column'>
-              {result.firstName} {result.lastName} <p className='fas fa-circle'></p>
+              {result.firstName} {result.lastName}
               <br />
             </p>
           </header>
@@ -174,7 +174,7 @@ console.log(unread);
                   className='card-footer-item card-buttons button is-info is-light is-size-7 is-white'
                   onClick={setMessageRoom}
                 >
-                  <i className='fas fa-circle'></i> Message {result.firstName}
+                 <span className='tag is-danger new-message'>{' '}</span> Message {result.firstName}
                 </Link>
               ) : (
                 <Link

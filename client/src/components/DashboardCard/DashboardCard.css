@@ -37,8 +37,10 @@
   background-color: #eef6fc !important;
 }
 
-/* .fa-circle {
-  color: #eb474e;
-  height: 10px;
-  padding-right: 5px;
-} */
+.new-message {
+  border-radius: 50% !important;
+  font-size: 6px !important;
+  margin-right: 5px;
+  width: 5px !important;
+  height: 10px !important;
+}
