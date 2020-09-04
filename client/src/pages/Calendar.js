@@ -5,6 +5,7 @@ import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu/SideBarMenu';
 import Nav from '../components/Nav/Nav';
 import { AuthContext } from '../AuthContext';
+import queryString from 'query-string';
 
 export default function Calendar(props) {
   const [emptyReviewMessage, setEmptyReviewMessage] = useState('off');
@@ -13,6 +14,8 @@ export default function Calendar(props) {
   const [reviewModal, setReviewModal] = useState('modal');
   const { userId } = useContext(AuthContext);
   const [session, setSession] = useState([]);
+
+  const { tutor } = queryString.parse(location.search);
 
   const handleDateToUTC = () => {
     if (session.date && session.startTime && session.endTime) {
@@ -51,7 +54,7 @@ export default function Calendar(props) {
 
   const handleBookSession = async () => {
     await handleDateToUTC();
-    Axios.post(`api/calendar/tutor/:tutorId/student/${userId}`, {
+    Axios.post(`api/calendar/tutor/${tutor}/student/${userId}`, {
       event: `Tutoring Session with ${session.studentName}`,
       start: session.utcStartTime,
       end: session.utcEndTime,
@@ -80,8 +83,8 @@ export default function Calendar(props) {
       </div>
 
       {/* Add Event Modal */}
-      {/* <div className={readReviewModal}> */}
-      <div className='modal is-active'>
+      <div className={readReviewModal}>
+      {/* <div className='modal is-active'> */}
         <div className='modal-background'></div>
         <div className='modal-card'>
           <header className='modal-card-head modal-header-style'>
