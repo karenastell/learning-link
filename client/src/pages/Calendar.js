@@ -1,11 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import Axios from 'axios';
 import SideBarMenu from '../components/SideBarMenu/SideBarMenu';
 import Nav from '../components/Nav/Nav';
 import { AuthContext } from '../AuthContext';
 import queryString from 'query-string';
+import '../App.css';
+
+// import "@fullcalendar/core/main.css";
+import "@fullcalendar/daygrid/main.css";
+import "@fullcalendar/timegrid/main.css";
 
 export default function Calendar({ location }) {
   const [bookSessionModal, setBookSessionModal] = useState('modal');
@@ -75,18 +81,29 @@ export default function Calendar({ location }) {
         <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
-        <div className='container column'>
+        <div className='container column calendar-style'>
           <button
             className='button is-light is-info'
             onClick={handleReadReview}
           >
             Book a Tutoring Session
           </button>
-          <FullCalendar
-            plugins={[dayGridPlugin]}
-            initialView='dayGridMonth'
+          {<FullCalendar
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          }}
+          initialView='dayGridMonth'
+            header={{
+              left: 'prev, next',
+              center: 'title',
+              right: "dayGridMonth, timeGridWeek, timeGridDay"
+            }}
+            plugins={[timeGridPlugin, dayGridPlugin]}
             events={userEvents}
-          />
+          />}
+        
         </div>
       </div>
 
