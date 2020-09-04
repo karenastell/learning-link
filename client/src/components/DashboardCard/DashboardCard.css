@@ -6,9 +6,12 @@
 }
 
 .card-body-style {
-  max-height: 200px;
+  max-height: 250px;
   overflow: scroll;
   background-color: white !important;
+  line-height: 1.4;
+  padding: 0 0 15px 0 !important;
+  font-size: 16px;
 }
 
 .card-foot {
@@ -31,8 +34,19 @@
   background: #4fa1df !important;
   border-bottom: #f0763a solid 3px !important;
   color: #2c3c70 !important;
+  font-family: 'Zilla Slab', serif;
+  font-weight: 600 !important;
 }
 
 .modal-bottom-style {
   background-color: #eef6fc !important;
+}
+
+ul {
+  list-style-type: none !important;
+}
+
+.bold-span {
+  font-weight: 600;
+  margin-right: 5px;
 }

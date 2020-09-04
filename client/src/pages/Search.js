@@ -245,28 +245,9 @@ export default function Search() {
     setResults(responseArray);
     console.log(responseArray);
     history.push('/search-results');
-    // checkForResults(responseArray);
   };
 
-  // const checkForResults = (arrayOfResults) => {
-  //   const allTutors = arrayOfResults.filter((result) => result.isTeacher === true);
 
-  //   if (allTutors.length > 0) {
-  //     console.log(allTutors)
-  //     history.push('/search-results');
-  //     setNoResultsMessage('off');
-  //   } else {
-  //     console.log(allTutors.length);
-  //     // The setNoResultsMessage isn't working... but the alert does
-  //     history.push('/search-results');
-  //     setNoResultsMessage('on');
-  //     // alert("no results match your search")
-  //     // window.scrollTo({
-  //     //   top: 0,
-  //     //   behavior: 'smooth',
-  //     // });
-  //   }
-  // }
 
   return (
     <>
@@ -275,19 +256,10 @@ export default function Search() {
         <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
-        <div className='container column'>
+        <div className='container column px-5 font-style'>
           <h1 className='title has-text-centered mt-3'>Search For a Tutor</h1>
           <h3 className='subtitle is-4 mt-5'>Choose Your Search Criteria:</h3>
           <p className="mb-2 subtitle is-5">You may select as many search parameters as you like.</p>
-          {/* {noResultsMessage === 'on' ? (
-                    <article className='mt-5 message is-danger'>
-                      <div className='message-body'>
-                        <p>There were no tutors that matched your search criteria.</p>
-                        <br />
-                        <p>Please, change your criteria and try again.</p>
-                      </div>
-                    </article>
-                  ) : null} */}
           <Delivery handleInputChange={handleInputChange} />
           <Address handleInputChange={handleInputChange} />
           <Availability

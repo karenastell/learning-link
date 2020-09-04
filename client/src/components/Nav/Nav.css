@@ -5,4 +5,12 @@
 
 .nav-and-modal-text {
   color: #2c3c70 !important;
+  font-family: 'Zilla Slab', serif;
+  font-weight: 600 !important;
+}
+
+.nav-text {
+  font-size: 38px !important; 
+  padding-left: 20px;
+  font-weight: 700 !important;
 }

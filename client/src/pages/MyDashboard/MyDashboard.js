@@ -123,14 +123,14 @@ export default function MyDashboard() {
         <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
-        <div className="column mt-5  my-dash-div">
+        <div className="column mt-5  my-dash-div font-style">
           <h1 className="title is-centered">Hello {userInfo.firstName},</h1>
           <h2 className="subtitle is-size-4">
             Welcome to your Learning Link Dashboard!
           </h2>
 
           {isTeacher ? (
-            <div className="mb-5 mt-4">
+            <div className="mb-5">
               <p>
                 Students and parents can add you to their dashboard and reach
                 out to you for tutoring services! When you are added to
@@ -138,17 +138,17 @@ export default function MyDashboard() {
                 regularly check your messages and your dashboard in case parents
                 or students contact you for tutoring.
               </p>
-              <h3 className="is-size-4 mt-5">Your Current Students: </h3>
+              <h3 className="is-size-4 mt-4">Your Current Students: </h3>
             </div>
           ) : (
-            <div className="mb-5 mt-4">
+            <div className="mb-5">
               <p>
                 To get started, search for tutors that meet your needs using the
                 "Search for a Tutor" button in the menu. From there, you'll be
                 able to view tutors, add them to your dashboard, and send them a
                 message.
               </p>
-              <h3 className="is-size-4 mt-5">Your Current Tutors: </h3>
+              <h3 className="is-size-4 mt-4">Your Current Tutors: </h3>
             </div>
           )}
           <div className="container">

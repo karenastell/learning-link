@@ -212,8 +212,8 @@ export default function Messages({ location }) {
         <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
-        <div className='column container'>
-          <h1 className='title'>Send {senderName} a message...</h1>
+        <div className='column container mt-5 font-style message-div-style'>
+          <h1 className='title font-style'>Send {senderName} a message...</h1>
           <div className='messageArea'>
             <article className='tile box tileStyle'>
               <ScrollToBottom>
