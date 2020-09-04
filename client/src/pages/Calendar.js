@@ -31,6 +31,7 @@ export default function Calendar({ location }) {
       console.log(response);
       for (let i = 0; i < response.data.length; i++) {
         eventArray.push({
+          id: response.data[i].id,
           title: response.data[i].event,
           start: response.data[i].start,
           end: response.data[i].end,
@@ -74,6 +75,14 @@ export default function Calendar({ location }) {
     });
   };
 
+  const handleEventClick = (clickInfo) => {
+    console.log(clickInfo.event.title)
+    console.log(clickInfo.event.id)
+    console.log(clickInfo.event.start)
+    console.log(clickInfo.event.end)
+    // clickInfo.event.remove()
+  }
+
   return (
     <>
       <Nav />
@@ -81,18 +90,18 @@ export default function Calendar({ location }) {
         <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
-        <div className='container column calendar-style'>
+        <div className='container column'>
           <button
             className='button is-light is-info'
             onClick={handleReadReview}
           >
             Book a Tutoring Session
           </button>
-          {<FullCalendar
+          <FullCalendar
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: 'dayGridMonth,timeGridWeek'
           }}
           initialView='dayGridMonth'
             header={{
@@ -101,8 +110,9 @@ export default function Calendar({ location }) {
               right: "dayGridMonth, timeGridWeek, timeGridDay"
             }}
             plugins={[timeGridPlugin, dayGridPlugin]}
+            eventClick={handleEventClick}
             events={userEvents}
-          />}
+          />
         
         </div>
       </div>
