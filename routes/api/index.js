@@ -643,6 +643,7 @@ router.get('/calendar/id/:Id', (req, res) => {
 
 // delete an event
 router.delete('/calendar/eventId/:id', (req, res) => {
+  console.log(req.params)
   db.Event.destroy({
     where: { id: req.params.id },
   }).then(() => {
