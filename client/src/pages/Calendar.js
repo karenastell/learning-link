@@ -44,6 +44,7 @@ export default function Calendar({ location }) {
       } else {
         for (let i = 0; i < response.data.length; i++) {
           eventArray.push({
+            id: response.data[i].id,
             title: 'You have Tutoring',
             start: response.data[i].start,
             end: response.data[i].end,
@@ -93,8 +94,8 @@ export default function Calendar({ location }) {
 
   // When you click an event a modal pops up with the event details.  If it is the user's own calendar, they have the option to cancel the event
   const handleEventClick = (clickInfo) => {
-    // console.log(clickInfo.event.title)
-    // console.log(clickInfo.event.id)
+    console.log(clickInfo.event.title)
+    console.log(clickInfo.event.id, "clicked id")
     // console.log(clickInfo.event.start)
     // console.log(clickInfo.event.end)
     setClickedEvent({
@@ -107,6 +108,7 @@ export default function Calendar({ location }) {
   }
 
   const deleteEvent = (id) => {
+    console.log(id, "This is the event id")
     Axios.delete(`api/calendar/eventId/${id}`).then((response) => {
       console.log(response.data, 'deleted');
       // close the modal
