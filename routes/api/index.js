@@ -659,7 +659,7 @@ router.get('/calendar/tutorName/:tutorId', (req, res) => {
 
 // delete an event
 router.delete('/calendar/eventId/:id', (req, res) => {
-  console.log(req.params)
+  console.log(req.params);
   db.Event.destroy({
     where: { id: req.params.id },
   })
@@ -673,7 +673,6 @@ router.delete('/calendar/eventId/:id', (req, res) => {
       });
     });
 });
-
 
 // get tutor and student info
 router.get('/calendar/eventinfo/:id', (req, res) => {
@@ -698,5 +697,12 @@ router.get(
   }
 );
 
+router.get('/tutorNames', (req, res) => {
+  db.User.findAll({
+    where: { isTeacher: 1 },
+  }).then((data) => {
+    res.json(data);
+  });
+});
 
 module.exports = router;

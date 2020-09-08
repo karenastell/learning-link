@@ -21,13 +21,24 @@ export default function Calendar({ location }) {
   // controls displaying of the viewEventModal
   const [viewEventModal, setViewEventModal] = useState('modal');
   const [clickedEvent, setClickedEvent] = useState({});
-  const [room, setRoom] = useState();
+  const [tutorNames, setTutorNames] = useState([]);
 
   const { forUser, myCalendar } = queryString.parse(location.search);
 
   useEffect(() => {
     getAllEvents();
+    getAllTutorNames();
   }, []);
+
+ 
+  const getAllTutorNames = () => {
+    Axios.get('api/tutorNames').then((response) => {
+      console.log(response);
+     const allTutors = response.data;
+      console.log(allTutors);
+      setTutorNames(allTutors);
+    });
+  };
 
   const getAllEvents = () => {
     let eventArray = [];
@@ -42,18 +53,25 @@ export default function Calendar({ location }) {
             end: response.data[i].end,
           });
         }
-      } 
-      else if(!isTeacher && myCalendar === 'true'){
+      } else if (!isTeacher && myCalendar === 'true') {
         for (let i = 0; i < response.data.length; i++) {
+          // let tutorId = response.data[i].TutorId;
+          // let tutorName;
+
+          // Axios.get(`api/calendar/tutorName/${tutorId}`).then((response) => {
+          //   console.log(response);
+          //   tutorName = response.data.firstName;
+          //   console.log(tutorName);
+          // });
+
           eventArray.push({
             id: response.data[i].id,
-            title: 'You have Tutoring',
+            title: `You have Tutoring with`,
             start: response.data[i].start,
             end: response.data[i].end,
           });
         }
-      }
-       else if(!isTeacher && myCalendar==='false'){
+      } else if (!isTeacher && myCalendar === 'false') {
         for (let i = 0; i < response.data.length; i++) {
           eventArray.push({
             id: response.data[i].id,
