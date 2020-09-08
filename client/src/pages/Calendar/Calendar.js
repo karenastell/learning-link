@@ -221,7 +221,7 @@ export default function Calendar({ location }) {
       {/* View/Delete event modal */}
       <div className={viewEventModal}>
         <div className="modal-background"></div>
-        <div className="modal-card">
+        <div className="modal-card calendar-style">
           <header className="modal-card-head modal-header-style">
             <p className="modal-card-title">Tutor Session:</p>
             <button
@@ -230,7 +230,7 @@ export default function Calendar({ location }) {
               onClick={handleModalClose}
             ></button>
           </header>
-          <section className="modal-card-body">
+          <section className="modal-card-body px-6">
             <p className="title is-5">{clickedEvent.title}</p>
             <p>Start: {new Date(clickedEvent.start).toLocaleString('en-US')}</p>
             <p>End: {new Date(clickedEvent.end).toLocaleString('en-US')}</p>
