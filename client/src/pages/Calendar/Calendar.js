@@ -22,25 +22,35 @@ export default function Calendar({ location }) {
   const [viewEventModal, setViewEventModal] = useState('modal');
   const [clickedEvent, setClickedEvent] = useState({});
   const [tutorNames, setTutorNames] = useState([]);
+  const [errorAlert, setErrorAlert] = useState('off');
 
   const { forUser, myCalendar } = queryString.parse(location.search);
 
   useEffect(() => {
-    getAllEvents();
-    getAllTutorNames();
+    const startFunction = async () => {
+      getAllEvents();
+      // await getAllTutorNames();
+    };
+    startFunction();
   }, []);
 
- 
-  const getAllTutorNames = () => {
-    Axios.get('api/tutorNames').then((response) => {
-      console.log(response);
-     const allTutors = response.data;
-      console.log(allTutors);
-      setTutorNames(allTutors);
-    });
-  };
+  // const getAllTutorNames = () => {
+  //   Axios.get('api/tutorNames').then((response) => {
+  //     console.log(response);
+  //     const allTutors = response.data;
+  //     console.log(allTutors);
+  //     setTutorNames(allTutors);
+  //   });
+  // };
 
   const getAllEvents = () => {
+    Axios.get('api/tutorNames').then((response) => {
+      console.log(response);
+      const allTutors = response.data;
+      console.log(allTutors);
+      setTutorNames(allTutors);
+      console.log(tutorNames);
+    });
     let eventArray = [];
     Axios.get(`api/calendar/id/${forUser}`).then((response) => {
       console.log(response);
@@ -55,7 +65,8 @@ export default function Calendar({ location }) {
         }
       } else if (!isTeacher && myCalendar === 'true') {
         for (let i = 0; i < response.data.length; i++) {
-          // let tutorId = response.data[i].TutorId;
+          let tutorId = response.data[i].TutorId;
+          console.log(tutorId);
           // let tutorName;
 
           // Axios.get(`api/calendar/tutorName/${tutorId}`).then((response) => {
@@ -63,6 +74,9 @@ export default function Calendar({ location }) {
           //   tutorName = response.data.firstName;
           //   console.log(tutorName);
           // });
+          console.log(tutorNames);
+          const name = tutorNames.filter((tutor) => tutor.id === tutorId);
+          console.log(name);
 
           eventArray.push({
             id: response.data[i].id,
@@ -105,38 +119,49 @@ export default function Calendar({ location }) {
   };
 
   const handleBookSession = async () => {
-    const eventObject = {
-      event: `Tutoring with ${session.studentName}`,
-      start: new Date(`${session.date} ${session.startTime}`).toISOString(),
-      end: new Date(`${session.date} ${session.endTime}`).toISOString(),
-    };
-    Axios.post(
-      `api/calendar/tutor/${forUser}/student/${userId}`,
-      eventObject
-    ).then((response) => {
-      console.log('session has been booked', response);
-      handleModalClose();
-      getAllEvents();
-    });
-    let roomNumber;
-    await Axios.get(
-      `api/calendar/messageinfo/tutorId/${forUser}/studentId/${userId}`
-    ).then((response) => {
-      console.log(response);
-      roomNumber = response.data.room;
-      console.log(roomNumber);
-    });
+    if (
+      !session.studentName ||
+      !session.startTime ||
+      !session.endTime ||
+      !session.date
+    ) {
+      setErrorAlert('on');
+    } else {
+      const eventObject = {
+        event: `Tutoring with ${session.studentName}`,
+        start: new Date(`${session.date} ${session.startTime}`).toISOString(),
+        end: new Date(`${session.date} ${session.endTime}`).toISOString(),
+      };
+      Axios.post(
+        `api/calendar/tutor/${forUser}/student/${userId}`,
+        eventObject
+      ).then((response) => {
+        console.log('session has been booked', response);
+        handleModalClose();
+        getAllEvents();
+      });
+      let roomNumber;
+      await Axios.get(
+        `api/calendar/messageinfo/tutorId/${forUser}/studentId/${userId}`
+      ).then((response) => {
+        console.log(response);
+        roomNumber = response.data.room;
+        console.log(roomNumber);
+      });
 
-    let date = new Date(`${session.date} ${session.startTime}`);
+      let date = new Date(`${session.date} ${session.startTime}`);
 
-    Axios.post(
-      `api/message/tutor${forUser}/student${userId}/sender${userId}/room${roomNumber}`,
-      {
-        message: `I booked a session for ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}`,
-      }
-    ).then(() => {
-      console.log('session info messaged to tutor');
-    });
+      Axios.post(
+        `api/message/tutor${forUser}/student${userId}/sender${userId}/room${roomNumber}`,
+        {
+          message: `I booked a session for ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}`,
+        }
+      ).then(() => {
+        console.log('session info messaged to tutor');
+      });
+      setErrorAlert('off');
+      
+    }
   };
 
   // When you click an event a modal pops up with the event details.  If it is the user's own calendar, they have the option to cancel the event
@@ -205,7 +230,7 @@ export default function Calendar({ location }) {
         <div className='container column mt-3'>
           {myCalendar === 'false' ? (
             <button
-              className='button is-light is-info'
+              className='button is-light is-info is-fullwidth'
               onClick={handleBookSessionModal}
             >
               Book a Tutoring Session
@@ -286,6 +311,11 @@ export default function Calendar({ location }) {
                 />
               </label>
             </form>
+            {errorAlert === 'off' ? null : (
+              <article className='message is-danger'>
+                <div className='message-body'>All fields are required!</div>
+              </article>
+            )}
           </section>
           <footer className='modal-card-foot modal-bottom-style'>
             <button className='button is-info' onClick={handleBookSession}>
