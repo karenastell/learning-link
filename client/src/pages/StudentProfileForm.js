@@ -141,7 +141,7 @@ export default function StudentProfileForm(props) {
 
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
-          <label className='label'>School Information</label>
+          <label className='label'>School Information *</label>
         </div>
         <div className='field-body'>
           <div className='field'>
@@ -174,7 +174,7 @@ export default function StudentProfileForm(props) {
       <Address handleInputChange={handleInputChange} />
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
-          <label className='label'>Special Education Services</label>
+          <label className='label'>Special Education Services *</label>
         </div>
         <div className='field-body'>
           <div className='field'>

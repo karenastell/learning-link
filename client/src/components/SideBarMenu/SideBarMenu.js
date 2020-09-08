@@ -3,7 +3,7 @@ import { AuthContext } from '../../AuthContext';
 import { Link } from 'react-router-dom';
 import './SideBarMenu.css';
 
-export default function SideBarMenu() {
+export default function SideBarMenu(props) {
   const { userId, isTeacher } = useContext(AuthContext);
   
   return (
@@ -24,9 +24,9 @@ export default function SideBarMenu() {
         {/* <li>
           <Link to="/all-messages" className="menu-style">Messages</Link>
         </li> */}
-        <li>
+        { props.doNotShow === 'true' ?  null : <li>
           <Link to={`/calendar?forUser=${userId}&myCalendar=true`} className="menu-style">My Calendar</Link>
-        </li>
+        </li>}
       </ul>
     </aside>
   );

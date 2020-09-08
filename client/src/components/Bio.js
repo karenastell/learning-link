@@ -4,7 +4,7 @@ export default function Bio(props) {
     return (
         <div className='field is-horizontal'>
         <div className='field-label is-normal'>
-          <label className='label'>Bio</label>
+          <label className='label'>Bio *</label>
         </div>
         <div className='field-body'>
           <div className='field'>
