@@ -219,7 +219,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } },
+    { where: { id: req.params.id } }
   );
 
   await db.UserProfile.update(
@@ -235,7 +235,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } },
+    { where: { UserId: req.params.id } }
   );
   res.json(req.body);
 });
@@ -364,7 +364,7 @@ router.get(
     console.log(
       '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
       req.params.TutorId,
-      req.params.StudentId,
+      req.params.StudentId
     );
     console.log(req.params.TutorId, req.params.StudentId);
     const roomInfo = await db.Message.findOrCreate({
@@ -386,7 +386,7 @@ router.get(
     });
 
     res.json({ roomInfo, userInfo });
-  },
+  }
 );
 
 // POST a message
@@ -433,7 +433,7 @@ router.post(
           });
         });
     }
-  },
+  }
 );
 
 router.get('/all-messages/student:studentId', (req, res) => {
@@ -534,7 +534,7 @@ router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
       {
         studentRead: true,
       },
-      { where: { id: req.params.messageId } },
+      { where: { id: req.params.messageId } }
     )
       .then(() => {
         console.log('message has been marked as read');
@@ -551,16 +551,18 @@ router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
       {
         tutorRead: true,
       },
-      { where: { id: req.params.messageId } },
-    ).then(() => {
-      console.log('message has been marked as read');
-      res.json(req.body);
-    }).catch((err) => {
-      res.status(500).json({
-        message: 'An error occurred',
-        error: err,
+      { where: { id: req.params.messageId } }
+    )
+      .then(() => {
+        console.log('message has been marked as read');
+        res.json(req.body);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: 'An error occurred',
+          error: err,
+        });
       });
-    });
   }
 });
 
@@ -630,14 +632,28 @@ router.get('/calendar/id/:Id', (req, res) => {
     where: {
       [Op.or]: [{ StudentId: req.params.Id }, { TutorId: req.params.Id }],
     },
-  }).then((response) => {
-    console.log(response);
-    res.json(response);
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+    include: { model: db.User },
+  })
+
+    .then((response) => {
+      console.log(response);
+      res.json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
+});
+
+// get tutor name to display on calendar for student
+router.get('/calendar/tutorName/:tutorId', (req, res) => {
+  db.User.findOne({
+    where: { id: req.params.tutorId },
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
   });
 });
 
@@ -645,14 +661,41 @@ router.get('/calendar/id/:Id', (req, res) => {
 router.delete('/calendar/eventId/:id', (req, res) => {
   db.Event.destroy({
     where: { id: req.params.id },
-  }).then(() => {
-    res.json('Event was deleted');
-  }).catch((err) => {
-    res.status(500).json({
-      message: 'An error occurred',
-      error: err,
+  })
+    .then(() => {
+      res.json('Event was deleted');
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'An error occurred',
+        error: err,
+      });
     });
+});
+
+
+// get tutor and student info
+router.get('/calendar/eventinfo/:id', (req, res) => {
+  db.Event.findOne({
+    where: { id: req.params.id },
+  }).then((data) => {
+    console.log(data);
+    res.json(data);
   });
 });
+
+// get message info between 2 users
+router.get(
+  '/calendar/messageinfo/tutorId/:tutorId/studentId/:studentId',
+  (req, res) => {
+    db.Message.findOne({
+      where: { TutorId: req.params.tutorId, StudentId: req.params.studentId },
+    }).then((data) => {
+      console.log(data);
+      res.json(data);
+    });
+  }
+);
+
 
 module.exports = router;

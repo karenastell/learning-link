@@ -1,0 +1,12 @@
+.calendar-style {
+    font-size: 12px !important;
+  }
+
+  .calendarDiv {
+      margin: 5px;
+      margin-top: 30px;
+  }
+
+  .calendarButton {
+      margin-top: 20px;
+  }
