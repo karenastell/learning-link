@@ -1,12 +1,15 @@
 
 .calendar-style {
-    /* font-size: 12px !important; */
     font-family: 'Raleway', sans-serif;
     margin-top: 15px;
   }
 
   .fc-daygrid-event:hover {
     width: fit-content;
+  }
+
+  .fc-daygrid-event {
+    font-size: 10px !important;
   }
 
   .fc-event-title:hover {
@@ -26,10 +29,10 @@
   }
 
   .fc-timegrid-event:hover {
-      height: fit-content;
       font-weight: bold;
   }
 
   .fc-timegrid-event {
       background-color: #4fa1df;
+      min-height: fit-content;
   }

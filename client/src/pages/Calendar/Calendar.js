@@ -12,6 +12,7 @@ import './Calendar.css';
 // import "@fullcalendar/core/main.css";
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
+import { useHistory } from 'react-router';
 
 export default function Calendar({ location }) {
   const [bookSessionModal, setBookSessionModal] = useState('modal');
@@ -74,6 +75,7 @@ export default function Calendar({ location }) {
   const handleBookSessionModal = () => {
     setBookSessionModal('modal is-active');
   };
+ const history = useHistory();
 
   const handleBookSession = async () => {
     const eventObject = {
@@ -107,6 +109,7 @@ export default function Calendar({ location }) {
       }
     ).then(() => {
       console.log('session info messaged to tutor');
+      history.push('/event-booked')
     });
   };
 
@@ -171,7 +174,7 @@ export default function Calendar({ location }) {
       <Nav />
       <div className='columns'>
         <div className='column is-narrow side-bar'>
-          <SideBarMenu />
+          <SideBarMenu doNotShow={'true'} />
         </div>
         <div className='container column mt-3'>
           {myCalendar === 'false' ? (

@@ -21,6 +21,7 @@ import TroubleShootMessages from './pages/Messages/TroubleshootMessages';
 import Calendar from './pages/Calendar/Calendar';
 import TutorSearchResult from './pages/TutorSearchResults/TutorSearchResult';
 import AllMessages from './pages/AllMessages/AllMessages';
+import EventBookedAlert from './pages/EventBookedAlert/EventBookedAlert';
 
 function App() {
   const { isAuth, setIsAuth } = useContext(AuthContext);
@@ -60,6 +61,7 @@ function App() {
             path='/student-dashboard'
             component={MyDashboard}
           />
+          <PrivateRoute exact path='/event-booked' component={EventBookedAlert} />
           <PrivateRoute exact path='/message' component={Messages} />
           <PrivateRoute exact path='/all-messages' component={AllMessages} />
         </>
