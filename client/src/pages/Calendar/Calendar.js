@@ -98,15 +98,12 @@ export default function Calendar({ location }) {
       console.log(roomNumber);
     });
 
-    let anotherDate = new Date(`${session.date} ${session.time}`)
-    console.log(anotherDate);
-    // let dateInfo = new Date(`${session.startTime}`)
-    // let newDate = dateInfo.toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true})
-    // console.log(newDate);
+    let date = new Date(`${session.date} ${session.startTime}`)
+
     Axios.post(
       `api/message/tutor${forUser}/student${userId}/sender${userId}/room${roomNumber}`,
       {
-        message: `I booked a session for ${session.startTime} on ${session.date}`,
+        message: `I booked a session for ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}`,
       }
     ).then(() => {
       console.log('session info messaged to tutor');
