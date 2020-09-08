@@ -133,7 +133,7 @@ export default function Calendar({ location }) {
       console.log(response);
       studentId = response.data.StudentId;
       tutorId = response.data.TutorId;
-      date = response.data.startTime;
+      date = new Date (response.data.start);
       console.log(new Date(date).toLocaleString('en-US'));
     });
 
@@ -159,10 +159,10 @@ export default function Calendar({ location }) {
     Axios.post(
       `api/message/tutor${tutorId}/student${studentId}/sender${userId}/room${roomNumber}`,
       {
-        message: `Tutoring Session for ${date} has been deleted`,
+        message: `Tutoring Session for ${date.toLocaleTimeString()} on ${date.toLocaleDateString()} has been deleted`,
       }
     ).then(() => {
-      console.log('session deletion message sent', date);
+      console.log('session deletion message sent');
     });
   };
 
