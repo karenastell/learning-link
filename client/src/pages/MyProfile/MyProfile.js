@@ -64,7 +64,8 @@ export default function MyProfile(props) {
           <SideBarMenu />
         </div>
         <div className="column is-10 mt-5 font-style">
-          <h1 className="title  has-text-centered ">My profile</h1>
+          <h1 className="title px-3">Welcome to your profile!</h1>
+          <p className="subtitle is-6 px-3">You may edit or update your information here.  Other users can see this information if you are on their dashboard{ isTeacher ? <span> and it is how student will search for you</span>: null }, so keep it professional and up-to-date for best results.</p>
           <div className="container">
             <div className="level">
               <div className="level-left"></div>
