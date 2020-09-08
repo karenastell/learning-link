@@ -21,6 +21,7 @@ export default function Calendar({ location }) {
   // controls displaying of the viewEventModal
   const [viewEventModal, setViewEventModal] = useState('modal');
   const [clickedEvent, setClickedEvent] = useState({});
+  const [room, setRoom] = useState();
 
   const { forUser, myCalendar } = queryString.parse(location.search);
 
@@ -74,9 +75,9 @@ export default function Calendar({ location }) {
     setBookSessionModal('modal is-active');
   };
 
-  const handleBookSession = () => {
+  const handleBookSession = async () => {
     const eventObject = {
-      event: `Tutoring Session with ${session.studentName}`,
+      event: `Tutoring with ${session.studentName}`,
       start: new Date(`${session.date} ${session.startTime}`).toISOString(),
       end: new Date(`${session.date} ${session.endTime}`).toISOString(),
     };
@@ -87,6 +88,25 @@ export default function Calendar({ location }) {
       console.log('session has been booked', response);
       handleModalClose();
       getAllEvents();
+    });
+    let roomNumber;
+    await Axios.get(
+      `api/calendar/messageinfo/tutorId/${forUser}/studentId/${userId}`
+    ).then((response) => {
+      console.log(response);
+      roomNumber = response.data.room;
+      console.log(roomNumber);
+    });
+
+    let date = new Date(`${session.date} ${session.startTime}`);
+
+    Axios.post(
+      `api/message/tutor${forUser}/student${userId}/sender${userId}/room${roomNumber}`,
+      {
+        message: `I booked a session for ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}`,
+      }
+    ).then(() => {
+      console.log('session info messaged to tutor');
     });
   };
 
@@ -105,50 +125,81 @@ export default function Calendar({ location }) {
     setViewEventModal('modal is-active');
   };
 
-  const deleteEvent = (id) => {
+  const deleteEvent = async (id) => {
+    let studentId;
+    let tutorId;
+    let date;
+    await Axios.get(`api/calendar/eventinfo/${id}`).then((response) => {
+      console.log(response);
+      studentId = response.data.StudentId;
+      tutorId = response.data.TutorId;
+      date = new Date(response.data.start);
+      console.log(new Date(date).toLocaleString('en-US'));
+    });
+
     console.log(id, 'This is the event id');
+
     Axios.delete(`api/calendar/eventId/${id}`).then((response) => {
       console.log(response.data, 'deleted');
       // close the modal
       setViewEventModal('modal');
       // Then get all the events so the calendar will update
       getAllEvents();
+    });
 
-      // TODO: Then POST a message!!!!
+    let roomNumber;
+    await Axios.get(
+      `api/calendar/messageinfo/tutorId/${tutorId}/studentId/${studentId}`
+    ).then((response) => {
+      console.log(response);
+      roomNumber = response.data.room;
+      console.log(roomNumber);
+    });
+    console.log(studentId, tutorId, roomNumber);
+    Axios.post(
+      `api/message/tutor${tutorId}/student${studentId}/sender${userId}/room${roomNumber}`,
+      {
+        message: `I have deleted our tutoring session for ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}.`,
+      }
+    ).then(() => {
+      console.log('session deletion message sent');
     });
   };
 
   return (
     <>
       <Nav />
-      <div className="columns">
-        <div className="column is-narrow side-bar">
+      <div className='columns'>
+        <div className='column is-narrow side-bar'>
           <SideBarMenu />
         </div>
-        <div className="container column mt-3">
-          <button
-            className="button is-light is-info"
-            onClick={handleBookSessionModal}
-          >
-            Book a Tutoring Session
-          </button>
-          <div className="calendar-style">
-          <FullCalendar
-            headerToolbar={{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'dayGridMonth,timeGridWeek',
-            }}
-            initialView="dayGridMonth"
-            header={{
-              left: 'prev, next',
-              center: 'title',
-              right: 'dayGridMonth, timeGridWeek, timeGridDay',
-            }}
-            plugins={[timeGridPlugin, dayGridPlugin]}
-            eventClick={handleEventClick}
-            events={userEvents}
-          />  
+        <div className='container column mt-3'>
+          {myCalendar === 'false' ? (
+            <button
+              className='button is-light is-info'
+              onClick={handleBookSessionModal}
+            >
+              Book a Tutoring Session
+            </button>
+          ) : null}
+
+          <div className='calendar-style'>
+            <FullCalendar
+              headerToolbar={{
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek',
+              }}
+              initialView='dayGridMonth'
+              header={{
+                left: 'prev, next',
+                center: 'title',
+                right: 'dayGridMonth, timeGridWeek, timeGridDay',
+              }}
+              plugins={[timeGridPlugin, dayGridPlugin]}
+              eventClick={handleEventClick}
+              events={userEvents}
+            />
           </div>
         </div>
       </div>
@@ -156,62 +207,62 @@ export default function Calendar({ location }) {
       {/* Add Event Modal */}
       <div className={bookSessionModal}>
         {/* <div className='modal is-active'> */}
-        <div className="modal-background"></div>
-        <div className="modal-card">
-          <header className="modal-card-head modal-header-style">
-            <p className="modal-card-title">Book A Tutoring Session</p>
+        <div className='modal-background'></div>
+        <div className='modal-card'>
+          <header className='modal-card-head modal-header-style'>
+            <p className='modal-card-title'>Book A Tutoring Session</p>
             <button
-              className="delete"
-              aria-label="close"
+              className='delete'
+              aria-label='close'
               onClick={handleModalClose}
             ></button>
           </header>
-          <section className="modal-card-body">
+          <section className='modal-card-body'>
             <form>
-              <label className="mr-2">
+              <label className='mr-2'>
                 Your Name
                 <input
-                  className="input"
-                  type="text"
-                  placeholder="Enter Your Name"
-                  name="studentName"
+                  className='input'
+                  type='text'
+                  placeholder='Enter Your Name'
+                  name='studentName'
                   onChange={handleInputChange}
                 ></input>
               </label>
               <label>
                 Date
                 <input
-                  type="date"
+                  type='date'
                   onChange={handleInputChange}
-                  name="date"
-                  className="input"
+                  name='date'
+                  className='input'
                 />
               </label>
-              <label className="mr-2">
+              <label className='mr-2'>
                 Start Time
                 <input
-                  className="input"
-                  type="time"
+                  className='input'
+                  type='time'
                   onChange={handleInputChange}
-                  name="startTime"
+                  name='startTime'
                 />
               </label>
               <label>
                 End Time
                 <input
-                  className="input"
-                  type="time"
+                  className='input'
+                  type='time'
                   onChange={handleInputChange}
-                  name="endTime"
+                  name='endTime'
                 />
               </label>
             </form>
           </section>
-          <footer className="modal-card-foot modal-bottom-style">
-            <button className="button is-info" onClick={handleBookSession}>
+          <footer className='modal-card-foot modal-bottom-style'>
+            <button className='button is-info' onClick={handleBookSession}>
               Submit
             </button>
-            <button className="button" onClick={handleModalClose}>
+            <button className='button' onClick={handleModalClose}>
               Cancel
             </button>
           </footer>
@@ -220,18 +271,18 @@ export default function Calendar({ location }) {
 
       {/* View/Delete event modal */}
       <div className={viewEventModal}>
-        <div className="modal-background"></div>
-        <div className="modal-card">
-          <header className="modal-card-head modal-header-style">
-            <p className="modal-card-title">Tutor Session:</p>
+        <div className='modal-background'></div>
+        <div className='modal-card'>
+          <header className='modal-card-head modal-header-style'>
+            <p className='modal-card-title'>Tutor Session:</p>
             <button
-              className="delete"
-              aria-label="close"
+              className='delete'
+              aria-label='close'
               onClick={handleModalClose}
             ></button>
           </header>
-          <section className="modal-card-body">
-            <p className="title is-5">{clickedEvent.title}</p>
+          <section className='modal-card-body'>
+            <p className='title is-5'>{clickedEvent.title}</p>
             <p>Start: {new Date(clickedEvent.start).toLocaleString('en-US')}</p>
             <p>End: {new Date(clickedEvent.end).toLocaleString('en-US')}</p>
             <br />
@@ -240,16 +291,16 @@ export default function Calendar({ location }) {
               <p>Would you like to cancel this session?</p>
             ) : null}
           </section>
-          <footer className="modal-card-foot modal-bottom-style">
+          <footer className='modal-card-foot modal-bottom-style'>
             {myCalendar === 'true' ? (
               <button
-                className="button is-info"
+                className='button is-info'
                 onClick={() => deleteEvent(clickedEvent.id)}
               >
                 Yes, Cancel this session
               </button>
             ) : null}
-            <button className="button" onClick={handleModalClose}>
+            <button className='button' onClick={handleModalClose}>
               Close
             </button>
           </footer>

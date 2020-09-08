@@ -124,7 +124,6 @@ export default function Messages({ location }) {
       
       for (let i = 0; i < allCorrespondence.data.length; i++) {
         await setMessagesToRead(allCorrespondence.data[i].id);
-        console.log(allCorrespondence.data[i].id);
       }
       studentName = await Axios.get(
         `api/all-messages/student-name/${allCorrespondence.data[0].StudentId}`
