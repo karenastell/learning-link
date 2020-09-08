@@ -212,9 +212,9 @@ export default function Messages({ location }) {
           <SideBarMenu />
         </div>
         <div className='column container mt-5 font-style message-div-style'>
-          <h1 className='title font-style'>Send {senderName} a message...</h1>
+          <h1 className='title font-style px-2'>Send {senderName} a message...</h1>
           <div className='messageArea'>
-            <article className='tile box tileStyle'>
+            <article className='mx-3 tileStyle'>
               <ScrollToBottom>
                 {correspondence.map((message) => (
                   <OneMessage
@@ -232,7 +232,7 @@ export default function Messages({ location }) {
             </article>
             <form className='form'>
               <input
-                className='message-input'
+                className='message-input input'
                 type='text'
                 placeholder='Enter a message...'
                 value={message}
