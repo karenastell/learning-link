@@ -5,7 +5,7 @@ export default function Subjects(props) {
     <>
       <div className='field is-horizontal'>
         <div className='field-label'>
-          <label className='label'>Subjects</label>
+          <label className='label'>Subjects *</label>
         </div>
         <div className='field-body'>
           <table className='table is-narrow'>

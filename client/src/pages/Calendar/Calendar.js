@@ -12,6 +12,7 @@ import './Calendar.css';
 // import "@fullcalendar/core/main.css";
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
+import { useHistory } from 'react-router';
 
 export default function Calendar({ location }) {
   const [bookSessionModal, setBookSessionModal] = useState('modal');
@@ -117,6 +118,7 @@ export default function Calendar({ location }) {
   const handleBookSessionModal = () => {
     setBookSessionModal('modal is-active');
   };
+ const history = useHistory();
 
   const handleBookSession = async () => {
     if (
@@ -151,18 +153,15 @@ export default function Calendar({ location }) {
 
       let date = new Date(`${session.date} ${session.startTime}`);
 
-      Axios.post(
-        `api/message/tutor${forUser}/student${userId}/sender${userId}/room${roomNumber}`,
-        {
-          message: `I booked a session for ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}`,
-        }
-      ).then(() => {
-        console.log('session info messaged to tutor');
-      });
-      setErrorAlert('off');
-
-
-    }
+    Axios.post(
+      `api/message/tutor${forUser}/student${userId}/sender${userId}/room${roomNumber}`,
+      {
+        message: `I booked a session for ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}`,
+      }
+    ).then(() => {
+      console.log('session info messaged to tutor');
+      history.push('/event-booked')
+    });
   };
 
   // When you click an event a modal pops up with the event details.  If it is the user's own calendar, they have the option to cancel the event
@@ -226,7 +225,7 @@ export default function Calendar({ location }) {
       <Nav />
       <div className='columns'>
         <div className='column is-narrow side-bar'>
-          <SideBarMenu />
+          <SideBarMenu doNotShow={'true'} />
         </div>
         <div className='container column mt-3'>
           {myCalendar === 'false' ? (
@@ -331,18 +330,18 @@ export default function Calendar({ location }) {
 
       {/* View/Delete event modal */}
       <div className={viewEventModal}>
-        <div className='modal-background'></div>
-        <div className='modal-card'>
-          <header className='modal-card-head modal-header-style'>
-            <p className='modal-card-title'>Tutor Session:</p>
+        <div className="modal-background"></div>
+        <div className="modal-card calendar-style">
+          <header className="modal-card-head modal-header-style">
+            <p className="modal-card-title">Tutor Session:</p>
             <button
               className='delete'
               aria-label='close'
               onClick={handleModalClose}
             ></button>
           </header>
-          <section className='modal-card-body'>
-            <p className='title is-5'>{clickedEvent.title}</p>
+          <section className="modal-card-body px-6">
+            <p className="title is-5">{clickedEvent.title}</p>
             <p>Start: {new Date(clickedEvent.start).toLocaleString('en-US')}</p>
             <p>End: {new Date(clickedEvent.end).toLocaleString('en-US')}</p>
             <br />

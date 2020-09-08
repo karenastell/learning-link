@@ -150,7 +150,7 @@ export default function ProfileForm(props) {
 
       <div className="field is-horizontal">
         <div className="field-label is-normal">
-          <label className="label">Education</label>
+          <label className="label">Education *</label>
         </div>
         <div className="field-body">
           <div className="field">
@@ -183,7 +183,7 @@ export default function ProfileForm(props) {
 
       <div className="field is-horizontal">
         <div className="field-label is-normal">
-          <label className="label">Availability</label>
+          <label className="label">Availability *</label>
         </div>
         <div className="field-body">
           <div className="field is-narrow">

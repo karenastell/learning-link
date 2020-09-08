@@ -5,7 +5,7 @@ export default function UserInfo(props) {
     <>
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
-          <label className='label'>Your Information</label>
+          <label className='label'>Your Information *</label>
         </div>
         <div className='field-body'>
           <div className='field'>
@@ -48,7 +48,7 @@ export default function UserInfo(props) {
       </div>
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
-          <label className='label'>Password</label>
+          <label className='label'>Password *</label>
         </div>
         <div className='field-body'>
           <div className='field'>
@@ -66,7 +66,7 @@ export default function UserInfo(props) {
       </div>
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
-          <label className='label'>Password</label>
+          <label className='label'>Confirm Password *</label>
         </div>
         <div className='field-body'>
           <div className='field'>

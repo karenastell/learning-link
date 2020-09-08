@@ -4,7 +4,7 @@ export default function Delivery(props) {
     return (
         <div className='field is-horizontal'>
         <div className='field-label is-normal'>
-          <label className='label'>Delivery</label>
+          <label className='label'>Delivery *</label>
         </div>
         <div className='field-body'>
           <div className='field'>

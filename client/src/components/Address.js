@@ -4,7 +4,7 @@ export default function Address(props) {
     return (
         <div className='field is-horizontal'>
         <div className='field-label is-normal'>
-          <label className='label'>Location</label>
+          <label className='label'>Location *</label>
         </div>
         <div className='field-body'>
           <div className='field'>
