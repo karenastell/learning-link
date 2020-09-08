@@ -3,11 +3,11 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import Axios from 'axios';
-import SideBarMenu from '../components/SideBarMenu/SideBarMenu';
-import Nav from '../components/Nav/Nav';
-import { AuthContext } from '../AuthContext';
+import SideBarMenu from '../../components/SideBarMenu/SideBarMenu';
+import Nav from '../../components/Nav/Nav';
+import { AuthContext } from '../../AuthContext';
 import queryString from 'query-string';
-import '../App.css';
+import './Calendar.css';
 
 // import "@fullcalendar/core/main.css";
 import '@fullcalendar/daygrid/main.css';
@@ -125,13 +125,14 @@ export default function Calendar({ location }) {
         <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
-        <div className="container column">
+        <div className="container column mt-3">
           <button
             className="button is-light is-info"
             onClick={handleBookSessionModal}
           >
             Book a Tutoring Session
           </button>
+          <div className="calendar-style">
           <FullCalendar
             headerToolbar={{
               left: 'prev,next today',
@@ -147,7 +148,8 @@ export default function Calendar({ location }) {
             plugins={[timeGridPlugin, dayGridPlugin]}
             eventClick={handleEventClick}
             events={userEvents}
-          />
+          />  
+          </div>
         </div>
       </div>
 
