@@ -27,7 +27,7 @@ useEffect(() => {
       <img src="./coloredpencilscropped.jpg" alt="colored pencils" />
       <div className="container has-text-centered mt-3">
         <div className="container my-5 has-text-centered">
-          <h3 className="mb-3 title is-4">Login or Sign up to get started!</h3>
+          <h3 className="mb-3 title is-4">Sign up to get started!</h3>
           <Link to="/signup-tutor" className="button-main">
             <button className="button is-info button-main mx-2">
               I am a Tutor/Teacher
@@ -38,6 +38,7 @@ useEffect(() => {
               I am a Student/Parent
             </button>
           </Link>
+          <p className="is-size-7">Already have an account?  Login at the top of the screen!</p>
         </div>
         <p>
           Learning Link connects parents to skilled teachers and tutors to fill
