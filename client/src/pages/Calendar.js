@@ -10,8 +10,8 @@ import queryString from 'query-string';
 import '../App.css';
 
 // import "@fullcalendar/core/main.css";
-import "@fullcalendar/daygrid/main.css";
-import "@fullcalendar/timegrid/main.css";
+import '@fullcalendar/daygrid/main.css';
+import '@fullcalendar/timegrid/main.css';
 
 export default function Calendar({ location }) {
   const [bookSessionModal, setBookSessionModal] = useState('modal');
@@ -32,15 +32,15 @@ export default function Calendar({ location }) {
     let eventArray = [];
     Axios.get(`api/calendar/id/${forUser}`).then((response) => {
       console.log(response);
-      if(isTeacher){
-           for (let i = 0; i < response.data.length; i++) {
-        eventArray.push({
-          id: response.data[i].id,
-          title: response.data[i].event,
-          start: response.data[i].start,
-          end: response.data[i].end,
-        });
-      }
+      if (isTeacher) {
+        for (let i = 0; i < response.data.length; i++) {
+          eventArray.push({
+            id: response.data[i].id,
+            title: response.data[i].event,
+            start: response.data[i].start,
+            end: response.data[i].end,
+          });
+        }
       } else {
         for (let i = 0; i < response.data.length; i++) {
           eventArray.push({
@@ -51,11 +51,10 @@ export default function Calendar({ location }) {
           });
         }
       }
-   
+
       console.log(eventArray);
       setUserEvents(eventArray);
     });
-
   };
 
   const handleInputChange = (event) => {
@@ -76,7 +75,6 @@ export default function Calendar({ location }) {
   };
 
   const handleBookSession = () => {
-
     const eventObject = {
       event: `Tutoring Session with ${session.studentName}`,
       start: new Date(`${session.date} ${session.startTime}`).toISOString(),
@@ -94,21 +92,21 @@ export default function Calendar({ location }) {
 
   // When you click an event a modal pops up with the event details.  If it is the user's own calendar, they have the option to cancel the event
   const handleEventClick = (clickInfo) => {
-    console.log(clickInfo.event.title)
-    console.log(clickInfo.event.id, "clicked id")
+    console.log(clickInfo.event.title);
+    console.log(clickInfo.event.id, 'clicked id');
     // console.log(clickInfo.event.start)
     // console.log(clickInfo.event.end)
     setClickedEvent({
       id: clickInfo.event.id,
       title: clickInfo.event.title,
       start: clickInfo.event.start.toISOString(),
-      end: clickInfo.event.end.toISOString()
+      end: clickInfo.event.end.toISOString(),
     });
     setViewEventModal('modal is-active');
-  }
+  };
 
   const deleteEvent = (id) => {
-    console.log(id, "This is the event id")
+    console.log(id, 'This is the event id');
     Axios.delete(`api/calendar/eventId/${id}`).then((response) => {
       console.log(response.data, 'deleted');
       // close the modal
@@ -117,110 +115,113 @@ export default function Calendar({ location }) {
       getAllEvents();
 
       // TODO: Then POST a message!!!!
-    })
-
-    
-  }
+    });
+  };
 
   return (
     <>
       <Nav />
-      <div className='columns'>
-        <div className='column is-narrow side-bar'>
+      <div className="columns">
+        <div className="column is-narrow side-bar">
           <SideBarMenu />
         </div>
-        <div className='container column'>
+        <div className="container column">
           <button
-            className='button is-light is-info'
+            className="button is-light is-info"
             onClick={handleBookSessionModal}
           >
             Book a Tutoring Session
           </button>
           <FullCalendar
-          headerToolbar={{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek'
-          }}
-          initialView='dayGridMonth'
+            headerToolbar={{
+              left: 'prev,next today',
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek',
+            }}
+            initialView="dayGridMonth"
             header={{
               left: 'prev, next',
               center: 'title',
-              right: "dayGridMonth, timeGridWeek, timeGridDay"
+              right: 'dayGridMonth, timeGridWeek, timeGridDay',
             }}
             plugins={[timeGridPlugin, dayGridPlugin]}
             eventClick={handleEventClick}
             events={userEvents}
           />
-        
         </div>
       </div>
 
       {/* Add Event Modal */}
       <div className={bookSessionModal}>
         {/* <div className='modal is-active'> */}
-        <div className='modal-background'></div>
-        <div className='modal-card'>
-          <header className='modal-card-head modal-header-style'>
-            <p className='modal-card-title'>Book A Tutoring Session</p>
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head modal-header-style">
+            <p className="modal-card-title">Book A Tutoring Session</p>
             <button
-              className='delete'
-              aria-label='close'
+              className="delete"
+              aria-label="close"
               onClick={handleModalClose}
             ></button>
           </header>
-          <section className='modal-card-body'>
+          <section className="modal-card-body">
             <form>
-              <label className='mr-2'>
+              <label className="mr-2">
                 Your Name
                 <input
-                  type='text'
-                  placeholder='Enter Your Name'
-                  name='studentName'
+                  className="input"
+                  type="text"
+                  placeholder="Enter Your Name"
+                  name="studentName"
                   onChange={handleInputChange}
                 ></input>
               </label>
               <label>
                 Date
-                <input type='date' onChange={handleInputChange} name='date' />
+                <input
+                  type="date"
+                  onChange={handleInputChange}
+                  name="date"
+                  className="input"
+                />
               </label>
-              <label>
+              <label className="mr-2">
                 Start Time
                 <input
-                  type='time'
+                  className="input"
+                  type="time"
                   onChange={handleInputChange}
-                  name='startTime'
+                  name="startTime"
                 />
               </label>
               <label>
                 End Time
                 <input
-                  type='time'
+                  className="input"
+                  type="time"
                   onChange={handleInputChange}
-                  name='endTime'
+                  name="endTime"
                 />
               </label>
             </form>
           </section>
-          <footer className='modal-card-foot modal-bottom-style'>
-            <button className='button is-info' onClick={handleBookSession}>
+          <footer className="modal-card-foot modal-bottom-style">
+            <button className="button is-info" onClick={handleBookSession}>
               Submit
             </button>
-            <button className='button' onClick={handleModalClose}>
+            <button className="button" onClick={handleModalClose}>
               Cancel
             </button>
           </footer>
         </div>
       </div>
 
-          {/* View/Delete event modal */}
+      {/* View/Delete event modal */}
       <div className={viewEventModal}>
         <div className="modal-background"></div>
         <div className="modal-card">
           <header className="modal-card-head modal-header-style">
-            <p className="modal-card-title">
-              Tutor Session:
-            </p>
+            <p className="modal-card-title">Tutor Session:</p>
             <button
               className="delete"
               aria-label="close"
@@ -229,18 +230,23 @@ export default function Calendar({ location }) {
           </header>
           <section className="modal-card-body">
             <p className="title is-5">{clickedEvent.title}</p>
-            <p>Start: {new Date(clickedEvent.start).toLocaleString("en-US")}</p>
+            <p>Start: {new Date(clickedEvent.start).toLocaleString('en-US')}</p>
             <p>End: {new Date(clickedEvent.end).toLocaleString('en-US')}</p>
-            <br/>
-            <br/>
-            { myCalendar === 'true' ? (<p>
-              Would you like to cancel this session?
-            </p>) : null }
+            <br />
+            <br />
+            {myCalendar === 'true' ? (
+              <p>Would you like to cancel this session?</p>
+            ) : null}
           </section>
           <footer className="modal-card-foot modal-bottom-style">
-            { myCalendar === 'true' ? (<button className="button is-info" onClick={() => deleteEvent(clickedEvent.id)}>
-              Yes, Cancel this session
-            </button>) : null}
+            {myCalendar === 'true' ? (
+              <button
+                className="button is-info"
+                onClick={() => deleteEvent(clickedEvent.id)}
+              >
+                Yes, Cancel this session
+              </button>
+            ) : null}
             <button className="button" onClick={handleModalClose}>
               Close
             </button>

@@ -214,7 +214,7 @@ export default function Messages({ location }) {
         <div className='column container mt-5 font-style message-div-style'>
           <h1 className='title font-style px-2'>Send {senderName} a message...</h1>
           <div className='messageArea'>
-            <article className='mx-3 tileStyle'>
+            <article className='mx-3 tile box tileStyle'>
               <ScrollToBottom>
                 {correspondence.map((message) => (
                   <OneMessage
@@ -230,7 +230,7 @@ export default function Messages({ location }) {
                 ))}
               </ScrollToBottom>
             </article>
-            <form className='form'>
+            <form className='form pl-2 columns'>
               <input
                 className='message-input input'
                 type='text'
