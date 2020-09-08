@@ -42,11 +42,22 @@ export default function Calendar({ location }) {
             end: response.data[i].end,
           });
         }
-      } else {
+      } 
+      else if(!isTeacher && myCalendar === 'true'){
         for (let i = 0; i < response.data.length; i++) {
           eventArray.push({
             id: response.data[i].id,
             title: 'You have Tutoring',
+            start: response.data[i].start,
+            end: response.data[i].end,
+          });
+        }
+      }
+       else if(!isTeacher && myCalendar==='false'){
+        for (let i = 0; i < response.data.length; i++) {
+          eventArray.push({
+            id: response.data[i].id,
+            title: 'Tutor Is Unavailable',
             start: response.data[i].start,
             end: response.data[i].end,
           });
