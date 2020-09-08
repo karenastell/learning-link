@@ -4,6 +4,10 @@
   width: 450px;
 }
 
+@media only screen and (max-width: 768px) {
+  .oneMessage-message {width: 350px}
+}
+
 .senderName-message {
   font-size: 10px;
   color: black;
