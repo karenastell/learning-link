@@ -160,7 +160,8 @@ export default function Calendar({ location }) {
         console.log('session info messaged to tutor');
       });
       setErrorAlert('off');
-      
+
+
     }
   };
 
