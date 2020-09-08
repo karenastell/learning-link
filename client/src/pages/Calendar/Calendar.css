@@ -1,0 +1,35 @@
+
+.calendar-style {
+    font-size: 12px !important;
+    font-family: 'Raleway', sans-serif;
+    margin-top: 15px;
+  }
+
+  .fc-daygrid-event:hover {
+    width: fit-content;
+  }
+
+  .fc-event-title:hover {
+      overflow: visible !important;
+      overflow-wrap: normal !important;
+  }
+
+  .fc-button {
+      background-color: #4fa1df !important;
+      border: 1px #eef6fc solid !important;
+      border-radius: 5px !important;
+      font-weight: bold !important;
+  }
+
+  .fc-sticky:hover {
+    overflow: visible !important;
+  }
+
+  .fc-timegrid-event:hover {
+      height: fit-content;
+      font-weight: bold;
+  }
+
+  .fc-timegrid-event {
+      background-color: #4fa1df;
+  }
