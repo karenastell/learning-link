@@ -177,12 +177,13 @@ export default function Calendar({ location }) {
           <SideBarMenu />
         </div>
         <div className='container column mt-3'>
-          <button
+          {myCalendar === 'false' ?  <button
             className='button is-light is-info'
             onClick={handleBookSessionModal}
           >
             Book a Tutoring Session
-          </button>
+          </button>: null}
+         
           <div className='calendar-style'>
             <FullCalendar
               headerToolbar={{
