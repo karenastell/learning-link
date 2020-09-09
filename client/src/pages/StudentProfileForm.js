@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import UserInfo from '../components/UserInfo';
+import UserInfo from '../components/UserInfo/UserInfo';
 import Address from '../components/Address';
 import Bio from '../components/Bio';
 import Subjects from '../components/Subjects';
@@ -8,7 +8,7 @@ import Delivery from '../components/Delivery';
 import Axios from 'axios';
 
 export default function StudentProfileForm(props) {
-  const [studentFormInfo, setStudentFormInfo] = useState({});
+  const [formInfo, setFormInfo] = useState({});
   const [subjects, setSubjects] = useState([]);
 
   // These handle validation alert messages
@@ -28,7 +28,7 @@ export default function StudentProfileForm(props) {
     const { name, value } = event.target;
 
     // use brackets to signify the name in the state
-    setStudentFormInfo({ ...studentFormInfo, [name]: value });
+    setFormInfo({ ...formInfo, [name]: value });
   };
 
   const handleCheckboxes = (event) => {
@@ -42,17 +42,17 @@ export default function StudentProfileForm(props) {
     event.preventDefault();
     // if any required fields are empty, display an alert
     if (
-      !studentFormInfo.firstName ||
-      ! studentFormInfo.lastName ||
-      !studentFormInfo.email ||
-      !studentFormInfo.password ||
-      !studentFormInfo.bio ||
-      !studentFormInfo.grade ||
-      !studentFormInfo.school ||
-      !studentFormInfo.city ||
-      !studentFormInfo.state ||
-      !studentFormInfo.special_ed ||
-      !studentFormInfo.delivery_method ||
+      !formInfo.firstName ||
+      ! formInfo.lastName ||
+      !formInfo.email ||
+      !formInfo.password ||
+      !formInfo.bio ||
+      !formInfo.grade ||
+      !formInfo.school ||
+      !formInfo.city ||
+      !formInfo.state ||
+      !formInfo.special_ed ||
+      !formInfo.delivery_method ||
       !subjects[0]
     ) {
       setPasswordAlert('off')
@@ -62,7 +62,7 @@ export default function StudentProfileForm(props) {
         behavior: 'smooth',
       });
       return;
-    } else if (studentFormInfo.password !== studentFormInfo.confirmPassword) {
+    } else if (formInfo.password !== formInfo.confirmPassword) {
       setPasswordAlert('on');
       setErrorAlert('off')
       window.scrollTo({
@@ -78,19 +78,19 @@ export default function StudentProfileForm(props) {
 
   const postToDatabase = () => {
     Axios.post('/api/auth/signup-student', {
-      firstName: studentFormInfo.firstName,
-      lastName: studentFormInfo.lastName,
-      email: studentFormInfo.email,
-      password: studentFormInfo.password,
-      bio: studentFormInfo.bio,
-      grade: studentFormInfo.grade,
-      school: studentFormInfo.school,
-      city: studentFormInfo.city,
-      state: studentFormInfo.state,
-      special_ed: studentFormInfo.special_ed,
+      firstName: formInfo.firstName,
+      lastName: formInfo.lastName,
+      email: formInfo.email,
+      password: formInfo.password,
+      bio: formInfo.bio,
+      grade: formInfo.grade,
+      school: formInfo.school,
+      city: formInfo.city,
+      state: formInfo.state,
+      special_ed: formInfo.special_ed,
       subjects: subjects,
-      delivery_method: studentFormInfo.delivery_method,
-      duration: studentFormInfo.duration,
+      delivery_method: formInfo.delivery_method,
+      duration: formInfo.duration,
     }).then((response) => {
       console.log(response, 'Sign Up Form Has Been Posted');
       if (response.data.name === 'SequelizeUniqueConstraintError') {
@@ -136,7 +136,7 @@ export default function StudentProfileForm(props) {
                   <div className="message-body">That email already has an account.</div>
                 </article>
               ) : null}
-      <UserInfo handleInputChange={handleInputChange} />
+      <UserInfo handleInputChange={handleInputChange} formInfo={formInfo} />
       <Bio handleInputChange={handleInputChange} />
 
       <div className='field is-horizontal'>
