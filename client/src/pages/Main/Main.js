@@ -38,6 +38,7 @@ useEffect(() => {
               I am a Student/Parent
             </button>
           </Link>
+          <p className="is-size-7">Already have an account?  Login at the top of the screen!</p>
         </div>
         <p>
           Learning Link connects parents to skilled teachers and tutors to fill

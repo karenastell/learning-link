@@ -329,8 +329,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
         <div className="modal-card">
           <header className="modal-card-head modal-header-style">
             <p className="modal-card-title">
-              You are about to remove {result.firstName} {result.lastName} from
-              your Dashboard
+              You are about to remove {result.firstName}
             </p>
             <button
               className="delete"

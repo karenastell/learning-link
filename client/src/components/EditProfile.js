@@ -80,7 +80,7 @@ export default function ProfileDisplay({
     <>
       <div className="field is-horizontal">
         <div className="field-label is-normal">
-          <label className="label">Your Information</label>
+          <label className="label">Your Information *</label>
         </div>
         <div className="field-body">
           <div className="field">
@@ -147,7 +147,7 @@ export default function ProfileDisplay({
         <>
           <div className="field is-horizontal">
             <div className="field-label is-normal">
-              <label className="label">Education</label>
+              <label className="label">Education *</label>
             </div>
             <div className="field-body">
               <div className="field">
@@ -199,7 +199,7 @@ export default function ProfileDisplay({
       ) : (
         <div className="field is-horizontal">
           <div className="field-label is-normal">
-            <label className="label">School Information</label>
+            <label className="label">School Information *</label>
           </div>
           <div className="field-body">
             <div className="field">
