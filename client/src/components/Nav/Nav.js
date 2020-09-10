@@ -15,10 +15,6 @@ export default function Nav() {
   const [modal, setModal] = useState('modal');
 
   const [alert, setAlert] = useState('off');
-
-  // useEffect(() => {
-  //   console.log(userId);
-  // }, [userId])
   
   // displays the modal when the login button is clicked
   const handleModalDisplay = () => {
@@ -73,7 +69,7 @@ export default function Nav() {
         aria-label="main navigation"
       >
         <div className="navbar-brand">
-          <h1 className="title title-margin label-text nav-and-modal-text nav-text">Learning Link</h1>
+          <h1 className="title title-margin label-text is-size-3-mobile nav-and-modal-text nav-text">Learning Link</h1>
         </div>
         {/* if the user is logged in, the LogoutButton displays, if not, the loginButton */}
         { isAuth ? <LogoutButton /> : <LoginButton handleModalDisplay={handleModalDisplay} /> }

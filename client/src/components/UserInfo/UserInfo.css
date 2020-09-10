@@ -1,0 +1,12 @@
+.password-correct {
+    color: #39a043;
+    padding-left: 205px;
+    padding-bottom: 10px;
+}
+
+.password-wrong {
+    color: #eb474e;
+    padding-left: 205px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}

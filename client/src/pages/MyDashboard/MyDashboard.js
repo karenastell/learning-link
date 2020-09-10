@@ -11,17 +11,13 @@ export default function MyDashboard() {
   const [results, setResults] = useState([]);
   const [userInfo, setUserInfo] = useState({});
 
-
+// Get the current user's info and their tutorstudent pairs right off the bat so the dashboard cards will can render with the appropriate info
   useEffect(() => {
     if (userId) {
       getUserInfo();
       getMyStudentTutorPairs();
     }
   }, []);
-
-  // useEffect(() => {
-  //   console.log(results);
-  // }, [results]);
 
   const getUserInfo = () => {
     Axios.get(`/api/myprofile/${userId}`).then((response) => {
@@ -42,6 +38,7 @@ export default function MyDashboard() {
     // Get the student-tutor pairs from the TutorStudent table
     const tutorStudentPairs = await Axios.get(`/api/mydashboard/${userId}`);
     console.log(tutorStudentPairs.data);
+    // Then get all of the info of the people on their dashboard
     getMyPeepsInfo(tutorStudentPairs.data);
   };
 

@@ -5,7 +5,6 @@ import './EditAvailability.css';
 
 export default function EditAvailability({
   setEditAvailabilityMode,
-  isTeacher,
   getUserInfo,
 }) {
   const { userId } = useContext(AuthContext);

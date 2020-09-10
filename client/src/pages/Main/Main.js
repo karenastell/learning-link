@@ -8,7 +8,7 @@ import './Main.css';
 
 
 export default function Main(props) {
-const { isAuth, userId} = useContext(AuthContext);
+const { isAuth } = useContext(AuthContext);
 
 useEffect(() => {
   window.scrollTo({
@@ -38,6 +38,7 @@ useEffect(() => {
               I am a Student/Parent
             </button>
           </Link>
+          <p className="is-size-7">Already have an account?  Login at the top of the screen!</p>
         </div>
         <p>
           Learning Link connects parents to skilled teachers and tutors to fill
@@ -54,7 +55,7 @@ useEffect(() => {
           <br />
           <strong>For Teachers and Tutors:</strong> Sign up to create your
           teacher profile and showcase your qualifications, subjects, and
-          grades. Communicate with your students' parents
+          grades. Reach out to your students or their parents to communicate or set up tutoring sessions.
         </p>
 
         

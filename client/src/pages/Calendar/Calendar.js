@@ -231,7 +231,7 @@ export default function Calendar({ location }) {
             </button>
           ) : null}
 
-          <div className='calendar-style'>
+          <div className='calendar-style px-3'>
             <FullCalendar
               headerToolbar={{
                 left: 'prev,next today',

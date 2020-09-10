@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Address from '../components/Address';
 import Subjects from '../components/Subjects';
-import UserInfo from '../components/UserInfo';
+import UserInfo from '../components/UserInfo/UserInfo';
 import Bio from '../components/Bio';
 import Delivery from '../components/Delivery';
 import Axios from 'axios';
 
 export default function ProfileForm(props) {
-  const [tutorFormInfo, setTutorFormInfo] = useState({});
+  const [formInfo, setFormInfo] = useState({});
   const [subjects, setSubjects] = useState([]);
   const [days, setDays] = useState([]);
 
@@ -27,8 +27,8 @@ export default function ProfileForm(props) {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setTutorFormInfo({
-      ...tutorFormInfo,
+    setFormInfo({
+      ...formInfo,
       [name]: value,
     });
   };
@@ -47,16 +47,16 @@ export default function ProfileForm(props) {
     event.preventDefault();
     // if any required fields are empty, display an alert
     if (
-      !tutorFormInfo.firstName ||
-      !tutorFormInfo.lastName ||
-      !tutorFormInfo.email ||
-      !tutorFormInfo.password ||
-      !tutorFormInfo.bio ||
-      !tutorFormInfo.degree ||
-      !tutorFormInfo.experience ||
-      !tutorFormInfo.delivery_method ||
-      !tutorFormInfo.city ||
-      !tutorFormInfo.state ||
+      !formInfo.firstName ||
+      !formInfo.lastName ||
+      !formInfo.email ||
+      !formInfo.password ||
+      !formInfo.bio ||
+      !formInfo.degree ||
+      !formInfo.experience ||
+      !formInfo.delivery_method ||
+      !formInfo.city ||
+      !formInfo.state ||
       !subjects[0] ||
       !days[0]
     ) {
@@ -67,7 +67,7 @@ export default function ProfileForm(props) {
         behavior: 'smooth',
       });
       return;
-    } else if (tutorFormInfo.password !== tutorFormInfo.confirmPassword) {
+    } else if (formInfo.password !== formInfo.confirmPassword) {
       setPasswordAlert('on');
       setErrorAlert('off')
       window.scrollTo({
@@ -83,16 +83,16 @@ export default function ProfileForm(props) {
 
   const postToDatabase = () => {
     Axios.post('/api/auth/signup-tutor', {
-      firstName: tutorFormInfo.firstName,
-      lastName: tutorFormInfo.lastName,
-      email: tutorFormInfo.email,
-      password: tutorFormInfo.password,
-      bio: tutorFormInfo.bio,
-      degree: tutorFormInfo.degree,
-      experience: tutorFormInfo.experience,
-      delivery_method: tutorFormInfo.delivery_method,
-      city: tutorFormInfo.city,
-      state: tutorFormInfo.state,
+      firstName: formInfo.firstName,
+      lastName: formInfo.lastName,
+      email: formInfo.email,
+      password: formInfo.password,
+      bio: formInfo.bio,
+      degree: formInfo.degree,
+      experience: formInfo.experience,
+      delivery_method: formInfo.delivery_method,
+      city: formInfo.city,
+      state: formInfo.state,
       // these last 2 are arrays
       subjects: subjects,
       days: days,
@@ -144,7 +144,7 @@ export default function ProfileForm(props) {
           <div className="message-body">That email already has an account.</div>
         </article>
       ) : null}
-      <UserInfo handleInputChange={handleInputChange} />
+      <UserInfo handleInputChange={handleInputChange} formInfo={formInfo} />
 
       <Bio handleInputChange={handleInputChange} />
 
