@@ -15,10 +15,6 @@ export default function Nav() {
   const [modal, setModal] = useState('modal');
 
   const [alert, setAlert] = useState('off');
-
-  // useEffect(() => {
-  //   console.log(userId);
-  // }, [userId])
   
   // displays the modal when the login button is clicked
   const handleModalDisplay = () => {

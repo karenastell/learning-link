@@ -8,7 +8,7 @@ import './Main.css';
 
 
 export default function Main(props) {
-const { isAuth, userId} = useContext(AuthContext);
+const { isAuth } = useContext(AuthContext);
 
 useEffect(() => {
   window.scrollTo({
@@ -55,7 +55,7 @@ useEffect(() => {
           <br />
           <strong>For Teachers and Tutors:</strong> Sign up to create your
           teacher profile and showcase your qualifications, subjects, and
-          grades. Communicate with your students' parents
+          grades. Reach out to your students or their parents to communicate or set up tutoring sessions.
         </p>
 
         

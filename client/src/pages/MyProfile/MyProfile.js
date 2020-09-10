@@ -1,8 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import Axios from 'axios';
-
 import SideBarMenu from '../../components/SideBarMenu/SideBarMenu';
-
 import Nav from '../../components/Nav/Nav';
 import ProfileDisplay from '../../components/ProfileDisplay/ProfileDisplay';
 import EditProfile from '../../components/EditProfile';
@@ -98,7 +96,6 @@ export default function MyProfile(props) {
             ) : editAvailabilityMode === 'on' ? (
               <EditAvailability
                 setEditAvailabilityMode={setEditAvailabilityMode}
-                isTeacher={isTeacher}
                 getUserInfo={getUserInfo}
               />
             ) : editSubjectsMode === 'on' ? (

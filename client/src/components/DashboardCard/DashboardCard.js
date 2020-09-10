@@ -6,18 +6,22 @@ import './DashboardCard.css';
 
 export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   const { isTeacher, userId } = useContext(AuthContext);
-  const [reviewModal, setReviewModal] = useState('modal');
+  // These two review states are used for if a user is writing a review for a tutor
   const [review, setReview] = useState({});
   const [reviewer, setReviewer] = useState({});
-  const [removeMessage, setRemoveMessage] = useState('modal');
+// This state holds all of the reviews for a tutor
+  const [tutorReviews, setTutorReviews] = useState([]);
+  // This is the room for the messageing between the tutor and student pair
   const [room, setRoom] = useState('');
+  
   const [unread, setUnread] = useState(false);
 
   const [emptyReviewMessage, setEmptyReviewMessage] = useState('off');
 
+  // These three states control whether the modals display
+  const [removeMessage, setRemoveMessage] = useState('modal');
   const [readReviewModal, setReadReviewModal] = useState('modal');
-
-  const [tutorReviews, setTutorReviews] = useState([]);
+  const [reviewModal, setReviewModal] = useState('modal');
 
   useEffect(() => {
     setMessageRoom();
@@ -25,6 +29,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
 
   useEffect(() => {
     checkForUnreadMessages();
+    // Every 10 seconds we poll for any messages that are "unread" so we can display a red icon for unread messages
     const interval = setInterval(() => {
       checkForUnreadMessages();
     }, 10000);
@@ -96,7 +101,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
     await Axios.delete(
       `/api/mydashboard/${userId}/remove/${result.id}/${isTeacher}`
     );
-
+    // Then get the studenttutorpairs after the delete so we can update the virtual dom
     getMyStudentTutorPairs();
   };
 
@@ -141,7 +146,11 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
             </p>
             {!isTeacher ? (
               <Link to={`/calendar?forUser=${result.id}&myCalendar=false`}>
-                <img src="./calendar.png" width="50px" className="calendar-button"/>
+                <img
+                  src="./calendar.png"
+                  width="50px"
+                  className="calendar-button"
+                />
               </Link>
             ) : null}
           </header>
