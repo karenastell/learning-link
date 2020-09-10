@@ -14,7 +14,7 @@ export default function OneMessage({
   return (
     <div className='oneMessage-div'>
       {senderId === null ? null : senderId === userId ? (
-        <div className='oneMessage-message messageContainer justifyStart'>
+        <div className='oneMessage-message messageContainer justifyEnd'>
           <div className='messageBox backgroundLight'>
             <p className='senderName-message'>You</p>
             <p className='receiverText messageText is-size-7-mobile'>{message}</p>
@@ -31,7 +31,7 @@ export default function OneMessage({
           </div>
         </div>
       ) : !isTeacher ? (
-        <div className='oneMessage-message messageContainer justifyEnd'>
+        <div className='oneMessage-message messageContainer justifyStart '>
           <div className='messageBox backgroundBlue'>
             <p className='senderName-message'>{firstName}</p>
             <p className='senderText messageText is-size-7-mobile'>{message}</p>
@@ -48,7 +48,7 @@ export default function OneMessage({
           </div>
         </div>
       ) : (
-        <div className='oneMessage-message messageContainer justifyEnd'>
+        <div className='oneMessage-message messageContainer justifyStart'>
           <div className='messageBox backgroundBlue'>
             <p className='senderName-message'>{senderName}</p>
             <p className='senderText messageText is-size-7-mobile'>{message}</p>
