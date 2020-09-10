@@ -43,6 +43,12 @@ export default function ProfileDisplay({
 
           {isTeacher ? (
             <div className="tile is-child box box-style">
+              <button
+                className="button is-outlined is-small is-pulled-right is-info"
+                onClick={() => setEditAvailabilityMode('on')}
+              >
+                Edit Availability
+              </button>
               <dl className="block-list is-small is-outlined is-success is-centered">
                 <h3 className="profile-text profile-span">Days Available: </h3>
                 {availabilityInfo.map((day) => (
@@ -51,12 +57,6 @@ export default function ProfileDisplay({
                   </li>
                 ))}
               </dl>
-              <button
-                className="button is-outlined is-small is-pulled-right is-info"
-                onClick={() => setEditAvailabilityMode('on')}
-              >
-                Edit Availability
-              </button>
             </div>
           ) : null}
           {isTeacher === false ? (
@@ -119,6 +119,12 @@ export default function ProfileDisplay({
         </div>
         <div className="tile is-parent">
           <div className="tile is-child box box-style">
+            <button
+              className="button is-small is-outlined is-pulled-right is-info"
+              onClick={() => setEditSubjectsMode('on')}
+            >
+              Edit Subjects
+            </button>
             <dl className="block-list is-small is-outlined is-success is-centered">
               <h3 className="profile-text">
                 <span className="profile-span">Subjects for tutoring:</span>
@@ -129,28 +135,32 @@ export default function ProfileDisplay({
                 </li>
               ))}
             </dl>
-            <button
-              className="button is-small is-pulled-right is-outlined is-info"
-              onClick={() => setEditSubjectsMode('on')}
-            >
-              Edit Subjects
-            </button>
           </div>
         </div>
       </div>
 
-      { isTeacher ? (<div className="tile is-ancestor">
-        <div className="tile is-parent is-vertical is-12">
-          <div className="tile is-child box box-style profile-text">
-            <h3 className="title is-4 profile-text">Your Reviews: </h3>
-            { reviews.length > 0 ? reviews.map(review => (<div key={review.id} className="p-1">
-            <p className="profile-text">"{review.review}"</p>
-            <p className="is-pulled-right profile-text pr-6">- {review.reviewer}</p>
-            <hr/>
-            </div>)) : <p>You do not have any reviews yet...</p>}
+      {isTeacher ? (
+        <div className="tile is-ancestor">
+          <div className="tile is-parent is-vertical is-12">
+            <div className="tile is-child box box-style profile-text">
+              <h3 className="title is-4 profile-text">Your Reviews: </h3>
+              {reviews.length > 0 ? (
+                reviews.map((review) => (
+                  <div key={review.id} className="p-1">
+                    <p className="profile-text">"{review.review}"</p>
+                    <p className="is-pulled-right profile-text pr-6">
+                      - {review.reviewer}
+                    </p>
+                    <hr />
+                  </div>
+                ))
+              ) : (
+                <p>You do not have any reviews yet...</p>
+              )}
+            </div>
           </div>
         </div>
-      </div>) : null}
+      ) : null}
     </>
   );
 }

@@ -65,20 +65,17 @@ export default function MyProfile(props) {
           <h1 className="title px-3">Welcome to your profile!</h1>
           <p className="subtitle is-6 px-3">You may edit or update your information here.  Other users can see this information if you are on their dashboard{ isTeacher ? <span> and it is how student will search for you</span>: null }, so keep it professional and up-to-date for best results.</p>
           <div className="container">
-            <div className="level">
-              <div className="level-left"></div>
-              <div className="level-right">
+            <div className="level mb-3">
                 {editMode === 'off' &&
                 editAvailabilityMode === 'off' &&
                 editSubjectsMode === 'off' ? (
                   <button
-                    className="level-item button is-small is-outlined is-pulled-right is-info"
+                    className=" button is-small is-outlined is-info "
                     onClick={() => setEditMode('on')}
                   >
                     Edit Profile
                   </button>
                 ) : null}
-              </div>
             </div>
             {editMode === 'on' ? (
               <EditProfile
