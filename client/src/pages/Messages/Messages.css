@@ -1,7 +1,6 @@
 .tileStyle {
   margin-bottom: 0px !important;
   min-width: 100px;
-  width: 500px;
   height: 500px;
   max-height: 500px;
 }
@@ -38,4 +37,15 @@ select:focus {
 
 .message-div-style {
   min-height: 100vh;
+}
+
+.messageSpace {
+  max-height: 500px;
+}
+
+.form {
+  margin-top: 0px !important;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+  padding-right: 10px;
 }
