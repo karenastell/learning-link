@@ -23,7 +23,6 @@ export default function Messages({ location }) {
   const [senderNameArray, setSenderNameArray] = useState([]);
   const [senderId, setSenderId] = useState('');
 
-
   let senderIdArray = [];
   let noDuplicates;
   let tempArray = [];
@@ -121,7 +120,7 @@ export default function Messages({ location }) {
       console.log(allCorrespondence);
       await setCorrespondence(allCorrespondence.data);
       await console.log(allCorrespondence.data.length);
-      
+
       for (let i = 0; i < allCorrespondence.data.length; i++) {
         await setMessagesToRead(allCorrespondence.data[i].id);
       }
@@ -137,13 +136,13 @@ export default function Messages({ location }) {
       console.log(allCorrespondence);
       await setCorrespondence(allCorrespondence.data);
       await setSenderName(allCorrespondence.data[0].User.firstName);
-      
+
       await console.log(allCorrespondence.data.length);
       for (let i = 0; i < allCorrespondence.data.length; i++) {
         await setMessagesToRead(allCorrespondence.data[i].id);
       }
     }
-    
+
     await console.log(correspondence.length);
     for (let i = 0; i < correspondence.length; i++) {
       setMessagesToRead(correspondence[i].id);
@@ -151,9 +150,9 @@ export default function Messages({ location }) {
   };
 
   const setMessagesToRead = (messageId) => {
-      Axios.put(`api/all-messages/message${messageId}/tutor${isTeacher}`).then((response) => {
-        
-      });
+    Axios.put(
+      `api/all-messages/message${messageId}/tutor${isTeacher}`
+    ).then((response) => {});
   };
 
   useEffect(() => {
@@ -211,22 +210,26 @@ export default function Messages({ location }) {
           <SideBarMenu />
         </div>
         <div className='column container mt-5 font-style message-div-style'>
-          <h1 className='title font-style px-2'>Send {senderName} a message...</h1>
+          <h1 className='title font-style px-2'>
+            Send {senderName} a message...
+          </h1>
           <div className='messageArea'>
             <article className='mx-3 tile box tileStyle'>
               <ScrollToBottom>
-                {correspondence.map((message) => (
-                  <OneMessage
-                    key={message.createdAt}
-                    isTeacher={isTeacher}
-                    senderId={message.SenderId}
-                    userId={userId}
-                    message={message.message}
-                    firstName={message.User.firstName}
-                    senderName={senderName}
-                    date={message.createdAt}
-                  />
-                ))}
+                <div className='messageSpace'>
+                  {correspondence.map((message) => (
+                    <OneMessage
+                      key={message.createdAt}
+                      isTeacher={isTeacher}
+                      senderId={message.SenderId}
+                      userId={userId}
+                      message={message.message}
+                      firstName={message.User.firstName}
+                      senderName={senderName}
+                      date={message.createdAt}
+                    />
+                  ))}
+                </div>
               </ScrollToBottom>
             </article>
             <form className='form pl-2 columns'>

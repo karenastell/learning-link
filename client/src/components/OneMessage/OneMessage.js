@@ -17,7 +17,7 @@ export default function OneMessage({
         <div className='oneMessage-message messageContainer justifyStart'>
           <div className='messageBox backgroundLight'>
             <p className='senderName-message'>You</p>
-            <p className='receiverText messageText'>{message}</p>
+            <p className='receiverText messageText is-7-mobile'>{message}</p>
             <p className='messageDate'>
               {new Date(date).toLocaleString([], {
                 month: 'short',
