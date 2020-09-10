@@ -310,7 +310,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
                 <label className="label" htmlFor="Name">
                   Your Name
                   <input
-                    className="input"
+                    className="input p-2"
                     id="Name"
                     type="text"
                     placeholder="Your Name"
