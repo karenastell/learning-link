@@ -17,7 +17,7 @@ export default function OneMessage({
         <div className='oneMessage-message messageContainer justifyStart'>
           <div className='messageBox backgroundLight'>
             <p className='senderName-message'>You</p>
-            <p className='receiverText messageText is-7-mobile'>{message}</p>
+            <p className='receiverText messageText is-size-7-mobile'>{message}</p>
             <p className='messageDate'>
               {new Date(date).toLocaleString([], {
                 month: 'short',
@@ -34,7 +34,7 @@ export default function OneMessage({
         <div className='oneMessage-message messageContainer justifyEnd'>
           <div className='messageBox backgroundBlue'>
             <p className='senderName-message'>{firstName}</p>
-            <p className='senderText messageText'>{message}</p>
+            <p className='senderText messageText is-size-7-mobile'>{message}</p>
             <p className='messageDate'>
               {new Date(date).toLocaleString([], {
                 month: 'short',
@@ -51,7 +51,7 @@ export default function OneMessage({
         <div className='oneMessage-message messageContainer justifyEnd'>
           <div className='messageBox backgroundBlue'>
             <p className='senderName-message'>{senderName}</p>
-            <p className='senderText messageText'>{message}</p>
+            <p className='senderText messageText is-size-7-mobile'>{message}</p>
             <p className='messageDate'>
               {new Date(date).toLocaleString([], {
                 month: 'short',
