@@ -21,9 +21,6 @@ export default function SideBarMenu(props) {
             <Link to="/search" className="menu-style">Search for a Tutor</Link>
           </li>
         ) : null}
-        {/* <li>
-          <Link to="/all-messages" className="menu-style">Messages</Link>
-        </li> */}
         { props.doNotShow === 'true' ?  null : <li>
           <Link to={`/calendar?forUser=${userId}&myCalendar=true`} className="menu-style">My Calendar</Link>
         </li>}

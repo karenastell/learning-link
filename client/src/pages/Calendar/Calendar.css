@@ -2,7 +2,18 @@
 .calendar-style {
     font-family: 'Raleway', sans-serif;
     margin-top: 15px;
+    min-height: 100vh;
   }
+
+  @media only screen and (max-width: 768px) {
+    .fc-toolbar-title { font-size: 1em !important;}
+
+    .fc-button-primary { font-size: 10px !important;}
+
+    .fc-col-header-cell {
+      font-size: 10px !important;
+    }
+}
 
   .fc-daygrid-event:hover {
     width: fit-content;

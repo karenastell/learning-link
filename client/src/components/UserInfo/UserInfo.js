@@ -2,7 +2,7 @@ import React from 'react';
 import './UserInfo.css'
 
 export default function UserInfo(props) {
-  console.log(props.formInfo);
+  // This handles the rendering of a message depending on whether the password confirm was correct or not
   const renderPasswordCheck = () => {
     if (
       props.formInfo.password === '' ||

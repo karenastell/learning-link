@@ -43,7 +43,7 @@ export default function StudentProfileForm(props) {
     // if any required fields are empty, display an alert
     if (
       !formInfo.firstName ||
-      ! formInfo.lastName ||
+      !formInfo.lastName ||
       !formInfo.email ||
       !formInfo.password ||
       !formInfo.bio ||
