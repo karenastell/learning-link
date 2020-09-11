@@ -57,7 +57,10 @@ Use FullCalendar.io to book a tutoring session with your tutor.
 * [Depolyed App on Heroku](https://ancient-brushlands-96177.herokuapp.com/)
 * [GitHub Repository](https://github.com/karenastell/learning-link)
 
+## Created by:
 
+* [Kaleigh Spurio](https://github.com/Kaleighspurio/)
+* [Karen Astell](https://github.com/karenastell/)
 
 
 
