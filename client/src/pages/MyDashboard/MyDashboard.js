@@ -21,7 +21,6 @@ export default function MyDashboard() {
 
   const getUserInfo = () => {
     Axios.get(`/api/myprofile/${userId}`).then((response) => {
-      console.log(response);
       const data = response.data;
       setUserInfo({
         ...userInfo,
@@ -37,7 +36,6 @@ export default function MyDashboard() {
   const getMyStudentTutorPairs = async () => {
     // Get the student-tutor pairs from the TutorStudent table
     const tutorStudentPairs = await Axios.get(`/api/mydashboard/${userId}`);
-    console.log(tutorStudentPairs.data);
     // Then get all of the info of the people on their dashboard
     getMyPeepsInfo(tutorStudentPairs.data);
   };
@@ -56,7 +54,6 @@ export default function MyDashboard() {
         studentUserInfo.data.Subjects.forEach((subject) => {
           subjectArray.push(subject.subject);
         });
-        // console.log(subjectArray, "subject array")
         let responseData = {
           id: response.id,
           firstName: response.firstName,

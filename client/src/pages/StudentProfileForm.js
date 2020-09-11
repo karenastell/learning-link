@@ -92,7 +92,6 @@ export default function StudentProfileForm(props) {
       delivery_method: formInfo.delivery_method,
       duration: formInfo.duration,
     }).then((response) => {
-      console.log(response, 'Sign Up Form Has Been Posted');
       if (response.data.name === 'SequelizeUniqueConstraintError') {
         setEmailAlert('on');
         window.scrollTo({

@@ -14,7 +14,6 @@ export default function UserInfo(props) {
     } else if (
       props.formInfo.password === props.formInfo.confirmPassword
     ) {
-      console.log('We have a match!');
       return <p className="password-correct is-size-7">Password confirmed!</p>;
     } else {
       return <p className="password-wrong is-size-7">Password does not match! Please check your passwords before continuing...</p>;

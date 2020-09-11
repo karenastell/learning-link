@@ -23,7 +23,6 @@ export default function Search() {
     Saturday: false,
   });
   const { setResults } = useContext(AuthContext);
-  const [noResultsMessage, setNoResultsMessage] = useState('off');
 
   let responseArray = [];
   let responseData;
@@ -77,7 +76,6 @@ export default function Search() {
     if (days.length >= 1) {
       for (let x = 0; x < days.length; x++) {
         const response = await Axios.get(`api/search/day/${days[x]}`);
-        console.log('day: ', response.data);
         if (response.data.length >= 1) {
           for (let y = 0; y < response.data.length; y++) {
             let dayArray = [];
@@ -85,12 +83,10 @@ export default function Search() {
 
             for (let z = 0; z < response.data[y].Availabilities.length; z++) {
               await dayArray.push(response.data[y].Availabilities[z].day);
-              console.log(dayArray);
             }
 
             for (let i = 0; i < response.data[y].Subjects.length; i++) {
               await subArray.push(response.data[y].Subjects[i].subject);
-              console.log(subArray);
             }
             responseData = {
               UserId: response.data[y].UserProfile.UserId,
@@ -119,7 +115,6 @@ export default function Search() {
     if (subjects.length >= 1) {
       for (let x = 0; x < subjects.length; x++) {
         const response2 = await Axios.get(`api/search/subject/${subjects[x]}`);
-        console.log('subjects: ', response2.data);
         if (response2.data.length >= 1) {
           for (let y = 0; y < response2.data.length; y++) {
             let dayArray = [];
@@ -127,12 +122,10 @@ export default function Search() {
 
             for (let z = 0; z < response2.data[y].Availabilities.length; z++) {
               await dayArray.push(response2.data[y].Availabilities[z].day);
-              console.log(dayArray);
             }
 
             for (let i = 0; i < response2.data[y].Subjects.length; i++) {
               await subArray.push(response2.data[y].Subjects[i].subject);
-              console.log(subArray);
             }
             responseData = {
               UserId: response2.data[y].UserProfile.UserId,
@@ -162,7 +155,6 @@ export default function Search() {
       const response3 = await Axios.get(
         `api/search/delivery_method/${search.delivery_method}`
       );
-      console.log('delivery: ', response3.data);
       if (response3.data.length >= 1) {
         for (let y = 0; y < response3.data.length; y++) {
           let dayArray = [];
@@ -170,12 +162,10 @@ export default function Search() {
 
           for (let z = 0; z < response3.data[y].Availabilities.length; z++) {
             await dayArray.push(response3.data[y].Availabilities[z].day);
-            console.log(dayArray);
           }
 
           for (let i = 0; i < response3.data[y].Subjects.length; i++) {
             await subArray.push(response3.data[y].Subjects[i].subject);
-            console.log(subArray);
           }
           responseData = {
             UserId: response3.data[y].UserProfile.UserId,
@@ -204,7 +194,6 @@ export default function Search() {
       const response4 = await Axios.get(
         `api/search/city/${search.city}/state/${search.state}`
       );
-      console.log('city/state: ', response4);
       if (response4.data.length >= 1) {
         for (let y = 0; y < response4.data.length; y++) {
           let dayArray = [];
@@ -212,12 +201,10 @@ export default function Search() {
 
           for (let z = 0; z < response4.data[y].Availabilities.length; z++) {
             await dayArray.push(response4.data[y].Availabilities[z].day);
-            console.log(dayArray);
           }
 
           for (let i = 0; i < response4.data[y].Subjects.length; i++) {
             await subArray.push(response4.data[y].Subjects[i].subject);
-            console.log(subArray);
           }
           responseData = {
             UserId: response4.data[y].UserProfile.UserId,
@@ -243,7 +230,6 @@ export default function Search() {
     }
 
     setResults(responseArray);
-    console.log(responseArray);
     history.push('/search-results');
   };
 

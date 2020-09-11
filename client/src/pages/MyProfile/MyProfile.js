@@ -35,7 +35,6 @@ export default function MyProfile(props) {
   const getUserInfo = () => {
     if (userId) {
       Axios.get(`/api/myprofile/${userId}`).then((response) => {
-        console.log(response.data);
         const data = response.data;
         setUserInfo({
           ...userInfo,

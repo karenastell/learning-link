@@ -16,7 +16,6 @@ export default function TutorSearchResult(props) {
   const [tutorToBeReviewed, setTutorToBeReviewed] = useState('');
   const [tutorAddedMessage, setTutorAddedMessage] = useState('off');
 
-  console.log(userId);
 
   useEffect(() => {
     window.scrollTo({
@@ -31,7 +30,6 @@ export default function TutorSearchResult(props) {
       TutorId: id,
       StudentId: userId,
     }).then((response) => {
-      console.log(response.data);
       setTutorAddedMessage('on');
       window.scrollTo({
         top: 0,
@@ -44,24 +42,18 @@ export default function TutorSearchResult(props) {
     });
   };
 
-  console.log('results tutor search page', results);
-  const allTutors = results.filter((result) => result.isTeacher === true);
 
-  console.log(allTutors);
+  const allTutors = results.filter((result) => result.isTeacher === true);
 
   // https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
   const tutorResults = [
     ...new Map(allTutors.map((item) => [JSON.stringify(item), item])).values(),
   ];
 
-  console.log('tutor results', tutorResults);
-  console.log(results, 'results!!!!!!!!!!!!!!!!!!!!!!!');
-  // console.log(results.day);
 
   // Get the reviews for the tutor that is clicked and display them in the readreview modal
   const handleReadReview = (UserId, name) => {
     Axios.get(`/api/read-reviews/${UserId}`).then((response) => {
-      console.log(response.data);
       setTutorReviews(response.data);
     });
     setReadReviewModal('modal is-active');

@@ -6,7 +6,6 @@ const passport = require('../../config/passport');
 // passport.authenticate() is a middle ware provided by passport
 // and is configured
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  // console.log(req.user.dataValues);
   console.log('user is logged in');
   res.json(req.user);
 });
@@ -34,14 +33,12 @@ router.post('/signup-tutor', async (req, res) => {
     res.json(e);
   }
 
-  console.log(dbUser.dataValues.id, 'This should be the id');
-
   const setUserId = () => {
     UserId = dbUser.dataValues.id;
   };
   await setUserId();
 
-  // // after the User is created, then make the UserProfile
+  // after the User is created, then make the UserProfile
   const dbUserProfile = await db.UserProfile.create({
     bio: req.body.bio,
     degree: req.body.degree,
@@ -52,12 +49,11 @@ router.post('/signup-tutor', async (req, res) => {
     rate: req.body.rate,
     UserId,
   });
-  console.log(dbUserProfile);
 
   // for each subject in the subjects array, create the row in the table
   await req.body.subjects.forEach((subject) => {
     db.Subject.create({
-      subject: subject,
+      subject,
       UserId,
     });
   });
@@ -65,7 +61,7 @@ router.post('/signup-tutor', async (req, res) => {
   // for each day in the days array, create the row in the Availability table
   await req.body.days.forEach((day) => {
     db.Availability.create({
-      day: day,
+      day,
       UserId,
     });
   });
@@ -107,13 +103,6 @@ router.post('/signup-student', async (req, res) => {
     UserId,
   });
 
-  // const dbSubject = await db.Subject.create({
-  //   subject: req.body.subject,
-  //   UserId,
-  // });
-
-  console.log(req.body);
-  console.log(req.body.subjects);
 
   await req.body.subjects.forEach((subject) => {
     db.Subject.create({

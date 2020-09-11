@@ -8,8 +8,6 @@ export default function Message({
   senderName,
   receiverName,
 }) {
-  console.log(senderName, receiverName);
-  console.log('user1: ', user1, 'user: ', user);
 
   let isSentByCurrentUser = false;
 
