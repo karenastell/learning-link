@@ -48,7 +48,7 @@ useEffect(() => {
           <br />
           <strong>For Parents and students:</strong> Sign up to create a profile
           detailing your or your child's needs and search for available tutors.
-          You'll be able to view teachers' and tutors' qualifications and
+          You'll be able to view tutors' qualifications and
           exeperience, and can contact them to learn more about them or to set
           up a session!
           <br />
