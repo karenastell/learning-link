@@ -30,7 +30,7 @@ useEffect(() => {
           <h3 className="mb-3 title is-4">Sign up to get started!</h3>
           <Link to="/signup-tutor" className="button-main">
             <button className="button is-info button-main mx-2">
-              I am a Tutor/Teacher
+              I am a Tutor
             </button>
           </Link>
           <Link to="/signup-student" className="button-main">
@@ -41,8 +41,8 @@ useEffect(() => {
           <p className="is-size-7">Already have an account?  Login at the top of the screen!</p>
         </div>
         <p>
-          Learning Link connects parents to skilled teachers and tutors to fill
-          their child's educational needs. Search among our teachers and tutors
+          Learning Link connects parents to skilled tutors to fill
+          their child's educational needs. Search among our tutors
           to find one that is right for you!
           <br />
           <br />
@@ -53,12 +53,10 @@ useEffect(() => {
           up a session!
           <br />
           <br />
-          <strong>For Teachers and Tutors:</strong> Sign up to create your
-          teacher profile and showcase your qualifications, subjects, and
+          <strong>For Tutors:</strong> Sign up to create your
+          tutor profile and showcase your qualifications, subjects, and
           grades. Reach out to your students or their parents to communicate or set up tutoring sessions.
         </p>
-
-        
       </div>
     </div>
       
