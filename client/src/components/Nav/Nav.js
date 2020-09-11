@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import LoginButton from '../LoginButton';
 import LogoutButton from '../../components/LogoutButton';
 import { AuthContext } from '../../AuthContext';
@@ -7,7 +7,7 @@ import Axios from 'axios';
 import './Nav.css';
 
 export default function Nav() {
-  const { isAuth, setIsAuth, setUserId, userId, setIsTeacher} = useContext(AuthContext);
+  const { isAuth, setIsAuth, setUserId, setIsTeacher} = useContext(AuthContext);
   const emptyCreds = { emailInput: '', passwordInput: '' };
   const errorMessage = 'Incorrect email or password';
   const [formData, setFormData] = useState(emptyCreds);
@@ -44,8 +44,6 @@ export default function Nav() {
   const login = (loginCreds) => {
     Axios.post('/api/auth/login', loginCreds)
       .then((user) => {
-        console.log('login response ', user);
-        console.log(user.data.id, "This should be the id...")
         setUserId(user.data.id);
         setIsTeacher(user.data.isTeacher);
         setIsAuth(true);

@@ -5,7 +5,6 @@ const db = require('../../models');
 
 // Get the User's profile information to populate the My Profile page
 router.get('/myprofile/:id', (req, res) => {
-  console.log(req.params.id, 'this is the params');
   db.User.findOne({
     where: { id: req.params.id },
     include: [
@@ -16,7 +15,6 @@ router.get('/myprofile/:id', (req, res) => {
     ],
   })
     .then((data) => {
-      // console.log(data);
       res.json(data);
     })
     .catch((err) => {
@@ -58,13 +56,11 @@ router.get('/search/day/:day', async (req, res) => {
     });
     usersDays.push(oneUser);
   }
-  console.log(usersDays, 'Look here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
   res.json(usersDays);
 });
 
 // search route if user searches by location
 router.get('/search/city/:city/state/:state', (req, res) => {
-  console.log(req.params.city, req.params.state);
   db.User.findAll({
     include: [
       {
@@ -76,7 +72,6 @@ router.get('/search/city/:city/state/:state', (req, res) => {
     ],
   })
     .then((data) => {
-      console.log(data);
       res.json(data);
     })
     .catch((err) => {
@@ -89,7 +84,6 @@ router.get('/search/city/:city/state/:state', (req, res) => {
 
 // search route if user searches by subjects
 router.get('/search/subject/:subject', async (req, res) => {
-  console.log(req.params.subject);
   const subjectSearch = await db.User.findAll({
     include: [
       {
@@ -103,11 +97,8 @@ router.get('/search/subject/:subject', async (req, res) => {
   const usersSubjects = [];
 
   subjectSearch.forEach((user) => {
-    console.log('other for each', user.dataValues.id);
     allUserIds.push(user.dataValues.id);
   });
-
-  console.log(allUserIds);
 
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < allUserIds.length; i++) {
@@ -128,7 +119,6 @@ router.get('/search/subject/:subject', async (req, res) => {
 
 // Post the tutorStudent pairs to add to dashboard
 router.post('/TutorStudent', async (req, res) => {
-  console.log('req.body', req.body);
   // First check that this pair does not already exist
   const alreadyExists = await db.TutorStudent.findOne({
     where: {
@@ -136,7 +126,6 @@ router.post('/TutorStudent', async (req, res) => {
       TutorId: req.body.TutorId,
     },
   });
-  console.log(alreadyExists);
   // If the match does not exist, create it.  If not send a message saying it already exists
   if (alreadyExists === null) {
     db.TutorStudent.create({
@@ -152,7 +141,6 @@ router.post('/TutorStudent', async (req, res) => {
 
 // search route if user searches by method of delivery
 router.get('/search/delivery_method/:delivery_method', (req, res) => {
-  console.log(req.params.delivery_method);
   db.User.findAll({
     include: [
       db.Subject,
@@ -164,7 +152,6 @@ router.get('/search/delivery_method/:delivery_method', (req, res) => {
     ],
   })
     .then((data) => {
-      console.log(data);
       res.json(data);
     })
     .catch((err) => {
@@ -178,7 +165,6 @@ router.get('/search/delivery_method/:delivery_method', (req, res) => {
 // Route to edit the myprofile page subjects
 router.put('/edit-profile/subjects/:id', async (req, res) => {
   // delete existing subjects, then post the new ones
-  console.log(req.body);
   await db.Subject.destroy({
     where: { UserId: req.params.id },
   });
@@ -194,7 +180,6 @@ router.put('/edit-profile/subjects/:id', async (req, res) => {
 // route to edit the myprofile availability
 router.put('/edit-profile/availability/:id', async (req, res) => {
   // delete existing subjects, then post the new ones
-  console.log(req.body);
   await db.Availability.destroy({
     where: { UserId: req.params.id },
   });
@@ -210,8 +195,6 @@ router.put('/edit-profile/availability/:id', async (req, res) => {
 
 // route to edit the user's basic profile information
 router.put('/edit-profile/:id', async (req, res) => {
-  console.log(req.body);
-
   // Then we can update the user (PUT)
   await db.User.update(
     {
@@ -219,7 +202,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       lastName: req.body.user.lastName,
       email: req.body.user.email,
     },
-    { where: { id: req.params.id } }
+    { where: { id: req.params.id } },
   );
 
   await db.UserProfile.update(
@@ -235,7 +218,7 @@ router.put('/edit-profile/:id', async (req, res) => {
       duration: req.body.userProfile.duration,
       rate: req.body.userProfile.rate,
     },
-    { where: { UserId: req.params.id } }
+    { where: { UserId: req.params.id } },
   );
   res.json(req.body);
 });
@@ -270,7 +253,6 @@ router.get('/mydashboard/mypeeps/:id', (req, res) => {
     ],
   })
     .then((data) => {
-      // console.log(data);
       res.json(data);
     })
     .catch((err) => {
@@ -283,7 +265,6 @@ router.get('/mydashboard/mypeeps/:id', (req, res) => {
 
 // POST a review of a tutor
 router.post('/mydashboard/review/:id', (req, res) => {
-  console.log(req.body);
   db.Review.create({
     review: req.body.review,
     reviewer: req.body.reviewer,
@@ -319,7 +300,6 @@ router.get('/read-reviews/:id', (req, res) => {
 // Delete a TutorStudent match to remove them from the dashboard
 router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
   const { idOne, idTwo, isTeacher } = req.params;
-  console.log(idOne, idTwo, isTeacher);
   if (isTeacher === 'true') {
     db.TutorStudent.destroy({
       where: {
@@ -328,7 +308,6 @@ router.delete('/mydashboard/:idOne/remove/:idTwo/:isTeacher', (req, res) => {
       },
     })
       .then(() => {
-        console.log('deleted');
         res.json('Entry deleted');
       })
       .catch((err) => {
@@ -361,12 +340,6 @@ router.get(
   '/message-room/tutor:TutorId/student:StudentId',
   async (req, res) => {
     const room = Math.floor(Math.random() * 900000000);
-    console.log(
-      '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
-      req.params.TutorId,
-      req.params.StudentId
-    );
-    console.log(req.params.TutorId, req.params.StudentId);
     const roomInfo = await db.Message.findOrCreate({
       where: {
         TutorId: req.params.TutorId,
@@ -386,16 +359,13 @@ router.get(
     });
 
     res.json({ roomInfo, userInfo });
-  }
+  },
 );
 
 // POST a message
 router.post(
   '/message/tutor:TutorId/student:StudentId/sender:SenderId/room:room',
   (req, res) => {
-    console.log(req.params.SenderId, 'sender');
-    console.log(req.params.StudentId, 'student');
-    console.log(req.params.TutorId, 'Tutor');
     if (req.params.SenderId === req.params.StudentId) {
       db.Message.create({
         message: req.body.message,
@@ -433,7 +403,7 @@ router.post(
           });
         });
     }
-  }
+  },
 );
 
 router.get('/all-messages/student:studentId', (req, res) => {
@@ -442,7 +412,6 @@ router.get('/all-messages/student:studentId', (req, res) => {
     where: { StudentId: req.params.studentId },
   })
     .then((data) => {
-      // console.log(data);
       res.json(data);
     })
     .catch((err) => {
@@ -454,12 +423,10 @@ router.get('/all-messages/student:studentId', (req, res) => {
 });
 
 router.get('/all-messages/tutor:tutorId', (req, res) => {
-  console.log(req.params.tutorId);
   db.Message.findAll({
     where: { TutorId: req.params.tutorId },
   })
     .then((data) => {
-      // console.log(data);
       res.json(data);
     })
     .catch((err) => {
@@ -471,12 +438,10 @@ router.get('/all-messages/tutor:tutorId', (req, res) => {
 });
 
 router.get('/all-messages/student-name/:studentId', (req, res) => {
-  console.log(req.params.studentId);
   db.User.findOne({
     where: { id: req.params.studentId },
   })
     .then((data) => {
-      // console.log(data);
       res.json(data);
     })
     .catch((err) => {
@@ -488,12 +453,10 @@ router.get('/all-messages/student-name/:studentId', (req, res) => {
 });
 
 router.get('/sent-messages-to/:personId', (req, res) => {
-  console.log(req.params.personId);
   db.User.findOne({
     where: { id: req.params.personId },
   })
     .then((data) => {
-      // console.log(data);
       res.json(data);
     })
     .catch((err) => {
@@ -506,16 +469,11 @@ router.get('/sent-messages-to/:personId', (req, res) => {
 
 // Get all messages between a particular student and tutor
 router.get('/all-messages/:studentId/:tutorId', (req, res) => {
-  console.log(req.params, 'LOOK HEREHHHHASDFaskjsaldkjflkj');
   db.Message.findAll({
     where: { StudentId: req.params.studentId, TutorId: req.params.tutorId },
     include: { model: db.User },
   })
     .then((data) => {
-      console.log(
-        data,
-        'l;sdkjaf;alsjkdf;alskjdf;lakjsd;lfjk!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-      );
       res.json(data);
     })
     .catch((err) => {
@@ -528,13 +486,12 @@ router.get('/all-messages/:studentId/:tutorId', (req, res) => {
 
 // UPDATE when a message is read
 router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
-  console.log(req.params);
   if (req.params.isTeacher === 'tutorfalse') {
     db.Message.update(
       {
         studentRead: true,
       },
-      { where: { id: req.params.messageId } }
+      { where: { id: req.params.messageId } },
     )
       .then(() => {
         console.log('message has been marked as read');
@@ -551,7 +508,7 @@ router.put('/all-messages/message:messageId/:isTeacher', (req, res) => {
       {
         tutorRead: true,
       },
-      { where: { id: req.params.messageId } }
+      { where: { id: req.params.messageId } },
     )
       .then(() => {
         console.log('message has been marked as read');
@@ -607,7 +564,6 @@ router.get('/unread/:userId/:otherId/:isTeacher', (req, res) => {
 
 // POST calendar events
 router.post('/calendar/tutor/:tutorId/student/:studentId', (req, res) => {
-  console.log(req.params);
   db.Event.create({
     event: req.body.event,
     start: req.body.start,
@@ -636,7 +592,6 @@ router.get('/calendar/id/:Id', (req, res) => {
   })
 
     .then((response) => {
-      console.log(response);
       res.json(response);
     })
     .catch((err) => {
@@ -652,14 +607,12 @@ router.get('/calendar/tutorName/:tutorId', (req, res) => {
   db.User.findOne({
     where: { id: req.params.tutorId },
   }).then((data) => {
-    console.log(data);
     res.json(data);
   });
 });
 
 // delete an event
 router.delete('/calendar/eventId/:id', (req, res) => {
-  console.log(req.params);
   db.Event.destroy({
     where: { id: req.params.id },
   })
@@ -679,7 +632,6 @@ router.get('/calendar/eventinfo/:id', (req, res) => {
   db.Event.findOne({
     where: { id: req.params.id },
   }).then((data) => {
-    console.log(data);
     res.json(data);
   });
 });
@@ -691,10 +643,9 @@ router.get(
     db.Message.findOne({
       where: { TutorId: req.params.tutorId, StudentId: req.params.studentId },
     }).then((data) => {
-      console.log(data);
       res.json(data);
     });
-  }
+  },
 );
 
 router.get('/tutorNames', (req, res) => {

@@ -16,10 +16,8 @@ import MyProfile from './pages/MyProfile/MyProfile';
 import MyDashboard from './pages/MyDashboard/MyDashboard';
 
 import Messages from './pages/Messages/Messages';
-// import TroubleShootMessages from './pages/Messages/TroubleshootMessages';
 import Calendar from './pages/Calendar/Calendar';
 import TutorSearchResult from './pages/TutorSearchResults/TutorSearchResult';
-import AllMessages from './pages/AllMessages/AllMessages';
 import EventBookedAlert from './pages/EventBookedAlert/EventBookedAlert';
 
 function App() {
@@ -62,7 +60,6 @@ function App() {
           />
           <PrivateRoute exact path='/event-booked' component={EventBookedAlert} />
           <PrivateRoute exact path='/message' component={Messages} />
-          <PrivateRoute exact path='/all-messages' component={AllMessages} />
         </>
       </Router>
       <Footer />

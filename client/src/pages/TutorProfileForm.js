@@ -97,8 +97,6 @@ export default function ProfileForm(props) {
       subjects: subjects,
       days: days,
     }).then((response) => {
-      console.log(response.data, 'This is the response!');
-      // do we need a redirect?
       // If there is an error because of an existing email address, display email alert and return.
       if (response.data.name === 'SequelizeUniqueConstraintError') {
         setEmailAlert('on');

@@ -64,6 +64,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   const handleReviewSubmit = async () => {
     // post the review
     if (!review.review) {
+      // If nothing was typed in the review textarea, don't proceed and sent an alert
       console.log('Oops, empty box');
       setEmptyReviewMessage('on');
       return;
@@ -88,7 +89,6 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   // Get the reviews for the tutor that is clicked and display them in the readreview modal
   const handleReadReview = () => {
     Axios.get(`/api/read-reviews/${result.id}`).then((response) => {
-      console.log(response.data);
       setTutorReviews(response.data);
     });
     setReadReviewModal('modal is-active');
@@ -111,13 +111,11 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
       const getRoomInfo = await Axios.get(
         `/api/message-room/tutor${userId}/student${result.id}`
       );
-      console.log(getRoomInfo.data.roomInfo);
       setRoom(getRoomInfo.data.roomInfo[0].room);
     } else {
       const getRoomInfo = await Axios.get(
         `/api/message-room/tutor${result.id}/student${userId}`
       );
-      console.log(getRoomInfo.data.roomInfo);
       setRoom(getRoomInfo.data.roomInfo[0].room);
     }
   };
@@ -125,7 +123,6 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
   const checkForUnreadMessages = () => {
     Axios.get(`/api/unread/${userId}/${result.id}/${isTeacher}`).then(
       (response) => {
-        console.log(response);
         if (response.data.length > 0) {
           setUnread(true);
         }
@@ -133,7 +130,6 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
     );
   };
 
-  console.log(unread);
 
   return (
     <>
@@ -150,6 +146,7 @@ export default function DashboardCard({ result, getMyStudentTutorPairs }) {
                   src="./calendar.png"
                   width="50px"
                   className="calendar-button"
+                  alt="calendar"
                 />
               </Link>
             ) : null}
