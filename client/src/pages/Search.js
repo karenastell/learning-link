@@ -73,6 +73,7 @@ export default function Search() {
   const history = useHistory();
 
   const findATutor = async () => {
+    // searches by different parameters
     if (days.length >= 1) {
       for (let x = 0; x < days.length; x++) {
         const response = await Axios.get(`api/search/day/${days[x]}`);
@@ -228,7 +229,7 @@ export default function Search() {
         console.log('no responses for your location search');
       }
     }
-
+// set the results into state to be used to display on search-results page
     setResults(responseArray);
     history.push('/search-results');
   };

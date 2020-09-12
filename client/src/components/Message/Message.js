@@ -3,7 +3,6 @@ import './Message.css';
 
 export default function Message({
   message: { user, text },
-  setUser1,
   user1,
   senderName,
   receiverName,

@@ -36,7 +36,7 @@ export default function Messages({ location }) {
     const { user1, user2 } = queryString.parse(location.search);
     const startFunction = async () => {
       const { user1, user2 } = queryString.parse(location.search);
-
+// set the room information dependent on if it is a teacher or student 
       if (isTeacher) {
         const messageRoomInfo = await Axios.get(
           `/api/message-room/tutor${user1}/student${user2}`
@@ -61,9 +61,11 @@ export default function Messages({ location }) {
 
     setUser1(user1);
 
+    // do something upon joining the room
     socket.emit('join', { user1, room }, () => {});
 
     return () => {
+      // do something upon leaving the room
       socket.emit('disconnect');
 
       socket.off();
@@ -71,6 +73,7 @@ export default function Messages({ location }) {
   }, [ENDPOINT, location.search]);
 
   const getMessages = async () => {
+    // get all messages sent to student or tutor
     if (!isTeacher) {
       const allMessages = await Axios.get(`api/all-messages/student${userId}/`);
       for (let i = 0; i < allMessages.data.length; i++) {
@@ -98,10 +101,12 @@ export default function Messages({ location }) {
   };
 
   const viewAllMessages = async (id) => {
+       // get and display all messages sent only between a specific tutor and student
     if (isTeacher) {
       allCorrespondence = await Axios.get(`api/all-messages/${id}/${userId}`);
       await setCorrespondence(allCorrespondence.data);
 
+      // tutor and student read messages tracked
       for (let i = 0; i < allCorrespondence.data.length; i++) {
         await setMessagesToRead(allCorrespondence.data[i].id);
       }
@@ -131,12 +136,12 @@ export default function Messages({ location }) {
   };
 
   useEffect(() => {
-    // Kaleigh needed to add this for it to work
+
     const { user1, user2 } = queryString.parse(location.search);
     socket.on('message', (message) => {
       setMessages([...messages, message]);
     });
-    // and change this from senderId to user2
+
     viewAllMessages(user2);
   }, [messages]);
 
@@ -144,6 +149,7 @@ export default function Messages({ location }) {
     setSenderNameArray(tempArray);
   }, []);
 
+// send a message to a user and post it to the db
   const sendMessage = (event) => {
     event.preventDefault();
     if (message) {

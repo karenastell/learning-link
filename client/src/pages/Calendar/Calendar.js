@@ -36,7 +36,11 @@ export default function Calendar({ location }) {
 
   const getAllEvents = () => {
     let eventArray = [];
+    // gets all the events for the user's calendar 
+    // dependent on if they are a tutor or student
+    // the calendar will display different event names
     Axios.get(`api/calendar/id/${forUser}`).then((response) => {
+
       if (isTeacher) {
         for (let i = 0; i < response.data.length; i++) {
           eventArray.push({
@@ -90,6 +94,7 @@ export default function Calendar({ location }) {
   const history = useHistory();
 
   const handleBookSession = async () => {
+    // all fields in the booking a session modal need to be filled out
     if (
       !session.studentName ||
       !session.startTime ||
@@ -98,11 +103,13 @@ export default function Calendar({ location }) {
     ) {
       setErrorAlert('on');
     } else {
+      // create an object to be used as the events prop in the calendar to set the event
       const eventObject = {
         event: `Tutoring with ${session.studentName}`,
         start: new Date(`${session.date} ${session.startTime}`).toISOString(),
         end: new Date(`${session.date} ${session.endTime}`).toISOString(),
       };
+      // post that event to the database
       Axios.post(
         `api/calendar/tutor/${forUser}/student/${userId}`,
         eventObject
@@ -112,6 +119,7 @@ export default function Calendar({ location }) {
         getAllEvents();
       });
       let roomNumber;
+      // get the ids for the tutor and student that the event is being made for
       await Axios.get(
         `api/calendar/messageinfo/tutorId/${forUser}/studentId/${userId}`
       ).then((response) => {
@@ -120,6 +128,7 @@ export default function Calendar({ location }) {
 
       let date = new Date(`${session.date} ${session.startTime}`);
 
+      // post a message when the event is made 
       Axios.post(
         `api/message/tutor${forUser}/student${userId}/sender${userId}/room${roomNumber}`,
         {
@@ -161,11 +170,13 @@ export default function Calendar({ location }) {
     });
 
     let roomNumber;
+    // get the ids of the tutor and student the event is being deleted from and the message room they share
     await Axios.get(
       `api/calendar/messageinfo/tutorId/${tutorId}/studentId/${studentId}`
     ).then((response) => {
       roomNumber = response.data.room;
     });
+    // send a message to the tutor and student when event has been deleted
     Axios.post(
       `api/message/tutor${tutorId}/student${studentId}/sender${userId}/room${roomNumber}`,
       {
